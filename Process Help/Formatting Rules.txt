@@ -1,0 +1,29 @@
+
+/* ------------------------------------
+Explain what the function does
+Explain how to use
+Explain about each variable
+Explain what the returned value is
+-------------------------------------*/
+
+int superfunc ( double val, double x )
+{
+	int selection;
+//before writing the actual function write down the process steps in comments and then fill it up
+
+// 1 - Allow the user to select a data file and put the file name into the local 'filename' 
+	selection = FileSelectPopup(....);   //code should be indented correctly (use tabs not spaces)
+	
+	if ( x >= y )  //if you write something special that is not self explanatory give a short explanation
+	{
+		y=x;
+	}
+// 2 - Take data from the selected file into the global 'data_arr' array
+
+// 3 - Analyze the data and calculate the value of 'mean' 'median' and 'sd'
+
+// 4 - .....
+
+	return val*val;
+
+}
