@@ -39,3 +39,6 @@ int getRecordIdsFromField(char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
 int countAllRecords(int *amount);
+
+//checks if the record allready exists
+int recordCheck(char id[]);
