@@ -6,7 +6,7 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
- //allows specifying the databases file, it will be saved globally
+//allows specifying the databases file, it will be saved globally
 //to be accessed by other functions
 //other functions should check if a database file was defined and not work otherwise
 //returns 1 if successful, 0 if not 
@@ -14,7 +14,8 @@ int setDatabaseFile(char name[]);
 
 //changes the value of the provided 'name' to the used database file name.
 //the user must make sure an appropriate array is provided
-void getDatabaseFile(char name[]);
+//returns 1 if successful, 0 if not
+int getDatabaseFile(char name[]);
 
 //creates a new empty record (a line in the database, a worker etc.)
 //returns 1 if successful, 0 if not 
@@ -43,6 +44,10 @@ int getRecordIdsFromField(char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
 int countAllRecords(int *amount);
+
+//checks if the record allready exists
+//returns 1 if exists, 0 if not
+int recordCheck(char id[]);
 
 
 #endif
