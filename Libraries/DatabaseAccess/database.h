@@ -6,6 +6,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#define SIZE 50
+
 //allows specifying the databases file, it will be saved globally
 //to be accessed by other functions
 //other functions should check if a database file was defined and not work otherwise

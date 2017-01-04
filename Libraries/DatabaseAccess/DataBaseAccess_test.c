@@ -1,9 +1,13 @@
+#include <ansi_c.h>
+#include <utility.h>
 #include <cvirte.h>		
 #include <userint.h>
 #include "DataBaseAccess_test.h"
 #include "database.h"
 
 static int panelHandle;
+static int num_of_files = 0,num_of_records = 1, num_of_fields = 1;
+static char dbFile[SIZE][300];
 
 void initialize();
 
@@ -48,7 +52,9 @@ int CVICALLBACK btnRecored (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			
+			InsertTableRows (panelHandle, PANEL_TABLE, -1, 1, VAL_CELL_STRING);
+			//addNewRecord(char id[]);
+			num_of_records++;
 			break;
 	}
 	return 0;
@@ -64,7 +70,9 @@ int CVICALLBACK btnField (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-
+			InsertTableColumns (panelHandle, PANEL_TABLE, -1, 1, VAL_CELL_STRING);
+			//addNewField(char id[], char field[], char value[]);
+			num_of_fields++;
 			break;
 	}
 	return 0;
@@ -76,11 +84,17 @@ int setFieldVal(char id[], char field[], char value[]);
 -------------------------------------*/
 int CVICALLBACK tblFunc (int panel, int control, int event,
 						 void *callbackData, int eventData1, int eventData2)
-{
+{//eventData1 = TRUE if entering edit mode; FALSE if leaving edit mode
 	switch (event)
 	{
 		case EVENT_COMMIT:
-				MessagePopup("Update","Field was updated!");
+			break;
+		case EVENT_EDIT_MODE_STATE_CHANGE:
+			if(!eventData1)
+			{
+				//setFieldVal(char id[], char field[], char value[]); 
+				MessagePopup("event","updated");
+			}
 			break;
 	}
 	return 0;
@@ -97,18 +111,15 @@ int CVICALLBACK ringFunc (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			GetCtrlVal (panelHandle, PANEL_RING, &op);
-			switch(op)
+			if(op == num_of_files)
+				MessagePopup("Create","Create new database");
+			else
 			{
-				case -1:
-					break;
-				case 0:
-					//create new database file
-				default:
-					//open database file
-					//initialize the table using
-					//int getFieldVal(char id[], char field[], char value[]);
-					break;
+				MessagePopup("read","read from ini file and put in table");
+				GetCtrlVal (panelHandle, PANEL_RING, &op);
+				//getDatabaseFile(dbFile[op]);
 			}
+							  
 			break;
 	}
 	return 0;
@@ -119,5 +130,20 @@ Check if database files were created and add them to PANEL_RING
 -------------------------------------*/
 void initialize()
 {
-	
+	char file[300]; 
+	if(!GetFirstFile ("Database\\*.ini", 1, 0, 0, 0, 0, 0, file))
+	{
+		InsertListItem (panelHandle, PANEL_RING, 0, file, 0);
+		strcpy (dbFile[num_of_files], file);
+		num_of_files++;
+		while (!GetNextFile (file))
+		{
+			InsertListItem (panelHandle, PANEL_RING, num_of_files, file, num_of_files);
+			strcpy (dbFile[num_of_files], file);
+			num_of_files++;
+		}
+	}
+	InsertListItem (panelHandle, PANEL_RING, num_of_files, "Add new...", num_of_files);
+	//read .ini file using 
+	//getFieldVal(char id[], char field[], char value[]); 
 }
