@@ -6,7 +6,7 @@
 #include "database.h"
 
 static int panelHandle;
-static int num_of_files = 0,num_of_records = 1, num_of_fields = 1;
+static int num_of_files = 0;
 static char dbFile[SIZE][300];
 
 void initialize();
@@ -18,7 +18,7 @@ int main (int argc, char *argv[])
 	if ((panelHandle = LoadPanel (0, "DataBaseAccess_test.uir", PANEL)) < 0)
 		return -1;
 	DisplayPanel (panelHandle);
-	initialize();
+	initialize(0);
 	RunUserInterface ();
 	DiscardPanel (panelHandle);
 	return 0;
@@ -54,7 +54,7 @@ int CVICALLBACK btnRecored (int panel, int control, int event,
 		case EVENT_COMMIT:
 			InsertTableRows (panelHandle, PANEL_TABLE, -1, 1, VAL_CELL_STRING);
 			//addNewRecord(char id[]);
-			num_of_records++;
+			//countAllRecords(*amount);
 			break;
 	}
 	return 0;
@@ -72,7 +72,6 @@ int CVICALLBACK btnField (int panel, int control, int event,
 		case EVENT_COMMIT:
 			InsertTableColumns (panelHandle, PANEL_TABLE, -1, 1, VAL_CELL_STRING);
 			//addNewField(char id[], char field[], char value[]);
-			num_of_fields++;
 			break;
 	}
 	return 0;
@@ -112,7 +111,12 @@ int CVICALLBACK ringFunc (int panel, int control, int event,
 		case EVENT_COMMIT:
 			GetCtrlVal (panelHandle, PANEL_RING, &op);
 			if(op == num_of_files)
-				MessagePopup("Create","Create new database");
+			{
+				num_of_files++;
+				PromptPopup ("Create new", "Enter name for the database", dbFile[num_of_files],300 );
+				//setDatabaseFile(dbFile[num_of_files]);
+				initialize(num_of_files);
+			}
 			else
 			{
 				MessagePopup("read","read from ini file and put in table");
@@ -128,9 +132,11 @@ int CVICALLBACK ringFunc (int panel, int control, int event,
 /* ------------------------------------
 Check if database files were created and add them to PANEL_RING
 -------------------------------------*/
-void initialize()
+void initialize(int active)
 {
 	char file[300]; 
+	ClearListCtrl (panelHandle, PANEL_RING);
+	num_of_files = 0;
 	if(!GetFirstFile ("Database\\*.ini", 1, 0, 0, 0, 0, 0, file))
 	{
 		InsertListItem (panelHandle, PANEL_RING, 0, file, 0);
@@ -144,6 +150,9 @@ void initialize()
 		}
 	}
 	InsertListItem (panelHandle, PANEL_RING, num_of_files, "Add new...", num_of_files);
+	SetCtrlVal (panelHandle, PANEL_RING, active);
 	//read .ini file using 
+	//getDatabaseFile(file); 
+	//countAllRecords(*amount); 
 	//getFieldVal(char id[], char field[], char value[]); 
 }

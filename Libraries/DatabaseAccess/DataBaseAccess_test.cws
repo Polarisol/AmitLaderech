@@ -48,7 +48,7 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
 File Type = "User Interface Resource"
-Disk Date = 3566406808
+Disk Date = 3566407590
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
@@ -59,12 +59,12 @@ Window Z-Order = 3
 [File 0002]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 File Type = "CSource"
-Disk Date = 3566406969
+Disk Date = 3566409714
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
 Window Z-Order = 1
-Source Window State = "1,89,89,89,13,30,30,0,0,109,0,45,0,2,0,27,99,0,147,58,561,1272,1,14,"
+Source Window State = "1,116,116,116,34,45,45,0,3,109,0,126,0,2,0,27,99,0,116,34,561,1272,1,0,"
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
@@ -74,7 +74,7 @@ In Projects = "1,"
 Window Top = 182
 Window Left = 82
 Window Z-Order = 2
-Source Window State = "1,37,37,37,4,56,4,0,0,80,0,30,0,0,0,17,0,0,45,95,461,1272,1,14,"
+Source Window State = "1,14,14,14,4,33,33,0,3,80,0,27,0,0,0,17,0,0,14,4,461,1272,1,42,"
 
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
