@@ -11,7 +11,7 @@
 
 #include "database.h"
 
-static IniText iniText;
+static IniText iniHandle;
 static char dbFile[SIZE];
 FILE *fp;
 
@@ -62,5 +62,62 @@ int getDatabaseFile(char name[])
 	}
 	return 0;
 }
+
+
+
+int createIniFile()
+{
+	iniHandle = Ini_New (1);
+	Ini_ReadFromFile (iniHandle, dbFile);
+	Ini_PutString (iniHandle, "203059936", "last name", "gazit2");
+	Ini_WriteToFile (iniHandle, dbFile);
+	
+	return 1;
+	
+}
+
+
+
+int search(int iniHandle,char id[], int numOfTags, char * tagName[], char * tagValue[])
+{
+	int val = recordCheck (iniHandle, id);
+	if(val==-1)
+		return -1;
+	for(int i=0;i<numOfTags;i++)
+		{
+				Ini_NthItemName (iniHandle, id, i+1, &tagName[i]);
+				Ini_GetPointerToRawString (iniHandle, id, tagName[i], &tagValue[i]);
+				printf("%s %s\n",tagName[i],tagValue[i]);
+		}
+		
+	return 1;
+}
+
+int recordCheck(int iniHandle,char id[])
+{
+	if(Ini_SectionExists (iniHandle, id)==0)//not exist
+		return -1;
+	return 1;
+
+}
+
+int countAllRecords(int iniHandle)
+{
+	int amount = Ini_NumberOfSections (iniHandle);
+	return amount;
+}
+
+int countAllFields(int iniHandle,char id[])
+{
+	int fieldAmount = Ini_NumberOfItems (iniHandle, id);
+	return fieldAmount; 
+}
+
+int getRecordInfo(int iniHandle,char *id,int i)
+{
+	Ini_NthSectionName (iniHandle, i, &id);
+	return id;
+}
+
 
 

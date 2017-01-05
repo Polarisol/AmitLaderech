@@ -54,43 +54,44 @@ In Projects = "1,"
 [File 0002]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
 File Type = "User Interface Resource"
-Disk Date = 3566407590
+Disk Date = 3566471352
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Window Height = 586
 Window Width = 1272
-Window Z-Order = 1
+Window Z-Order = 4
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 File Type = "CSource"
-Disk Date = 3566452546
+Disk Date = 3566476494
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
-Window Z-Order = 4
-Source Window State = "1,139,153,153,4,5,5,0,0,80,0,126,0,2,0,21,114,0,127,12,561,1272,1,0,"
+Window Z-Order = 1
+Source Window State = "1,27,28,28,4,55,55,0,0,109,0,127,0,3,0,27,104,0,114,20,561,1272,1,0,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
 File Type = "Include"
-Disk Date = 3566452438
+Disk Date = 3566476005
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Window Z-Order = 2
-Source Window State = "1,23,24,23,0,0,0,0,0,80,0,27,0,0,0,17,20,0,46,16,461,1272,1,42,"
+Window Z-Order = 3
+Source Window State = "1,62,63,62,0,0,0,0,0,80,0,3,0,0,0,17,40,0,62,32,461,1272,1,0,"
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
 File Type = "CSource"
-Disk Date = 3566454559
+Disk Date = 3566476410
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Window Z-Order = 3
-Source Window State = "1,0,3,3,0,80,80,0,0,80,0,11,0,11,0,17,0,0,14,13,461,1272,1,0,"
+Window Z-Order = 2
+Source Window State = "1,117,117,117,4,22,22,0,0,80,0,11,0,11,0,17,106,0,119,0,461,1272,1,0,"
+Breakpoint 0001 = "119,0,enabled,"
 
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
@@ -185,4 +186,52 @@ External Process Path = ""
 Command Line Args = ""
 Working Directory = ""
 Environment Options = ""
+
+[Watch 1]
+Watch Expression = "tagValue"
+
+[Watch 2]
+Watch Expression = "tagValue[0]"
+
+[Watch 3]
+Watch Expression = "tagValue[0][0]"
+
+[Watch 4]
+Watch Expression = "tagValue[0][1]"
+
+[Watch 5]
+Watch Expression = "tagValue[0][2]"
+
+[Watch 6]
+Watch Expression = "tagValue[0][3]"
+
+[Watch 7]
+Watch Expression = "tagValue[0][4]"
+
+[Watch 8]
+Watch Expression = "tagValue[0][5]"
+
+[Watch 9]
+Watch Expression = "tagValue[0][6]"
+
+[Watch 10]
+Watch Expression = "tagValue[0][7]"
+
+[Watch 11]
+Watch Expression = "tagValue[0][8]"
+
+[Watch 12]
+Watch Expression = "tagValue[0][9]"
+
+[Watch 13]
+Watch Expression = "tagValue[0][10]"
+
+[Watch 14]
+Watch Expression = "tagValue[0][11]"
+
+[Watch 15]
+Watch Expression = "tagValue[0][12]"
+
+[Watch 16]
+Watch Expression = "tagValue[0][13]"
 

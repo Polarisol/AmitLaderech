@@ -8,6 +8,8 @@
 
 #define SIZE 300
 
+
+
 //allows specifying the databases file, it will be saved globally
 //to be accessed by other functions
 //other functions should check if a database file was defined and not work otherwise
@@ -45,11 +47,28 @@ void getNumberOfIdsFromField(char field[], char value[], int *amount);
 int getRecordIdsFromField(char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
-int countAllRecords(int *amount);
-
+int countAllRecords(int iniHandle);
+//provides the total amount of fields in the record
+int countAllFields(int iniHandle,char id[]);
+					 
 //checks if the record allready exists
 //returns 1 if exists, 0 if not
-int recordCheck(char id[]);
+int recordCheck(int iniHandle,char id[]);
+
+//use the ini func ini_numberOfItems
+//return ini_numberofItems
+int getFieldNum(char id[]);
+
+
+int getRecordInfo(int iniHandle,char *id,int i);
+
+int readDb(char name[]);
+
+int createIniFile();
+
+//search id in ini file and put the tagName and tagValue inside an array
+//return -1 if not found
+int search(int iniHandle,char id[], int numOfTags, char ** tagName, char ** tagValue);
 
 
 #endif

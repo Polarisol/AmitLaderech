@@ -14,10 +14,17 @@
      /* Panels and Controls: */
 
 #define  PANEL                            1       /* callback function: exitFunc */
-#define  PANEL_TABLE                      2       /* control type: table, callback function: tblFunc */
-#define  PANEL_NEWFIELD                   3       /* control type: command, callback function: btnField */
-#define  PANEL_NEWRECORED                 4       /* control type: command, callback function: btnRecored */
-#define  PANEL_RING                       5       /* control type: ring, callback function: ringFunc */
+#define  PANEL_AMOUNT                     2       /* control type: command, callback function: btnAmout */
+#define  PANEL_MENTOR                     3       /* control type: command, callback function: btnMentor */
+#define  PANEL_SHOWAMIT                   4       /* control type: command, callback function: btnAmit */
+#define  PANEL_SEARCH                     5       /* control type: command, callback function: btnSearch */
+
+#define  PANEL_2                          2       /* callback function: exitFunc */
+#define  PANEL_2_TABLE                    2       /* control type: table, callback function: tblFuncSearch */
+#define  PANEL_2_DELETE                   3       /* control type: command, callback function: btnDelete */
+
+#define  PANEL_3                          3       /* callback function: exitFunc */
+#define  PANEL_3_TABLE                    2       /* control type: table, callback function: tblFunc */
 
 
      /* Control Arrays: */
@@ -32,11 +39,14 @@
 
      /* Callback Prototypes: */
 
-int  CVICALLBACK btnField(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK btnRecored(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK btnAmit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK btnAmout(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK btnDelete(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK btnMentor(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK btnSearch(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK ringFunc(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK tblFunc(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK tblFuncSearch(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
