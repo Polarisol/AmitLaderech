@@ -93,6 +93,8 @@ int search(IniText iniHandle,char id[], int numOfTags, char * tagName[], char * 
 	return 1;
 }
 
+//check if the record exist in the db.
+//if not return -1
 int recordCheck(IniText iniHandle,char id[])
 {
 	if(Ini_SectionExists (iniHandle, id)==0)//not exist
@@ -100,23 +102,23 @@ int recordCheck(IniText iniHandle,char id[])
 	return 1;
 
 }
-
+//return the amount of records in the db.
 int countAllRecords(IniText iniHandle)
 {
 	int amount = Ini_NumberOfSections (iniHandle);
 	return amount;
 }
-
+//return the amount of fields in a record
 int countAllFields(IniText iniHandle,char id[])
 {
 	int fieldAmount = Ini_NumberOfItems (iniHandle, id);
 	return fieldAmount; 
 }
 
-int getRecordInfo(IniText iniHandle,char *id,int i)
+char* getRecordInfo(IniText iniHandle,char *id,int i)
 {
 	Ini_NthSectionName (iniHandle, i, &id);
-	return i;
+	return id;
 }
 
 

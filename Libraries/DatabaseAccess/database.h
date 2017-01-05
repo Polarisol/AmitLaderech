@@ -61,9 +61,7 @@ int recordCheck(IniText iniHandle,char id[]);
 int getFieldNum(char id[]);
 
 
-int getRecordInfo(IniText iniHandle,char *id,int i);
-
-int readDb(char name[]);
+char* getRecordInfo(IniText iniHandle,char *id,int i);
 
 int createIniFile();
 

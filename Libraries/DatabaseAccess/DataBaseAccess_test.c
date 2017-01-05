@@ -7,7 +7,6 @@
 #include "database.h"
 
 static int panelHandle,panelHandle2,panelHandle3;
-static int num_of_files = 0;
 static char dbFile[SIZE];
 static char id[SIZE];
 static char *tagName[100],*tagValue[100];
@@ -82,10 +81,6 @@ int CVICALLBACK btnSearch (int panel, int control, int event,
 				{
 					SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(2,j), tagValue[j-1]);
 					SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(1,j), tagName[j-1]);
-					
-					//SetTableColumnAttribute (panelHandle2, PANEL_2_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
-					//SetTableColumnAttribute (panelHandle2, PANEL_2_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
-					  
 				}
 				
 			}
@@ -103,24 +98,31 @@ int CVICALLBACK btnAmit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			
 			DisplayPanel(panelHandle3);
 			recordAmount = countAllRecords(iniHandle);
 			
-
 				InsertTableRows (panelHandle3, PANEL_3_TABLE, -1, recordAmount, VAL_CELL_STRING);
-				InsertTableColumns (panelHandle3, PANEL_3_TABLE, -1, fieldAmount, VAL_CELL_STRING);
+				
 				for(int i=1;i<=recordAmount;i++)
 				{
-					getRecordInfo(iniHandle,id,1);
-					search(iniHandle,id,recordAmount,tagName,tagValue);
+					sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
 					fieldAmount = countAllFields(iniHandle,id);
-					 for(int j=1;j<=fieldAmount;j++)
-					 {
-						 SetTableCellVal (panelHandle3, PANEL_3_TABLE, MakePoint(j,i), tagValue[j-1]);
-						 SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
-						 SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
+					
+					search(iniHandle,id,fieldAmount,tagName,tagValue);
+					SetTableRowAttribute (panelHandle3, PANEL_3_TABLE, i, ATTR_USE_LABEL_TEXT, 1);
+					SetTableRowAttribute (panelHandle3, PANEL_3_TABLE, i, ATTR_LABEL_TEXT, id);
+				
+					for(int j=1;j<=fieldAmount;j++)
+					{
+						if(i==1)//check if this is the loop's fist run.if true create the columns. need to think on a diffrent way
+							InsertTableColumns (panelHandle3, PANEL_3_TABLE, -1, 1, VAL_CELL_STRING); 
+						SetTableCellVal (panelHandle3, PANEL_3_TABLE, MakePoint(j,i), tagValue[j-1]);
+						SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
+						SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
 					  
-					 }
+					}
+					
 				}
 			break;
 	}
