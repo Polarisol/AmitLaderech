@@ -79,7 +79,7 @@ int createIniFile()
 
 //search for the ID in database.create arrays for name value.
 //return -1 if ID is not in the db
-int search(int iniHandle,char id[], int numOfTags, char * tagName[], char * tagValue[])
+int search(IniText iniHandle,char id[], int numOfTags, char * tagName[], char * tagValue[])
 {
 	int val = recordCheck (iniHandle, id);
 	if(val==-1)
@@ -93,7 +93,7 @@ int search(int iniHandle,char id[], int numOfTags, char * tagName[], char * tagV
 	return 1;
 }
 
-int recordCheck(int iniHandle,char id[])
+int recordCheck(IniText iniHandle,char id[])
 {
 	if(Ini_SectionExists (iniHandle, id)==0)//not exist
 		return -1;
@@ -101,22 +101,22 @@ int recordCheck(int iniHandle,char id[])
 
 }
 
-int countAllRecords(int iniHandle)
+int countAllRecords(IniText iniHandle)
 {
 	int amount = Ini_NumberOfSections (iniHandle);
 	return amount;
 }
 
-int countAllFields(int iniHandle,char id[])
+int countAllFields(IniText iniHandle,char id[])
 {
 	int fieldAmount = Ini_NumberOfItems (iniHandle, id);
 	return fieldAmount; 
 }
 
-int getRecordInfo(int iniHandle,char *id,int i)
+int getRecordInfo(IniText iniHandle,char *id,int i)
 {
 	Ini_NthSectionName (iniHandle, i, &id);
-	return id;
+	return i;
 }
 
 

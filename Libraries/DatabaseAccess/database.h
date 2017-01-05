@@ -6,6 +6,7 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include "inifile.h" 
 #define SIZE 300
 
 
@@ -47,20 +48,20 @@ void getNumberOfIdsFromField(char field[], char value[], int *amount);
 int getRecordIdsFromField(char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
-int countAllRecords(int iniHandle);
+int countAllRecords(IniText iniHandle);
 //provides the total amount of fields in the record
-int countAllFields(int iniHandle,char id[]);
+int countAllFields(IniText iniHandle,char id[]);
 					 
 //checks if the record allready exists
 //returns 1 if exists, 0 if not
-int recordCheck(int iniHandle,char id[]);
+int recordCheck(IniText iniHandle,char id[]);
 
 //use the ini func ini_numberOfItems
 //return ini_numberofItems
 int getFieldNum(char id[]);
 
 
-int getRecordInfo(int iniHandle,char *id,int i);
+int getRecordInfo(IniText iniHandle,char *id,int i);
 
 int readDb(char name[]);
 
@@ -68,7 +69,7 @@ int createIniFile();
 
 //search id in ini file and put the tagName and tagValue inside an array
 //return -1 if not found
-int search(int iniHandle,char id[], int numOfTags, char ** tagName, char ** tagValue);
+int search(IniText iniHandle,char id[], int numOfTags, char ** tagName, char ** tagValue);
 
 
 #endif
