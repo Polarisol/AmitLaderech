@@ -77,18 +77,18 @@ int createIniFile()
 }
 
 
-
+//search for the ID in database.create arrays for name value.
+//return -1 if ID is not in the db
 int search(int iniHandle,char id[], int numOfTags, char * tagName[], char * tagValue[])
 {
 	int val = recordCheck (iniHandle, id);
 	if(val==-1)
 		return -1;
 	for(int i=0;i<numOfTags;i++)
-		{
-				Ini_NthItemName (iniHandle, id, i+1, &tagName[i]);
-				Ini_GetPointerToRawString (iniHandle, id, tagName[i], &tagValue[i]);
-				printf("%s %s\n",tagName[i],tagValue[i]);
-		}
+	{
+		Ini_NthItemName (iniHandle, id, i+1, &tagName[i]);
+		Ini_GetPointerToRawString (iniHandle, id, tagName[i], &tagValue[i]);
+	}
 		
 	return 1;
 }

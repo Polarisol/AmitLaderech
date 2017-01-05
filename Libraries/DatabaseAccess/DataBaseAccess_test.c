@@ -70,24 +70,24 @@ int CVICALLBACK btnSearch (int panel, int control, int event,
 			PromptPopup ("Search", "Enter ID number", id, 12);
 			fieldAmount = countAllFields(iniHandle,id);
 			if(search(iniHandle,id, fieldAmount,tagName,tagValue)==-1)
-				MessagePopup("asf","no");
+				MessagePopup("Message","ID was not found");
 			else
 			{
 				DisplayPanel (panelHandle2);
-				recordAmount = countAllRecords(iniHandle);
-				InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, recordAmount, VAL_CELL_STRING);
-				InsertTableColumns (panelHandle2, PANEL_2_TABLE, -1, fieldAmount, VAL_CELL_STRING);
-				for(int i=1;i<=recordAmount;i++)
+				DeleteTableRows (panelHandle2, PANEL_2_TABLE, 1, -1);
+				DeleteTableColumns (panelHandle2, PANEL_2_TABLE, 1, -1);
+				InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, fieldAmount, VAL_CELL_STRING);
+				InsertTableColumns (panelHandle2, PANEL_2_TABLE, -1, 2, VAL_CELL_STRING);
+				for(int j=1;j<=fieldAmount;j++)
 				{
-					 for(int j=1;j<=fieldAmount;j++)
-					 {
-						 char str[100];
-						 SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(j,i), tagValue[j-1]);
-						 SetTableColumnAttribute (panelHandle2, PANEL_2_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
-						 SetTableColumnAttribute (panelHandle2, PANEL_2_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
+					SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(2,j), tagValue[j-1]);
+					SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(1,j), tagName[j-1]);
+					
+					//SetTableColumnAttribute (panelHandle2, PANEL_2_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
+					//SetTableColumnAttribute (panelHandle2, PANEL_2_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
 					  
-					 }
 				}
+				
 			}
 			
 
@@ -116,7 +116,6 @@ int CVICALLBACK btnAmit (int panel, int control, int event,
 					fieldAmount = countAllFields(iniHandle,id);
 					 for(int j=1;j<=fieldAmount;j++)
 					 {
-						 char str[100];
 						 SetTableCellVal (panelHandle3, PANEL_3_TABLE, MakePoint(j,i), tagValue[j-1]);
 						 SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
 						 SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
@@ -175,17 +174,6 @@ int CVICALLBACK tblFuncSearch (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK btnDelete (int panel, int control, int event,
-						   void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-
-			break;
-	}
-	return 0;
-}
 
 int CVICALLBACK tblFunc (int panel, int control, int event,
 						 void *callbackData, int eventData1, int eventData2)
