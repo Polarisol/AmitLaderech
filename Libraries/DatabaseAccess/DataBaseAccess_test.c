@@ -115,14 +115,16 @@ int CVICALLBACK ringFunc (int panel, int control, int event,
 			{
 				num_of_files++;
 				PromptPopup ("Create new", "Enter name for the database", dbFile[num_of_files],300 );
-				setDatabaseFile(dbFile[num_of_files]);
-				initialize(num_of_files-1);
+				if(setDatabaseFile(dbFile[num_of_files]))
+					initialize(num_of_files-1);
+				else
+					MessagePopup("Error", "Fail to create database");
 			}
 			else
 			{
 				MessagePopup("read","read from ini file and put in table");
 				GetCtrlVal (panelHandle, PANEL_RING, &op);
-				//getDatabaseFile(dbFile[op]);
+				getDatabaseFile(dbFile[op]);
 			}
 							  
 			break;
