@@ -9,7 +9,7 @@ IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
-Number of Files = 3
+Number of Files = 5
 Target Type = "Executable"
 Flags = 2064
 Copied From Locked InstrDrv Directory = False
@@ -18,7 +18,6 @@ Locked InstrDrv Name = ""
 Don't Display Deploy InstrDrv Dialog = False
 
 [Folders]
-Instrument Files Folder Not Added Yet = True
 Library Files Folder Not Added Yet = True
 Folder 0 = "User Interface Files"
 FolderEx 0 = "User Interface Files"
@@ -26,6 +25,8 @@ Folder 1 = "Source Files"
 FolderEx 1 = "Source Files"
 Folder 2 = "Include Files"
 FolderEx 2 = "Include Files"
+Folder 3 = "Instrument Files"
+FolderEx 3 = "Instrument Files"
 
 [File 0001]
 File Type = "User Interface Resource"
@@ -44,6 +45,19 @@ File Type = "CSource"
 Res Id = 2
 Path Is Rel = True
 Path Rel To = "Project"
+Path Rel Path = "database.c"
+Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 1
+
+[File 0003]
+File Type = "CSource"
+Res Id = 3
+Path Is Rel = True
+Path Rel To = "Project"
 Path Rel Path = "DataBaseAccess_test.c"
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 Exclude = False
@@ -52,9 +66,9 @@ Project Flags = 0
 Folder = "Source Files"
 Folder Id = 1
 
-[File 0003]
+[File 0004]
 File Type = "Include"
-Res Id = 3
+Res Id = 4
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "database.h"
@@ -63,6 +77,19 @@ Exclude = False
 Project Flags = 0
 Folder = "Include Files"
 Folder Id = 2
+
+[File 0005]
+File Type = "Function Panel"
+Res Id = 5
+Path Is Rel = True
+Path Rel To = "CVI"
+Path Rel To Override = "CVI"
+Path Rel Path = "toolslib/toolbox/inifile.fp"
+Path = "/c/Program Files (x86)/National Instruments/CVI2015/toolslib/toolbox/inifile.fp"
+Exclude = False
+Project Flags = 0
+Folder = "Instrument Files"
+Folder Id = 3
 
 [Custom Build Configs]
 Num Custom Build Configs = 0
@@ -332,14 +359,14 @@ Type Lib FP File = ""
 [Compiler Options]
 Default Calling Convention = "cdecl"
 Require Prototypes = True
-Require Return Values = False
-Enable Pointer Mismatch Warning = False
-Enable Unreachable Code Warning = False
-Enable Unreferenced Identifiers Warning = False
-Enable Assignment In Conditional Warning = False
+Require Return Values = True
+Enable Pointer Mismatch Warning = True
+Enable Unreachable Code Warning = True
+Enable Unreferenced Identifiers Warning = True
+Enable Assignment In Conditional Warning = True
 O Option Compatible With 5.0 = False
 Enable C99 Extensions = True
-Uninitialized Locals Compile Warning = "Disabled"
+Uninitialized Locals Compile Warning = "Aggressive"
 Precompile Prefix Header = False
 Prefix Header File = ""
 

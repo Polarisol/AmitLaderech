@@ -9,6 +9,7 @@ static int panelHandle;
 static int num_of_files = 0;
 static char dbFile[SIZE][300];
 
+
 void initialize();
 
 int main (int argc, char *argv[])
@@ -114,8 +115,8 @@ int CVICALLBACK ringFunc (int panel, int control, int event,
 			{
 				num_of_files++;
 				PromptPopup ("Create new", "Enter name for the database", dbFile[num_of_files],300 );
-				//setDatabaseFile(dbFile[num_of_files]);
-				initialize(num_of_files);
+				setDatabaseFile(dbFile[num_of_files]);
+				initialize(num_of_files-1);
 			}
 			else
 			{
