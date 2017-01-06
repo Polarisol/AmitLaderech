@@ -97,6 +97,7 @@ int CVICALLBACK btnAmit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			initialize("Amit.ini");
 			DisplayPanel(panelHandle3);
 			SetInTable(panelHandle3,PANEL_3_TABLE);
 			break;
