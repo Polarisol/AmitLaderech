@@ -14,13 +14,13 @@
 //allows specifying the databases file, it will be saved globally
 //to be accessed by other functions
 //other functions should check if a database file was defined and not work otherwise
-//returns 1 if successful, 0 if not 
-int setDatabaseFile(char name[]);
+//returns iniHandle if successful, 0 if not 
+IniText setDatabaseFile(char name[]);
 
 //changes the value of the provided 'name' to the used database file name.
 //the user must make sure an appropriate array is provided
-//returns 1 if successful, 0 if not
-int getDatabaseFile(char name[]);
+//returns iniHandle if successful, 0 if not
+IniText getDatabaseFile(char name[]);
 
 //creates a new empty record (a line in the database, a worker etc.)
 //returns 1 if successful, 0 if not 

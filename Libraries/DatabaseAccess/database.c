@@ -19,7 +19,7 @@ FILE *fp;
 //to be accessed by other functions
 //other functions should check if a database file was defined and not work otherwise
 //returns 1 if successful, 0 if not 
-int setDatabaseFile(char name[])
+IniText setDatabaseFile(char name[])
 {
 	char path[SIZE];
 	if(strcmp (name, ""))
@@ -27,8 +27,8 @@ int setDatabaseFile(char name[])
 		sprintf (path, "Database\\%s.ini", name);
 		fp = fopen (path, "w");
 		fclose(fp);
-		getDatabaseFile(path);
-		return 1;
+		iniHandle = getDatabaseFile(path);
+		return iniHandle;
 	}
 	
 	return 0;	
@@ -36,19 +36,26 @@ int setDatabaseFile(char name[])
 
 //changes the value of the provided 'name' to the used database file name.
 //the user must make sure an appropriate array is provided
-//returns 1 if successful, 0 if not
-int getDatabaseFile(char name[])
+//returns iniHandle if successful, 0 if not
+IniText getDatabaseFile(char name[])
 {
 	char file[SIZE];
 	char path[SIZE];
-	GetFirstFile ("Database\\*.ini", 1, 0, 0, 0, 0, 0, file);
+	/*if(strstr(name,".ini") == NULL)
+	{
+		  sprintf(file,"%s.ini",name);
+		  name = file;
+	} */
+	GetFirstFile ("Database\\*.ini", 1, 0, 0, 0, 0, 0, file);//file = *.ini
 	if(strcmp (file, ""))
 	{
 		if(!strcmp (file, name))
 		{
 			sprintf (path, "Database\\%s", name);
 			strcpy (dbFile, path);
-			return 1;
+			iniHandle = Ini_New (0);
+			Ini_ReadFromFile (iniHandle, dbFile);
+			return iniHandle;
 		}
 		while (!GetNextFile (file))
 		{
@@ -56,7 +63,9 @@ int getDatabaseFile(char name[])
 			{
 				sprintf (path, "Database\\%s", name);
 				strcpy (dbFile, path);
-				return 1;
+				iniHandle = Ini_New (0);
+				Ini_ReadFromFile (iniHandle, dbFile);
+				return iniHandle;
 			}
 		}
 	}
