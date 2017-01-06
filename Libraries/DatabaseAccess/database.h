@@ -24,16 +24,16 @@ IniText getDatabaseFile(char name[]);
 
 //creates a new empty record (a line in the database, a worker etc.)
 //returns 1 if successful, 0 if not 
-int addNewRecord(char id[]);
+int addNewRecord(IniText iniHandle,char id[],char * tagName[],int fieldAmount);
 
 //adds a new field (column, like "Cellphone Number") to a specific record
 //it is optional to add a value (if 0 is provided than it will be an empty string)
 //returns 1 if successful, 0 if not 
-int addNewField(char id[], char field[], char value[]);
+int addNewField(IniText iniHandle,char id[], char field[], char value[]);
 
 // sets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
-int setFieldVal(char id[], char field[], char value[]);
+int setFieldVal(IniText iniHandle,char id[], char field[], char value[]);
 
 // gets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)

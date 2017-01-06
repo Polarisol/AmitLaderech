@@ -9,6 +9,7 @@
 
 static int panelHandle,panelHandle2,panelHandle3;
 static char id[SIZE];
+static char dbFile[SIZE];
 static char *tagName[100],*tagValue[100];
 static IniText iniHandle;
 int recordAmount,fieldAmount;
@@ -172,6 +173,7 @@ int CVICALLBACK tblFunc (int panel, int control, int event,
 
 void initialize(char name[])
 {
+	sprintf(dbFile,"%s",name);
 	iniHandle = getDatabaseFile(name);
 	if(iniHandle == 0)		 
 		MessagePopup ("Error", "No database found");
@@ -187,6 +189,7 @@ void SetInTable(int panel,int control)
 {
 	
 	delTable(panel,control);
+	SetPanelAttribute (panel, ATTR_TITLE, dbFile);
 	recordAmount = countAllRecords(iniHandle); 
 	InsertTableRows (panel, control, -1, recordAmount, VAL_CELL_STRING);
 	for(int i=1;i<=recordAmount;i++)
@@ -212,3 +215,17 @@ void SetInTable(int panel,int control)
 }
 
 
+int CVICALLBACK btnNewRec (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			  PromptPopup ("New Record","Enter ID", id, 12);
+			  HebrewConverter_convertHebrewISOtoUTF8(id);
+			  addNewRecord(iniHandle,id,tagName,fieldAmount);
+			  SetInTable(panel,PANEL_3_TABLE);
+			break;
+	}
+	return 0;
+}

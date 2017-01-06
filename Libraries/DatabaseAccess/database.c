@@ -15,6 +15,20 @@ static IniText iniHandle;
 static char dbFile[SIZE];
 FILE *fp;
 
+//creates a new empty record (a line in the database, a worker etc.)
+//returns 1 if successful, 0 if not 
+int addNewRecord(IniText iniHandle,char id[],char * tagName[],int fieldAmount)
+{   
+	int val = recordCheck(iniHandle,id);
+	if(val==1)
+		return 0;
+	for(int i=0;i<fieldAmount;i++)
+	{
+		Ini_PutRawString (iniHandle, id, tagName[i], "");	
+	}
+	Ini_WriteToFile (iniHandle, dbFile);
+	return 1;
+}
 //allows specifying the databases file, it will be saved globally
 //to be accessed by other functions
 //other functions should check if a database file was defined and not work otherwise

@@ -24,6 +24,7 @@
 
 #define  PANEL_3                          3       /* callback function: exitFunc */
 #define  PANEL_3_TABLE                    2       /* control type: table, callback function: tblFunc */
+#define  PANEL_3_ADD                      3       /* control type: command, callback function: btnNewRec */
 
 
      /* Control Arrays: */
@@ -41,6 +42,7 @@
 int  CVICALLBACK btnAmit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK btnAmout(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK btnMentor(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK btnNewRec(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK btnSearch(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK tblFunc(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
