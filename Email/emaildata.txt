@@ -1,0 +1,1 @@
+SwithMail.exe /s /from "amitprojectcvi@gmail.com" /name "amit" /pass "NvvxhxntakH!2#4%" /server "smtp.gmail.com" /p "587" /SSL /rt "amitprojectcvi@gmail.com" /to "nivs304@gmail.com" /sub "My mail" /b "text text text bla bla bla" 
