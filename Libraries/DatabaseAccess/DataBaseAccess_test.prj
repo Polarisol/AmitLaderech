@@ -9,7 +9,7 @@ IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
-Number of Files = 5
+Number of Files = 7
 Target Type = "Executable"
 Flags = 2064
 Copied From Locked InstrDrv Directory = False
@@ -67,8 +67,21 @@ Folder = "Source Files"
 Folder Id = 1
 
 [File 0004]
-File Type = "Include"
+File Type = "CSource"
 Res Id = 4
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "../HebrewConversions/HebrewConversions.c"
+Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 1
+
+[File 0005]
+File Type = "Include"
+Res Id = 5
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "database.h"
@@ -78,14 +91,26 @@ Project Flags = 0
 Folder = "Include Files"
 Folder Id = 2
 
-[File 0005]
+[File 0006]
+File Type = "Include"
+Res Id = 6
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "../HebrewConversions/HebrewConversions.h"
+Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 2
+
+[File 0007]
 File Type = "Function Panel"
-Res Id = 5
+Res Id = 7
 Path Is Rel = True
 Path Rel To = "CVI"
 Path Rel To Override = "CVI"
 Path Rel Path = "toolslib/toolbox/inifile.fp"
-Path = "/c/Program Files (x86)/National Instruments/CVI2015/toolslib/toolbox/inifile.fp"
+Path = "/c/program files (x86)/national instruments/cvi2015/toolslib/toolbox/inifile.fp"
 Exclude = False
 Project Flags = 0
 Folder = "Instrument Files"

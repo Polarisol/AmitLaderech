@@ -8,7 +8,7 @@
 
 #include <ansi_c.h>
 #include "inifile.h"
-
+#include "HebrewConversions.h" 
 #include "database.h"
 
 static IniText iniHandle;
@@ -86,8 +86,11 @@ int search(IniText iniHandle,char id[], int numOfTags, char * tagName[], char * 
 		return -1;
 	for(int i=0;i<numOfTags;i++)
 	{
+		
 		Ini_NthItemName (iniHandle, id, i+1, &tagName[i]);
+		HebrewConverter_convertHebrewUTF8toISO(tagName[i]);
 		Ini_GetPointerToRawString (iniHandle, id, tagName[i], &tagValue[i]);
+		HebrewConverter_convertHebrewUTF8toISO(tagValue[i]);
 	}
 		
 	return 1;

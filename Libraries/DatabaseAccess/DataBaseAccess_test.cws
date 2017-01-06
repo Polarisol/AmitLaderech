@@ -54,7 +54,7 @@ In Projects = "1,"
 [File 0002]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
 File Type = "User Interface Resource"
-Disk Date = 3566484418
+Disk Date = 3566544134
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
@@ -65,12 +65,12 @@ Window Z-Order = 4
 [File 0003]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 File Type = "CSource"
-Disk Date = 3566487552
+Disk Date = 3566547090
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
-Window Z-Order = 1
-Source Window State = "1,112,113,113,0,0,0,0,0,109,0,59,0,3,0,23,109,0,117,71,561,1272,1,11,"
+Window Z-Order = 3
+Source Window State = "1,125,125,125,24,42,42,0,0,80,0,59,0,3,0,21,103,0,123,30,561,1272,1,11,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
@@ -79,18 +79,34 @@ Disk Date = 3566485358
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Window Z-Order = 3
-Source Window State = "1,63,63,63,0,4,4,0,0,80,0,54,0,0,0,17,52,0,63,6,461,1272,1,16,"
+Window Z-Order = 2
+Source Window State = "1,63,63,63,0,4,4,0,0,80,0,54,0,0,0,17,42,0,63,6,461,1272,1,16,"
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
 File Type = "CSource"
-Disk Date = 3566485358
+Disk Date = 3566547197
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Window Z-Order = 2
-Source Window State = "1,86,86,86,18,27,27,0,0,80,0,11,0,11,0,17,103,0,89,31,461,1272,1,0,"
+Window Z-Order = 1
+Source Window State = "1,122,123,122,0,0,0,0,0,109,0,11,0,11,0,23,106,0,122,15,461,1272,1,0,"
+
+[File 0006]
+Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.c"
+File Type = "CSource"
+Disk Date = 3566544439
+In Projects = "1,"
+Window Top = 182
+Window Left = 82
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,0,69,20,386,1272,1,0,"
+
+[File 0007]
+Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.h"
+File Type = "Include"
+Disk Date = 3566544439
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"

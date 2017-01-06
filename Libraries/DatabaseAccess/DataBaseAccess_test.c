@@ -5,6 +5,7 @@
 #include <userint.h>
 #include "DataBaseAccess_test.h"
 #include "database.h"
+#include "HebrewConversions.h"
 
 static int panelHandle,panelHandle2,panelHandle3;
 static char dbFile[SIZE];
@@ -13,7 +14,11 @@ static char *tagName[100],*tagValue[100];
 static IniText iniHandle;
 int recordAmount,fieldAmount;
 
-
+void initialize()
+{
+	iniHandle = Ini_New (0);
+	Ini_ReadFromFile (iniHandle, "Database\\amit.ini");
+}
 int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -24,11 +29,11 @@ int main (int argc, char *argv[])
 		return -1;
 	if ((panelHandle3 = LoadPanel (0, "DataBaseAccess_test.uir", PANEL_3)) < 0)
 		return -1;
-	iniHandle = Ini_New (0);
-	Ini_ReadFromFile (iniHandle, "Database\\amit.ini");
-
 	DisplayPanel (panelHandle);
+	initialize(); 
 	RunUserInterface ();
+	
+
 	DiscardPanel (panelHandle3);
 	DiscardPanel (panelHandle2);
 	DiscardPanel (panelHandle);
@@ -100,30 +105,32 @@ int CVICALLBACK btnAmit (int panel, int control, int event,
 		case EVENT_COMMIT:
 			
 			DisplayPanel(panelHandle3);
+			DeleteTableRows (panelHandle3, PANEL_3_TABLE, 1, -1);
+			DeleteTableColumns (panelHandle3, PANEL_3_TABLE, 1, -1);
 			recordAmount = countAllRecords(iniHandle);
 			
-				InsertTableRows (panelHandle3, PANEL_3_TABLE, -1, recordAmount, VAL_CELL_STRING);
+			InsertTableRows (panelHandle3, PANEL_3_TABLE, -1, recordAmount, VAL_CELL_STRING);
 				
-				for(int i=1;i<=recordAmount;i++)
+			for(int i=1;i<=recordAmount;i++)
+			{
+				sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
+				fieldAmount = countAllFields(iniHandle,id);
+					
+				search(iniHandle,id,fieldAmount,tagName,tagValue);
+				SetTableRowAttribute (panelHandle3, PANEL_3_TABLE, i, ATTR_USE_LABEL_TEXT, 1);
+				SetTableRowAttribute (panelHandle3, PANEL_3_TABLE, i, ATTR_LABEL_TEXT, id);
+				
+				for(int j=1;j<=fieldAmount;j++)
 				{
-					sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
-					fieldAmount = countAllFields(iniHandle,id);
-					
-					search(iniHandle,id,fieldAmount,tagName,tagValue);
-					SetTableRowAttribute (panelHandle3, PANEL_3_TABLE, i, ATTR_USE_LABEL_TEXT, 1);
-					SetTableRowAttribute (panelHandle3, PANEL_3_TABLE, i, ATTR_LABEL_TEXT, id);
-				
-					for(int j=1;j<=fieldAmount;j++)
-					{
-						if(i==1)//check if this is the loop's fist run.if true create the columns. need to think on a diffrent way
-							InsertTableColumns (panelHandle3, PANEL_3_TABLE, -1, 1, VAL_CELL_STRING); 
-						SetTableCellVal (panelHandle3, PANEL_3_TABLE, MakePoint(j,i), tagValue[j-1]);
-						SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
-						SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
+					if(i==1)//check if this is the loop's fist run.if true create the columns. need to think on a diffrent way
+						InsertTableColumns (panelHandle3, PANEL_3_TABLE, -1, 1, VAL_CELL_STRING); 
+					SetTableCellVal (panelHandle3, PANEL_3_TABLE, MakePoint(j,i), tagValue[j-1]);
+					SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_USE_LABEL_TEXT, 1);
+					SetTableColumnAttribute (panelHandle3, PANEL_3_TABLE, j, ATTR_LABEL_TEXT, tagName[j-1]);
 					  
-					}
-					
 				}
+					
+			}
 			break;
 	}
 	return 0;
