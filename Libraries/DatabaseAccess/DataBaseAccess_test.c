@@ -13,6 +13,7 @@ static char dbFile[SIZE];
 static char *tagName[100],*tagValue[100];
 static IniText iniHandle;
 int recordAmount,fieldAmount;
+Point p;
 
 void initialize(char name[]);
 void SetInTable(int panel,int control);
@@ -29,7 +30,6 @@ int main (int argc, char *argv[])
 	if ((panelHandle3 = LoadPanel (0, "DataBaseAccess_test.uir", PANEL_3)) < 0)
 		return -1;
 	DisplayPanel (panelHandle);
-	initialize("Amit.ini"); 
 	RunUserInterface ();
 	
 
@@ -145,6 +145,7 @@ int CVICALLBACK tblFuncSearch (int panel, int control, int event,
 		case EVENT_EDIT_MODE_STATE_CHANGE:
 			if(!eventData1)
 			{
+				
 				//setFieldVal(char id[], char field[], char value[]); 
 				MessagePopup("event","updated");
 			}
@@ -157,13 +158,25 @@ int CVICALLBACK tblFuncSearch (int panel, int control, int event,
 int CVICALLBACK tblFunc (int panel, int control, int event,
 						 void *callbackData, int eventData1, int eventData2)
 {
+	char tag[SIZE],val[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
+		
 			break;
 		case EVENT_EDIT_MODE_STATE_CHANGE:
+			if(eventData1)
+				GetActiveTableCell (panel, control, &p);
 			if(!eventData1)
-			{
+			{ 
+				GetTableRowAttribute (panel, control, p.y, ATTR_LABEL_TEXT, id);
+				HebrewConverter_convertHebrewISOtoUTF8(id);
+				GetTableColumnAttribute (panel, control, p.x, ATTR_LABEL_TEXT, tag);
+				HebrewConverter_convertHebrewISOtoUTF8(tag);
+				GetTableCellVal (panel, control, p, val);
+				HebrewConverter_convertHebrewISOtoUTF8(val);
+				Ini_PutRawString (iniHandle, "20", tag, val);
+				Ini_WriteToFile (iniHandle, dbFile);
 				//setFieldVal(char id[], char field[], char value[]); 
 				MessagePopup("event","updated");
 			}
@@ -224,8 +237,10 @@ int CVICALLBACK btnNewRec (int panel, int control, int event,
 		case EVENT_COMMIT:
 			  PromptPopup ("New Record","Enter ID", id, 12);
 			  HebrewConverter_convertHebrewISOtoUTF8(id);
-			  addNewRecord(iniHandle,id,tagName,fieldAmount);
-			  SetInTable(panel,PANEL_3_TABLE);
+			  if(addNewRecord(iniHandle,id,tagName,fieldAmount)==0)
+				  MessagePopup("Error", "ID already exist");
+			  else
+			  	SetInTable(panel,PANEL_3_TABLE);
 			break;
 	}
 	return 0;

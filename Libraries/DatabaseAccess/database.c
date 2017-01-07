@@ -24,7 +24,7 @@ int addNewRecord(IniText iniHandle,char id[],char * tagName[],int fieldAmount)
 		return 0;
 	for(int i=0;i<fieldAmount;i++)
 	{
-		Ini_PutRawString (iniHandle, id, tagName[i], "");	
+		Ini_PutRawString (iniHandle, id, tagName[i], tagName[i]);	
 	}
 	Ini_WriteToFile (iniHandle, dbFile);
 	return 1;
