@@ -201,10 +201,8 @@ int getFieldVal(IniText iniHandle,char id[], char field[], char value[])
 	return 0;
 }
 
-
-//provide a list of all ids with this value in the specified field
-//the user must make sure an appropriate array is provided
-int getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **ids)
+//counts how many records have this value in the specified field 
+int getNumberOfIdsFromField(IniText iniHandle,char field[], char value[])
 {
 	int amount,count =0;
 	char id[SIZE];
@@ -214,12 +212,32 @@ int getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **i
 		sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
 		if(getFieldVal(iniHandle,id,field,value)==1)
 		{
-			ids[count] = malloc(sizeof(char)*SIZE);
-			sprintf(ids[count],"%s",id);
 			count++;
 		}
 		
 	}
 	return count;
+}
+
+//provide a list of all ids with this value in the specified field
+//the user must make sure an appropriate array is provided
+char** getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **ids)
+{
+	int amount,count =0;
+	char id[SIZE];
+	amount = countAllRecords(iniHandle);
+	ids = malloc(sizeof(char*)*getNumberOfIdsFromField(iniHandle,field,value));
+	for(int i=1;i<=amount;i++)
+	{
+		sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
+		if(getFieldVal(iniHandle,id,field,value)==1)
+		{
+			ids[count] = malloc(sizeof(char)*(strlen(id)+1));
+			sprintf(ids[count],"%s",id);
+			count++;
+		}
+		
+	}
+	return ids;
 }
 

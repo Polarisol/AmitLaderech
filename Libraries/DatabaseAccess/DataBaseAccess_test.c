@@ -10,7 +10,7 @@
 static int panelHandle,panelHandle2,panelHandle3;
 static char id[SIZE];
 static char dbFile[SIZE];
-static char *tagName[SIZE],*tagValue[SIZE],*ids[SIZE];
+static char *tagName[SIZE],*tagValue[SIZE],**ids;
 static IniText iniHandle;
 int recordAmount,fieldAmount;
 Point p;
@@ -250,7 +250,8 @@ int checkFieldInDB(char db[],int j)
 	HebrewConverter_convertHebrewUTF8toISO(f);
 	GetCtrlVal (panelHandle2, PANEL_2_SBFIELDVAL, v);
 	HebrewConverter_convertHebrewUTF8toISO(v);
-	count = getRecordIdsFromField(iniHandle, f ,v ,ids);
+	count = getNumberOfIdsFromField(iniHandle,f,v);
+	ids = getRecordIdsFromField(iniHandle, f ,v ,ids);
 	InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, count, VAL_CELL_STRING);
 	for(int i=0;i<count;i++ )
 	{

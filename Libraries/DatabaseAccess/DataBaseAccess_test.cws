@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 5
+Number of Opened Files = 4
 Window Confinement Region Enabled = True
 MainColumnWidth = 196
 FileDateColumnWidth = 70
@@ -60,37 +60,37 @@ Window Top = 47
 Window Left = 13
 Window Height = 586
 Window Width = 1272
-Window Z-Order = 3
+Window Z-Order = 4
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 File Type = "CSource"
-Disk Date = 3566663276
+Disk Date = 3566671159
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
-Window Z-Order = 1
-Source Window State = "1,293,293,293,24,28,24,0,0,109,0,64,0,3,0,25,261,0,275,44,561,1272,1,22,"
+Window Z-Order = 2
+Source Window State = "1,278,278,278,74,81,81,0,0,80,0,64,0,3,0,21,284,0,295,83,561,1272,1,22,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
 File Type = "Include"
-Disk Date = 3566657547
+Disk Date = 3566670320
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Window Z-Order = 5
-Source Window State = "1,37,40,40,0,56,56,0,0,80,0,37,0,0,0,17,11,0,47,79,461,1272,1,16,"
+Window Z-Order = 3
+Source Window State = "1,47,47,47,0,3,3,0,0,80,0,37,0,0,0,17,29,0,47,6,461,1272,1,16,"
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
 File Type = "CSource"
-Disk Date = 3566662550
+Disk Date = 3566671159
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Window Z-Order = 2
-Source Window State = "1,116,116,116,47,54,54,0,0,80,0,191,0,11,0,17,106,0,225,30,461,1272,1,15,"
+Window Z-Order = 1
+Source Window State = "1,112,112,112,0,66,66,0,0,109,0,171,0,11,0,25,217,0,111,18,461,1272,1,15,"
 
 [File 0006]
 Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.c"
@@ -108,22 +108,11 @@ Disk Date = 3566544439
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0008]
-Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.h"
-File Type = "Include"
-Disk Date = 3566661283
-In Projects = ""
-Window Top = 272
-Window Left = 128
-Window Z-Order = 4
-Source Window State = "1,53,53,53,17,25,25,0,3,77,0,0,0,0,0,15,38,0,53,17,411,1227,1,0,"
-
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
 Tab 0002 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 Tab 0003 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
 Tab 0004 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
-Tab 0005 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

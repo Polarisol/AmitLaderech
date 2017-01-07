@@ -41,11 +41,11 @@ int setFieldVal(IniText iniHandle,char id[], char field[], char value[]);
 int getFieldVal(IniText iniHandle,char id[], char field[], char value[]);
 
 //counts how many records have this value in the specified field 
-void getNumberOfIdsFromField(char field[], char value[], int *amount);
+int getNumberOfIdsFromField(IniText iniHandle,char field[], char value[]);
 
 //provide a list of all ids with this value in the specified field
 //the user must make sure an appropriate array is provided
-int getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **ids);
+char** getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
 int countAllRecords(IniText iniHandle);
