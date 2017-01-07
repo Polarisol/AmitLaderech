@@ -13,9 +13,9 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "DataBaseAccess_test.prj"
 Drag Bar Left = 213
-Window Top = 34
+Window Top = 45
 Window Left = 0
-Window Bottom = 1020
+Window Bottom = 1031
 Window Right = 1912
 Maximized = True
 Maximized Children = True
@@ -65,12 +65,12 @@ Window Z-Order = 4
 [File 0003]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 File Type = "CSource"
-Disk Date = 3566566251
+Disk Date = 3566645128
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
 Window Z-Order = 1
-Source Window State = "1,164,164,164,8,39,39,0,0,109,0,12,0,3,0,19,150,0,164,8,561,1272,1,16,"
+Source Window State = "1,177,178,178,0,68,68,0,0,109,0,12,0,3,0,25,163,0,176,60,561,1272,1,16,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
@@ -79,20 +79,31 @@ Disk Date = 3566557472
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Window Z-Order = 5
-Source Window State = "1,33,35,35,0,75,75,0,3,80,0,37,0,0,0,17,21,0,33,0,461,1272,1,16,"
+Window Z-Order = 3
+Source Window State = "1,33,35,35,0,75,75,0,0,80,0,37,0,0,0,17,27,0,35,0,461,1272,1,16,"
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
 File Type = "CSource"
-Disk Date = 3566565797
+Disk Date = 3566645088
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Window Z-Order = 2
-Source Window State = "1,28,28,28,4,40,40,0,0,80,0,11,0,11,0,17,15,0,30,25,461,1272,1,0,"
+Source Window State = "1,158,158,158,37,40,40,0,0,80,0,11,0,11,0,17,149,0,161,0,461,1272,1,0,"
+Breakpoint 0001 = "160,0,enabled,"
 
 [File 0006]
+Path = "/c/Program Files (x86)/National Instruments/CVI2015/toolslib/toolbox/inifile.h"
+File Type = "Include"
+Disk Date = 3562614000
+In Projects = ""
+Window Top = 92
+Window Left = 36
+Window Z-Order = 5
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,13,75,0,81,66,361,1272,1,0,"
+
+[File 0007]
 Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.c"
 File Type = "CSource"
 Disk Date = 3566544439
@@ -101,22 +112,12 @@ Window Top = 182
 Window Left = 82
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,0,40,16,386,1272,1,0,"
 
-[File 0007]
+[File 0008]
 Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.h"
 File Type = "Include"
 Disk Date = 3566544439
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0008]
-Path = "/c/Program Files (x86)/National Instruments/CVI2015/toolslib/toolbox/inifile.h"
-File Type = "Include"
-Disk Date = 3562614000
-In Projects = ""
-Window Top = 92
-Window Left = 36
-Window Z-Order = 3
-Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,13,75,0,81,66,361,1272,1,0,"
 
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"

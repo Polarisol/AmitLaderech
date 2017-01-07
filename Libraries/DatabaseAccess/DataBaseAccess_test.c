@@ -175,9 +175,7 @@ int CVICALLBACK tblFunc (int panel, int control, int event,
 				HebrewConverter_convertHebrewISOtoUTF8(tag);
 				GetTableCellVal (panel, control, p, val);
 				HebrewConverter_convertHebrewISOtoUTF8(val);
-				Ini_PutRawString (iniHandle, "20", tag, val);
-				Ini_WriteToFile (iniHandle, dbFile);
-				//setFieldVal(char id[], char field[], char value[]); 
+				setFieldVal(iniHandle,id, tag , val); 
 				MessagePopup("event","updated");
 			}
 			break;

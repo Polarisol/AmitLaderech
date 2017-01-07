@@ -10,6 +10,7 @@
 #include "inifile.h"
 #include "HebrewConversions.h" 
 #include "database.h"
+#define  DIR "Database//"
 
 static IniText iniHandle;
 static char dbFile[SIZE];
@@ -145,6 +146,19 @@ char* getRecordInfo(IniText iniHandle,char *id,int i)
 {
 	Ini_NthSectionName (iniHandle, i, &id);
 	return id;
+}
+
+// sets the value of an existing field of an existing record
+//returns 1 if successful, 0 if not (for example if the field or record are not known)
+int setFieldVal(IniText iniHandle,char id[], char field[], char value[])
+{
+	HebrewConverter_convertHebrewISOtoUTF8(id);  
+	HebrewConverter_convertHebrewISOtoUTF8(field);  
+	HebrewConverter_convertHebrewISOtoUTF8(value); 
+	
+	Ini_PutRawString (iniHandle, id, field, value);
+	Ini_WriteToFile (iniHandle, dbFile);
+	return 1;
 }
 
 
