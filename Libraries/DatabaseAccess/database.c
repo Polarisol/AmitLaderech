@@ -1,3 +1,6 @@
+#include <userint.h>
+#include "DataBaseAccess_test.h"
+
 //==============================================================================
 //									database.c							
 //							database function file.
@@ -14,6 +17,7 @@
 
 static IniText iniHandle;
 static char dbFile[SIZE];
+static char *tagName[SIZE],*tagValue[SIZE];
 FILE *fp;
 
 //creates a new empty record (a line in the database, a worker etc.)
@@ -28,6 +32,17 @@ int addNewRecord(IniText iniHandle,char id[],char * tagName[],int fieldAmount)
 		Ini_PutRawString (iniHandle, id, tagName[i], tagName[i]);	
 	}
 	Ini_WriteToFile (iniHandle, dbFile);
+	return 1;
+}
+
+//remove record from db file.
+//return 1 if successful, 0 if record does no exist
+int removeRecord(IniText iniHandle, char id[])
+{
+	if(Ini_RemoveSection (iniHandle, id)==0)
+		return 0;
+	else
+		Ini_WriteToFile (iniHandle, dbFile);
 	return 1;
 }
 //allows specifying the databases file, it will be saved globally
@@ -88,19 +103,6 @@ IniText getDatabaseFile(char name[])
 }
 
 
-
-int createIniFile()
-{
-	iniHandle = Ini_New (1);
-	Ini_ReadFromFile (iniHandle, dbFile);
-	Ini_PutString (iniHandle, "203059936", "last name", "gazit2");
-	Ini_WriteToFile (iniHandle, dbFile);
-	
-	return 1;
-	
-}
-
-
 //search for the ID in database.create arrays for name value.
 //return -1 if ID is not in the db
 int search(IniText iniHandle,char id[], int numOfTags, char * tagName[], char * tagValue[])
@@ -129,12 +131,14 @@ int recordCheck(IniText iniHandle,char id[])
 	return 1;
 
 }
+
 //return the amount of records in the db.
 int countAllRecords(IniText iniHandle)
 {
 	int amount = Ini_NumberOfSections (iniHandle);
 	return amount;
 }
+
 //return the amount of fields in a record
 int countAllFields(IniText iniHandle,char id[])
 {
@@ -142,6 +146,9 @@ int countAllFields(IniText iniHandle,char id[])
 	return fieldAmount; 
 }
 
+//get record name from the index provided.
+//when called use the following:
+//sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
 char* getRecordInfo(IniText iniHandle,char *id,int i)
 {
 	Ini_NthSectionName (iniHandle, i, &id);
@@ -161,5 +168,58 @@ int setFieldVal(IniText iniHandle,char id[], char field[], char value[])
 	return 1;
 }
 
+//return the index of the field in the iniText
+//if the field does not exist return 0
+int getIndexofField(IniText iniHandle,char id[],char field[])
+{
+	if(recordCheck(iniHandle,id)!=-1) 
+	{
+		 int fieldAmount = countAllFields(iniHandle,id);
+		 for(int i=1;i<=fieldAmount;i++) 
+		 {
+			if(!strcmp(tagName[i-1],field))
+				return (i-1);
+		 }
+	}
+	 return 0;
+}
 
+// gets the value of an existing field of an existing record
+//returns 1 if successful, 0 if not (for example if the field or record are not known)
+//the user must make sure an appropriate array is provided
+int getFieldVal(IniText iniHandle,char id[], char field[], char value[])
+{
+	int fieldAmount,i;
+	if(recordCheck(iniHandle,id)!=-1)
+	{
+		fieldAmount = countAllFields(iniHandle,id);
+		search(iniHandle,id,fieldAmount,tagName,tagValue);
+		i = getIndexofField(iniHandle,id,field);
+				if(!strcmp(tagValue[i],value))
+					return 1;
+	}
+	return 0;
+}
+
+
+//provide a list of all ids with this value in the specified field
+//the user must make sure an appropriate array is provided
+int getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **ids)
+{
+	int amount,count =0;
+	char id[SIZE];
+	amount = countAllRecords(iniHandle);
+	for(int i=1;i<=amount;i++)
+	{
+		sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
+		if(getFieldVal(iniHandle,id,field,value)==1)
+		{
+			ids[count] = malloc(sizeof(char)*SIZE);
+			sprintf(ids[count],"%s",id);
+			count++;
+		}
+		
+	}
+	return count;
+}
 

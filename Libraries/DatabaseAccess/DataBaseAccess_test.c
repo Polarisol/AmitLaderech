@@ -10,7 +10,7 @@
 static int panelHandle,panelHandle2,panelHandle3;
 static char id[SIZE];
 static char dbFile[SIZE];
-static char *tagName[100],*tagValue[100];
+static char *tagName[SIZE],*tagValue[SIZE],*ids[SIZE];
 static IniText iniHandle;
 int recordAmount,fieldAmount;
 Point p;
@@ -66,26 +66,7 @@ int CVICALLBACK btnSearch (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			PromptPopup ("Search", "Enter ID number", id, 12);
-			fieldAmount = countAllFields(iniHandle,id);
-			if(search(iniHandle,id, fieldAmount,tagName,tagValue)==-1)
-				MessagePopup("Message","ID was not found");
-			else
-			{
 				DisplayPanel (panelHandle2);
-				delTable(panelHandle2,PANEL_2_TABLE);
-				InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, fieldAmount, VAL_CELL_STRING);
-				InsertTableColumns (panelHandle2, PANEL_2_TABLE, -1, 2, VAL_CELL_STRING);
-				for(int j=1;j<=fieldAmount;j++)
-				{
-					SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(2,j), tagValue[j-1]);
-					SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(1,j), tagName[j-1]);
-				}
-				
-			}
-			
-
-
 			break;
 	}
 	return 0;
@@ -97,7 +78,7 @@ int CVICALLBACK btnAmit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			initialize("Amit.ini");
+			initialize("amit.ini");
 			DisplayPanel(panelHandle3);
 			SetInTable(panelHandle3,PANEL_3_TABLE);
 			break;
@@ -243,3 +224,84 @@ int CVICALLBACK btnNewRec (int panel, int control, int event,
 	}
 	return 0;
 }
+
+int CVICALLBACK btnDelRecord (int panel, int control, int event,
+							  void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			PromptPopup ("Delete Record", "Enter ID to delete", id, 100);
+			if(removeRecord(iniHandle,id)==0)
+				MessagePopup ("Error", "ID");
+			else
+				SetInTable(panel,PANEL_3_TABLE);
+			break;
+	}
+	return 0;
+}
+
+int checkFieldInDB(char db[],int j)
+{
+	int count;
+	char f[SIZE],v[SIZE];
+	initialize(db);
+	GetCtrlVal (panelHandle2, PANEL_2_SBFIELD, f);
+	HebrewConverter_convertHebrewUTF8toISO(f);
+	GetCtrlVal (panelHandle2, PANEL_2_SBFIELDVAL, v);
+	HebrewConverter_convertHebrewUTF8toISO(v);
+	count = getRecordIdsFromField(iniHandle, f ,v ,ids);
+	InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, count, VAL_CELL_STRING);
+	for(int i=0;i<count;i++ )
+	{
+		SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(1,j+i+1), ids[i]);
+	}
+	return count;
+}
+
+int checkByID(char db[])
+{
+	initialize(db);
+	GetCtrlVal (panelHandle2, PANEL_2_SBYID, id);
+	fieldAmount = countAllFields(iniHandle,id);
+			
+	if(search(iniHandle,id, fieldAmount,tagName,tagValue)==-1)
+		return 0;
+	else
+	{
+		delTable(panelHandle2,PANEL_2_TABLE);
+		InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, fieldAmount, VAL_CELL_STRING);
+		InsertTableColumns (panelHandle2, PANEL_2_TABLE, -1, 2, VAL_CELL_STRING);
+		for(int j=1;j<=fieldAmount;j++)
+		{
+			SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(2,j), tagValue[j-1]);
+			SetTableCellVal (panelHandle2, PANEL_2_TABLE, MakePoint(1,j), tagName[j-1]);
+		}
+		return 1;
+	}
+}
+int CVICALLBACK searchBy (int panel, int control, int event,
+					   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			delTable(panel,PANEL_2_TABLE);
+			if(control == PANEL_2_BTNID)
+			{
+				if(checkByID("amit.ini")==0)
+					if(checkByID("mentor.ini")==0)
+						MessagePopup("Error","Id was not found");
+				
+			}
+			else if(control == PANEL_2_BTNFIELD)
+			{
+				InsertTableColumns (panelHandle2, PANEL_2_TABLE, -1, 1, VAL_CELL_STRING);
+				int count = checkFieldInDB("amit.ini",0);
+				checkFieldInDB("mentor.ini",count);
+			}
+			break;
+	}
+	return 0;
+}
+

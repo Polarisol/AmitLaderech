@@ -38,14 +38,14 @@ int setFieldVal(IniText iniHandle,char id[], char field[], char value[]);
 // gets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
 //the user must make sure an appropriate array is provided
-int getFieldVal(char id[], char field[], char value[]);
+int getFieldVal(IniText iniHandle,char id[], char field[], char value[]);
 
 //counts how many records have this value in the specified field 
 void getNumberOfIdsFromField(char field[], char value[], int *amount);
 
 //provide a list of all ids with this value in the specified field
 //the user must make sure an appropriate array is provided
-int getRecordIdsFromField(char field[], char value[], char **ids);
+int getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
 int countAllRecords(IniText iniHandle);
@@ -56,19 +56,22 @@ int countAllFields(IniText iniHandle,char id[]);
 //returns 1 if exists, 0 if not
 int recordCheck(IniText iniHandle,char id[]);
 
-//use the ini func ini_numberOfItems
-//return ini_numberofItems
-int getFieldNum(char id[]);
-
-
+//get record name from the index provided.
+//when called use the following:
+//sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
 char* getRecordInfo(IniText iniHandle,char *id,int i);
-
-int createIniFile();
 
 //search id in ini file and put the tagName and tagValue inside an array
 //return -1 if not found
 int search(IniText iniHandle,char id[], int numOfTags, char ** tagName, char ** tagValue);
 
+//remove record from db file.
+//return 1 if successful, 0 if record does no exist
+int removeRecord(IniText iniHandle, char id[]);
+
+//return the index of the field in the iniText
+//if the field does not exist return 0
+int getIndexofField(IniText iniHandle,char id[],char field[]);
 
 #endif
 
