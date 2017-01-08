@@ -1,7 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/DatabaseAccess/DataBase"
-Pathname Line0002 = "Access_test.cws"
+Pathname = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -12,12 +11,12 @@ VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
-Project 0001 = ""
+Project 0001 = "Functions.prj"
 Drag Bar Left = 217
 Window Top = 45
-Window Left = 112
-Window Bottom = 686
-Window Right = 884
+Window Left = 121
+Window Bottom = 639
+Window Right = 875
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -31,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 2
+Number of Opened Files = 4
 Window Confinement Region Enabled = True
 MainColumnWidth = 200
 FileDateColumnWidth = 70
@@ -47,29 +46,51 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.c"
+Path = "/c/Users/Dror/Desktop/CVI Project/Dror/CSV_Parser_Functions.c"
 File Type = "CSource"
-Disk Date = 3566746233
-In Projects = ""
-Window Top = 40
-Window Left = 11
-Window Z-Order = 2
-Source Window State = "1,0,27,27,0,19,19,0,3,80,0,0,0,0,0,25,0,0,0,0,531,1020,1,0,"
+Disk Date = 3566762618
+In Projects = "1,"
+Window Top = 33
+Window Left = 10
+Window Z-Order = 1
+Source Window State = "1,5,5,5,8,31,8,0,0,117,0,0,0,0,0,27,0,0,6,47,331,780,1,0,"
 
 [File 0002]
+Path = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.c"
+File Type = "CSource"
+Disk Date = 3566758868
+In Projects = "1,"
+Window Top = 154
+Window Left = 71
+Window Z-Order = 2
+Source Window State = "1,52,53,53,0,18,18,0,0,80,0,1,0,1,0,25,0,0,17,4,531,1020,1,14,"
+
+[File 0003]
 Path = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.uir"
 File Type = "User Interface Resource"
-Disk Date = 3566746484
-In Projects = ""
+Disk Date = 3566758670
+In Projects = "1,"
 Window Top = 78
 Window Left = 31
 Window Height = 531
 Window Width = 1020
-Window Z-Order = 1
+Window Z-Order = 3
+
+[File 0004]
+Path = "/c/Users/Dror/Desktop/CVI Project/Dror/Func_Header.h"
+File Type = "Include"
+Disk Date = 3566747441
+In Projects = ""
+Window Top = 40
+Window Left = 11
+Window Z-Order = 4
+Source Window State = "1,0,0,0,0,51,0,0,0,80,0,0,0,0,0,22,0,0,1,11,471,1020,1,20,"
 
 [Tab Order]
-Tab 0001 = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.c"
-Tab 0002 = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.uir"
+Tab 0001 = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.uir"
+Tab 0002 = "/c/Users/Dror/Desktop/CVI Project/Dror/Functions.c"
+Tab 0003 = "/c/Users/Dror/Desktop/CVI Project/Dror/Func_Header.h"
+Tab 0004 = "/c/Users/Dror/Desktop/CVI Project/Dror/CSV_Parser_Functions.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
@@ -160,50 +181,5 @@ Working Directory = ""
 Environment Options = ""
 
 [Watch 1]
-Watch Expression = "tagValue"
-
-[Watch 2]
-Watch Expression = "tagValue[0]"
-
-[Watch 3]
-Watch Expression = "tagValue[0][0]"
-
-[Watch 4]
-Watch Expression = "tagValue[0][1]"
-
-[Watch 5]
-Watch Expression = "tagValue[0][2]"
-
-[Watch 6]
-Watch Expression = "tagValue[0][3]"
-
-[Watch 7]
-Watch Expression = "tagValue[0][4]"
-
-[Watch 8]
-Watch Expression = "tagValue[0][5]"
-
-[Watch 9]
-Watch Expression = "tagValue[0][6]"
-
-[Watch 10]
-Watch Expression = "tagValue[0][7]"
-
-[Watch 11]
-Watch Expression = "tagValue[0][8]"
-
-[Watch 12]
-Watch Expression = "tagValue[0][9]"
-
-[Watch 13]
-Watch Expression = "tagValue[0][10]"
-
-[Watch 14]
-Watch Expression = "tagValue[0][11]"
-
-[Watch 15]
-Watch Expression = "tagValue[0][12]"
-
-[Watch 16]
-Watch Expression = "tagValue[0][13]"
+Watch Expression = "status"
 

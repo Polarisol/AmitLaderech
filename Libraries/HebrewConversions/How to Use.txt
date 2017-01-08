@@ -7,4 +7,4 @@ This applies to array cells
 3. add the 'HebrewConversions.c' file to your project (Edit->add files to project)
 4. When you read a Hebrew string from file use the 'HebrewConverter_convertHebrewUTF8toISO' function before Seting a CVI control value.
 5. When you read a Hebrew string from a CVI control use the 'HebrewConverter_convertHebrewISOtoUTF8' function before writing it to file (note that the string will double in size)
- 
+ d
