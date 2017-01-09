@@ -10,7 +10,7 @@
 static int panelHandle,panelHandle2,panelHandle3;
 static char id[SIZE];
 static char dbFile[SIZE];
-static char *tagName[SIZE],*tagValue[SIZE],**ids;
+static char **tagName,**tagValue,**ids;
 static IniText iniHandle;
 int recordAmount,fieldAmount;
 Point p;
@@ -30,9 +30,9 @@ int main (int argc, char *argv[])
 	if ((panelHandle3 = LoadPanel (0, "DataBaseAccess_test.uir", PANEL_3)) < 0)
 		return -1;
 	DisplayPanel (panelHandle);
+	initialize("config.ini");
 	RunUserInterface ();
-	
-
+	free(ids);free(tagName);free(tagValue);
 	DiscardPanel (panelHandle3);
 	DiscardPanel (panelHandle2);
 	DiscardPanel (panelHandle);
@@ -100,42 +100,6 @@ int CVICALLBACK btnMentor (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK btnAmout (int panel, int control, int event,
-						  void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-
-			break;
-	}
-	return 0;
-}
-
-
-	
-
-int CVICALLBACK tblFuncSearch (int panel, int control, int event,
-						 void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-
-			break;
-		case EVENT_EDIT_MODE_STATE_CHANGE:
-			if(!eventData1)
-			{
-				
-				//setFieldVal(char id[], char field[], char value[]); 
-				MessagePopup("event","updated");
-			}
-			break;
-	}
-	return 0;
-}
-
-
 int CVICALLBACK tblFunc (int panel, int control, int event,
 						 void *callbackData, int eventData1, int eventData2)
 {
@@ -151,11 +115,8 @@ int CVICALLBACK tblFunc (int panel, int control, int event,
 			if(!eventData1)
 			{ 
 				GetTableRowAttribute (panel, control, p.y, ATTR_LABEL_TEXT, id);
-				HebrewConverter_convertHebrewISOtoUTF8(id);
 				GetTableColumnAttribute (panel, control, p.x, ATTR_LABEL_TEXT, tag);
-				HebrewConverter_convertHebrewISOtoUTF8(tag);
 				GetTableCellVal (panel, control, p, val);
-				HebrewConverter_convertHebrewISOtoUTF8(val);
 				setFieldVal(iniHandle,id, tag , val); 
 				MessagePopup("event","updated");
 			}
@@ -168,6 +129,11 @@ void initialize(char name[])
 {
 	sprintf(dbFile,"%s",name);
 	iniHandle = getDatabaseFile(name);
+	if(!strcmp(name,"config.ini"))
+	{
+		tagName = malloc(sizeof(char*)*countAllFields(iniHandle,"CONFIG"));
+		tagValue = malloc(sizeof(char*)*countAllFields(iniHandle,"CONFIG"));
+	}
 	if(iniHandle == 0)		 
 		MessagePopup ("Error", "No database found");
 }
@@ -215,7 +181,7 @@ int CVICALLBACK btnNewRec (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			  PromptPopup ("New Record","Enter ID", id, 12);
-			  HebrewConverter_convertHebrewISOtoUTF8(id);
+			  //HebrewConverter_convertHebrewISOtoUTF8(id);
 			  if(addNewRecord(iniHandle,id,tagName,fieldAmount)==0)
 				  MessagePopup("Error", "ID already exist");
 			  else
@@ -247,11 +213,11 @@ int checkFieldInDB(char db[],int j)
 	char f[SIZE],v[SIZE];
 	initialize(db);
 	GetCtrlVal (panelHandle2, PANEL_2_SBFIELD, f);
-	HebrewConverter_convertHebrewUTF8toISO(f);
+	//HebrewConverter_convertHebrewUTF8toISO(f);
 	GetCtrlVal (panelHandle2, PANEL_2_SBFIELDVAL, v);
-	HebrewConverter_convertHebrewUTF8toISO(v);
+	//HebrewConverter_convertHebrewUTF8toISO(v);
 	count = getNumberOfIdsFromField(iniHandle,f,v);
-	ids = getRecordIdsFromField(iniHandle, f ,v ,ids);
+	ids= getRecordIdsFromField(iniHandle, f ,v ,ids);
 	InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, count, VAL_CELL_STRING);
 	for(int i=0;i<count;i++ )
 	{

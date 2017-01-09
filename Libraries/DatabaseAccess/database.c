@@ -15,6 +15,7 @@
 #include "database.h"
 #define  DIR "Database//"
 
+
 static IniText iniHandle;
 static char dbFile[SIZE];
 static char *tagName[SIZE],*tagValue[SIZE];
@@ -71,11 +72,6 @@ IniText getDatabaseFile(char name[])
 {
 	char file[SIZE];
 	char path[SIZE];
-	/*if(strstr(name,".ini") == NULL)
-	{
-		  sprintf(file,"%s.ini",name);
-		  name = file;
-	} */
 	GetFirstFile ("Database\\*.ini", 1, 0, 0, 0, 0, 0, file);//file = *.ini
 	if(strcmp (file, ""))
 	{
@@ -110,13 +106,15 @@ int search(IniText iniHandle,char id[], int numOfTags, char * tagName[], char * 
 	int val = recordCheck (iniHandle, id);
 	if(val==-1)
 		return -1;
+	//tagName = malloc(sizeof(char*)*countAllFields(iniHandle,id));
+	//tagValue = malloc(sizeof(char*)*countAllFields(iniHandle,id));
 	for(int i=0;i<numOfTags;i++)
 	{
 		
 		Ini_NthItemName (iniHandle, id, i+1, &tagName[i]);
-		HebrewConverter_convertHebrewUTF8toISO(tagName[i]);
+		//HebrewConverter_convertHebrewUTF8toISO(tagName[i]);
 		Ini_GetPointerToRawString (iniHandle, id, tagName[i], &tagValue[i]);
-		HebrewConverter_convertHebrewUTF8toISO(tagValue[i]);
+		//HebrewConverter_convertHebrewUTF8toISO(tagValue[i]);
 	}
 		
 	return 1;
@@ -159,9 +157,9 @@ char* getRecordInfo(IniText iniHandle,char *id,int i)
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
 int setFieldVal(IniText iniHandle,char id[], char field[], char value[])
 {
-	HebrewConverter_convertHebrewISOtoUTF8(id);  
-	HebrewConverter_convertHebrewISOtoUTF8(field);  
-	HebrewConverter_convertHebrewISOtoUTF8(value); 
+	//HebrewConverter_convertHebrewISOtoUTF8(id);  
+	//HebrewConverter_convertHebrewISOtoUTF8(field);  
+	//HebrewConverter_convertHebrewISOtoUTF8(value); 
 	
 	Ini_PutRawString (iniHandle, id, field, value);
 	Ini_WriteToFile (iniHandle, dbFile);
@@ -214,7 +212,6 @@ int getNumberOfIdsFromField(IniText iniHandle,char field[], char value[])
 		{
 			count++;
 		}
-		
 	}
 	return count;
 }
