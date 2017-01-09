@@ -73,5 +73,7 @@ int removeRecord(IniText iniHandle, char id[]);
 //if the field does not exist return 0
 int getIndexofField(IniText iniHandle,char id[],char field[]);
 
+int getAutofill(IniText iniHandle,int amount, char *tag, char** lib,char **output);
+
 #endif
 

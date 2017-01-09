@@ -14,6 +14,7 @@ static char **tagName,**tagValue,**ids;
 static IniText iniHandle;
 int recordAmount,fieldAmount;
 Point p;
+int autofill;
 
 void initialize(char name[]);
 void SetInTable(int panel,int control);
@@ -272,3 +273,36 @@ int CVICALLBACK searchBy (int panel, int control, int event,
 	return 0;
 }
 
+int CVICALLBACK test (int panel, int control, int event,
+					  void *callbackData, int eventData1, int eventData2)
+{
+	char **lib,**d;
+	int k=0;
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			break;
+		case EVENT_VAL_CHANGED:
+			autofill = NewCtrl (panelHandle2, CTRL_LIST, "", 250, 162);
+			SetCtrlAttribute (panelHandle2, autofill, ATTR_WIDTH, 194);
+			SetCtrlAttribute (panelHandle2, autofill, ATTR_TEXT_CHARACTER_SET, VAL_HEBREW_CHARSET);
+			char str[SIZE];
+			GetCtrlVal (panelHandle2, PANEL_2_SBYID, str);
+			initialize("amit.ini");
+			int a = countAllRecords(iniHandle);
+			lib = malloc(sizeof(char*)*a);
+			d = malloc(sizeof(char*)*a);
+			for(int i=0;i<a;i++)
+			{
+				Ini_NthSectionName (iniHandle, i+1, &lib[i]);
+			}
+			k = getAutofill(iniHandle,countAllRecords(iniHandle),str, lib,d);
+			for(int i=0;i<k;i++)
+			{
+				InsertListItem (panelHandle2, autofill, -1, d[i], i);
+			}
+			break; 
+	}
+	return 0;
+}

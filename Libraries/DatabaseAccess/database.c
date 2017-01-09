@@ -153,6 +153,7 @@ char* getRecordInfo(IniText iniHandle,char *id,int i)
 	return id;
 }
 
+
 // sets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
 int setFieldVal(IniText iniHandle,char id[], char field[], char value[])
@@ -236,5 +237,23 @@ char** getRecordIdsFromField(IniText iniHandle,char field[], char value[], char 
 		
 	}
 	return ids;
+}
+
+int getAutofill(IniText iniHandle,int amount, char *tag, char** lib,char **output)
+{
+	int i,j=0;
+	for(i=0;i<amount;i++)
+	{
+		
+		if(strstr(lib[i],tag)!=NULL)
+		{
+			output[i] = malloc(sizeof(char*)*SIZE);
+			sprintf(output[i],"%s",lib[i]);
+			j++;
+		}
+	}
+	
+	return j;
+	
 }
 

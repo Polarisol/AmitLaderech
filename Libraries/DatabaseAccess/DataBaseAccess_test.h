@@ -22,9 +22,10 @@
 #define  PANEL_2_TABLE                    2       /* control type: table, callback function: (none) */
 #define  PANEL_2_SBFIELDVAL               3       /* control type: string, callback function: (none) */
 #define  PANEL_2_SBFIELD                  4       /* control type: string, callback function: (none) */
-#define  PANEL_2_SBYID                    5       /* control type: string, callback function: (none) */
+#define  PANEL_2_SBYID                    5       /* control type: string, callback function: test */
 #define  PANEL_2_BTNFIELD                 6       /* control type: command, callback function: searchBy */
 #define  PANEL_2_BTNID                    7       /* control type: command, callback function: searchBy */
+#define  PANEL_2_LISTBOX                  8       /* control type: listBox, callback function: (none) */
 
 #define  PANEL_3                          3       /* callback function: exitFunc */
 #define  PANEL_3_TABLE                    2       /* control type: table, callback function: tblFunc */
@@ -52,6 +53,7 @@ int  CVICALLBACK btnSearch(int panel, int control, int event, void *callbackData
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK searchBy(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK tblFunc(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK test(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
