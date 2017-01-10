@@ -20,7 +20,8 @@
 #define  PANEL_USERDATA                   5       /* control type: command, callback function: userinfoFunc */
 #define  PANEL_ADDRESSBOX                 6       /* control type: command, callback function: (none) */
 #define  PANEL_SENDBOTTON                 7       /* control type: pictButton, callback function: sendmessageFunc */
-#define  PANEL_PICTURE                    8       /* control type: picture, callback function: (none) */
+#define  PANEL_FILESELECT                 8       /* control type: pictButton, callback function: fileselectFunc */
+#define  PANEL_PICTURE                    9       /* control type: picture, callback function: (none) */
 
 #define  PANEL_2                          2       /* callback function: justrandomexitFunc */
 #define  PANEL_2_MAIL                     2       /* control type: string, callback function: (none) */
@@ -45,6 +46,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK fileselectFunc(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK justrandomexitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK okFunc(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK sendmessageFunc(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

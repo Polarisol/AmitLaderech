@@ -48,33 +48,33 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Amit Ladereh Project/AmitLaderech/Email/MailFunctions.h"
 File Type = "Include"
-Disk Date = 3566900358
+Disk Date = 3566902098
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Window Z-Order = 3
-Source Window State = "1,11,11,11,32,33,33,0,0,60,0,0,0,0,0,19,0,0,9,34,271,523,1,0,"
+Source Window State = "1,15,18,15,8,45,8,0,0,60,0,0,0,0,0,19,0,0,12,12,271,523,1,0,"
 
 [File 0002]
 Path = "/d/Amit Ladereh Project/AmitLaderech/Email/email.uir"
 File Type = "User Interface Resource"
-Disk Date = 3566900191
+Disk Date = 3566901951
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Window Height = 349
 Window Width = 683
-Window Z-Order = 2
+Window Z-Order = 1
 
 [File 0003]
 Path = "/d/Amit Ladereh Project/AmitLaderech/Email/email.c"
 File Type = "CSource"
-Disk Date = 3566900224
+Disk Date = 3566901950
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
-Window Z-Order = 1
-Source Window State = "1,19,19,19,23,27,23,0,0,145,0,4,0,4,0,34,153,0,19,23,349,683,1,0,"
+Window Z-Order = 2
+Source Window State = "1,193,193,193,86,100,100,0,0,80,0,4,0,4,0,25,166,0,193,74,349,683,1,0,"
 
 [File 0004]
 Path = "/d/Amit Ladereh Project/AmitLaderech/Email/bass.lib"

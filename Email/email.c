@@ -22,7 +22,7 @@ char port[MAX] = "587";
 char to[MAX];  
 char subject[MAX];
 char text[MAX] = "Enter Your Text";
-char attachmentFile[MAX];
+char attachmentFile[600];
 
 int counter=1;
 
@@ -180,6 +180,19 @@ int CVICALLBACK userinfoFunc (int panel, int control, int event,
 			 HidePanel (panelHandle);
 			 DisplayPanel (panelHandle2);
 			 SetActiveCtrl (panelHandle2, PANEL_2_MAIL);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK fileselectFunc (int panel, int control, int event,
+								void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			FileSelectPopup ("", "*.*", "", "Load File", VAL_LOAD_BUTTON, 0, 0, 1, 0, attachmentFile);
+
 			break;
 	}
 	return 0;

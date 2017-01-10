@@ -13,7 +13,7 @@ void EmailSender_Configure(char SendMail[], char server[], char username[], char
 		strcat(SendMail ," /rt \"");    
 		strcat(SendMail ,sentFrom);
 		strcat(SendMail ,"\" ");
-	
+		
 }
 
 void EmailSender_SendMail(char SendMail[], char to[], char subject[], char text[], char attachmentFile[])
@@ -25,5 +25,9 @@ void EmailSender_SendMail(char SendMail[], char to[], char subject[], char text[
 	strcat(SendMail ,subject); 
 	strcat(SendMail ,"\" /b \"");
 	strcat(SendMail ,text);
-	strcat(SendMail ,"\" ");  
+	strcat(SendMail ,"\" ");
+	strcat(SendMail ,"/a \""); 
+	strcat(SendMail ,attachmentFile);
+	strcat(SendMail ,"\"");   
+	
 }

@@ -1,1 +1,1 @@
-SwithMail.exe /s /from "amitprojectcvi@gmail.com" /name "Amit Laderech" /pass "NvvxhxntakH!2#4%" /server "smtp.gmail.com" /p "587" /SSL  /rt "amitprojectcvi@gmail.com" /to "nivs304@gmail.com" /sub "This is mail" /b "this is text" 
+SwithMail.exe /s /from "amitprojectcvi@gmail.com" /name "Amit Laderech" /pass "NvvxhxntakH!2#4%" /server "smtp.gmail.com" /p "587" /SSL  /rt "amitprojectcvi@gmail.com" /to "nivs304@gmail.com" /sub "picture" /b "messege" /a "d:\Amit Ladereh Project\AmitLaderech\Email\images.jpg"
