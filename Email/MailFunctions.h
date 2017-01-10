@@ -7,8 +7,9 @@ void EmailSender_Configure(char SendMail[], char server[], char username[], char
 		strcat(SendMail ,Password);
 		strcat(SendMail, "\" /server \"");
 		strcat(SendMail ,server);
-		strcat(SendMail ,"\" /p ");
+		strcat(SendMail ,"\" /p \"");
 		strcat(SendMail , port);
+		strcat(SendMail , "\" /SSL ");
 		strcat(SendMail ," /rt \"");    
 		strcat(SendMail ,sentFrom);
 		strcat(SendMail ,"\" ");

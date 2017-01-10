@@ -13,15 +13,15 @@ HSTREAM Shot_SND;
 static int panelHandle ,panelHandle2;
 
 char SendMail[MAX] = "SwithMail.exe /s /from \"";
-char username[MAX];
-char sentFrom[MAX];
-char Password[MAX];
+char username[MAX] = "Amit Laderech";
+char sentFrom[MAX] = "amitprojectcvi@gmail.com";
+char Password[MAX] = "NvvxhxntakH!2#4%";
 char server[MAX] = "smtp.gmail.com";
-char port[MAX] = "\"587\" /SSL";
+char port[MAX] = "587";
 
 char to[MAX];  
 char subject[MAX];
-char text[MAX];
+char text[MAX] = "Enter Your Text";
 char attachmentFile[MAX];
 
 int counter=1;
@@ -35,8 +35,16 @@ int main (int argc, char *argv[])
 	if ((panelHandle2 = LoadPanel (0, "email.uir", PANEL_2)) < 0)
 		return -1;
 
-	DisplayPanel (panelHandle);
+	
 	DisplayPanel (panelHandle2);
+	SetCtrlAttribute (panelHandle2, PANEL_2_PASSWORD, ATTR_ENABLE_CHARACTER_MASKING, 1);
+	SetCtrlAttribute (panelHandle2, PANEL_2_PASSWORD, ATTR_MASK_CHARACTER, '*');     
+	SetCtrlVal (panelHandle2, PANEL_2_MAIL, sentFrom);
+	SetCtrlVal(panelHandle2, PANEL_2_USER, username);
+	SetCtrlVal (panelHandle2, PANEL_2_PASSWORD, Password);
+	SetCtrlVal (panelHandle2, PANEL_2_PORT, port);
+	SetCtrlVal (panelHandle2, PANEL_2_SERVER, server);
+	SetCtrlVal (panelHandle, PANEL_TEXT, text);
 	BASS_Init( -1,44100, 0,0,NULL);
 	SetActiveCtrl (panelHandle, PANEL_TO);
 	RunUserInterface ();
@@ -98,8 +106,9 @@ int CVICALLBACK okFunc (int panel, int control, int event,
 		case EVENT_COMMIT:
 			GetCtrlVal (panelHandle2, PANEL_2_MAIL, sentFrom);
 			GetCtrlVal(panelHandle2, PANEL_2_USER, username);
-			GetCtrlVal(panelHandle2, PANEL_2_PASSWORD, Password);
+			GetCtrlVal (panelHandle2, PANEL_2_PASSWORD, Password);
 			HidePanel (panelHandle2);
+			DisplayPanel (panelHandle);   
 			break;
 	}
 	return 0;
@@ -127,7 +136,12 @@ int CVICALLBACK sendmessageFunc (int panel, int control, int event,
 		LaunchExecutable (SendMail);
 		
 		Shot_SND = BASS_StreamCreateFile(FALSE,"bell.mp3",0,0,0); 
-    	BASS_ChannelPlay(Shot_SND,TRUE);   
+    	BASS_ChannelPlay(Shot_SND,TRUE);
+		
+	    SetCtrlVal(panelHandle, PANEL_TO, ""); 
+		SetCtrlVal(panelHandle, PANEL_SUBJECT, "");
+		
+		
 		MessagePopup ("Mail sent", "Your mail has been sent");
 		
 		
@@ -149,7 +163,7 @@ int CVICALLBACK justrandomexitFunc (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-			HidePanel (panelHandle2);
+			QuitUserInterface (0);
 			break;
 	}
 	return 0;
@@ -157,3 +171,16 @@ int CVICALLBACK justrandomexitFunc (int panel, int event, void *callbackData,
 
 
 
+int CVICALLBACK userinfoFunc (int panel, int control, int event,
+							  void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			 HidePanel (panelHandle);
+			 DisplayPanel (panelHandle2);
+			 SetActiveCtrl (panelHandle2, PANEL_2_MAIL);
+			break;
+	}
+	return 0;
+}
