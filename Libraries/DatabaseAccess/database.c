@@ -244,8 +244,8 @@ int getAutofill(IniText iniHandle,int amount, char *tag, char** lib,char **outpu
 		
 		if(strstr(lib[i],tag)!=NULL)
 		{
-			output[i] = malloc(sizeof(char*)*SIZE);
-			sprintf(output[i],"%s",lib[i]);
+			output[j] = malloc(sizeof(char*)*SIZE);
+			sprintf(output[j],"%s",lib[i]);
 			j++;
 		}
 	}

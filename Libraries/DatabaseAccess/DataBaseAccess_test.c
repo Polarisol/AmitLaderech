@@ -275,7 +275,7 @@ int CVICALLBACK searchBy (int panel, int control, int event,
 
 int CVICALLBACK test (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
-{//Doesnt work 
+{ 
 	char **lib,**d;
 	int k=0;
 	switch (event)
@@ -284,9 +284,8 @@ int CVICALLBACK test (int panel, int control, int event,
 
 			break;
 		case EVENT_VAL_CHANGED:
-			autofill = NewCtrl (panelHandle2, CTRL_LIST, "", 250, 162);
-			SetCtrlAttribute (panelHandle2, autofill, ATTR_WIDTH, 194);
-			SetCtrlAttribute (panelHandle2, autofill, ATTR_TEXT_CHARACTER_SET, VAL_HEBREW_CHARSET);
+			DeleteListItem (panel, PANEL_2_AUTOFILL, 0, -1);
+			SetCtrlAttribute (panel, PANEL_2_AUTOFILL, ATTR_VISIBLE, 1);
 			char str[SIZE];
 			GetCtrlVal (panelHandle2, PANEL_2_SBYID, str);
 			initialize("amit.ini");
@@ -300,8 +299,9 @@ int CVICALLBACK test (int panel, int control, int event,
 			k = getAutofill(iniHandle,countAllRecords(iniHandle),str, lib,d);
 			for(int i=0;i<k;i++)
 			{
-				InsertListItem (panelHandle2, autofill, -1, d[i], i);
+				InsertListItem (panelHandle2, PANEL_2_AUTOFILL, -1, d[i], i);
 			}
+			free(d);free(lib);
 			break; 
 	}
 	return 0;

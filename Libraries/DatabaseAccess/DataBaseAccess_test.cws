@@ -54,7 +54,7 @@ In Projects = "1,"
 [File 0002]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
 File Type = "User Interface Resource"
-Disk Date = 3566843026
+Disk Date = 3566895250
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
@@ -65,12 +65,12 @@ Window Z-Order = 4
 [File 0003]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 File Type = "CSource"
-Disk Date = 3566893860
+Disk Date = 3566895857
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
 Window Z-Order = 1
-Source Window State = "1,289,290,289,0,0,0,0,0,109,0,26,0,3,0,25,272,0,277,15,561,1272,1,22,"
+Source Window State = "1,301,301,301,68,69,69,0,0,109,0,26,0,3,0,17,274,0,277,1,561,1272,1,22,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
@@ -80,17 +80,17 @@ In Projects = "1,"
 Window Top = 182
 Window Left = 82
 Window Z-Order = 3
-Source Window State = "1,54,64,64,26,21,21,0,0,80,0,37,0,0,0,17,56,0,72,12,461,1272,1,16,"
+Source Window State = "1,54,64,64,26,21,21,0,0,80,0,37,0,0,0,17,0,0,22,35,461,1272,1,16,"
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
 File Type = "CSource"
-Disk Date = 3566893859
+Disk Date = 3566895806
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Window Z-Order = 2
-Source Window State = "1,9,11,11,0,32,32,0,0,80,0,214,0,9,0,17,232,0,237,18,461,1272,1,15,"
+Source Window State = "1,244,244,244,18,21,21,0,0,80,0,214,0,9,0,17,233,0,249,39,461,1272,1,15,"
 
 [File 0006]
 Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.c"

@@ -25,7 +25,7 @@
 #define  PANEL_2_SBYID                    5       /* control type: string, callback function: test */
 #define  PANEL_2_BTNFIELD                 6       /* control type: command, callback function: searchBy */
 #define  PANEL_2_BTNID                    7       /* control type: command, callback function: searchBy */
-#define  PANEL_2_LISTBOX                  8       /* control type: listBox, callback function: (none) */
+#define  PANEL_2_AUTOFILL                 8       /* control type: listBox, callback function: (none) */
 
 #define  PANEL_3                          3       /* callback function: exitFunc */
 #define  PANEL_3_TABLE                    2       /* control type: table, callback function: tblFunc */
