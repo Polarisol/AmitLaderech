@@ -275,7 +275,7 @@ int CVICALLBACK searchBy (int panel, int control, int event,
 
 int CVICALLBACK test (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
-{
+{//Doesnt work 
 	char **lib,**d;
 	int k=0;
 	switch (event)

@@ -6,6 +6,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <ansi_c.h>
+#include "HebrewConversions.h" 
 #include "inifile.h" 
 #define SIZE 300
 
@@ -73,6 +75,8 @@ int removeRecord(IniText iniHandle, char id[]);
 //if the field does not exist return 0
 int getIndexofField(IniText iniHandle,char id[],char field[]);
 
+//set the values that partially include tag string in output array
+//return the number of elements in output
 int getAutofill(IniText iniHandle,int amount, char *tag, char** lib,char **output);
 
 #endif

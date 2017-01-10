@@ -1,5 +1,3 @@
-#include <userint.h>
-#include "DataBaseAccess_test.h"
 
 //==============================================================================
 //									database.c							
@@ -9,11 +7,9 @@
 //						//dbFile - database file path.
 //==============================================================================
 
-#include <ansi_c.h>
-#include "inifile.h"
-#include "HebrewConversions.h" 
+ 
 #include "database.h"
-#define  DIR "Database//"
+
 
 
 static IniText iniHandle;
@@ -239,6 +235,7 @@ char** getRecordIdsFromField(IniText iniHandle,char field[], char value[], char 
 	return ids;
 }
 
+//work in progress
 int getAutofill(IniText iniHandle,int amount, char *tag, char** lib,char **output)
 {
 	int i,j=0;
