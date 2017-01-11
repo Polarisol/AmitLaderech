@@ -59,13 +59,18 @@ int CVICALLBACK check (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK load (int panel, int control, int event,
+int CVICALLBACK add (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 {
+	char file_name[100];
+	int num = 5000;
+	
 	switch (event)
 	{
 		case EVENT_COMMIT:
-
+			GetCtrlVal(panelHandle,PANEL_STRING, file_name);
+			CSVParser_MarkAsProcessed(file_name,num);
+			
 			break;
 	}
 	return 0;

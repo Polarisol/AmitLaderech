@@ -16,7 +16,8 @@
 #define  PANEL                            1       /* callback function: exitFunc */
 #define  PANEL_NUMERIC                    2       /* control type: numeric, callback function: (none) */
 #define  PANEL_COMMANDBUTTON              3       /* control type: command, callback function: check */
-#define  PANEL_COMMANDBUTTON_2            4       /* control type: command, callback function: load */
+#define  PANEL_COMMANDBUTTON_2            4       /* control type: command, callback function: add */
+#define  PANEL_STRING                     5       /* control type: string, callback function: (none) */
 
 
      /* Control Arrays: */
@@ -31,9 +32,9 @@
 
      /* Callback Prototypes: */
 
+int  CVICALLBACK add(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK check(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK load(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
