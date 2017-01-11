@@ -17,67 +17,72 @@
 //to be accessed by other functions
 //other functions should check if a database file was defined and not work otherwise
 //returns iniHandle if successful, 0 if not 
-IniText setDatabaseFile(char name[]);
+int Database_SetDatabaseFile(char name[]);
 
 //changes the value of the provided 'name' to the used database file name.
 //the user must make sure an appropriate array is provided
 //returns iniHandle if successful, 0 if not
-IniText getDatabaseFile(char name[]);
+int Database_GetDatabaseFile(char name[]);
 
 //creates a new empty record (a line in the database, a worker etc.)
 //returns 1 if successful, 0 if not 
-int addNewRecord(IniText iniHandle,char id[],char * tagName[],int fieldAmount);
+int Database_AddNewRecord(char id[],char * tagName[],int fieldAmount);
 
 //adds a new field (column, like "Cellphone Number") to a specific record
 //it is optional to add a value (if 0 is provided than it will be an empty string)
 //returns 1 if successful, 0 if not 
-int addNewField(IniText iniHandle,char id[], char field[], char value[]);
+int Database_AddNewField(char id[], char field[], char value[]);//didnt write it.
 
 // sets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
-int setFieldVal(IniText iniHandle,char id[], char field[], char value[]);
+int Database_SetFieldVal(char id[], char field[], char value[]);
 
 // gets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
 //the user must make sure an appropriate array is provided
-int getFieldVal(IniText iniHandle,char id[], char field[], char value[]);
+int Database_GetFieldVal(char id[], char field[], char value[]);
 
 //counts how many records have this value in the specified field 
-int getNumberOfIdsFromField(IniText iniHandle,char field[], char value[]);
+void Database_GetNumberOfIdsFromField(char field[], char value[], int *count);
 
 //provide a list of all ids with this value in the specified field
 //the user must make sure an appropriate array is provided
-char** getRecordIdsFromField(IniText iniHandle,char field[], char value[], char **ids);
+char** Database_GetRecordIdsFromField(char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
-int countAllRecords(IniText iniHandle);
+int Database_CountAllRecords(int *amout);
+
 //provides the total amount of fields in the record
-int countAllFields(IniText iniHandle,char id[]);
+int Database_CountAllFields(char id[], int *amount);
 					 
 //checks if the record allready exists
 //returns 1 if exists, 0 if not
-int recordCheck(IniText iniHandle,char id[]);
+int Database_RecordCheck(char id[]);
 
 //get record name from the index provided.
 //when called use the following:
 //sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
-char* getRecordInfo(IniText iniHandle,char *id,int i);
+char* Database_GetRecordInfo(char *id,int i);
 
 //search id in ini file and put the tagName and tagValue inside an array
 //return -1 if not found
-int search(IniText iniHandle,char id[], int numOfTags, char ** tagName, char ** tagValue);
+int Database_GetRecordValues(char id[], int numOfTags, char ** tagName, char ** tagValue);
 
 //remove record from db file.
 //return 1 if successful, 0 if record does no exist
-int removeRecord(IniText iniHandle, char id[]);
+int Database_RemoveRecord(char id[]);
+
+//Compare the value recived to the value of the specific field and record.
+//return 1 if equal. 0 if not.
+//int Database_CmpGetFieldVal(char id[], char field[], char value[]);
 
 //return the index of the field in the iniText
 //if the field does not exist return 0
-int getIndexofField(IniText iniHandle,char id[],char field[]);
+//int Database_GetIndexofField(char id[],char field[]);
 
 //set the values that partially include tag string in output array
 //return the number of elements in output
-int getAutofill(IniText iniHandle,int amount, char *tag, char** lib,char **output);
+int Database_GetAutofill(int amount, char *tag,char **output);
 
 #endif
 
