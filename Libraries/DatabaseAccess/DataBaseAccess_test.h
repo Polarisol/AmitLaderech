@@ -31,6 +31,7 @@
 #define  PANEL_3_TABLE                    2       /* control type: table, callback function: tblFunc */
 #define  PANEL_3_DEL                      3       /* control type: command, callback function: btnDelRecord */
 #define  PANEL_3_ADD                      4       /* control type: command, callback function: btnNewRec */
+#define  PANEL_3_NEWFIELD                 5       /* control type: command, callback function: btnNewField */
 
 
      /* Control Arrays: */
@@ -49,6 +50,7 @@ int  CVICALLBACK autofillFunc(int panel, int control, int event, void *callbackD
 int  CVICALLBACK btnAmit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK btnDelRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK btnMentor(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK btnNewField(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK btnNewRec(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK btnSearch(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);

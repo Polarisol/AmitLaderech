@@ -23,7 +23,7 @@ int autofill;
 void initialize(char name[]);
 void SetInTable(int panel,int control);
 void delTable(int panel,int control);
-
+void finalize();
 int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -37,7 +37,7 @@ int main (int argc, char *argv[])
 	DisplayPanel (panelHandle);
 	initialize(CONFIG);
 	RunUserInterface ();
-	free(ids);free(tagName);free(tagValue);
+	finalize();
 	DiscardPanel (panelHandle3);
 	DiscardPanel (panelHandle2);
 	DiscardPanel (panelHandle);
@@ -134,9 +134,6 @@ int CVICALLBACK tblFunc (int panel, int control, int event,
 
 void initialize(char name[])
 {
-	//sprintf(dbFile,"%s",name);
-	//iniHandle = Database_GetDatabaseFile(name);
-	
 	if(Database_SetDatabaseFile(name)==1)
 	{
 		if(!strcmp(name,CONFIG))
@@ -148,6 +145,11 @@ void initialize(char name[])
 	}
 	else		 
 		MessagePopup ("Error", "No database found");
+}
+
+void finalize()
+{
+	free(ids);free(tagName);free(tagValue);
 }
 
 void delTable(int panel,int control)
@@ -165,7 +167,7 @@ void SetInTable(int panel,int control)
 	InsertTableRows (panel, control, -1, recordAmount, VAL_CELL_STRING);
 	for(int i=1;i<=recordAmount;i++)
 		{
-			sprintf(id,"%s",Database_GetRecordInfo(id,i));
+			Database_GetRecordInfo(id,i);
 			Database_CountAllFields(id,&fieldAmount);
 					
 			Database_GetRecordValues(id,fieldAmount,tagName,tagValue);
@@ -228,7 +230,7 @@ int checkFieldInDB(char db[],int j)
 	GetCtrlVal (panelHandle2, PANEL_2_SBFIELDVAL, v);
 	Database_GetNumberOfIdsFromField(f,v,&count);
 	ids = malloc(sizeof(char*)*count); 
-	ids= Database_GetRecordIdsFromField(f ,v ,ids);
+	Database_GetRecordIdsFromField(f ,v ,ids);
 	InsertTableRows (panelHandle2, PANEL_2_TABLE, -1, count, VAL_CELL_STRING);
 	for(int i=0;i<count;i++ )
 	{
@@ -286,29 +288,29 @@ int CVICALLBACK searchBy (int panel, int control, int event,
 int CVICALLBACK test (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 { 
-	/*char **d;
-	int k=0;
-	char str[SIZE];*/
+	char **d;
+	int k=0,a=0;
+	char str[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
 
 			break;
-		/*case EVENT_VAL_CHANGED:
+		case EVENT_VAL_CHANGED:
 			GetCtrlVal (panelHandle2, PANEL_2_SBYID, str);
 			DeleteListItem (panel, PANEL_2_AUTOFILL, 0, -1);
 			SetCtrlAttribute (panel, PANEL_2_AUTOFILL, ATTR_VISIBLE, 1);
-			initialize("amit.ini");
-			int a = countAllRecords(iniHandle);
+			initialize("Database\\amit.ini");
+			Database_CountAllRecords(&a);
 			d = malloc(sizeof(char*)*a);
 			
-			k = getAutofill(countAllRecords(iniHandle),str,d);
+			k = Database_GetAutofill(a,str,d);
 			for(int i=0;i<k;i++)
 			{
 				InsertListItem (panelHandle2, PANEL_2_AUTOFILL, -1, d[i], i);
 			}
 			free(d);
-			break;*/ 
+			break; 
 	}
 	return 0;
 }
@@ -325,6 +327,26 @@ int CVICALLBACK autofillFunc (int panel, int control, int event,
 			GetCtrlVal (panel, PANEL_2_AUTOFILL, &index);
 			GetLabelFromIndex (panel, PANEL_2_AUTOFILL, index, str);
 			SetCtrlVal (panel, PANEL_2_SBYID, str);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK btnNewField (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{
+	char value[SIZE+1];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			PromptPopup ("Add new", "Enter new field name", value, SIZE);
+			if(Database_AddNewFieldAll(value,NULL)==0)
+				MessagePopup("adf","Adf");
+			Database_SetDatabaseFile(CONFIG); 
+			Database_AddNewFieldAll(value,value);
+			initialize(CONFIG);
+			initialize(AMIT);
+			SetInTable(panel,PANEL_3_TABLE);
 			break;
 	}
 	return 0;

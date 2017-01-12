@@ -31,7 +31,10 @@ int Database_AddNewRecord(char id[],char * tagName[],int fieldAmount);
 //adds a new field (column, like "Cellphone Number") to a specific record
 //it is optional to add a value (if 0 is provided than it will be an empty string)
 //returns 1 if successful, 0 if not 
-int Database_AddNewField(char id[], char field[], char value[]);//didnt write it.
+int Database_AddNewField(char id[], char field[], char value[]);
+
+//add a new field to all the records in the database.
+int Database_AddNewFieldAll(char field[],char value[]);
 
 // sets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
@@ -47,7 +50,7 @@ void Database_GetNumberOfIdsFromField(char field[], char value[], int *count);
 
 //provide a list of all ids with this value in the specified field
 //the user must make sure an appropriate array is provided
-char** Database_GetRecordIdsFromField(char field[], char value[], char **ids);
+int Database_GetRecordIdsFromField(char field[], char value[], char **ids);
 
 //provides the total amount of records in the database
 int Database_CountAllRecords(int *amout);
@@ -62,7 +65,7 @@ int Database_RecordCheck(char id[]);
 //get record name from the index provided.
 //when called use the following:
 //sprintf(id,"%s",getRecordInfo(iniHandle,id,i));
-char* Database_GetRecordInfo(char *id,int i);
+int Database_GetRecordInfo(char *id,int i);
 
 //search id in ini file and put the tagName and tagValue inside an array
 //return -1 if not found
@@ -71,14 +74,6 @@ int Database_GetRecordValues(char id[], int numOfTags, char ** tagName, char ** 
 //remove record from db file.
 //return 1 if successful, 0 if record does no exist
 int Database_RemoveRecord(char id[]);
-
-//Compare the value recived to the value of the specific field and record.
-//return 1 if equal. 0 if not.
-//int Database_CmpGetFieldVal(char id[], char field[], char value[]);
-
-//return the index of the field in the iniText
-//if the field does not exist return 0
-//int Database_GetIndexofField(char id[],char field[]);
 
 //set the values that partially include tag string in output array
 //return the number of elements in output

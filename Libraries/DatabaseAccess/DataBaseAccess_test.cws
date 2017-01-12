@@ -54,7 +54,7 @@ In Projects = "1,"
 [File 0002]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
 File Type = "User Interface Resource"
-Disk Date = 3567010638
+Disk Date = 3567059439
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
@@ -65,32 +65,32 @@ Window Z-Order = 4
 [File 0003]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
 File Type = "CSource"
-Disk Date = 3567012094
+Disk Date = 3567088999
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
-Window Z-Order = 3
-Source Window State = "1,86,86,86,20,24,24,0,0,80,0,74,0,74,30,21,74,0,86,14,561,1272,1,0,"
+Window Z-Order = 2
+Source Window State = "1,140,140,140,12,35,35,0,0,80,0,74,0,74,30,21,0,0,142,63,561,1272,1,0,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
 File Type = "Include"
-Disk Date = 3567010249
+Disk Date = 3567088816
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Window Z-Order = 2
-Source Window State = "1,74,75,75,0,31,31,0,3,80,0,58,0,0,0,17,64,0,74,0,461,1272,1,66,"
+Window Z-Order = 3
+Source Window State = "1,36,36,36,0,55,55,0,3,80,0,58,0,0,0,17,20,0,36,0,461,1272,1,66,"
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
 File Type = "CSource"
-Disk Date = 3567012928
+Disk Date = 3567088816
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Window Z-Order = 1
-Source Window State = "1,141,141,141,4,22,22,0,0,109,0,184,0,9,0,17,129,0,140,37,461,1272,1,15,"
+Source Window State = "1,160,160,160,11,14,14,0,0,109,0,243,0,6,0,25,0,0,160,12,461,1272,1,15,"
 
 [File 0006]
 Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.c"
@@ -99,7 +99,7 @@ Disk Date = 3566544439
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,14,33,0,40,16,386,1272,1,0,"
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,40,16,386,1272,1,0,"
 
 [File 0007]
 Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.h"
