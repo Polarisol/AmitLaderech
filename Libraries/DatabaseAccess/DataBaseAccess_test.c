@@ -340,10 +340,11 @@ int CVICALLBACK btnNewField (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			PromptPopup ("Add new", "Enter new field name", value, SIZE);
-			/*if(Database_AddNewFieldAll(value,NULL)==0)
-				MessagePopup("adf","Adf"); */
+			if(Database_AddNewFieldAll(value,NULL)==0)
+				MessagePopup("Alert","already exist"); 
+			PromptPopup ("Remove field", "Enter field to remove", value, SIZE);  
 			if(Database_RemoveFieldAll(value)==0)
-				MessagePopup("adf","Adf");
+				MessagePopup("Alert","field does not exist");
 			Database_SetDatabaseFile(CONFIG); 
 			Database_AddNewFieldAll(value,value);
 			initialize(CONFIG);

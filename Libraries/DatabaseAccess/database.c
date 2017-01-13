@@ -299,8 +299,7 @@ int Database_RemoveField(char *id,char *field)
 {
 	if(id!=NULL)
 	{
-		Ini_RemoveItem (iniHandle, id, field);
-		return 1;
+		return Ini_RemoveItem (iniHandle, id, field);
 	}
 	return 0;
 }
