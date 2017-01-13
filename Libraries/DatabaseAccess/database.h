@@ -34,7 +34,16 @@ int Database_AddNewRecord(char id[],char * tagName[],int fieldAmount);
 int Database_AddNewField(char id[], char field[], char value[]);
 
 //add a new field to all the records in the database.
+//returns 1 if successful, 0 if not   
 int Database_AddNewFieldAll(char field[],char value[]);
+
+//remove field from id record
+//returns 1 if successful, 0 if not   
+int Database_RemoveField(char *id,char *field);
+
+//remove field from all records in database
+//returns 1 if successful, 0 if not   
+int Database_RemoveFieldAll(char *field);
 
 // sets the value of an existing field of an existing record
 //returns 1 if successful, 0 if not (for example if the field or record are not known)
@@ -77,7 +86,7 @@ int Database_RemoveRecord(char id[]);
 
 //set the values that partially include tag string in output array
 //return the number of elements in output
-int Database_GetAutofill(int amount, char *tag,char **output);
+int Database_GetAutofillId(char *tag,char **output);
 
 #endif
 

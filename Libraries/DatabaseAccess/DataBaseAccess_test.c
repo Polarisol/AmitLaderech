@@ -304,7 +304,7 @@ int CVICALLBACK test (int panel, int control, int event,
 			Database_CountAllRecords(&a);
 			d = malloc(sizeof(char*)*a);
 			
-			k = Database_GetAutofill(a,str,d);
+			k = Database_GetAutofillId(str,d);
 			for(int i=0;i<k;i++)
 			{
 				InsertListItem (panelHandle2, PANEL_2_AUTOFILL, -1, d[i], i);
@@ -340,7 +340,9 @@ int CVICALLBACK btnNewField (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			PromptPopup ("Add new", "Enter new field name", value, SIZE);
-			if(Database_AddNewFieldAll(value,NULL)==0)
+			/*if(Database_AddNewFieldAll(value,NULL)==0)
+				MessagePopup("adf","Adf"); */
+			if(Database_RemoveFieldAll(value)==0)
 				MessagePopup("adf","Adf");
 			Database_SetDatabaseFile(CONFIG); 
 			Database_AddNewFieldAll(value,value);

@@ -8,9 +8,6 @@
 
  
 #include "database.h"
-
-
-
 static IniText iniHandle;
 static char *dbFile;
 static char *tagName[SIZE],*tagValue[SIZE];
@@ -166,7 +163,6 @@ int Database_RecordCheck(char id[])
 	if(Ini_SectionExists (iniHandle, id)==0)//not exist
 		return 0;
 	return 1;
-
 }
 
 int Database_CountAllRecords(int *amount)
@@ -279,6 +275,35 @@ int Database_AddNewField(char id[], char field[], char value[])
 	}
 	return 0;
 }
+
+int Database_RemoveFieldAll(char *field)
+{
+	int amount =0;
+	Database_CountAllRecords(&amount);
+	char *id = malloc(sizeof(char*)*(amount+1));
+	for(int i=1;i<=amount;i++)
+	{
+		Database_GetRecordInfo(id,i);
+		if(Database_RemoveField(id,field)==0)
+		{
+			free(id);
+			return 0;
+		}
+	}
+	Ini_WriteToFile (iniHandle, dbFile);
+	free(id);
+	return 1;
+}
+
+int Database_RemoveField(char *id,char *field)
+{
+	if(id!=NULL)
+	{
+		Ini_RemoveItem (iniHandle, id, field);
+		return 1;
+	}
+	return 0;
+}
 //==============================================================================
 //							End Field functions						
 //==============================================================================
@@ -287,28 +312,31 @@ int Database_AddNewField(char id[], char field[], char value[])
 //								Auto Fill functions						
 //==============================================================================
 
-int Database_GetAutofill(int amount, char *tag,char **output)
+int Database_GetAutofillId(char *tag,char **output)
 {
 	char **lib;
 	int i,j=0;
-	int a ;
-	Database_CountAllRecords(&a);
-	lib = malloc(sizeof(char*)*a);
-	for(int i=0;i<a;i++)
+	int amount,flag = 1;
+	Database_CountAllRecords(&amount);
+	lib = malloc(sizeof(char*)*amount);
+	for(int i=0;i<amount;i++)
 	{
 		Ini_NthSectionName (iniHandle,i+1, &lib[i]);
 	}
 	for(i=0;i<amount;i++)
 	{
-		if(strstr(lib[i],tag)!=NULL)
+		for(int k=0;k<strlen(tag);k++)
 		{
-			if(lib[i][0] == tag[0])
-			{
-				output[j] = malloc(sizeof(char*)*SIZE);
-				sprintf(output[j],"%s",lib[i]);
-				j++;
-			}
+			if(lib[i][k] != tag[k])
+				flag = 0;
 		}
+		if(flag)
+		{
+			output[j] = malloc(sizeof(char*)*SIZE);
+			sprintf(output[j],"%s",lib[i]);
+			j++;	
+		}
+		flag =1;
 	}
 	free(lib);
 	return j;
