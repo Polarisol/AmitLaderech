@@ -38,21 +38,19 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
 	return 0;
 }
 
-int CVICALLBACK check (int panel, int control, int event,
+int CVICALLBACK find_num_records (int panel, int control, int event,
 					   void *callbackData, int eventData1, int eventData2)
 {
 	char file_name[300];
 	int num;
-	int status;
 				
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			
-				status = FileSelectPopup ("", "*.*", "", "", VAL_LOAD_BUTTON, 0, 0, 1, 0, file_name);
+					GetCtrlVal (panelHandle, PANEL_STRING_1, file_name);
 
 					num = CSVParser_GetNumberOfRecords(file_name);
-					SetCtrlVal (panelHandle, PANEL_NUMERIC, num);
+					SetCtrlVal (panelHandle, PANEL_NUMERIC_1, num);
 				
 		break;
 	}
@@ -62,15 +60,34 @@ int CVICALLBACK check (int panel, int control, int event,
 int CVICALLBACK add (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 {
-	char file_name[100];
-	int num = 5000;
+	char file_name[300];
+	int num;
 	
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			GetCtrlVal(panelHandle,PANEL_STRING, file_name);
+			GetCtrlVal(panelHandle,PANEL_NUMERIC_3, &num);
+			GetCtrlVal(panelHandle,PANEL_STRING_3, file_name);
 			CSVParser_MarkAsProcessed(file_name,num);
 			
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK find_new_records (int panel, int control, int event,
+								  void *callbackData, int eventData1, int eventData2)
+{
+	char file_name[300];
+	int new_records;
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			GetCtrlVal (panelHandle, PANEL_STRING_2, file_name);
+			new_records = CSVParser_NewRecords(file_name);
+			SetCtrlVal (panelHandle, PANEL_NUMERIC_2, new_records);
+			SetCtrlVal (panelHandle, PANEL_NUMERIC_3, new_records); 
 			break;
 	}
 	return 0;

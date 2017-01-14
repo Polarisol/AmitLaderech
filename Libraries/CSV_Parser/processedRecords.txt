@@ -1,12 +1,3 @@
 path name,processed
-1.csv,5010
-2.csv,20
-3.csv,30
-4.csv,40
-5.csv,10050
-6.csv,60
-7.csv,70
-8.csv,80
-9.csv,90
-10.csv,100
-11.csv,20110
+CSVParser_demofile1.csv,10
+CSVParser_demofile2.csv,8

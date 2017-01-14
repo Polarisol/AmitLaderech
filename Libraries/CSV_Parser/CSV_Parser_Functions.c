@@ -15,7 +15,7 @@ int CSVParser_GetNumberOfRecords(char filename[])
 {
 	/*
 	written By Dror Kobo 08/01/17
-	this function recieves file path name (pointer to string) and returns number of records (lines)
+	this function recieve data base file path name (pointer to string) and returns number of records (lines)
 	if the function recieves invalid file path name it returns 0;
 	*/
 	const int BUFFER_SIZE = 10000;
@@ -40,7 +40,50 @@ int CSVParser_GetNumberOfRecords(char filename[])
 //if the file name cannot be found in "processedRecords.txt" the function return the number
 //of records in the database
 //this function does not update "processedRecords.txt"
-int CSVParser_NewRecords(char filename[]);
+int CSVParser_NewRecords(char filename[])
+{
+	/*
+	Written By Dror Kobo 14/01/17
+	This function recieve database file name and checks how many records the file have
+	then the function check the same database file name in processedRecords file for amount of records
+	if their is a match with the name, the function return the difference.
+	*/
+	
+	int records;
+	int temp;
+	const int BUFFER_SIZE = 400;				//buffer size 
+	char buffer[BUFFER_SIZE];					//line buffer
+	char old_filename[BUFFER_SIZE];
+	char Set_file[] = "processedRecords.txt";	//path name for the file containing other file name processed data
+	int str_cmp_res;							//result for strcmp, should be 0 if the file name was found on file
+	FILE *Stream;								//Stream for reading/writing to file
+
+	records = CSVParser_GetNumberOfRecords(filename);
+	
+	Stream = fopen(Set_file, "r");				//open  Set_file in read mode
+	
+	//code executed only if file name exist.
+	if(Stream != NULL)							
+	{
+		fgets(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
+	
+		//keep looking for file name in Set_file till we reach end of file
+		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
+		{
+			sscanf(buffer, "%[^,],%d", old_filename,&temp);	//retrieving info to buffer
+			str_cmp_res = strcmp(old_filename, filename);				//comparing str
+			
+			//if we found desired str (str_cmp_red=0) -> execute code
+			if(str_cmp_res == 0)
+				records = records-temp;
+		}
+	}
+	 
+	fclose(Stream);		//closing the file.
+
+	return	records;
+	
+}
 
 
 //Adds the 'numberOfNewProcessedRecords' to the previous number in the utility text file "processedRecords.txt"
@@ -54,33 +97,36 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 	*/
 	char Set_file[] = "processedRecords.txt";	//path name for the file containing other file name processed data
 	const int BUFFER_SIZE = 10000;				//buffer size
-	const int PATH_SIZE = 400;
-	int dyn_arr_size = 10;
+	const int PATH_SIZE = 400;					//path name size
+	int dyn_arr_size = 10;						//dynamic allocation size
 	char buffer[BUFFER_SIZE];					//line buffer 
 	int str_cmp_res;							//result for strcmp, should be 0 if the file name was found on file
 	FILE *Stream;								//Stream for reading/writing to file
-	int counter=0;
+	int counter=0;								//index of record
 	
+	//struct array
 	struct temp_arr
 	{
 		char path[PATH_SIZE];
 		int processed;
 	}typedef t_arr;
 	
+	//dynamic allocation
 	t_arr *array;
 	array = calloc(dyn_arr_size,sizeof(t_arr));
 	
-	Stream = fopen(Set_file, "r");				//open  Set_file as read mode
+	Stream = fopen(Set_file, "r");				//open  Set_file at read mode
 	
 	//code executed only if file name exist.
 	if(Stream != NULL)							
 	{
 		fgets(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
 	
-		//keep looking for file name in Set_file till we reach end of file or we found the file name
+		//keep looking for file name in Set_file till we reach end of file
 		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
 		{
-			if(counter == dyn_arr_size)
+			
+			if(counter == dyn_arr_size) //re allocating dynamic memmory
 			{
 				dyn_arr_size = 2*dyn_arr_size;
 				array = realloc(array,sizeof(t_arr)*dyn_arr_size);
@@ -93,7 +139,7 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 			if(str_cmp_res == 0)
 				array[counter].processed = array[counter].processed+numberOfNewProcessedRecords;
 			
-			counter++;
+			counter++;	
 		}
 		
 		Stream = freopen(Set_file,"w",Stream);
@@ -104,7 +150,7 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 		}
 	}
 	fclose(Stream);		//closing the file and saving changes made.
-	free(array);
+	free(array);		//releasing dynamic memmory
 	
 	
 }

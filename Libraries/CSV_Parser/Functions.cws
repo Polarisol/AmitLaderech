@@ -50,28 +50,28 @@ Batch Build Debug = False
 Path Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/CSV_Parser_F"
 Path Line0002 = "unctions.c"
 File Type = "CSource"
-Disk Date = 3566997093
+Disk Date = 3567254707
 In Projects = "1,"
 Window Top = 38
 Window Left = 10
 Window Z-Order = 1
-Source Window State = "1,70,70,70,45,58,45,0,0,117,0,0,0,0,0,22,71,0,111,47,331,780,1,0,"
+Source Window State = "1,47,47,47,81,94,81,0,0,117,0,0,0,0,0,35,18,0,47,102,331,780,1,0,"
 
 [File 0002]
 Path = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.c"
 File Type = "CSource"
-Disk Date = 3566990410
+Disk Date = 3567255647
 In Projects = "1,"
 Window Top = 40
 Window Left = 11
-Window Z-Order = 2
-Source Window State = "1,65,65,65,14,18,14,0,0,80,0,0,0,0,0,25,8,0,27,59,531,1020,1,0,"
+Window Z-Order = 3
+Source Window State = "1,89,89,89,51,52,51,0,0,80,0,0,0,0,0,25,46,0,81,48,531,1020,1,0,"
 
 [File 0003]
 Path Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.ui"
 Path Line0002 = "r"
 File Type = "User Interface Resource"
-Disk Date = 3566990358
+Disk Date = 3567255612
 In Projects = "1,"
 Window Top = 78
 Window Left = 31
@@ -83,12 +83,12 @@ Window Z-Order = 4
 Path Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Func_Header."
 Path Line0002 = "h"
 File Type = "Include"
-Disk Date = 3566980168
+Disk Date = 3567254728
 In Projects = ""
 Window Top = 40
 Window Left = 11
-Window Z-Order = 3
-Source Window State = "1,0,0,0,0,51,0,0,0,80,0,0,0,0,0,22,0,0,1,81,471,1020,1,20,"
+Window Z-Order = 2
+Source Window State = "1,0,0,0,0,51,0,0,0,80,0,0,0,0,0,22,0,0,1,42,471,1020,1,20,"
 
 [Tab Order]
 Tab 0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.c"
