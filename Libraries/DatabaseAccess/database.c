@@ -1,5 +1,5 @@
-#include <userint.h>
-#include "DataBaseAccess_test.h"
+//#include <userint.h>
+//#include "DataBaseAccess_test.h"
 
 //==============================================================================
 //									database.c							
@@ -11,7 +11,7 @@
 static IniText iniHandle;
 static char *dbFile;
 static char *tagName[SIZE],*tagValue[SIZE];
-FILE *fp;
+
 
 //==============================================================================
 //									Staic functions							
