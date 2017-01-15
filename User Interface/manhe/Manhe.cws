@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname = "/c/Users/shay/Desktop/CVIPros/Shay/manhe/Manhe.cws"
+Pathname = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/manhe/Manhe.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -46,7 +46,7 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/c/Users/shay/Desktop/CVIPros/Shay/manhe/Manhe.uir"
+Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/manhe/Manhe.uir"
 File Type = "User Interface Resource"
 Disk Date = 3567316250
 In Projects = "1,"
@@ -57,7 +57,7 @@ Window Width = 1020
 Window Z-Order = 1
 
 [File 0002]
-Path = "/c/Users/shay/Desktop/CVIPros/Shay/manhe/Manhe.c"
+Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/manhe/Manhe.c"
 File Type = "CSource"
 Disk Date = 3567316261
 In Projects = "1,"
@@ -66,8 +66,8 @@ Window Z-Order = 2
 Source Window State = "1,0,0,0,0,0,0,0,0,45,0,0,0,0,0,18,0,0,17,0,400,600,1,0,"
 
 [Tab Order]
-Tab 0001 = "/c/Users/shay/Desktop/CVIPros/Shay/manhe/Manhe.uir"
-Tab 0002 = "/c/Users/shay/Desktop/CVIPros/Shay/manhe/Manhe.c"
+Tab 0001 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/manhe/Manhe.c"
+Tab 0002 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/manhe/Manhe.uir"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

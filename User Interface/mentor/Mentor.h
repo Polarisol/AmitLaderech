@@ -14,6 +14,8 @@
      /* Panels and Controls: */
 
 #define  PANEL                            1       /* callback function: PanelFunc */
+#define  PANEL_STRING                     2       /* control type: string, callback function: (none) */
+#define  PANEL_PICTURE                    3       /* control type: picture, callback function: (none) */
 
 
      /* Control Arrays: */
