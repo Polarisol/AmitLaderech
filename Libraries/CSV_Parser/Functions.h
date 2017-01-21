@@ -29,6 +29,7 @@
 #define  PANEL_TEXTMSG_2                  14      /* control type: textMsg, callback function: (none) */
 #define  PANEL_STRING_2                   15      /* control type: string, callback function: (none) */
 #define  PANEL_STRING_1                   16      /* control type: string, callback function: (none) */
+#define  PANEL_COMMANDBUTTON_4            17      /* control type: command, callback function: test */
 
 
      /* Control Arrays: */
@@ -47,6 +48,7 @@ int  CVICALLBACK add(int panel, int control, int event, void *callbackData, int 
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK find_new_records(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK find_num_records(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK test(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

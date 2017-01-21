@@ -92,3 +92,59 @@ int CVICALLBACK find_new_records (int panel, int control, int event,
 	}
 	return 0;
 }
+
+int CVICALLBACK test (int panel, int control, int event,
+					  void *callbackData, int eventData1, int eventData2)
+{
+	int LINE_SIZE = 300;
+	char line[LINE_SIZE];
+	char filename[LINE_SIZE];
+	char buffer[LINE_SIZE];
+	FILE *Stream;
+	char *token;
+	char s[2] = ",";
+	char l[3] = """"""""";
+
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+				GetCtrlVal (panelHandle, PANEL_STRING_2, filename);
+				Stream = fopen(filename,"r");
+				if(Stream)
+				{
+					fgets(line,LINE_SIZE,Stream);
+					while(fgets(line,LINE_SIZE,Stream)!=0)
+					{
+						if(line[0] == '"')
+						{
+							token = strtok(line,l);
+							strcpy(buffer, token);
+						}
+						else
+						{
+							token = strtok(line,s);
+							strcpy(buffer, token);	
+						}
+						while(token != NULL)
+						{
+							if(&token[0] == '"')
+							{
+								token = strtok(NULL,l);
+								strcpy(buffer, token);
+							}
+							else
+							{
+								token = strtok(NULL,s);
+								strcpy(buffer, token);	
+							}							
+						}
+							
+
+			
+					}
+				}
+			break;
+	}
+	return 0;
+}

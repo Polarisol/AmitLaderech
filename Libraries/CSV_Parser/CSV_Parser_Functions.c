@@ -170,5 +170,34 @@ int CSVParser_CountAllRecordsWithFieldValue(char filename[], char fieldName[], c
 //put their record numbers (line numbers) in the 'recordNumbers' array
 //put the values of the 'fieldToGet' field (strings) in the 2D array called 'recordValues'
 //example: first string value will be in recordValues[0] (the first character will be in recordValues[0][0] second in recordValues[0][1] etc.)
-void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[],char fieldToGet[], char **recordValues);
-
+void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[],char fieldToGet[], char **recordValues)
+{
+	int LINE_SIZE = 300;
+	char line[LINE_SIZE];
+	char buffer[LINE_SIZE];
+	FILE *Stream;
+	int buffer_counter;
+	int line_counter=0;
+	int g_counter=0;
+	int start;
+	char *token;
+	char s[2]=",";
+	
+	Stream = fopen(filename,"r");
+	if(Stream)
+	{
+		fgets(line,LINE_SIZE,Stream);
+		while(fgets(line,LINE_SIZE,Stream)!=0)
+		{
+			token = strtok(line,s);
+			while(token!=NULL)
+			{
+				token = strtok(NULL,s);
+				strcpy(buffer, token);
+				
+				
+			}
+			
+		}
+	}
+}
