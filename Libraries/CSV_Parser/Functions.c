@@ -96,54 +96,26 @@ int CVICALLBACK find_new_records (int panel, int control, int event,
 int CVICALLBACK test (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 {
-	int LINE_SIZE = 300;
-	char line[LINE_SIZE];
-	char filename[LINE_SIZE];
-	char buffer[LINE_SIZE];
-	FILE *Stream;
-	char *token;
-	char s[2] = ",";
-	char l[3] = """"""""";
 
+	char line[300];	
+	char** list = NULL;
+	int num_of_values;
 	
 	switch (event)
 	{
 		case EVENT_COMMIT:
-				GetCtrlVal (panelHandle, PANEL_STRING_2, filename);
-				Stream = fopen(filename,"r");
-				if(Stream)
-				{
-					fgets(line,LINE_SIZE,Stream);
-					while(fgets(line,LINE_SIZE,Stream)!=0)
-					{
-						if(line[0] == '"')
-						{
-							token = strtok(line,l);
-							strcpy(buffer, token);
-						}
-						else
-						{
-							token = strtok(line,s);
-							strcpy(buffer, token);	
-						}
-						while(token != NULL)
-						{
-							if(&token[0] == '"')
-							{
-								token = strtok(NULL,l);
-								strcpy(buffer, token);
-							}
-							else
-							{
-								token = strtok(NULL,s);
-								strcpy(buffer, token);	
-							}							
-						}
-							
-
+				
+			GetCtrlVal (panelHandle, PANEL_STRING, line);
+			list = CSV_Analyzer(line, &num_of_values);
+			InsertTableRows (panelHandle, PANEL_TABLE, -1, num_of_values, VAL_CELL_STRING);
+			for(int i=1 ; i<=num_of_values; i++)
+			{
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(1,i), list[i-1]);
+				
+			}
 			
-					}
-				}
+				
+				
 			break;
 	}
 	return 0;

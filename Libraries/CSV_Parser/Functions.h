@@ -30,6 +30,9 @@
 #define  PANEL_STRING_2                   15      /* control type: string, callback function: (none) */
 #define  PANEL_STRING_1                   16      /* control type: string, callback function: (none) */
 #define  PANEL_COMMANDBUTTON_4            17      /* control type: command, callback function: test */
+#define  PANEL_STRING_4                   18      /* control type: string, callback function: (none) */
+#define  PANEL_STRING                     19      /* control type: string, callback function: (none) */
+#define  PANEL_TABLE                      20      /* control type: table, callback function: (none) */
 
 
      /* Control Arrays: */

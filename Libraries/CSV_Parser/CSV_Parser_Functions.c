@@ -1,3 +1,4 @@
+#include <userint.h>
 #include <ansi_c.h>
 
 //Some definitions first: 
@@ -170,34 +171,141 @@ int CSVParser_CountAllRecordsWithFieldValue(char filename[], char fieldName[], c
 //put their record numbers (line numbers) in the 'recordNumbers' array
 //put the values of the 'fieldToGet' field (strings) in the 2D array called 'recordValues'
 //example: first string value will be in recordValues[0] (the first character will be in recordValues[0][0] second in recordValues[0][1] etc.)
-void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[],char fieldToGet[], char **recordValues)
+void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[],char fieldToGet[], char **recordValues);
+
+
+char** CSV_Analyzer(char* runner, int* num_of_values)
 {
-	int LINE_SIZE = 300;
-	char line[LINE_SIZE];
-	char buffer[LINE_SIZE];
-	FILE *Stream;
-	int buffer_counter;
-	int line_counter=0;
-	int g_counter=0;
-	int start;
-	char *token;
-	char s[2]=",";
+	/*
+	Writen by Dror Kobo
+	function inputs: 1. address of csv string (char* runner) 2. address of field counter (int* num_of_values) 
+	function output: 2d array of field values strings.
+	Enjoy.
+	*/
+	int buffer_size = 300;
+	int buf_counter=0;
+	int field_size=10;
+	int value_length;
 	
-	Stream = fopen(filename,"r");
-	if(Stream)
+	*num_of_values=0;
+	char* buffer =  calloc(buffer_size, sizeof(char));
+	char** pointer =  calloc(field_size,sizeof(char*));
+	
+	
+	while(*runner != '\0') //run on string till it encounter \0
 	{
-		fgets(line,LINE_SIZE,Stream);
-		while(fgets(line,LINE_SIZE,Stream)!=0)
+		
+		if(*num_of_values==field_size)
 		{
-			token = strtok(line,s);
-			while(token!=NULL)
+			//dynamic memory allocation for pointer
+			field_size*=2;
+			pointer = realloc(pointer, sizeof(char*)*field_size);
+		}
+		
+		
+		if(*runner==',' && *num_of_values==0)
+		{
+			//found first blank cell
+			pointer[*num_of_values] =  malloc(sizeof(char)*2);
+			strcpy(pointer[*num_of_values],"0");
+			*num_of_values = *num_of_values+1;
+			runner++;
+		}
+		
+		if(*runner=='"') //dealing with value that padded with "" 
+		{
+			runner++;
+			while(1)
 			{
-				token = strtok(NULL,s);
-				strcpy(buffer, token);
+				if(*runner=='"' && *(runner+1)!=',')
+					runner++;
 				
+				if(buf_counter==buffer_size)
+				{
+					buffer_size*=2;
+					buffer = realloc(buffer, sizeof(char)*buffer_size);
+				}
+				buffer[buf_counter]=*runner;
+				buf_counter++;
+				runner++;
+				
+				if(*(runner)=='\0')
+				{
+					buffer[buf_counter]='\0';
+					buf_counter = 0;
+					
+					value_length = strlen(buffer)+1;
+					pointer[*num_of_values] = malloc(sizeof(char)*value_length);
+					strcpy(pointer[*num_of_values],buffer);
+					
+					break;					
+				}				
+				if(*runner=='"' && *(runner+1)==',')
+				{
+					buffer[buf_counter]='\0';
+					buf_counter = 0;
+					runner = runner+2;
+					
+					value_length = strlen(buffer)+1;
+					pointer[*num_of_values] = malloc(sizeof(char)*value_length);
+					strcpy(pointer[*num_of_values],buffer);
+					break;
+				}
 				
 			}
+		}//  end if(*runner=='"')
+		
+		else //dealing with normal value 
+		{
+			while(1)
+			{
+				if(*runner=='"' && *(runner+1)!=',')
+					runner++;
+				if(buf_counter==buffer_size)
+				{
+					buffer_size*=2;
+					buffer = realloc(buffer, sizeof(char)*buffer_size);
+				}
+				buffer[buf_counter]=*runner;
+				buf_counter++;
+				runner++;
+				if(*(runner)=='\0')
+				{
+					buffer[buf_counter]='\0';
+					buf_counter = 0;
+					
+					value_length = strlen(buffer)+1;
+					pointer[*num_of_values] = malloc(sizeof(char)*value_length);
+					strcpy(pointer[*num_of_values],buffer);
+					break;					
+				}
+				if(*(runner)==',')
+				{
+					buffer[buf_counter]='\0';
+					buf_counter = 0;
+					runner++;
+					
+					value_length = strlen(buffer)+1;
+					pointer[*num_of_values] = malloc(sizeof(char)*value_length);
+					strcpy(pointer[*num_of_values],buffer);
+					break;
+				}
+				
+			}								
+		}// end else 
+		*num_of_values = *num_of_values+1;
+		
+		if(*runner==',')
+		{
+			//found blank cell
 			
+			pointer[*num_of_values] =  malloc(sizeof(char)*2);
+			strcpy(pointer[*num_of_values],"0");
+			*num_of_values = *num_of_values+1;
+			runner++;
 		}
-	}
+
+	}// end while(*runner != '\0')
+	
+	return pointer;
 }
