@@ -1,6 +1,7 @@
 #include <cvirte.h>		
 #include <userint.h>
 #include "1.h"
+#include "database.h"
 
 static int pMain;
 
@@ -33,7 +34,7 @@ int CVICALLBACK exitActivity (int panel, int event, void *callbackData,
 	}
 	return 0;
 }
-
+			
 int CVICALLBACK exitMain (int panel, int event, void *callbackData,
 						  int eventData1, int eventData2)
 {
@@ -167,6 +168,29 @@ int CVICALLBACK analysis (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
+							   void *callbackData, int eventData1, int eventData2)
+
+{
+	char ID[10];
+	int amount;
+	char tagName[10][300];
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			Database_SetDatabaseFile ("Database\\soldier.ini");
+			GetCtrlAttribute (panel, P_NEW_SOLD_ID_NUMBER, ATTR_XYNAME_BOLD, ID);
+			Database_CountAllRecords(&amount);
+			Database_Get
+			
+			Database_AddNewRecord (ID , "fname" ,amount); 
 			break;
 	}
 	return 0;

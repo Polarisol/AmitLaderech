@@ -132,7 +132,7 @@
 #define  P_NEW_SOLD_FIRST_NAME            9       /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_ID_NUMBER             10      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_SELECT_IMAGE_BUTTON   11      /* control type: command, callback function: (none) */
-#define  P_NEW_SOLD_SAVE_DATA_BUTTON      12      /* control type: command, callback function: (none) */
+#define  P_NEW_SOLD_SAVE_DATA_BUTTON      12      /* control type: command, callback function: Save_Sol_Func */
 #define  P_NEW_SOLD_HEADLINE              13      /* control type: textMsg, callback function: (none) */
 #define  P_NEW_SOLD_IMAGE                 14      /* control type: picture, callback function: (none) */
 
@@ -177,6 +177,7 @@ int  CVICALLBACK exitNewGuide(int panel, int event, void *callbackData, int even
 int  CVICALLBACK exitNewMentor(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitNewSoldier(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitSoldier(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

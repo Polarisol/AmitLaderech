@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.cws"
+Pathname = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -11,12 +11,12 @@ VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
-Project 0001 = "1.prj"
-Drag Bar Left = 203
-Window Top = 102
-Window Left = 1293
-Window Bottom = 1093
-Window Right = 2251
+Project 0001 = "DataBaseAccess_test.prj"
+Drag Bar Left = 213
+Window Top = 45
+Window Left = 0
+Window Bottom = 1031
+Window Right = 1912
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -30,9 +30,9 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 3
+Number of Opened Files = 4
 Window Confinement Region Enabled = True
-MainColumnWidth = 186
+MainColumnWidth = 196
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -46,40 +46,75 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.uir"
-File Type = "User Interface Resource"
-Disk Date = 3567955383
+Path = "/c/program files (x86)/national instruments/cvi2015/toolslib/toolbox/inifile.fp"
+File Type = "Function Panel"
+Disk Date = 3562614000
 In Projects = "1,"
-Window Top = 56
-Window Left = 11
-Window Height = 531
-Window Width = 780
-Window Z-Order = 3
 
 [File 0002]
-Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.c"
-File Type = "CSource"
-Disk Date = 3567956431
+Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
+File Type = "User Interface Resource"
+Disk Date = 3567059439
 In Projects = "1,"
-Window Top = 40
-Window Left = 11
-Window Z-Order = 1
-Source Window State = "1,192,192,192,38,61,61,0,0,139,0,0,0,0,0,34,180,0,195,33,531,1020,1,0,"
+Window Top = 47
+Window Left = 13
+Window Height = 586
+Window Width = 1272
+Window Z-Order = 2
 
 [File 0003]
-Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/Libraries/DatabaseAccess/database.h"
-File Type = "Include"
-Disk Date = 3567954434
+Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
+File Type = "CSource"
+Disk Date = 3567344586
 In Projects = "1,"
-Window Top = 40
-Window Left = 11
-Window Z-Order = 2
-Source Window State = "1,9,9,9,21,30,30,0,0,80,0,0,0,0,0,25,0,0,7,17,531,1020,1,0,"
+Window Top = 272
+Window Left = 128
+Window Z-Order = 1
+Source Window State = "1,317,317,317,16,28,28,0,0,109,0,74,0,74,30,25,0,0,301,33,561,1272,1,0,"
+
+[File 0004]
+Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
+File Type = "Include"
+Disk Date = 3567167800
+In Projects = "1,"
+Window Top = 182
+Window Left = 82
+Window Z-Order = 3
+Source Window State = "1,40,40,40,0,14,14,0,0,80,0,58,0,0,0,17,0,0,44,38,461,1272,1,66,"
+
+[File 0005]
+Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
+File Type = "CSource"
+Disk Date = 3567345129
+In Projects = "1,"
+Window Top = 47
+Window Left = 13
+Window Z-Order = 4
+Source Window State = "1,1,2,1,0,0,0,0,0,80,0,9,0,6,0,17,0,0,13,0,461,1272,1,0,"
+
+[File 0006]
+Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.c"
+File Type = "CSource"
+Disk Date = 3566544439
+In Projects = "1,"
+Window Top = 182
+Window Left = 82
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,40,16,386,1272,1,0,"
+
+[File 0007]
+Path = "/d/Project/AmitLaderech/Libraries/HebrewConversions/HebrewConversions.h"
+File Type = "Include"
+Disk Date = 3566544439
+In Projects = "1,"
+Window Top = 92
+Window Left = 36
+Source Window State = "1,4,4,4,5,43,5,0,3,0,0,0,0,0,0,0,0,0,4,43,361,1272,1,0,"
 
 [Tab Order]
-Tab 0001 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.uir"
-Tab 0002 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.c"
-Tab 0003 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/Libraries/DatabaseAccess/database.h"
+Tab 0001 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.uir"
+Tab 0002 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
+Tab 0003 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.c"
+Tab 0004 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
@@ -168,4 +203,52 @@ External Process Path = ""
 Command Line Args = ""
 Working Directory = ""
 Environment Options = ""
+
+[Watch 1]
+Watch Expression = "tagValue"
+
+[Watch 2]
+Watch Expression = "tagValue[0]"
+
+[Watch 3]
+Watch Expression = "tagValue[0][0]"
+
+[Watch 4]
+Watch Expression = "tagValue[0][1]"
+
+[Watch 5]
+Watch Expression = "tagValue[0][2]"
+
+[Watch 6]
+Watch Expression = "tagValue[0][3]"
+
+[Watch 7]
+Watch Expression = "tagValue[0][4]"
+
+[Watch 8]
+Watch Expression = "tagValue[0][5]"
+
+[Watch 9]
+Watch Expression = "tagValue[0][6]"
+
+[Watch 10]
+Watch Expression = "tagValue[0][7]"
+
+[Watch 11]
+Watch Expression = "tagValue[0][8]"
+
+[Watch 12]
+Watch Expression = "tagValue[0][9]"
+
+[Watch 13]
+Watch Expression = "tagValue[0][10]"
+
+[Watch 14]
+Watch Expression = "tagValue[0][11]"
+
+[Watch 15]
+Watch Expression = "tagValue[0][12]"
+
+[Watch 16]
+Watch Expression = "tagValue[0][13]"
 
