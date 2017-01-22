@@ -15,9 +15,9 @@ Project 0001 = "Functions.prj"
 Drag Bar Left = 217
 Window Top = 38
 Window Left = 130
-Window Bottom = 585
-Window Right = 1321
-Maximized = False
+Window Bottom = 805
+Window Right = 1456
+Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
 Track Include File Dependencies = True
@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 5
 Window Confinement Region Enabled = True
 MainColumnWidth = 200
 FileDateColumnWidth = 70
@@ -49,27 +49,27 @@ Batch Build Debug = False
 Path Line0001 = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/CSV_Parser_Functions."
 Path Line0002 = "c"
 File Type = "CSource"
-Disk Date = 3567717394
+Disk Date = 3567937342
 In Projects = "1,"
 Window Top = 38
 Window Left = 10
 Window Z-Order = 1
-Source Window State = "1,166,166,166,44,61,44,0,0,77,0,281,0,1,0,13,170,0,180,16,331,780,1,17,"
+Source Window State = "1,15,15,15,15,28,15,0,3,137,0,207,0,0,0,34,2,0,15,28,531,1020,1,18,"
 
 [File 0002]
 Path = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/Functions.c"
 File Type = "CSource"
-Disk Date = 3567704919
+Disk Date = 3567922931
 In Projects = "1,"
 Window Top = 38
 Window Left = 10
-Window Z-Order = 4
-Source Window State = "1,77,82,77,18,28,18,0,0,80,0,0,0,0,0,25,58,0,82,28,531,1020,1,13,"
+Window Z-Order = 3
+Source Window State = "1,170,170,170,29,68,29,0,0,80,0,0,0,0,0,25,5,0,21,41,531,1020,1,13,"
 
 [File 0003]
 Path = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/Functions.uir"
 File Type = "User Interface Resource"
-Disk Date = 3567755987
+Disk Date = 3567953995
 In Projects = "1,"
 Window Top = 78
 Window Left = 31
@@ -80,12 +80,22 @@ Window Z-Order = 2
 [File 0004]
 Path = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/Func_Header.h"
 File Type = "Include"
-Disk Date = 3567696575
+Disk Date = 3567922132
 In Projects = ""
 Window Top = 40
 Window Left = 11
-Window Z-Order = 3
-Source Window State = "1,3,3,3,0,62,62,0,0,80,0,0,0,0,0,22,0,0,3,54,471,1020,1,20,"
+Window Z-Order = 4
+Source Window State = "1,3,3,3,0,62,62,0,0,80,0,0,0,0,0,22,0,0,6,20,471,1020,1,17,"
+
+[File 0005]
+Path = "/c/Program Files (x86)/National Instruments/CVI2015/include/ansi/string.h"
+File Type = "Include"
+Disk Date = 3562614000
+In Projects = ""
+Window Top = 38
+Window Left = 10
+Window Z-Order = 5
+Source Window State = "1,44,44,44,15,44,44,0,3,80,0,0,0,0,0,13,36,0,44,15,291,1020,1,0,"
 
 [Tab Order]
 Tab 0001 = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/Functions.c"
@@ -93,6 +103,7 @@ Tab 0002 = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/Func_Head
 Tab 0003 Line0001 = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/CSV_Parser_Functions."
 Tab 0003 Line0002 = "c"
 Tab 0004 = "/c/Users/Dror/Desktop/CVI Project/backup/CSV_Parser/180117/Functions.uir"
+Tab 0005 = "/c/Program Files (x86)/National Instruments/CVI2015/include/ansi/string.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

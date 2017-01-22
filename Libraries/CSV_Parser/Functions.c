@@ -101,6 +101,7 @@ int CVICALLBACK test (int panel, int control, int event,
 	char** list = NULL;
 	int num_of_values;
 	
+	
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -116,6 +117,60 @@ int CVICALLBACK test (int panel, int control, int event,
 			
 				
 				
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK GetFieldFromRecord (int panel, int control, int event,
+									void *callbackData, int eventData1, int eventData2)
+{
+	int SIZE=300;
+	char file_name[SIZE];
+	int record_num;
+	char field_name[SIZE];
+	char value[SIZE];
+	int status;
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			
+			GetCtrlVal (panelHandle, PANEL_RECORD_NUM, &record_num);
+			GetCtrlVal (panelHandle, PANEL_S_FILE_NAME, file_name);
+			GetCtrlVal (panelHandle, PANEL_S_FIELD_NAME, field_name);
+			
+			status = CSVParser_GetFieldFromRecord(file_name, record_num, field_name, value); 
+			if(status==1)
+			SetCtrlVal (panelHandle, PANEL_FIELD_RESULT, value);
+			else
+			SetCtrlVal (panelHandle, PANEL_FIELD_RESULT, "Error");	
+			
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK CountAllRecordsWithFieldValue (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	int SIZE=300;
+	char file_name[SIZE];
+	int num_of_records;
+	char field_name[SIZE];
+	char value[SIZE];
+	int status;
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			GetCtrlVal (panelHandle, PANEL_S_VAL, value);
+			GetCtrlVal (panelHandle, PANEL_S_FILE_NAME_2, file_name);
+			GetCtrlVal (panelHandle, PANEL_S_FIELD_NAME_2, field_name);
+			
+			num_of_records = CSVParser_CountAllRecordsWithFieldValue(file_name, field_name, value);
+			
+			SetCtrlVal (panelHandle, PANEL_RECORD_NUM_2, num_of_records);
 			break;
 	}
 	return 0;

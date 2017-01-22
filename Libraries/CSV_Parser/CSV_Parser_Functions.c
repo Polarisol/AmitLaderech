@@ -1,5 +1,6 @@
 #include <userint.h>
 #include <ansi_c.h>
+char** CSV_Analyzer(char* runner, int* num_of_values);
 
 //Some definitions first: 
 //'Record' refers to a specific line in the data (a row)
@@ -32,7 +33,8 @@ int CSVParser_GetNumberOfRecords(char filename[])
 		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
 			counter++;
 	}
-
+	
+	fclose(Stream);
 	return counter;
 }
 
@@ -56,7 +58,6 @@ int CSVParser_NewRecords(char filename[])
 	char buffer[BUFFER_SIZE];					//line buffer
 	char old_filename[BUFFER_SIZE];
 	char Set_file[] = "processedRecords.txt";	//path name for the file containing other file name processed data
-	int str_cmp_res;							//result for strcmp, should be 0 if the file name was found on file
 	FILE *Stream;								//Stream for reading/writing to file
 
 	records = CSVParser_GetNumberOfRecords(filename);
@@ -72,10 +73,9 @@ int CSVParser_NewRecords(char filename[])
 		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
 		{
 			sscanf(buffer, "%[^,],%d", old_filename,&temp);	//retrieving info to buffer
-			str_cmp_res = strcmp(old_filename, filename);				//comparing str
 			
 			//if we found desired str (str_cmp_red=0) -> execute code
-			if(str_cmp_res == 0)
+			if(strcmp(old_filename, filename) == 0)  //comparing str  
 				records = records-temp;
 		}
 	}
@@ -149,8 +149,10 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 		{
 			fprintf(Stream,"%s,%d\n",array[i].path,array[i].processed); 
 		}
+		
+		fclose(Stream);		//closing the file and saving changes made.         	
 	}
-	fclose(Stream);		//closing the file and saving changes made.
+	
 	free(array);		//releasing dynamic memmory
 	
 	
@@ -160,18 +162,107 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 //Copies the value of a specific field from a specific record into the 'value' string
 //Returns 1 if the record and field exists (even if the value is an empty string)
 //Returns 0 if there is no such record of field
-int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[], char value[]);
+int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[], char value[])
+{
+	int LINE_SIZE = 10000;
+	FILE *Stream;
+	char line[LINE_SIZE];
+	char** field_header = NULL;
+	char** field_data = NULL;
+	int num_of_fields_h;
+	int num_of_fields_d;
+	int result = 0;
+	int record_counter=0;
+	int field_index=-1;
+	int num_of_records;
+	
+	Stream = fopen(filename, "r");
+	if(Stream)
+	{
+		num_of_records = CSVParser_GetNumberOfRecords(filename);
+		
+		if(recordNum>=0 && recordNum<=num_of_records)
+		{
+			fgets(line,LINE_SIZE,Stream);
+			field_header = CSV_Analyzer(line, &num_of_fields_h);
+		
+			for(int i=0 ; i<num_of_fields_h ; i++)
+			{
+				if(strcmp(fieldName,field_header[i])==0)
+				{
+					field_index=i;
+					result = 1;
+					break;
+				}
+			}
+		
+		
+			while(fgets(line,LINE_SIZE,Stream)!='\0')
+			{
+				record_counter++;
+				if(record_counter==recordNum)
+				{
+					field_data = CSV_Analyzer(line, &num_of_fields_d);
+					
+					if(field_index>=0 && value != NULL && field_data != NULL)
+						strcpy(value,field_data[field_index]);
+				}
+				/*
+				else if(recordNum==0)
+				{
+					recordNumber[recordNumber_counter]=record_counter;
+					recordNumber_counter++;
+				}
+				*/
+			}
+			
+
+
+		
+			free(field_header);
+			free(field_data);
+		}
+		fclose(Stream);
+	}
+	
+	return result;
+}
 
 
 //Returns the number of records that have a specific value in a specific field
-int CSVParser_CountAllRecordsWithFieldValue(char filename[], char fieldName[], char value[]);
+int CSVParser_CountAllRecordsWithFieldValue(char filename[], char fieldName[], char value[])
+{
+	int SIZE = 300;
+	int total_num_of_records;
+	int num_of_records=0;
+	int status;
+	char buffer[SIZE];
+	
+	total_num_of_records = CSVParser_GetNumberOfRecords(filename);
+	
+	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, buffer);
+	if(status>0)
+	{
+		for(int i=1; i<=total_num_of_records ; i++)
+		{
+			CSVParser_GetFieldFromRecord(filename, i, fieldName, buffer);
+			if(strcmp(value,buffer)==0)
+				num_of_records++;
+		}
+	}
+	
+	return num_of_records;
+}
 
 
 //Goes over the data and find the first 'number' of records with a specific value in a specific field
 //put their record numbers (line numbers) in the 'recordNumbers' array
 //put the values of the 'fieldToGet' field (strings) in the 2D array called 'recordValues'
 //example: first string value will be in recordValues[0] (the first character will be in recordValues[0][0] second in recordValues[0][1] etc.)
-void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[],char fieldToGet[], char **recordValues);
+void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[],char fieldToGet[], char **recordValues)
+{
+	
+}
 
 
 char** CSV_Analyzer(char* runner, int* num_of_values)
@@ -225,6 +316,7 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 					buffer_size*=2;
 					buffer = realloc(buffer, sizeof(char)*buffer_size);
 				}
+				
 				buffer[buf_counter]=*runner;
 				buf_counter++;
 				runner++;
@@ -240,7 +332,7 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 					
 					break;					
 				}				
-				if(*runner=='"' && *(runner+1)==',')
+				if((*runner=='"' && *(runner+1)==',') || (*runner=='"' && *(runner+1)==10))
 				{
 					buffer[buf_counter]='\0';
 					buf_counter = 0;
@@ -279,7 +371,7 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 					strcpy(pointer[*num_of_values],buffer);
 					break;					
 				}
-				if(*(runner)==',')
+				if(*(runner)==',' || *(runner)==10)
 				{
 					buffer[buf_counter]='\0';
 					buf_counter = 0;
@@ -307,5 +399,6 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 
 	}// end while(*runner != '\0')
 	
+	free(buffer);	
 	return pointer;
 }
