@@ -3,13 +3,24 @@
 #include "1.h"
 #include "database.h"
 #define SOLDIER "Database\\soldier.ini"
+#define CONFIG "Database\\config.ini"
 
+//==============================================================================
+//							Variables section
+//============================================================================== 
 static int pMain,pActivity,pNewSold;
+static char id[SIZE];
+static char dbFile[SIZE];
+static char **tagName,**tagValue,**ids;
+int recordAmount;
+int fieldAmount;
 
-static char **tagName , **tagValue;
-int RecordAmount,FieldAmount;
 
+//==============================================================================
+//							Function declaration section
+//============================================================================== 
 void initialize(char name[]);
+void finalize();
 
 int main (int argc, char *argv[])
 {
@@ -23,6 +34,7 @@ int main (int argc, char *argv[])
 		return -1;
 	DisplayPanel (pMain);
 	RunUserInterface ();
+	finalize();
 	DiscardPanel (pMain);
 	return 0;
 }
@@ -185,34 +197,25 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 
 {
-	char ID[10];
-	int amount;
-	char tagName[10][300];
-	
+	char tmpVal[SIZE],tmpName[SIZE];	
 	switch (event)
 	{
 		case EVENT_COMMIT:
-
-			Database_SetDatabaseFile (SOLDIER);
-			GetCtrlAttribute (panel, P_NEW_SOLD_ID_NUMBER, ATTR_XYNAME_BOLD, ID);
-			initialize(SOLDIER);
-			Database_AddNewRecord (ID , *tagname, amount); 
-			
-			
-			 
+			initialize("SOLDIER");
+			GetCtrlVal (panel, P_NEW_SOLD_ID_NUMBER, id);
+			Database_SetDatabaseFile(SOLDIER);
+			if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
+				  MessagePopup("Error", "ID already exist");
+			else
+			  {
+				 GetCtrlVal (panel, P_NEW_SOLD_FIRST_NAME, tmpVal); 
+				 GetCtrlAttribute (panel, P_NEW_SOLD_FIRST_NAME, ATTR_LABEL_TEXT, tmpName);
+				 Database_SetFieldVal(id,tmpName,tmpVal);
+				 HidePanel(panel);
+			  }  
 			break;
 	}
 	return 0;
-}
-
-void initialize(char name[])
-{
-	if (Database_SetDatabaseFile(name)==1)
-	{
-		Database_CountAllFile (name,&FieldAmount);
-		tagName = malloc (sizeof(char *)*FieldAmount);
-		tagValue = malloc (sizeof(char *)*FieldAmount);
-	}
 }
 
 
@@ -242,5 +245,27 @@ int CVICALLBACK Open_P_NEW_SOLD (int panel, int control, int event,
 			break;
 	}
 	return 0;
+}
+
+//==============================================================================
+//							Function realization section
+//============================================================================== 
+
+void initialize(char name[])
+{
+	Database_SetDatabaseFile(CONFIG);
+	Database_CountAllFields(name,&fieldAmount);  
+	Database_CountAllRecords(&recordAmount);
+	tagName = malloc(sizeof(char*)*(fieldAmount));
+	tagValue = malloc(sizeof(char*)*(fieldAmount));
+	for(int i=1;i<=recordAmount;i++)
+	{
+		Database_GetRecordValues(name,fieldAmount,tagName,tagValue);
+	}
+}
+
+void finalize()
+{
+	free(ids);free(tagName);free(tagValue);
 }
 
