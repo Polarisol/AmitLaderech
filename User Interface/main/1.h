@@ -68,6 +68,7 @@
 #define  P_MAIN_MY_TASKS                  14      /* control type: textBox, callback function: (none) */
 #define  P_MAIN_STATISTICS                15      /* control type: textBox, callback function: (none) */
 #define  P_MAIN_PICTURE                   16      /* control type: picture, callback function: (none) */
+#define  P_MAIN_PICTUREBUTTON             17      /* control type: pictButton, callback function: (none) */
 
 #define  P_MENTOR                         4       /* callback function: exitMentor */
 #define  P_MENTOR_GUIDE                   2       /* control type: string, callback function: (none) */

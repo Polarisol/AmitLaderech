@@ -48,13 +48,13 @@ Batch Build Debug = False
 [File 0001]
 Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3567920736
+Disk Date = 3567952738
 In Projects = "1,"
 Window Top = 56
 Window Left = 11
 Window Height = 531
 Window Width = 780
-Window Z-Order = 2
+Window Z-Order = 1
 
 [File 0002]
 Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.c"
@@ -63,8 +63,8 @@ Disk Date = 3567919244
 In Projects = "1,"
 Window Top = 40
 Window Left = 11
-Window Z-Order = 1
-Source Window State = "1,0,0,0,0,0,0,0,0,139,0,0,0,0,0,34,36,0,17,0,531,1020,1,0,"
+Window Z-Order = 2
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,36,0,17,0,531,1020,1,0,"
 
 [Tab Order]
 Tab 0001 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.uir"
