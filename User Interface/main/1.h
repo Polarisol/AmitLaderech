@@ -57,8 +57,8 @@
 #define  P_MAIN_DATE_STRING               3       /* control type: string, callback function: (none) */
 #define  P_MAIN_BLESSING                  4       /* control type: string, callback function: (none) */
 #define  P_MAIN_LIST_SOLDIERS_BUTTON      5       /* control type: command, callback function: (none) */
-#define  P_MAIN_ANALYSIS_PANEL_BUTTON     6       /* control type: command, callback function: analysis */
-#define  P_MAIN_ACTIVITY_PANEL_BUTTON     7       /* control type: command, callback function: (none) */
+#define  P_MAIN_ANALYSIS_PANEL_BUTTON     6       /* control type: command, callback function: (none) */
+#define  P_MAIN_ACTIVITY_PANEL_BUTTON     7       /* control type: command, callback function: OPEN_P_Activity */
 #define  P_MAIN_FRIDAY                    8       /* control type: textBox, callback function: (none) */
 #define  P_MAIN_THURSDAY                  9       /* control type: textBox, callback function: (none) */
 #define  P_MAIN_WEDNESDAY                 10      /* control type: textBox, callback function: (none) */
@@ -68,7 +68,7 @@
 #define  P_MAIN_MY_TASKS                  14      /* control type: textBox, callback function: (none) */
 #define  P_MAIN_STATISTICS                15      /* control type: textBox, callback function: (none) */
 #define  P_MAIN_PICTURE                   16      /* control type: picture, callback function: (none) */
-#define  P_MAIN_PICTUREBUTTON             17      /* control type: pictButton, callback function: (none) */
+#define  P_MAIN_PICTUREBUTTON             17      /* control type: pictButton, callback function: Open_P_NEW_SOLD */
 
 #define  P_MENTOR                         4       /* callback function: exitMentor */
 #define  P_MENTOR_GUIDE                   2       /* control type: string, callback function: (none) */
@@ -168,7 +168,6 @@
 
      /* Callback Prototypes: */
 
-int  CVICALLBACK analysis(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitActivity(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitGuide(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitMain(int panel, int event, void *callbackData, int eventData1, int eventData2);
@@ -177,6 +176,8 @@ int  CVICALLBACK exitNewGuide(int panel, int event, void *callbackData, int even
 int  CVICALLBACK exitNewMentor(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitNewSoldier(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitSoldier(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Open_P_NEW_SOLD(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
