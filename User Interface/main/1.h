@@ -13,14 +13,14 @@
 
      /* Panels and Controls: */
 
-#define  P_ACTIVITY                       1       /* callback function: exitActivity */
+#define  P_ACTIVITY                       1       /* callback function: exitFunc */
 #define  P_ACTIVITY_GUIDE_4_BUTTON        2       /* control type: command, callback function: (none) */
 #define  P_ACTIVITY_GUIDE_3_BUTTON        3       /* control type: command, callback function: (none) */
 #define  P_ACTIVITY_GUIDE_2_BUTTON        4       /* control type: command, callback function: (none) */
 #define  P_ACTIVITY_GUIDE_1_BUTTON        5       /* control type: command, callback function: (none) */
 #define  P_ACTIVITY_ADDING_GUIDE_BUTTON   6       /* control type: command, callback function: (none) */
 
-#define  P_GUIDE                          2       /* callback function: exitGuide */
+#define  P_GUIDE                          2       /* callback function: exitFunc */
 #define  P_GUIDE_AGE                      2       /* control type: string, callback function: (none) */
 #define  P_GUIDE_MAIN_OCCUPATION          3       /* control type: string, callback function: (none) */
 #define  P_GUIDE_ADDRESS                  4       /* control type: string, callback function: (none) */
@@ -52,7 +52,7 @@
 #define  P_GUIDE_SUMMARY                  30      /* control type: textBox, callback function: (none) */
 #define  P_GUIDE_EXCEPTIONS               31      /* control type: textBox, callback function: (none) */
 
-#define  P_MAIN                           3       /* callback function: exitMain */
+#define  P_MAIN                           3       /* callback function: exitFunc */
 #define  P_MAIN_CLOCK_STRING              2       /* control type: string, callback function: (none) */
 #define  P_MAIN_DATE_STRING               3       /* control type: string, callback function: (none) */
 #define  P_MAIN_BLESSING                  4       /* control type: string, callback function: (none) */
@@ -70,7 +70,7 @@
 #define  P_MAIN_PICTURE                   16      /* control type: picture, callback function: (none) */
 #define  P_MAIN_PICTUREBUTTON             17      /* control type: pictButton, callback function: Open_P_NEW_SOLD */
 
-#define  P_MENTOR                         4       /* callback function: exitMentor */
+#define  P_MENTOR                         4       /* callback function: exitFunc */
 #define  P_MENTOR_GUIDE                   2       /* control type: string, callback function: (none) */
 #define  P_MENTOR_MAIN_OCCUPATION         3       /* control type: string, callback function: (none) */
 #define  P_MENTOR_NEXT_MEETING_DATE       4       /* control type: string, callback function: (none) */
@@ -92,7 +92,7 @@
 #define  P_MENTOR_PROGRESS_RING           20      /* control type: slide, callback function: (none) */
 #define  P_MENTOR_SOLDIER_TEXT            21      /* control type: textMsg, callback function: (none) */
 
-#define  P_NEW_GUID                       5       /* callback function: exitNewGuide */
+#define  P_NEW_GUID                       5       /* callback function: exitFunc */
 #define  P_NEW_GUID_AGE                   2       /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_MAIN_OCCUPATION       3       /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_ADDRESS               4       /* control type: string, callback function: (none) */
@@ -106,7 +106,7 @@
 #define  P_NEW_GUID_IMAGE                 12      /* control type: picture, callback function: (none) */
 #define  P_NEW_GUID_HEADLINE              13      /* control type: textMsg, callback function: (none) */
 
-#define  P_NEW_MENT                       6       /* callback function: exitNewMentor */
+#define  P_NEW_MENT                       6       /* callback function: exitFunc */
 #define  P_NEW_MENT_AGE                   2       /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_GUIDE                 3       /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_MAIN_OCCUPATION       4       /* control type: string, callback function: (none) */
@@ -121,7 +121,7 @@
 #define  P_NEW_MENT_IMAGE                 13      /* control type: picture, callback function: (none) */
 #define  P_NEW_MENT_HEADLINE              14      /* control type: textMsg, callback function: (none) */
 
-#define  P_NEW_SOLD                       7       /* callback function: exitNewSoldier */
+#define  P_NEW_SOLD                       7       /* callback function: exitFunc */
 #define  P_NEW_SOLD_GUIDE                 2       /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_MENTOR                3       /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_AGE                   4       /* control type: string, callback function: (none) */
@@ -136,7 +136,7 @@
 #define  P_NEW_SOLD_HEADLINE              13      /* control type: textMsg, callback function: (none) */
 #define  P_NEW_SOLD_IMAGE                 14      /* control type: picture, callback function: (none) */
 
-#define  P_SOLDIER                        8       /* callback function: exitSoldier */
+#define  P_SOLDIER                        8       /* callback function: exitFunc */
 #define  P_SOLDIER_GUIDE                  2       /* control type: string, callback function: (none) */
 #define  P_SOLDIER_MENTOR                 3       /* control type: string, callback function: (none) */
 #define  P_SOLDIER_NEXT_MEETING_DATE      4       /* control type: string, callback function: (none) */
@@ -168,14 +168,7 @@
 
      /* Callback Prototypes: */
 
-int  CVICALLBACK exitActivity(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK exitGuide(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK exitMain(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK exitMentor(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK exitNewGuide(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK exitNewMentor(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK exitNewSoldier(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK exitSoldier(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_P_NEW_SOLD(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
