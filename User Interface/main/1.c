@@ -3,7 +3,9 @@
 #include "1.h"
 #include "database.h"
 #define SOLDIER "Database\\soldier.ini"
-#define CONFIG "Database\\config.ini"
+#define MENTOR  "Database\\mentor.ini"
+#define GUIDE   "Database\\guide.ini"
+#define CONFIG  "Database\\config.ini"
 
 //==============================================================================
 //							Variables section
@@ -17,7 +19,7 @@ int recordAmount;
 int fieldAmount;
 int soldierContorls[] = {P_NEW_SOLD_ID_NUMBER,P_NEW_SOLD_FIRST_NAME,
 						 P_NEW_SOLD_LAST_NAME,P_NEW_SOLD_PHONE_NUMBER,
-						P_NEW_SOLD_MAIL,P_NEW_SOLD_MAIL,P_NEW_SOLD_ADDRESS,P_NEW_SOLD_AGE,P_NEW_SOLD_GUIDE,
+						P_NEW_SOLD_MAIL,P_NEW_SOLD_ADDRESS,P_NEW_SOLD_AGE,P_NEW_SOLD_GUIDE,
 						P_NEW_SOLD_MENTOR, P_NEW_SOLD_IMAGE};
 
 
@@ -26,8 +28,12 @@ int soldierContorls[] = {P_NEW_SOLD_ID_NUMBER,P_NEW_SOLD_FIRST_NAME,
 //============================================================================== 
 void initialize(char database[]);
 void finalize();
-void addMember(char dir[],char database[],int memberControl[],int panel);
+void addMember(char dir[],char database[],int memberControl[],int limit,int panel);
 
+void textBoxInPanel(int panel)
+{
+	
+}
 
 int main (int argc, char *argv[])
 {
@@ -100,7 +106,43 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			addMember(SOLDIER,"SOLDIER",soldierContorls,panel);
+			int limit = sizeof(soldierContorls)/sizeof(int);
+			//addMember(SOLDIER,"SOLDIER",soldierContorls,limit,panel);
+			//control array solution
+			char tmpVal[SIZE],tmpName[SIZE];
+			int ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
+			int count,idIndex = -1;
+			char tmp[SIZE];
+			initialize("SOLDIER"); //CAPITAL LETTER IN CONFIG.INI
+			GetNumCtrlArrayItems (ctrlArray, &count);
+			for(int i=0;i<count;i++)
+			{
+				GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_CONSTANT_NAME, tmp);
+				if(strstr(tmp,"ID"))
+					idIndex = i;
+			}
+			if(idIndex!=-1)
+			{
+				GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, idIndex), id);
+				Database_SetDatabaseFile(SOLDIER);
+				if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
+					MessagePopup("Error", "ID already exist");
+				else
+				{
+					for(int i=0;i<limit;i++)
+					{
+						if(i!=idIndex)
+						{
+							GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, i), tmpVal); 
+							GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmpName);
+							Database_SetFieldVal(id,tmpName,tmpVal);
+						}
+					}
+				}
+				
+			}
+			else
+				MessagePopup("Eror","ID index was not found");
 			break;
 	}
 	return 0;
@@ -153,11 +195,12 @@ void finalize()
 	free(ids);free(tagName);free(tagValue);
 }
 
-void addMember(char dir[],char database[],int memberControl[],int panel)
+void addMember(char dir[],char database[],int memberControl[],int limit,int panel)
 {
 	//dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
 	//database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
 	//memberContor - array of the controls in  the panel.
+	//limit - the size of the memberControl array. use limit = sizeof(memberCcontrol)\sizeof(int);
 	//panel - panel handle the active panel - send panel. 
 	char tmpVal[SIZE],tmpName[SIZE];
 	initialize(database); //CAPITAL LETTER IN CONFIG.INI
@@ -167,10 +210,10 @@ void addMember(char dir[],char database[],int memberControl[],int panel)
 		MessagePopup("Error", "ID already exist");
 	else
 	{
-		for(int i=0;i<9;i++)
+		for(int i=1;i<limit;i++)
 		{
-			GetCtrlVal (panel, memberControl[i+1], tmpVal); 
-			GetCtrlAttribute (panel, memberControl[i+1], ATTR_LABEL_TEXT, tmpName);
+			GetCtrlVal (panel, memberControl[i], tmpVal); 
+			GetCtrlAttribute (panel, memberControl[i], ATTR_LABEL_TEXT, tmpName);
 			Database_SetFieldVal(id,tmpName,tmpVal);
 		}
 	}

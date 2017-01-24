@@ -134,7 +134,8 @@
 #define  P_NEW_SOLD_SELECT_IMAGE_BUTTON   11      /* control type: command, callback function: (none) */
 #define  P_NEW_SOLD_SAVE_DATA_BUTTON      12      /* control type: command, callback function: Save_Sol_Func */
 #define  P_NEW_SOLD_HEADLINE              13      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_IMAGE                 14      /* control type: picture, callback function: (none) */
+#define  P_NEW_SOLD_IMAGEBOX              14      /* control type: picture, callback function: (none) */
+#define  P_NEW_SOLD_IMAGE                 15      /* control type: string, callback function: (none) */
 
 #define  P_SOLDIER                        8       /* callback function: exitFunc */
 #define  P_SOLDIER_GUIDE                  2       /* control type: string, callback function: (none) */
@@ -158,8 +159,7 @@
 
      /* Control Arrays: */
 
-          /* (no control arrays in the resource file) */
-
+#define  CTRLARRAY        		          1
 
      /* Menu Bars, Menus, and Menu Items: */
 
