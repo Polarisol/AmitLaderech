@@ -2,6 +2,7 @@
 #include <userint.h>
 #include "1.h"
 #include "database.h"
+//Constants for the database directory
 #define SOLDIER "Database\\soldier.ini"
 #define MENTOR  "Database\\mentor.ini"
 #define GUIDE   "Database\\guide.ini"
@@ -17,10 +18,8 @@ static char id[SIZE];
 static char **tagName,**tagValue,**ids;
 int recordAmount;
 int fieldAmount;
-int soldierContorls[] = {P_NEW_SOLD_ID_NUMBER,P_NEW_SOLD_FIRST_NAME,
-						 P_NEW_SOLD_LAST_NAME,P_NEW_SOLD_PHONE_NUMBER,
-						P_NEW_SOLD_MAIL,P_NEW_SOLD_ADDRESS,P_NEW_SOLD_AGE,P_NEW_SOLD_GUIDE,
-						P_NEW_SOLD_MENTOR, P_NEW_SOLD_IMAGE};
+int ctrlArray;
+
 
 
 //==============================================================================
@@ -28,13 +27,14 @@ int soldierContorls[] = {P_NEW_SOLD_ID_NUMBER,P_NEW_SOLD_FIRST_NAME,
 //============================================================================== 
 void initialize(char database[]);
 void finalize();
-void addMember(char dir[],char database[],int memberControl[],int limit,int panel);
+void addMember(char dir[],char database[],int panel,int ctrlArray);
+int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[]);
+void showMember(int panel,char dir[],char database[],char record[],int ctrlArray);
 
-void textBoxInPanel(int panel)
-{
-	
-}
 
+//==============================================================================
+//									MAIN
+//============================================================================== 
 int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -103,46 +103,20 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 
 {
+	
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			int limit = sizeof(soldierContorls)/sizeof(int);
-			//addMember(SOLDIER,"SOLDIER",soldierContorls,limit,panel);
-			//control array solution
-			char tmpVal[SIZE],tmpName[SIZE];
-			int ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
-			int count,idIndex = -1;
-			char tmp[SIZE];
-			initialize("SOLDIER"); //CAPITAL LETTER IN CONFIG.INI
-			GetNumCtrlArrayItems (ctrlArray, &count);
-			for(int i=0;i<count;i++)
+			if(panel == pNewSold)
 			{
-				GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_CONSTANT_NAME, tmp);
-				if(strstr(tmp,"ID"))
-					idIndex = i;
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
+				addMember(SOLDIER,"SOLDIER",panel,ctrlArray);
 			}
-			if(idIndex!=-1)
+			else if(panel == pNewGuide)
 			{
-				GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, idIndex), id);
-				Database_SetDatabaseFile(SOLDIER);
-				if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
-					MessagePopup("Error", "ID already exist");
-				else
-				{
-					for(int i=0;i<limit;i++)
-					{
-						if(i!=idIndex)
-						{
-							GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, i), tmpVal); 
-							GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmpName);
-							Database_SetFieldVal(id,tmpName,tmpVal);
-						}
-					}
-				}
-				
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
+				addMember(GUIDE,"GUIDE",panel,ctrlArray);
 			}
-			else
-				MessagePopup("Eror","ID index was not found");
 			break;
 	}
 	return 0;
@@ -172,6 +146,20 @@ int CVICALLBACK Open_P_NEW_SOLD (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			 DisplayPanel (pNewSold);
+			 ctrlArray = GetCtrlArrayFromResourceID (pNewSold, CTRLARRAY);
+			 showMember(pNewSold,SOLDIER,"SOLDIER","203059936",ctrlArray);//only here for easy check of the function.
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK Open_New_Guide (int panel, int control, int event,
+								void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			DisplayPanel(pNewGuide);
 			break;
 	}
 	return 0;
@@ -180,9 +168,10 @@ int CVICALLBACK Open_P_NEW_SOLD (int panel, int control, int event,
 //==============================================================================
 //							Function realization section
 //============================================================================== 
-
+//Prepare the arrays for input. using the config.ini
 void initialize(char database[])
 {
+//database - name of the recorde database in config.ini
 	Database_SetDatabaseFile(CONFIG);
 	Database_CountAllFields(database,&fieldAmount);  
 	tagName = malloc(sizeof(char*)*(fieldAmount));
@@ -190,11 +179,123 @@ void initialize(char database[])
 	Database_GetRecordValues(database,fieldAmount,tagName,tagValue);
 }
 
+//free all dynamic arrays
 void finalize()
 {
 	free(ids);free(tagName);free(tagValue);
 }
 
+//Return the index of control in the CtrlArray
+//return -1 if the control was not found
+int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[])
+{
+//count - the amount of items in ctrlArray.
+//controlName - the given name of the control. no need for PANLE_..
+//panel - active panel.
+//ctrlArray - active cntrlArray.
+	char tmp[SIZE];
+	for(int i=0;i<count;i++)
+	{
+		GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_CONSTANT_NAME, tmp);
+		if(strcmp(controlName,tmp)==0)
+			return i;
+	}
+	return -1;
+}
+
+//add new member to the specific database
+void addMember(char dir[],char database[],int panel, int ctrlArray)
+{
+//dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
+//database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
+//panel - panel handle of the active panel.
+	char tmpVal[SIZE],tmpName[SIZE];
+	int count,idIndex = -1;
+	initialize(database); //CAPITAL LETTER IN CONFIG.INI
+	GetNumCtrlArrayItems (ctrlArray, &count);
+	idIndex = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+	if(idIndex!=-1)
+	{
+		GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, idIndex), id);
+		Database_SetDatabaseFile(dir);
+		if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
+			MessagePopup("Error", "ID already exist");
+		else
+		{
+			
+			for(int i=0;i<count;i++)
+			{
+				if(i!=idIndex)
+				{
+					GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, i), tmpVal); 
+					GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmpName);
+					Database_SetFieldVal(id,tmpName,tmpVal);
+				}
+			}
+		}
+				
+	}
+	else
+		MessagePopup("Eror","ID index was not found");
+}
+//Show the member from the database in the panel
+void showMember(int panel,char dir[],char database[],char record[],int ctrlArray)
+{
+//dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
+//database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
+//panel - panel handle of the active panel.
+//record - the id number of the member.
+	char tmpVal[SIZE],tmpName[SIZE];
+	int count,idIndex = -1;
+	initialize(database); //CAPITAL LETTER IN CONFIG.INI
+	Database_SetDatabaseFile(SOLDIER);
+	GetNumCtrlArrayItems (ctrlArray, &count);
+	Database_GetRecordValues(record,fieldAmount,tagName,tagValue);
+	idIndex = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+	if(idIndex == -1)
+	{
+		MessagePopup("Error", "Control was not found");
+	}
+	SetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, idIndex),record);//set the id number in the textbox
+	for(int i=0;i<count;i++)
+	{//Run on all of the items in the ctrlArray -> controls in the panel
+		GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmpName);//get the label text of the item
+		GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_CONSTANT_NAME, tmpVal);//get the name of the item. no PANEL_..
+		int index = getIndexOfControl(panel,ctrlArray,count,tmpVal);
+		if(index == -1)
+		{
+			MessagePopup("Error", "Control was not found");
+		}
+		if(index != idIndex)
+		{//Only if the control is not the ID NUMBER
+			for(int j=0;j<fieldAmount;j++)
+			{
+				if(strcmp(tmpName,tagName[j])==0)
+				{//if the control's label text is equal to the field name from the database
+				 //then, put the corresponding value in right control.
+					SetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, index),tagValue[j]);
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+//==============================================================================
+//							OLD Function\VAR realization section
+//============================================================================== 
+
+/*
+int soldierContorls[] = {P_NEW_SOLD_ID_NUMBER,P_NEW_SOLD_FIRST_NAME,
+						 P_NEW_SOLD_LAST_NAME,P_NEW_SOLD_PHONE_NUMBER,
+						P_NEW_SOLD_MAIL,P_NEW_SOLD_ADDRESS,P_NEW_SOLD_AGE,P_NEW_SOLD_GUIDE,
+						P_NEW_SOLD_MENTOR, P_NEW_SOLD_IMAGE};
 void addMember(char dir[],char database[],int memberControl[],int limit,int panel)
 {
 	//dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
@@ -218,4 +319,6 @@ void addMember(char dir[],char database[],int memberControl[],int limit,int pane
 		}
 	}
 }
+*/
+
 

@@ -18,7 +18,7 @@
 #define  P_ACTIVITY_GUIDE_3_BUTTON        3       /* control type: command, callback function: (none) */
 #define  P_ACTIVITY_GUIDE_2_BUTTON        4       /* control type: command, callback function: (none) */
 #define  P_ACTIVITY_GUIDE_1_BUTTON        5       /* control type: command, callback function: (none) */
-#define  P_ACTIVITY_ADDING_GUIDE_BUTTON   6       /* control type: command, callback function: (none) */
+#define  P_ACTIVITY_ADDING_GUIDE_BUTTON   6       /* control type: command, callback function: Open_New_Guide */
 
 #define  P_GUIDE                          2       /* callback function: exitFunc */
 #define  P_GUIDE_AGE                      2       /* control type: string, callback function: (none) */
@@ -102,9 +102,10 @@
 #define  P_NEW_GUID_FIRST_NAME            8       /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_ID_NUMBER             9       /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_SELECT_IMAGE_BUTTON   10      /* control type: command, callback function: (none) */
-#define  P_NEW_GUID_SAVE_DATA_BUTTON      11      /* control type: command, callback function: (none) */
-#define  P_NEW_GUID_IMAGE                 12      /* control type: picture, callback function: (none) */
+#define  P_NEW_GUID_SAVE_DATA_BUTTON      11      /* control type: command, callback function: Save_Sol_Func */
+#define  P_NEW_GUID_IMAGE_BOX             12      /* control type: picture, callback function: (none) */
 #define  P_NEW_GUID_HEADLINE              13      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_GUID_IMAGE                 14      /* control type: string, callback function: (none) */
 
 #define  P_NEW_MENT                       6       /* callback function: exitFunc */
 #define  P_NEW_MENT_AGE                   2       /* control type: string, callback function: (none) */
@@ -159,7 +160,8 @@
 
      /* Control Arrays: */
 
-#define  CTRLARRAY        		          1
+#define  CTRLARRAY                        1
+#define  CTRLARRAY_2                      2
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -169,6 +171,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Open_New_Guide(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_P_NEW_SOLD(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
