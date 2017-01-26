@@ -98,7 +98,7 @@ int CVICALLBACK find_new_records (int panel, int control, int event,
 int CVICALLBACK GetFieldFromRecord (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)
 {
-	int SIZE=300;
+	int SIZE=20000;
 	char file_name[SIZE];
 	int record_num;
 	char field_name[SIZE];

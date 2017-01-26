@@ -114,7 +114,7 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 	int str_cmp_res;							//result for strcmp, should be 0 if the file name was found on file
 	FILE *Stream;								//Stream for reading/writing to file
 	int counter=0;								//index of record
-	
+	int num_of_rec;
 	//struct array
 	struct temp_arr
 	{
@@ -158,6 +158,11 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 		for(int i=0; i<counter ; i++)
 		{
 			fprintf(Stream,"%s,%d\n",array[i].path,array[i].processed); 
+		}
+		if(str_cmp_res!=0)
+		{
+			num_of_rec = CSVParser_GetNumberOfRecords(filename);
+			fprintf(Stream,"%s,%d\n",filename,num_of_rec);
 		}
 		
 		fclose(Stream);		//closing the file and saving changes made.         	
