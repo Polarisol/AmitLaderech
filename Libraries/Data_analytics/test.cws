@@ -1,0 +1,179 @@
+[Workspace Header]
+Version = 1501
+Pathname = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.cws"
+CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
+CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
+CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
+CVI Pub Global Dir = "/C/ProgramData/National Instruments/CVI"
+IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
+IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
+VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
+Number of Projects = 1
+Active Project = 1
+Project 0001 = "test.prj"
+Drag Bar Left = 231
+Window Top = 38
+Window Left = 130
+Window Bottom = 679
+Window Right = 920
+Maximized = True
+Maximized Children = True
+Max32 Number Of Errors = 20
+Track Include File Dependencies = True
+Prompt For Missing Includes = True
+Stop On First Error File = False
+Bring Up Err Win At Start = True
+Bring Up Err Win For Errors = False
+Save Changes Before Running = "Always"
+Save Changes Before Compiling = "Always"
+Hide Windows = False
+Break At First Statement = False
+Sort Type = "File Name"
+Number of Opened Files = 2
+Window Confinement Region Enabled = True
+MainColumnWidth = 214
+FileDateColumnWidth = 70
+FileSizeColumnWidth = 70
+
+[Project Header 0001]
+Version = 1501
+Don't Update DistKit = False
+Platform Code = 4
+Build Configuration = "Debug"
+Warn User If Debugging Release = 1
+Batch Build Release = False
+Batch Build Debug = False
+
+[File 0001]
+Path = "/c/Users/Lenovo/Documents/User_analytics/CSV_Parser_Functions.c"
+File Type = "CSource"
+Disk Date = 3568026308
+In Projects = "1,"
+Window Top = 114
+Window Left = 55
+Window Z-Order = 2
+Source Window State = "1,163,163,163,54,63,63,0,0,79,0,188,0,0,0,15,0,0,11,35,331,1008,1,20,"
+
+[File 0002]
+Path = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.c"
+File Type = "CSource"
+Disk Date = 3568281401
+In Projects = "1,"
+Window Top = 86
+Window Left = 40
+Window Z-Order = 1
+Source Window State = "1,6,6,6,18,19,19,0,0,90,0,9,0,0,0,24,0,5,6,19,411,840,1,60,"
+
+[File 0003]
+Path = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.uir"
+File Type = "User Interface Resource"
+Disk Date = 3568099548
+In Projects = "1,"
+Window Top = 30
+Window Left = 10
+Window Height = 431
+Window Width = 1008
+
+[File 0004]
+Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/HebrewConversion"
+Path Line0002 = "s.c"
+File Type = "CSource"
+Disk Date = 3568026049
+In Projects = "1,"
+Window Top = 58
+Window Left = 25
+Source Window State = "1,65,65,65,5,63,5,0,0,0,0,6,0,0,0,0,0,0,40,24,331,948,1,16,"
+
+[Tab Order]
+Tab 0001 = "/c/Users/Lenovo/Documents/User_analytics/CSV_Parser_Functions.c"
+Tab 0002 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.c"
+
+[Default Build Config 0001 Debug]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Release]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Debug64]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Release64]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Build Dependencies 0001]
+Number of Dependencies = 0
+
+[Build Options 0001]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Execution Trace = "Disabled"
+Profile = "Disabled"
+Debugging Level = "Standard"
+Break On Library Errors = True
+Break On First Chance Exceptions = False
+
+[Execution Target 0001]
+Execution Target Address = "Local desktop computer"
+Execution Target Port = 0
+Execution Target Type = 0
+
+[SCC Options 0001]
+Use global settings = True
+SCC Provider = ""
+SCC Project = ""
+Local Path = ""
+Auxiliary Path = ""
+Perform Same Action For .h File As For .uir File = "Ask"
+Perform Same Action For .cds File As For .prj File = "Ask"
+Username = ""
+Comment = ""
+Use Default Username = False
+Use Default Comment = False
+Suppress CVI Error Messages = False
+Always show confirmation dialog = True
+
+[DLL Debugging Support 0001]
+External Process Path = ""
+
+[Command Line Args 0001]
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+
