@@ -4,6 +4,7 @@
 #include "Functions.h"
 
 #include "Func_Header.h"
+#include "HebrewConversions.h"
 
 
 static int panelHandle;
@@ -93,34 +94,6 @@ int CVICALLBACK find_new_records (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK test (int panel, int control, int event,
-					  void *callbackData, int eventData1, int eventData2)
-{
-
-	char line[300];	
-	char** list = NULL;
-	int num_of_values;
-	
-	
-	switch (event)
-	{
-		case EVENT_COMMIT:
-				
-			GetCtrlVal (panelHandle, PANEL_STRING, line);
-			list = CSV_Analyzer(line, &num_of_values);
-			InsertTableRows (panelHandle, PANEL_TABLE, -1, num_of_values, VAL_CELL_STRING);
-			for(int i=1 ; i<=num_of_values; i++)
-			{
-				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(1,i), list[i-1]);
-				
-			}
-			
-				
-				
-			break;
-	}
-	return 0;
-}
 
 int CVICALLBACK GetFieldFromRecord (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)
@@ -131,6 +104,7 @@ int CVICALLBACK GetFieldFromRecord (int panel, int control, int event,
 	char field_name[SIZE];
 	char value[SIZE];
 	int status;
+	int choice;
 	
 	switch (event)
 	{
@@ -138,14 +112,25 @@ int CVICALLBACK GetFieldFromRecord (int panel, int control, int event,
 			
 			GetCtrlVal (panelHandle, PANEL_RECORD_NUM, &record_num);
 			GetCtrlVal (panelHandle, PANEL_S_FILE_NAME, file_name);
-			GetCtrlVal (panelHandle, PANEL_S_FIELD_NAME, field_name);
+			
+			GetCtrlIndex (panelHandle, PANEL_RING, &choice);
+			GetLabelFromIndex (panelHandle, PANEL_RING, choice, field_name);
+			
+			HebrewConverter_convertHebrewISOtoUTF8(field_name);
+			
 			
 			status = CSVParser_GetFieldFromRecord(file_name, record_num, field_name, value); 
 			if(status==1)
-			SetCtrlVal (panelHandle, PANEL_FIELD_RESULT, value);
+			{
+				ResetTextBox (panelHandle, PANEL_TEXTBOX, "");
+				HebrewConverter_convertHebrewUTF8toISO(value);
+				SetCtrlVal (panelHandle, PANEL_TEXTBOX, value);
+			}
 			else
-			SetCtrlVal (panelHandle, PANEL_FIELD_RESULT, "Error");	
-			
+			{
+				ResetTextBox (panelHandle, PANEL_TEXTBOX, ""); 
+				SetCtrlVal (panelHandle, PANEL_TEXTBOX, "שגיאה");	
+			}
 			break;
 	}
 	return 0;
@@ -159,7 +144,6 @@ int CVICALLBACK CountAllRecordsWithFieldValue (int panel, int control, int event
 	int num_of_records;
 	char field_name[SIZE];
 	char value[SIZE];
-	int status;
 	
 	switch (event)
 	{
@@ -167,10 +151,51 @@ int CVICALLBACK CountAllRecordsWithFieldValue (int panel, int control, int event
 			GetCtrlVal (panelHandle, PANEL_S_VAL, value);
 			GetCtrlVal (panelHandle, PANEL_S_FILE_NAME_2, file_name);
 			GetCtrlVal (panelHandle, PANEL_S_FIELD_NAME_2, field_name);
+			HebrewConverter_convertHebrewISOtoUTF8(field_name);
+			HebrewConverter_convertHebrewISOtoUTF8(value);
 			
 			num_of_records = CSVParser_CountAllRecordsWithFieldValue(file_name, field_name, value);
 			
 			SetCtrlVal (panelHandle, PANEL_RECORD_NUM_2, num_of_records);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK Load_headers (int panel, int control, int event,
+							  void *callbackData, int eventData1, int eventData2)
+{
+	int MAX_SIZE = 10000;
+	char line[MAX_SIZE];
+	char file_name[300];
+	char** list = NULL;
+	int num_of_values;
+	FILE *Stream;
+	
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			ClearListCtrl (panelHandle, PANEL_RING);
+			GetCtrlVal (panelHandle, PANEL_S_FILE_NAME, file_name);
+			Stream = fopen(file_name,"r");
+			if(Stream)
+			{
+				fgetcsvl(line,MAX_SIZE,Stream);
+				list = CSV_Analyzer(line, &num_of_values);
+			
+				
+				
+				for(int i=0 ; i<num_of_values; i++)
+				{
+					
+				HebrewConverter_convertHebrewUTF8toISO(list[i]);	
+				InsertListItem (panelHandle, PANEL_RING, i, list[i], i);
+				
+				}
+			}
+			fclose(Stream);	
+				
 			break;
 	}
 	return 0;

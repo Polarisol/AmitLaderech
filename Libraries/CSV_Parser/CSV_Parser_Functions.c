@@ -1,6 +1,15 @@
-#include <userint.h>
 #include <ansi_c.h>
+int CSVParser_GetNumberOfRecords(char filename[]);
+int CSVParser_NewRecords(char filename[]);
+void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords);
+int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[], char value[]);
+int CSVParser_CountAllRecordsWithFieldValue(char filename[], char fieldName[], char value[]);
 char** CSV_Analyzer(char* runner, int* num_of_values);
+char* fgetcsvl(char* line,int MAX_SIZE,FILE *Stream);
+void HebrewConverter_convertHebrewUTF8toISO(char original[]);
+
+
+
 
 //Some definitions first: 
 //'Record' refers to a specific line in the data (a row)
@@ -20,17 +29,18 @@ int CSVParser_GetNumberOfRecords(char filename[])
 	this function recieve data base file path name (pointer to string) and returns number of records (lines)
 	if the function recieves invalid file path name it returns 0;
 	*/
-	const int BUFFER_SIZE = 10000;
+	const int BUFFER_SIZE = 20000;
 	char buffer[BUFFER_SIZE];
 	int counter=0;
 	FILE *Stream;
+	
 
 	Stream = fopen (filename, "r");
  
 	if(Stream)
 	{
-		fgets(buffer, BUFFER_SIZE, Stream); // first line in CSV File is a header so it doesnt count as a record.
-		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
+		fgetcsvl(buffer, BUFFER_SIZE, Stream); // first line in CSV File is a header so it doesnt count as a record.
+		while(fgetcsvl(buffer, BUFFER_SIZE, Stream)!=0)
 			counter++;
 	}
 	
@@ -67,10 +77,10 @@ int CSVParser_NewRecords(char filename[])
 	//code executed only if file name exist.
 	if(Stream != NULL)							
 	{
-		fgets(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
+		fgetcsvl(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
 	
 		//keep looking for file name in Set_file till we reach end of file
-		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
+		while(fgetcsvl(buffer, BUFFER_SIZE, Stream)!=0)
 		{
 			sscanf(buffer, "%[^,],%d", old_filename,&temp);	//retrieving info to buffer
 			
@@ -121,10 +131,10 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 	//code executed only if file name exist.
 	if(Stream != NULL)							
 	{
-		fgets(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
+		fgetcsvl(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
 	
 		//keep looking for file name in Set_file till we reach end of file
-		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
+		while(fgetcsvl(buffer, BUFFER_SIZE, Stream)!=0)
 		{
 			
 			if(counter == dyn_arr_size) //re allocating dynamic memmory
@@ -164,7 +174,7 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 //Returns 0 if there is no such record of field
 int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[], char value[])
 {
-	int LINE_SIZE = 10000;
+	int LINE_SIZE = 20000;
 	FILE *Stream;
 	char line[LINE_SIZE];
 	char** field_header = NULL;
@@ -183,7 +193,7 @@ int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[
 		
 		if(recordNum>=0 && recordNum<=num_of_records)
 		{
-			fgets(line,LINE_SIZE,Stream);
+			fgetcsvl(line,LINE_SIZE,Stream);
 			field_header = CSV_Analyzer(line, &num_of_fields_h);
 		
 			for(int i=0 ; i<num_of_fields_h ; i++)
@@ -197,7 +207,7 @@ int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[
 			}
 		
 		
-			while(fgets(line,LINE_SIZE,Stream)!='\0')
+			while(fgetcsvl(line,LINE_SIZE,Stream)!='\0')
 			{
 				record_counter++;
 				if(record_counter==recordNum)
@@ -259,7 +269,7 @@ int CSVParser_CountAllRecordsWithFieldValue(char filename[], char fieldName[], c
 //put their record numbers (line numbers) in the 'recordNumbers' array
 //put the values of the 'fieldToGet' field (strings) in the 2D array called 'recordValues'
 //example: first string value will be in recordValues[0] (the first character will be in recordValues[0][0] second in recordValues[0][1] etc.)
-void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[],char fieldToGet[], char **recordValues)
+void CSVParser_GetRecordsWithFieldValue(char filename[], char fieldName[], char value[], int number, int recordNumbers[])
 {
 	
 }
@@ -387,6 +397,13 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 		}// end else 
 		*num_of_values = *num_of_values+1;
 		
+		if(*num_of_values==field_size)
+		{
+			//dynamic memory allocation for pointer
+			field_size*=2;
+			pointer = realloc(pointer, sizeof(char*)*field_size);
+		}
+		
 		if(*runner==',')
 		{
 			//found blank cell
@@ -402,3 +419,120 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 	free(buffer);	
 	return pointer;
 }
+
+
+char* fgetcsvl(char* line,int MAX_SIZE,FILE *Stream)
+{	
+	/*
+	Written by Dror Kobo 25/01/17
+	
+	*/
+	char buffer[MAX_SIZE];
+	char buffer2[MAX_SIZE];
+	char* runner = buffer;
+	char* result=NULL;
+	int numofcom=0;
+	
+	result = fgets(buffer,MAX_SIZE,Stream);
+	while(result!=NULL && *runner!='\0')
+	{
+		if(*runner=='"') //dealing with value that padded with "" 
+		{
+			numofcom++;
+			runner++;
+			while(1)
+			{
+				if(*runner=='\n')
+				{
+					while(*runner=='\n' || *buffer2=='\n')
+					{
+						*runner = ' ';
+						runner++;
+						result = fgets(buffer2,MAX_SIZE,Stream);
+					}
+					if(result == NULL) //we reach end of file no need with buffer 2
+					{
+						strcpy(line,buffer);
+						return result;
+					}
+					else //found more data
+					{
+						*runner = '\0';
+						strcat(buffer,buffer2);	
+					}
+				}
+				
+				else if(*runner=='"' && *(runner+1)=='"')//found " -> advancing runner
+				{
+					runner = runner+2;
+					numofcom= numofcom+2;
+				}
+				
+				else if(*runner=='"' && *(runner+1)!='"')//found " -> advancing runner
+				{
+					numofcom++;
+					runner++;
+					if(*runner==',' && numofcom%2==0)//end of field
+					{
+						numofcom=0;
+						runner++;
+						break;	
+					}
+					else if(*runner=='\n' && numofcom%2==0)//end of line
+					{
+						//*runner=' ';
+						//runner = runner+2;
+						strcpy(line,buffer);
+						return line;	
+					}
+					else if(*runner=='\0') //end of file
+					{
+						//*(runner+1)=' ';
+						//runner = runner+2;
+						strcpy(line,buffer);
+						return line;	
+					}
+					
+				}
+				else //its a valid note that is part of the field
+				{
+					runner++;	
+				}
+				
+			}//end while (1)
+		}//  end if(*runner=='"')
+		else // dealling with normal values
+		{
+			while(1)
+			{
+				if(*runner==',') //end of field
+				{
+					runner++;
+					break;
+				}
+				else if(*runner=='\n')// end of a line -> its a csv line
+				{
+					//*runner=' ';
+					strcpy(line,buffer);
+					runner++;
+					return line;
+				}
+				else if(*runner=='\0')// end of a line -> its a csv line
+				{
+					//*runner=' ';
+					strcpy(line,buffer);
+					return line;
+				}
+				else //its a valid note
+				{
+					runner++;	
+				}
+			}// end while(1) 								
+		}// end else
+		
+		if(*runner==',') //found empty cell
+			runner++;
+		
+	}//end while(result != NULL)
+	return result;	
+}//end function

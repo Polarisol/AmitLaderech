@@ -33,19 +33,18 @@
 #define  PANEL_TEXTMSG_2                  18      /* control type: textMsg, callback function: (none) */
 #define  PANEL_STRING_2                   19      /* control type: string, callback function: (none) */
 #define  PANEL_STRING_1                   20      /* control type: string, callback function: (none) */
-#define  PANEL_COMMANDBUTTON_4            21      /* control type: command, callback function: test */
-#define  PANEL_STRING                     22      /* control type: string, callback function: (none) */
-#define  PANEL_TABLE                      23      /* control type: table, callback function: (none) */
-#define  PANEL_COMMANDBUTTON_6            24      /* control type: command, callback function: CountAllRecordsWithFieldValue */
-#define  PANEL_COMMANDBUTTON_5            25      /* control type: command, callback function: GetFieldFromRecord */
-#define  PANEL_S_VAL                      26      /* control type: string, callback function: (none) */
-#define  PANEL_S_FIELD_NAME_2             27      /* control type: string, callback function: (none) */
-#define  PANEL_S_FILE_NAME_2              28      /* control type: string, callback function: (none) */
-#define  PANEL_RECORD_NUM_2               29      /* control type: numeric, callback function: (none) */
-#define  PANEL_RECORD_NUM                 30      /* control type: numeric, callback function: (none) */
-#define  PANEL_S_FIELD_NAME               31      /* control type: string, callback function: (none) */
-#define  PANEL_S_FILE_NAME                32      /* control type: string, callback function: (none) */
-#define  PANEL_FIELD_RESULT               33      /* control type: string, callback function: (none) */
+#define  PANEL_TABLE                      21      /* control type: table, callback function: (none) */
+#define  PANEL_COMMANDBUTTON_6            22      /* control type: command, callback function: CountAllRecordsWithFieldValue */
+#define  PANEL_COMMANDBUTTON_5            23      /* control type: command, callback function: GetFieldFromRecord */
+#define  PANEL_S_VAL                      24      /* control type: string, callback function: (none) */
+#define  PANEL_S_FIELD_NAME_2             25      /* control type: string, callback function: (none) */
+#define  PANEL_S_FILE_NAME_2              26      /* control type: string, callback function: (none) */
+#define  PANEL_RECORD_NUM_2               27      /* control type: numeric, callback function: (none) */
+#define  PANEL_RECORD_NUM                 28      /* control type: numeric, callback function: (none) */
+#define  PANEL_S_FILE_NAME                29      /* control type: string, callback function: (none) */
+#define  PANEL_TEXTBOX                    30      /* control type: textBox, callback function: (none) */
+#define  PANEL_RING                       31      /* control type: ring, callback function: (none) */
+#define  PANEL_COMMANDBUTTON_4            32      /* control type: command, callback function: Load_headers */
 
 
      /* Control Arrays: */
@@ -66,7 +65,7 @@ int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventDat
 int  CVICALLBACK find_new_records(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK find_num_records(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK GetFieldFromRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK test(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Load_headers(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
