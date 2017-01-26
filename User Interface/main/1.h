@@ -86,7 +86,7 @@
 #define  P_MENTOR_EDITING_BUTTON          14      /* control type: command, callback function: (none) */
 #define  P_MENTOR_MEETING_LED             15      /* control type: LED, callback function: (none) */
 #define  P_MENTOR_SOLDIER_BUTTON          16      /* control type: command, callback function: (none) */
-#define  P_MENTOR_ADDING_SOLDIER_BUTTON   17      /* control type: command, callback function: (none) */
+#define  P_MENTOR_ADDING_SOLDIER_BUTTON   17      /* control type: command, callback function: Open_P_NEW_SOLD */
 #define  P_MENTOR_SEND_EMAIL              18      /* control type: pictButton, callback function: (none) */
 #define  P_MENTOR_EXCEPTIONS              19      /* control type: textBox, callback function: (none) */
 #define  P_MENTOR_PROGRESS_RING           20      /* control type: slide, callback function: (none) */
@@ -118,9 +118,10 @@
 #define  P_NEW_MENT_FIRST_NAME            9       /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_ID_NUMBER             10      /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_SELECT_IMAGE_BUTTON   11      /* control type: command, callback function: (none) */
-#define  P_NEW_MENT_SAVE_DATA_BUTTON      12      /* control type: command, callback function: (none) */
-#define  P_NEW_MENT_IMAGE                 13      /* control type: picture, callback function: (none) */
+#define  P_NEW_MENT_SAVE_DATA_BUTTON      12      /* control type: command, callback function: Save_Sol_Func */
+#define  P_NEW_MENT_IMAGE_BOX             13      /* control type: picture, callback function: (none) */
 #define  P_NEW_MENT_HEADLINE              14      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_MENT_IMAGE                 15      /* control type: string, callback function: (none) */
 
 #define  P_NEW_SOLD                       7       /* callback function: exitFunc */
 #define  P_NEW_SOLD_GUIDE                 2       /* control type: string, callback function: (none) */
@@ -149,19 +150,23 @@
 #define  P_SOLDIER_LAST_NAME              9       /* control type: string, callback function: (none) */
 #define  P_SOLDIER_FIRST_NAME             10      /* control type: string, callback function: (none) */
 #define  P_SOLDIER_ID_NUMBER              11      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_IMAGE                  12      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_IMAGE_BOX              12      /* control type: picture, callback function: (none) */
 #define  P_SOLDIER_EDITING_BUTTON         13      /* control type: command, callback function: (none) */
 #define  P_SOLDIER_MEETING_LED            14      /* control type: LED, callback function: (none) */
 #define  P_SOLDIER_COMMENTS               15      /* control type: textBox, callback function: (none) */
 #define  P_SOLDIER_MOVING_ARCHIVE_BUTTON  16      /* control type: command, callback function: (none) */
 #define  P_SOLDIER_PROGRESS_RING          17      /* control type: slide, callback function: (none) */
 #define  P_SOLDIER_SEND_EMAIL             18      /* control type: pictButton, callback function: (none) */
+#define  P_SOLDIER_IMAGE                  19      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_PROGRESS_STRING        20      /* control type: string, callback function: (none) */
 
 
      /* Control Arrays: */
 
 #define  CTRLARRAY                        1
 #define  CTRLARRAY_2                      2
+#define  CTRLARRAY_3                      3
+#define  CTRLARRAY_4                      4
 
      /* Menu Bars, Menus, and Menu Items: */
 
