@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.cws"
+Pathname = "/c/Users/Lenovo/Documents/user analyitics new/test.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -12,10 +12,10 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "test.prj"
-Drag Bar Left = 231
+Drag Bar Left = 236
 Window Top = 38
 Window Left = 130
-Window Bottom = 679
+Window Bottom = 805
 Window Right = 920
 Maximized = True
 Maximized Children = True
@@ -30,9 +30,9 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 2
+Number of Opened Files = 5
 Window Confinement Region Enabled = True
-MainColumnWidth = 214
+MainColumnWidth = 219
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -46,48 +46,78 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/c/Users/Lenovo/Documents/User_analytics/CSV_Parser_Functions.c"
-File Type = "CSource"
-Disk Date = 3568026308
-In Projects = "1,"
-Window Top = 114
-Window Left = 55
-Window Z-Order = 2
-Source Window State = "1,163,163,163,54,63,63,0,0,79,0,188,0,0,0,15,0,0,11,35,331,1008,1,20,"
-
-[File 0002]
-Path = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.c"
-File Type = "CSource"
-Disk Date = 3568281401
-In Projects = "1,"
-Window Top = 86
-Window Left = 40
-Window Z-Order = 1
-Source Window State = "1,6,6,6,18,19,19,0,0,90,0,9,0,0,0,24,0,5,6,19,411,840,1,60,"
-
-[File 0003]
-Path = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.uir"
+Path = "/c/Users/Lenovo/Documents/user analyitics new/test.uir"
 File Type = "User Interface Resource"
-Disk Date = 3568099548
+Disk Date = 3570714319
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
-Window Height = 431
-Window Width = 1008
+Window Height = 451
+Window Width = 780
+Window Z-Order = 3
 
-[File 0004]
-Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/HebrewConversion"
-Path Line0002 = "s.c"
+[File 0002]
+Path = "/c/Users/Lenovo/Documents/user analyitics new/test.c"
 File Type = "CSource"
-Disk Date = 3568026049
+Disk Date = 3570714354
 In Projects = "1,"
 Window Top = 58
 Window Left = 25
-Source Window State = "1,65,65,65,5,63,5,0,0,0,0,6,0,0,0,0,0,0,40,24,331,948,1,16,"
+Window Z-Order = 2
+Source Window State = "1,81,81,81,70,72,70,0,0,60,0,0,0,0,0,19,0,0,77,44,411,780,1,0,"
+
+[File 0003]
+Path = "/c/Users/Lenovo/Documents/user analyitics new/HebrewConversions.c"
+File Type = "CSource"
+Disk Date = 3568026049
+In Projects = "1,"
+Window Top = 170
+Window Left = 85
+Source Window State = "1,0,0,0,0,0,0,0,0,74,0,0,0,0,0,15,51,0,69,0,331,948,1,0,"
+
+[File 0004]
+Path = "/c/Users/Lenovo/Documents/user analyitics new/HebrewConversions.h"
+File Type = "Include"
+Disk Date = 3568026049
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0005]
+Path = "/c/Users/Lenovo/Documents/user analyitics new/CSV_Parser_Functions.c"
+File Type = "CSource"
+Disk Date = 3570688448
+In Projects = "1,"
+Window Top = 142
+Window Left = 70
+Window Z-Order = 1
+Source Window State = "1,0,0,0,0,0,0,0,0,90,0,191,0,0,0,24,215,0,222,37,331,948,1,40,"
+
+[File 0006]
+Path = "/c/Users/Lenovo/Documents/user analyitics new/Func_Header.h"
+File Type = "Include"
+Disk Date = 3570708292
+In Projects = "1,"
+Window Top = 58
+Window Left = 25
+Window Z-Order = 5
+Source Window State = "1,3,3,3,54,63,63,0,3,74,0,0,0,0,0,15,0,12,3,54,331,948,1,0,"
+
+[File 0007]
+Path = "/c/Users/Lenovo/Documents/user analyitics new/test.h"
+File Type = "Include"
+Disk Date = 3570714319
+In Projects = ""
+Window Top = 30
+Window Left = 10
+Window Z-Order = 4
+Source Window State = "1,0,0,0,0,0,0,0,0,74,0,0,0,0,0,15,8,0,15,42,331,948,1,0,"
 
 [Tab Order]
-Tab 0001 = "/c/Users/Lenovo/Documents/User_analytics/CSV_Parser_Functions.c"
-Tab 0002 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/test.c"
+Tab 0001 = "/c/Users/Lenovo/Documents/user analyitics new/test.c"
+Tab 0002 = "/c/Users/Lenovo/Documents/user analyitics new/test.uir"
+Tab 0003 = "/c/Users/Lenovo/Documents/user analyitics new/Func_Header.h"
+Tab 0004 = "/c/Users/Lenovo/Documents/user analyitics new/CSV_Parser_Functions.c"
+Tab 0005 = "/c/Users/Lenovo/Documents/user analyitics new/test.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
