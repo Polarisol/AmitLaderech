@@ -1,17 +1,21 @@
 #include <ansi_c.h>
-#include <cvirte.h>	
+#include <cvirte.h>
 #include <stdio.h>
 #include <userint.h>
 #include "date.h"
-#include "Func_Header.h"  
-#include "HebrewConversions.h" 
+#include "Func_Header.h"
+#include "HebrewConversions.h"
 
 static int panelHandle;
-typedef struct {
-  int dd, mm, yy;
+typedef struct
+{
+	int dd;
+	int mm;
+	int yy;
 } Date;
 
-Date *datearray=NULL; 
+Date *datearray=NULL;
+int num_dates;
 int extract_dates(char filename[], char fieldName[], char value[],char DatefieldName[])
 {
 	int SIZE = 300;
@@ -20,9 +24,8 @@ int extract_dates(char filename[], char fieldName[], char value[],char Datefield
 	int status;
 	char buffer[SIZE],date[300];
 
-	
+
 	total_num_of_records = CSVParser_GetNumberOfRecords(filename);
-	printf("%d\n",total_num_of_records);
 	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, buffer);
 	if(status>0)
 	{
@@ -33,17 +36,58 @@ int extract_dates(char filename[], char fieldName[], char value[],char Datefield
 			{
 				date_array_size++;
 				CSVParser_GetFieldFromRecord(filename,i,DatefieldName,date);
-				printf("%s\n",date);
 				datearray = (Date *)realloc(datearray, date_array_size* sizeof(Date));
-				sscanf(date,"%d/%d/&d",&datearray[date_array_size-1].dd,&datearray[date_array_size-1].mm,&datearray[date_array_size-1].yy);
-				printf("%d--%d--%d\n",datearray[date_array_size-1].dd,datearray[date_array_size-1].mm,datearray[date_array_size-1].yy);
+				sscanf(date,"%d/%d/%d",&datearray[date_array_size-1].dd,&datearray[date_array_size-1].mm,&datearray[date_array_size-1].yy);
+				printf("%d|%d|%d\n",datearray[date_array_size-1].dd,datearray[date_array_size-1].mm,datearray[date_array_size-1].yy);
 			}
 		}
 	}
-	
+
 	return date_array_size;
 }
 
+Date findmostrecent(Date *array,int array_size)
+{
+	Date temp;
+	puts("");
+	puts("sorting\n");
+	for (int i=0 ; i<array_size; i++)
+	{
+		for (int j=0; j<array_size-i-1; j++)
+		{
+			if (datearray[j].yy < datearray[j+1].yy)
+			{
+				temp=datearray[j];
+				datearray[j]=datearray[j+1];
+				datearray[j+1]=temp;
+			} 
+			if (datearray[j].yy == datearray[j+1].yy)
+			{
+				if (datearray[j].mm < datearray[j+1].mm)
+				{
+					temp=datearray[j];
+					datearray[j]=datearray[j+1];
+					datearray[j+1]=temp;
+				}
+			}
+			if ((datearray[j].mm == datearray[j+1].mm)&&(datearray[j].yy == datearray[j+1].yy))
+			{
+				if (datearray[j].dd < datearray[j+1].dd)
+				{
+					temp=datearray[j];
+					datearray[j]=datearray[j+1];
+					datearray[j+1]=temp;
+				}
+			}
+			
+
+		}
+	}
+	puts("");
+	for (int i=0 ; i<array_size; i++)
+		printf("%d|%d|%d\n",datearray[i].dd,datearray[i].mm,datearray[i].yy);
+	return datearray[0];
+}
 int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -91,8 +135,23 @@ int CVICALLBACK extract (int panel, int control, int event,
 			HebrewConverter_convertHebrewISOtoUTF8(datefield);
 			GetCtrlVal (panelHandle, PANEL_NAMECOLM, namefield);
 			HebrewConverter_convertHebrewISOtoUTF8(namefield);
-			printf("asd\n");
-			extract_dates(path, namefield, name,datefield);
+			num_dates=extract_dates(path, namefield, name,datefield);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK find_recent (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{
+	Date most_resent;
+	char lastdate[200];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			most_resent=findmostrecent(datearray,num_dates);
+			sprintf (lastdate,"%d/%d/%d",most_resent.dd,most_resent.mm,most_resent.yy);
+			MessagePopup ("Most Recent",lastdate);
 			break;
 	}
 	return 0;

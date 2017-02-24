@@ -17,7 +17,7 @@ Window Top = 38
 Window Left = 130
 Window Bottom = 805
 Window Right = 920
-Maximized = False
+Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
 Track Include File Dependencies = True
@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 3
 Window Confinement Region Enabled = True
 MainColumnWidth = 214
 FileDateColumnWidth = 70
@@ -48,23 +48,23 @@ Batch Build Debug = False
 [File 0001]
 Path = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/date.uir"
 File Type = "User Interface Resource"
-Disk Date = 3570738463
+Disk Date = 3570745081
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
-Window Height = 431
-Window Width = 948
+Window Height = 451
+Window Width = 780
 Window Z-Order = 2
 
 [File 0002]
 Path = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/date.c"
 File Type = "CSource"
-Disk Date = 3570738376
+Disk Date = 3570745964
 In Projects = "1,"
 Window Top = 86
 Window Left = 40
 Window Z-Order = 1
-Source Window State = "1,20,20,20,0,26,26,0,0,90,0,1,0,1,0,24,21,0,13,0,411,780,1,0,"
+Source Window State = "1,153,153,153,40,43,40,1,0,90,0,1,0,1,0,24,135,0,138,8,411,780,1,0,"
 
 [File 0003]
 Path = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/Func_Header.h"
@@ -73,7 +73,6 @@ Disk Date = 3570738607
 In Projects = "1,"
 Window Top = 198
 Window Left = 100
-Window Z-Order = 4
 Source Window State = "1,5,5,5,5,39,39,0,3,74,0,0,0,0,0,15,0,0,5,5,331,948,1,0,"
 
 [File 0004]
@@ -85,7 +84,7 @@ In Projects = "1,"
 Window Top = 30
 Window Left = 10
 Window Z-Order = 3
-Source Window State = "1,0,0,0,0,0,0,0,0,74,0,0,0,0,0,15,0,0,0,0,331,948,1,0,"
+Source Window State = "1,0,0,0,0,0,0,0,0,74,0,0,0,0,0,15,0,0,0,0,331,948,1,20,"
 
 [File 0005]
 Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/CSV_Parser_Funct"
@@ -108,11 +107,10 @@ Window Left = 85
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,69,0,331,948,1,0,"
 
 [Tab Order]
-Tab 0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/Func_Header.h"
-Tab 0002 Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/HebrewConversion"
-Tab 0002 Line0002 = "s.h"
-Tab 0003 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/date.uir"
-Tab 0004 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/date.c"
+Tab 0001 Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/HebrewConversion"
+Tab 0001 Line0002 = "s.h"
+Tab 0002 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/date.uir"
+Tab 0003 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/Data_analytics/date.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

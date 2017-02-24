@@ -19,6 +19,7 @@
 #define  PANEL_DATE_COLUMN                4       /* control type: string, callback function: (none) */
 #define  PANEL_NAME                       5       /* control type: string, callback function: (none) */
 #define  PANEL_EXTRACT                    6       /* control type: command, callback function: extract */
+#define  PANEL_FINDRECENT                 7       /* control type: command, callback function: find_recent */
 
 
      /* Control Arrays: */
@@ -34,6 +35,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK extract(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK find_recent(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK mainfunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 
 
