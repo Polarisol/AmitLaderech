@@ -16,6 +16,15 @@ typedef struct
 
 Date *datearray=NULL;
 int num_dates;
+
+void dateswap(int index,Date *pdate)
+{
+	Date temp;
+	temp=pdate[index];
+	pdate[index]=pdate[index+1];
+	pdate[index+1]=temp;
+
+}
 int extract_dates(char filename[], char fieldName[], char value[],char DatefieldName[])
 {
 	int SIZE = 300;
@@ -23,8 +32,9 @@ int extract_dates(char filename[], char fieldName[], char value[],char Datefield
 	int date_array_size=0;
 	int status;
 	char buffer[SIZE],date[300];
-
-
+	HebrewConverter_convertHebrewISOtoUTF8(value);
+	HebrewConverter_convertHebrewISOtoUTF8(DatefieldName);
+	HebrewConverter_convertHebrewISOtoUTF8(fieldName);
 	total_num_of_records = CSVParser_GetNumberOfRecords(filename);
 	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, buffer);
 	if(status>0)
@@ -49,6 +59,7 @@ int extract_dates(char filename[], char fieldName[], char value[],char Datefield
 Date findmostrecent(Date *array,int array_size)
 {
 	Date temp;
+
 	puts("");
 	puts("sorting\n");
 	for (int i=0 ; i<array_size; i++)
@@ -56,31 +67,13 @@ Date findmostrecent(Date *array,int array_size)
 		for (int j=0; j<array_size-i-1; j++)
 		{
 			if (datearray[j].yy < datearray[j+1].yy)
-			{
-				temp=datearray[j];
-				datearray[j]=datearray[j+1];
-				datearray[j+1]=temp;
-			} 
+				dateswap(j,datearray);
 			if (datearray[j].yy == datearray[j+1].yy)
-			{
 				if (datearray[j].mm < datearray[j+1].mm)
-				{
-					temp=datearray[j];
-					datearray[j]=datearray[j+1];
-					datearray[j+1]=temp;
-				}
-			}
+					dateswap(j,datearray);
 			if ((datearray[j].mm == datearray[j+1].mm)&&(datearray[j].yy == datearray[j+1].yy))
-			{
 				if (datearray[j].dd < datearray[j+1].dd)
-				{
-					temp=datearray[j];
-					datearray[j]=datearray[j+1];
-					datearray[j+1]=temp;
-				}
-			}
-			
-
+					dateswap(j,datearray);
 		}
 	}
 	puts("");
@@ -130,11 +123,8 @@ int CVICALLBACK extract (int panel, int control, int event,
 		case EVENT_COMMIT:
 			GetCtrlVal (panelHandle, PANEL_PATH, path);
 			GetCtrlVal (panelHandle, PANEL_NAME, name);
-			HebrewConverter_convertHebrewISOtoUTF8(name);
 			GetCtrlVal (panelHandle, PANEL_DATE_COLUMN, datefield);
-			HebrewConverter_convertHebrewISOtoUTF8(datefield);
 			GetCtrlVal (panelHandle, PANEL_NAMECOLM, namefield);
-			HebrewConverter_convertHebrewISOtoUTF8(namefield);
 			num_dates=extract_dates(path, namefield, name,datefield);
 			break;
 	}
