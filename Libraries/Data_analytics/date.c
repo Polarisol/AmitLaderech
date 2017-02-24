@@ -58,8 +58,6 @@ int extract_dates(char filename[], char fieldName[], char value[],char Datefield
 
 Date findmostrecent(Date *array,int array_size)
 {
-	Date temp;
-
 	puts("");
 	puts("sorting\n");
 	for (int i=0 ; i<array_size; i++)
@@ -91,6 +89,26 @@ int main (int argc, char *argv[])
 	RunUserInterface ();
 	DiscardPanel (panelHandle);
 	return 0;
+}
+
+int daysbetween(Date givendate)
+{
+	struct tm given_tm;
+	time_t t;
+	time_t tgiven;
+	double diff_time;
+	int day_diff;
+	t = time(NULL);
+	given_tm.tm_hour=0;
+	given_tm.tm_min=0;
+	given_tm.tm_sec=0;
+	given_tm.tm_mday=givendate.dd;
+	given_tm.tm_mon=givendate.mm-1;
+	given_tm.tm_year=givendate.yy-1900;
+	tgiven=mktime(&given_tm);
+	diff_time=difftime(t,tgiven);
+	day_diff=(int)diff_time/86400;
+	return day_diff=(int)diff_time/86400;
 }
 
 int CVICALLBACK mainfunc (int panel, int event, void *callbackData,
@@ -136,13 +154,54 @@ int CVICALLBACK find_recent (int panel, int control, int event,
 {
 	Date most_resent;
 	char lastdate[200];
+	int days;
 	switch (event)
 	{
 		case EVENT_COMMIT:
 			most_resent=findmostrecent(datearray,num_dates);
-			sprintf (lastdate,"%d/%d/%d",most_resent.dd,most_resent.mm,most_resent.yy);
+			days=daysbetween(most_resent);
+			sprintf (lastdate,"%d/%d/%d\ndays passed - %d",most_resent.dd,most_resent.mm,most_resent.yy,days);
 			MessagePopup ("Most Recent",lastdate);
 			break;
 	}
 	return 0;
 }
+
+/*int CVICALLBACK compare (int panel, int control, int event,
+						 void *callbackData, int eventData1, int eventData2)
+{
+	struct tm system_tm;
+	struct tm given_tm;
+	time_t t,tt;
+	time_t tg;
+	Date sysdate;
+	Date givendate;
+	double diff_time;
+	int day_diff;
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			t = time(NULL);
+			system_tm = *localtime(&t);
+			sysdate.yy=system_tm.tm_year + 1900;
+			sysdate.mm= system_tm.tm_mon + 1;
+			sysdate.dd= system_tm.tm_mday;
+			printf("%d / %d / %d\n",sysdate.dd,sysdate.mm,sysdate.yy);
+			givendate.dd=10;
+			givendate.mm=2;
+			givendate.yy=2017;
+			given_tm.tm_hour=0;
+			given_tm.tm_min=0;
+			given_tm.tm_sec=0;
+			given_tm.tm_mday=givendate.dd;
+			given_tm.tm_mon=givendate.mm-1;
+			given_tm.tm_year=givendate.yy-1900;
+			tg=mktime(&given_tm);
+			diff_time=difftime(t,tg);
+			day_diff=(int)diff_time/86400;
+			printf("%f\n%d",diff_time,day_diff);
+			break;
+	}
+	return 0;
+}  */
+
