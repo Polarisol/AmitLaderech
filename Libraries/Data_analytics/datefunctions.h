@@ -27,7 +27,6 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 	int status;
 	char buffer[SIZE],date[300];
 	*date_array_size=0;
-	//*datearray = (Date*) malloc(100*sizeof(Date));
 	HebrewConverter_convertHebrewISOtoUTF8(value);
 	HebrewConverter_convertHebrewISOtoUTF8(DatefieldName);
 	HebrewConverter_convertHebrewISOtoUTF8(fieldName);
@@ -44,7 +43,6 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 				CSVParser_GetFieldFromRecord(filename,i,DatefieldName,date);
 				datearray = (Date *)realloc(datearray, *date_array_size* sizeof(Date));
 				sscanf(date,"%d/%d/%d",&(datearray[*date_array_size-1]).dd,&(datearray[*date_array_size-1]).mm,&(datearray[*date_array_size-1]).yy);
-				//printf("%d|%d|%d\n",(datearray[*date_array_size-1]).dd,(datearray[*date_array_size-1]).mm,(datearray[*date_array_size-1]).yy);
 			}
 		}
 	}
@@ -54,8 +52,6 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 
 Date findmostrecent(Date *datearray,int array_size)
 {
-	puts("");
-	puts("sorting\n");
 	for (int i=0 ; i<array_size; i++)
 	{
 		for (int j=0; j<array_size-i-1; j++)
@@ -70,9 +66,6 @@ Date findmostrecent(Date *datearray,int array_size)
 					dateswap(j,datearray);
 		}
 	}
-	puts("");
-	for (int i=0 ; i<array_size; i++)
-		printf("%d|%d|%d\n",datearray[i].dd,datearray[i].mm,datearray[i].yy);
 	return datearray[0];
 }
 

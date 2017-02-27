@@ -18,7 +18,7 @@ Window Top = 38
 Window Left = 483
 Window Bottom = 805
 Window Right = 1273
-Maximized = False
+Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
 Track Include File Dependencies = True
@@ -50,35 +50,35 @@ Batch Build Debug = False
 Path Line0001 = "/c/Users/Lenovo/Documents/Amitladerech/AmitLaderech/Libraries/Data_analytics/dat"
 Path Line0002 = "e.uir"
 File Type = "User Interface Resource"
-Disk Date = 3571054749
+Disk Date = 3571057681
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
 Window Height = 451
 Window Width = 780
-Window Z-Order = 5
+Window Z-Order = 1
 
 [File 0002]
 Path Line0001 = "/c/Users/Lenovo/Documents/Amitladerech/AmitLaderech/Libraries/Data_analytics/dat"
 Path Line0002 = "e.c"
 File Type = "CSource"
-Disk Date = 3571054964
+Disk Date = 3571057502
 In Projects = "1,"
 Window Top = 86
 Window Left = 40
-Window Z-Order = 3
-Source Window State = "1,58,58,58,0,8160,14,1,0,60,0,0,0,1,0,19,0,0,58,0,411,780,1,20,"
+Window Z-Order = 4
+Source Window State = "1,57,57,57,12,14,14,1,0,60,0,0,0,1,0,19,38,0,57,12,411,780,1,20,"
 
 [File 0003]
 Path Line0001 = "/c/Users/Lenovo/Documents/Amitladerech/AmitLaderech/Libraries/Data_analytics/dat"
 Path Line0002 = "efunctions.h"
 File Type = "Include"
-Disk Date = 3571054814
+Disk Date = 3571057277
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
-Window Z-Order = 4
-Source Window State = "1,21,21,21,0,3,3,1,0,74,0,0,0,0,0,15,6,0,13,0,331,948,1,0,"
+Window Z-Order = 2
+Source Window State = "1,68,73,73,0,8160,27,1,0,74,0,6,0,0,0,15,0,0,68,0,331,948,1,20,"
 
 [File 0004]
 Path Line0001 = "/c/Users/Lenovo/Documents/Amitladerech/AmitLaderech/Libraries/Data_analytics/CSV"
@@ -88,8 +88,8 @@ Disk Date = 3570966932
 In Projects = "1,"
 Window Top = 58
 Window Left = 25
-Window Z-Order = 1
-Source Window State = "1,1,1,1,4,32,32,0,0,90,0,0,17,0,0,24,146,0,158,32,331,948,1,20,"
+Window Z-Order = 5
+Source Window State = "1,1,1,1,4,32,32,0,0,74,0,0,17,0,0,15,200,0,158,32,331,948,1,20,"
 
 [File 0005]
 Path Line0001 = "/c/Users/Lenovo/Documents/Amitladerech/AmitLaderech/Libraries/Data_analytics/Heb"
@@ -99,8 +99,8 @@ Disk Date = 3570966932
 In Projects = "1,"
 Window Top = 170
 Window Left = 85
-Window Z-Order = 2
-Source Window State = "1,0,0,0,0,0,0,0,0,74,0,0,0,0,0,15,63,0,69,0,331,948,1,0,"
+Window Z-Order = 3
+Source Window State = "1,0,0,0,0,0,0,0,0,74,0,0,0,0,0,15,0,0,69,0,331,948,1,0,"
 
 [File 0006]
 Path Line0001 = "/c/Users/Lenovo/Documents/Amitladerech/AmitLaderech/Libraries/Data_analytics/Fun"

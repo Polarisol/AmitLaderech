@@ -7,7 +7,7 @@
 
 int panelHandle;
 int num_dates;
-Date *datearray=NULL; 
+Date *datearray=NULL;
 int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -54,7 +54,7 @@ int CVICALLBACK extract (int panel, int control, int event,
 			GetCtrlVal (panelHandle, PANEL_DATE_COLUMN, datefield);
 			GetCtrlVal (panelHandle, PANEL_NAMECOLM, namefield);
 			datearray=extract_dates(path, namefield, name,datefield, &num_dates);
-			for (int i=0;i< num_dates;i++)
+			for (int i=0; i< num_dates; i++)
 				printf("%d|%d|%d\n",(datearray[i]).dd,(datearray[i]).mm,(datearray[i]).yy);
 			break;
 	}
@@ -74,7 +74,12 @@ int CVICALLBACK find_recent (int panel, int control, int event,
 			days=daysbetween(most_resent);
 			sprintf (lastdate,"%d/%d/%d\ndays passed - %d",most_resent.dd,most_resent.mm,most_resent.yy,days);
 			MessagePopup ("Most Recent",lastdate);
+			puts("");
+			puts("sorted date array");
+			puts("");
+			for (int i=0 ; i<num_dates; i++)
+				printf("%d|%d|%d\n",datearray[i].dd,datearray[i].mm,datearray[i].yy);
 			break;
-	} 
-	return 0;	 
+	}
+	return 0;
 }
