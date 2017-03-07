@@ -48,7 +48,7 @@ Batch Build Debug = False
 [File 0001]
 Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3571763989
+Disk Date = 3571763110
 In Projects = "1,"
 Window Top = 56
 Window Left = 11
@@ -59,7 +59,7 @@ Window Z-Order = 1
 [File 0002]
 Path = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3571763989
+Disk Date = 3571763078
 In Projects = "1,"
 Window Top = 56
 Window Left = 13
