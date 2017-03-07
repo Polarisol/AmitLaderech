@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname = "/d/Project/AmitLaderech/User Interface/main/1.cws"
+Pathname = "/c/Users/shay/Desktop/AmitLaderech-User_Interface/User Interface/main/1.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -12,11 +12,11 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "1.prj"
-Drag Bar Left = 213
+Drag Bar Left = 203
 Window Top = 102
 Window Left = 1293
 Window Bottom = 1093
-Window Right = 3205
+Window Right = 2251
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -30,9 +30,9 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 6
+Number of Opened Files = 1
 Window Confinement Region Enabled = True
-MainColumnWidth = 196
+MainColumnWidth = 186
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -46,82 +46,55 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
+Path = "/c/Users/shay/Desktop/AmitLaderech-User_Interface/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3568104028
+Disk Date = 3571763110
 In Projects = "1,"
 Window Top = 56
 Window Left = 11
 Window Height = 531
 Window Width = 780
-Window Z-Order = 3
+Window Z-Order = 1
 
 [File 0002]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
+Path = "/c/Users/shay/Desktop/AmitLaderech-User_Interface/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3568107113
+Disk Date = 3571763078
+In Projects = "1,"
+Window Top = 56
+Window Left = 13
+Source Window State = "1,154,154,154,16,31,31,0,3,0,0,0,0,0,0,0,200,0,154,16,561,1227,1,0,"
+
+[File 0003]
+Path = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
+File Type = "CSource"
+Disk Date = 0
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Window Z-Order = 1
-Source Window State = "1,144,144,144,37,40,40,0,0,109,0,0,0,0,0,25,136,0,144,59,561,1227,1,0,"
+Source Window State = "1,218,218,218,4,24,24,0,0,0,0,130,0,0,0,0,224,0,225,0,411,1272,1,66,"
 
-[File 0003]
-Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
+[File 0004]
+Path Line0001 = "/c/Users/shay/Desktop/AmitLaderech-User_Interface/Libraries/DatabaseAccess/datab"
+Path Line0002 = "ase.h"
 File Type = "Include"
-Disk Date = 3567966381
+Disk Date = 3571763078
 In Projects = "1,"
 Window Top = 45
 Window Left = 11
-Window Z-Order = 5
-Source Window State = "1,28,28,28,27,35,27,0,0,64,0,0,0,0,0,19,24,0,8,18,531,1020,1,0,"
-
-[File 0004]
-Path = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
-File Type = "CSource"
-Disk Date = 3567970645
-In Projects = "1,"
-Window Top = 47
-Window Left = 13
-Window Z-Order = 2
-Source Window State = "1,127,127,127,15,17,17,0,0,80,0,130,0,0,0,15,60,0,72,7,411,1272,1,66,"
+Source Window State = "1,61,61,61,4,34,34,0,3,0,0,0,0,0,0,0,45,0,61,4,531,1020,1,0,"
 
 [File 0005]
-Path = "/c/Users/omrig/Desktop/DatabaseAccess/DataBaseAccess_test.c"
-File Type = "CSource"
-Disk Date = 3567966912
-In Projects = ""
-Window Top = 92
-Window Left = 36
-Window Z-Order = 4
-Source Window State = "1,125,125,125,79,82,82,0,0,80,0,0,0,0,0,15,6,0,126,53,411,1272,1,0,"
-
-[File 0006]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.h"
-File Type = "Include"
-Disk Date = 3568104284
-In Projects = ""
-Window Top = 137
-Window Left = 59
-Window Z-Order = 6
-Source Window State = "1,161,161,161,9,28,28,0,0,80,0,0,0,0,0,15,144,0,161,35,411,1272,1,0,"
-
-[File 0007]
 Path = "/c/Users/omrig/Desktop/HebrewConversions/HebrewConversions.c"
 File Type = "CSource"
-Disk Date = 3567963141
+Disk Date = 0
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,40,16,411,1272,1,0,"
 
 [Tab Order]
-Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
-Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
-Tab 0003 = "/c/Users/omrig/Desktop/DatabaseAccess/DataBaseAccess_test.c"
-Tab 0004 = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
-Tab 0005 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
-Tab 0006 = "/d/Project/AmitLaderech/User Interface/main/1.h"
+Tab 0001 = "/c/Users/shay/Desktop/AmitLaderech-User_Interface/User Interface/main/1.uir"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
