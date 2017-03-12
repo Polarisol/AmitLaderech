@@ -62,37 +62,39 @@ int CSVParser_NewRecords(char filename[])
 	if their is a match with the name, the function return the difference.
 	*/
 	
-	int records;
-	int temp;
+	int current_records;
+	int new_records;
+	int saved_records;
 	const int BUFFER_SIZE = 400;				//buffer size 
 	char buffer[BUFFER_SIZE];					//line buffer
 	char old_filename[BUFFER_SIZE];
 	char Set_file[] = "processedRecords.txt";	//path name for the file containing other file name processed data
 	FILE *Stream;								//Stream for reading/writing to file
 
-	records = CSVParser_GetNumberOfRecords(filename);
+	current_records = CSVParser_GetNumberOfRecords(filename);
+	new_records = current_records;
 	
 	Stream = fopen(Set_file, "r");				//open  Set_file in read mode
 	
 	//code executed only if file name exist.
 	if(Stream != NULL)							
 	{
-		fgetcsvl(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
+		fgets(buffer, BUFFER_SIZE, Stream);		//first line is a header -- not important
 	
 		//keep looking for file name in Set_file till we reach end of file
-		while(fgetcsvl(buffer, BUFFER_SIZE, Stream)!=0)
+		while(fgets(buffer, BUFFER_SIZE, Stream)!=0)
 		{
-			sscanf(buffer, "%[^,],%d", old_filename,&temp);	//retrieving info to buffer
+			sscanf(buffer, "%[^,],%d", old_filename,&saved_records);	//retrieving info to buffer
 			
 			//if we found desired str (str_cmp_red=0) -> execute code
 			if(strcmp(old_filename, filename) == 0)  //comparing str  
-				records = records-temp;
+				new_records = current_records-saved_records;
 		}
 	}
 	 
 	fclose(Stream);		//closing the file.
 
-	return	records;
+	return	new_records;
 	
 }
 
@@ -179,6 +181,8 @@ void CSVParser_MarkAsProcessed(char filename[], int numberOfNewProcessedRecords)
 //Returns 0 if there is no such record of field
 int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[], char value[])
 {
+	//Writen by Dror Kobo
+	
 	int LINE_SIZE = 20000;
 	FILE *Stream;
 	char line[LINE_SIZE];
@@ -247,6 +251,8 @@ int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[
 //Returns the number of records that have a specific value in a specific field
 int CSVParser_CountAllRecordsWithFieldValue(char filename[], char fieldName[], char value[])
 {
+	//writen by Dror Kobo
+	
 	int SIZE = 300;
 	int total_num_of_records;
 	int num_of_records=0;
@@ -318,6 +324,7 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 			runner++;
 		}
 		
+		
 		if(*runner=='"') //dealing with value that padded with "" 
 		{
 			runner++;
@@ -373,9 +380,8 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 					buffer_size*=2;
 					buffer = realloc(buffer, sizeof(char)*buffer_size);
 				}
-				buffer[buf_counter]=*runner;
-				buf_counter++;
-				runner++;
+			
+				
 				if(*(runner)=='\0')
 				{
 					buffer[buf_counter]='\0';
@@ -398,6 +404,10 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 					break;
 				}
 				
+				buffer[buf_counter]=*runner;
+				buf_counter++;
+				runner++;
+				
 			}								
 		}// end else 
 		*num_of_values = *num_of_values+1;
@@ -409,7 +419,8 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 			pointer = realloc(pointer, sizeof(char*)*field_size);
 		}
 		
-		if(*runner==',')
+		//new eddition for empty last cells
+		if(*runner==',' || *runner==10 || *runner=='\n')
 		{
 			//found blank cell
 			

@@ -1,7 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.cw"
-Pathname Line0002 = "s"
+Pathname = "/c/Users/Drorness/Desktop/260117/Functions.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -13,12 +12,12 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "Functions.prj"
-Drag Bar Left = 217
+Drag Bar Left = 160
 Window Top = 38
-Window Left = 130
-Window Bottom = 805
-Window Right = 1456
-Maximized = True
+Window Left = 26
+Window Bottom = 540
+Window Right = 816
+Maximized = False
 Maximized Children = True
 Max32 Number Of Errors = 20
 Track Include File Dependencies = True
@@ -33,7 +32,7 @@ Break At First Statement = False
 Sort Type = "File Name"
 Number of Opened Files = 4
 Window Confinement Region Enabled = True
-MainColumnWidth = 200
+MainColumnWidth = 143
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -47,57 +46,51 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.c"
+Path = "/c/Users/Drorness/Desktop/260117/Functions.c"
 File Type = "CSource"
 Disk Date = 3568283549
 In Projects = "1,"
 Window Top = 38
 Window Left = 10
-Window Z-Order = 3
-Source Window State = "1,100,100,100,13,16,13,0,0,80,0,0,0,0,0,25,0,0,8,0,531,1020,1,0,"
+Window Z-Order = 4
+Source Window State = "1,100,100,100,13,16,13,0,0,108,0,0,0,0,0,31,149,0,54,8,531,1020,1,0,"
 
 [File 0002]
-Path Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.ui"
-Path Line0002 = "r"
+Path = "/c/Users/Drorness/Desktop/260117/Functions.uir"
 File Type = "User Interface Resource"
-Disk Date = 3568212057
+Disk Date = 3568431508
 In Projects = "1,"
 Window Top = 78
 Window Left = 31
 Window Height = 531
 Window Width = 1020
-Window Z-Order = 2
+Window Z-Order = 1
 
 [File 0003]
-Path Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/CSV_Parser_F"
-Path Line0002 = "unctions.c"
+Path = "/c/Users/Drorness/Desktop/260117/CSV_Parser_Functions.c"
 File Type = "CSource"
-Disk Date = 3568285688
+Disk Date = 3570973658
 In Projects = "1,"
 Window Top = 38
 Window Left = 10
-Window Z-Order = 1
-Source Window State = "1,163,163,163,54,62,54,0,0,137,0,0,0,0,0,36,255,0,276,24,531,1020,1,0,"
+Window Z-Order = 2
+Source Window State = "1,90,90,90,42,46,42,0,0,108,0,0,0,0,0,31,114,0,155,32,531,1020,1,0,"
 
 [File 0004]
-Path Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/HebrewConver"
-Path Line0002 = "sions.c"
+Path = "/c/Users/Drorness/Desktop/260117/HebrewConversions.c"
 File Type = "CSource"
 Disk Date = 3566841090
 In Projects = "1,"
 Window Top = 38
 Window Left = 10
-Window Z-Order = 4
-Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,17,30,0,47,12,371,1020,1,0,"
+Window Z-Order = 3
+Source Window State = "1,0,0,0,0,0,0,0,0,108,0,0,0,0,0,21,0,0,55,34,371,1020,1,0,"
 
 [Tab Order]
-Tab 0001 Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.ui"
-Tab 0001 Line0002 = "r"
-Tab 0002 Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/CSV_Parser_F"
-Tab 0002 Line0002 = "unctions.c"
-Tab 0003 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/Functions.c"
-Tab 0004 Line0001 = "/c/Users/Dror/Desktop/CVI Project/AmitLaderech/Libraries/CSV_Parser/HebrewConver"
-Tab 0004 Line0002 = "sions.c"
+Tab 0001 = "/c/Users/Drorness/Desktop/260117/HebrewConversions.c"
+Tab 0002 = "/c/Users/Drorness/Desktop/260117/Functions.c"
+Tab 0003 = "/c/Users/Drorness/Desktop/260117/Functions.uir"
+Tab 0004 = "/c/Users/Drorness/Desktop/260117/CSV_Parser_Functions.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
