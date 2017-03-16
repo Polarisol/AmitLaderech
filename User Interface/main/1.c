@@ -12,7 +12,7 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold;
+static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL;
 static char id[SIZE];
 //static char dbFile[SIZE];
 static char **tagName,**tagValue,**ids;
@@ -56,6 +56,8 @@ int main (int argc, char *argv[])
         return -1;
     if ((pNewSold = LoadPanel (0, "1.uir", P_NEW_SOLD)) < 0)
         return -1;
+	if ((pEditTL = LoadPanel (0, "1.uir", P_EDIT_TL)) < 0)
+        return -1;
     DisplayPanel (pMain);
     RunUserInterface ();
     finalize();
@@ -67,6 +69,7 @@ int main (int argc, char *argv[])
     DiscardPanel (pNewMent);
     DiscardPanel (pSoldier);
     DiscardPanel (pNewSold);
+	DiscardPanel (pEditTL);
     return 0;
 }
 
@@ -108,7 +111,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			if(panel == pNewSold)
+			/*if(panel == pNewSold)
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
 				addMember(SOLDIER,"SOLDIER",panel,ctrlArray);
@@ -127,7 +130,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
 				addMember(MENTOR,"MENTOR",panel,ctrlArray);
-			}
+			}  */
 			break;
 	}
 	return 0;
@@ -343,3 +346,14 @@ void addMember(char dir[],char database[],int memberControl[],int limit,int pane
 */
 
 
+int CVICALLBACK OpenPanelNewGroup (int panel, int control, int event,
+								   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			break;
+	}
+	return 0;
+}
