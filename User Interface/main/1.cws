@@ -48,7 +48,7 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3572533218
+Disk Date = 3572537527
 In Projects = "1,"
 Window Top = 56
 Window Left = 11
@@ -59,12 +59,12 @@ Window Z-Order = 1
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3572534432
+Disk Date = 3572537524
 In Projects = "1,"
 Window Top = 56
 Window Left = 13
 Window Z-Order = 2
-Source Window State = "1,311,314,314,0,1,1,0,0,77,0,0,0,0,0,21,176,0,247,44,561,1227,1,0,"
+Source Window State = "1,127,127,127,28,34,34,0,0,77,0,0,0,0,0,21,112,0,127,33,561,1227,1,0,"
 
 [File 0003]
 Path = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"

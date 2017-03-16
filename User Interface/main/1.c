@@ -27,7 +27,6 @@ int ctrlArray;
 //============================================================================== 
 void initialize(char database[]);
 void finalize();
-void setInTextboxes();
 void addMember(char dir[],char database[],int panel,int ctrlArray);
 int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[]);
 void showMember(int panel,char dir[],char database[],char record[],int ctrlArray);
@@ -100,10 +99,8 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
     return 0;
 }
 
-//////////////////////////////////
-//      Adding a new soldier	//
-//////////////////////////////////
 
+//Add new record to any database
 int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 
@@ -114,7 +111,6 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 		case EVENT_COMMIT:
 			if(panel == pNewSold)
 			{
-				setInTextboxes();
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
 				addMember(SOLDIER,"SOLDIER",panel,ctrlArray);
 				HidePanel(panel);
@@ -124,13 +120,21 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 			}
 			else if(panel == pNewGuide)
 			{
-				//ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
-				//addMember(GUIDE,"GUIDE",panel,ctrlArray);
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_5);
+				addMember(GUIDE,"GUIDE",panel,ctrlArray);
+				HidePanel(panel);
+				DisplayPanel(pGuide);
+				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
+				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
 			}
 			else if(panel == pNewMent)
 			{
-				//ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
-				//addMember(MENTOR,"MENTOR",panel,ctrlArray);
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
+				addMember(MENTOR,"MENTOR",panel,ctrlArray);
+				HidePanel(panel);
+				DisplayPanel(pMentor);
+				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
+				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
 			}
 			break;
 	}
@@ -175,6 +179,29 @@ int CVICALLBACK Open_New_Guide (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel(pNewGuide);
+			break;
+	}
+	return 0;
+}
+int CVICALLBACK OpenPanelNewGroup (int panel, int control, int event,
+								   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK Open_P_NEW_MENTOR (int panel, int control, int event,
+								   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			DisplayPanel(pNewMent);
 			break;
 	}
 	return 0;
@@ -309,10 +336,6 @@ void connectIDtoName(char dir[],char database[],char record[],char fullName[])
 	sprintf(fullName,"%s %s",fName,lName);
 }
 
-void setInTextboxes()
-{
-	
-}
 
 //==============================================================================
 //							OLD Function\VAR realization section
@@ -349,14 +372,4 @@ void addMember(char dir[],char database[],int memberControl[],int limit,int pane
 */
 
 
-int CVICALLBACK OpenPanelNewGroup (int panel, int control, int event,
-								   void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
 
-			break;
-	}
-	return 0;
-}
