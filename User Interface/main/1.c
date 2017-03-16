@@ -27,6 +27,7 @@ int ctrlArray;
 //============================================================================== 
 void initialize(char database[]);
 void finalize();
+void setInTextboxes();
 void addMember(char dir[],char database[],int panel,int ctrlArray);
 int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[]);
 void showMember(int panel,char dir[],char database[],char record[],int ctrlArray);
@@ -111,26 +112,26 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			/*if(panel == pNewSold)
+			if(panel == pNewSold)
 			{
+				setInTextboxes();
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
 				addMember(SOLDIER,"SOLDIER",panel,ctrlArray);
 				HidePanel(panel);
 				DisplayPanel(pSoldier);
-				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_4);
+				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
 				showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
-				
 			}
 			else if(panel == pNewGuide)
 			{
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
-				addMember(GUIDE,"GUIDE",panel,ctrlArray);
+				//ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
+				//addMember(GUIDE,"GUIDE",panel,ctrlArray);
 			}
 			else if(panel == pNewMent)
 			{
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
-				addMember(MENTOR,"MENTOR",panel,ctrlArray);
-			}  */
+				//ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
+				//addMember(MENTOR,"MENTOR",panel,ctrlArray);
+			}
 			break;
 	}
 	return 0;
@@ -178,6 +179,7 @@ int CVICALLBACK Open_New_Guide (int panel, int control, int event,
 	}
 	return 0;
 }
+
 
 //==============================================================================
 //							Function realization section
@@ -262,13 +264,15 @@ void showMember(int panel,char dir[],char database[],char record[],int ctrlArray
 	char tmpVal[SIZE],tmpName[SIZE];
 	int count,idIndex = -1;
 	initialize(database); //CAPITAL LETTER IN CONFIG.INI
-	Database_SetDatabaseFile(SOLDIER);
+	Database_SetDatabaseFile(dir);
 	GetNumCtrlArrayItems (ctrlArray, &count);
 	Database_GetRecordValues(record,fieldAmount,tagName,tagValue);
+	//(count-1) because: ID_NUMBER count as a ControlArray item but not as a field in ini file
 	idIndex = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
 	if(idIndex == -1)
 	{
 		MessagePopup("Error", "Control was not found");
+		return;
 	}
 	SetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, idIndex),record);//set the id number in the textbox
 	for(int i=0;i<count;i++)
@@ -279,6 +283,7 @@ void showMember(int panel,char dir[],char database[],char record[],int ctrlArray
 		if(index == -1)
 		{
 			MessagePopup("Error", "Control was not found");
+			return;
 		}
 		if(index != idIndex)
 		{//Only if the control is not the ID NUMBER
@@ -295,7 +300,7 @@ void showMember(int panel,char dir[],char database[],char record[],int ctrlArray
 }
 
 void connectIDtoName(char dir[],char database[],char record[],char fullName[])
-{
+{//gets the ID and returns the FULL NAME of the record.
 	char fName[SIZE],lName[SIZE];
 	initialize(database);
 	Database_SetDatabaseFile(dir);
@@ -304,12 +309,10 @@ void connectIDtoName(char dir[],char database[],char record[],char fullName[])
 	sprintf(fullName,"%s %s",fName,lName);
 }
 
-
-
-
-
-
-
+void setInTextboxes()
+{
+	
+}
 
 //==============================================================================
 //							OLD Function\VAR realization section

@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 3
+Number of Opened Files = 2
 Window Confinement Region Enabled = True
 MainColumnWidth = 196
 FileDateColumnWidth = 70
@@ -48,7 +48,7 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3572527736
+Disk Date = 3572533218
 In Projects = "1,"
 Window Top = 56
 Window Left = 11
@@ -59,12 +59,12 @@ Window Z-Order = 1
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3572528569
+Disk Date = 3572534432
 In Projects = "1,"
 Window Top = 56
 Window Left = 13
-Window Z-Order = 3
-Source Window State = "1,105,105,105,16,29,29,0,0,77,0,0,0,0,0,21,338,0,348,0,561,1227,1,0,"
+Window Z-Order = 2
+Source Window State = "1,311,314,314,0,1,1,0,0,77,0,0,0,0,0,21,176,0,247,44,561,1227,1,0,"
 
 [File 0003]
 Path = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
@@ -73,7 +73,7 @@ Disk Date = 3572434523
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Source Window State = "1,218,218,218,4,24,24,0,0,0,0,130,0,0,0,0,224,0,225,0,411,1272,1,66,"
+Source Window State = "1,218,218,218,4,24,24,0,0,80,0,130,0,0,0,15,104,0,136,23,411,1272,1,66,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
@@ -93,20 +93,9 @@ Window Top = 272
 Window Left = 128
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,40,16,411,1272,1,0,"
 
-[File 0006]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.h"
-File Type = "Include"
-Disk Date = 3572527712
-In Projects = ""
-Window Top = 47
-Window Left = 13
-Window Z-Order = 2
-Source Window State = "1,385,385,385,17,34,34,0,3,77,0,0,0,0,0,15,366,0,385,17,411,1227,1,0,"
-
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.c"
 Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
-Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/1.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

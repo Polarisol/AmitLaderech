@@ -369,8 +369,8 @@
 
      /* Control Arrays: */
 
-          /* (no control arrays in the resource file) */
-
+#define  CTRLARRAY                        1
+#define  CTRLARRAY_2                      2
 
      /* Menu Bars, Menus, and Menu Items: */
 
