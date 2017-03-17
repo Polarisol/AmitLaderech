@@ -17,10 +17,10 @@
 #define  P_ACTIVITY_ADDING_GUIDE_BUTTON   2       /* control type: pictButton, callback function: Open_New_Guide */
 #define  P_ACTIVITY_LINE                  3       /* control type: deco, callback function: (none) */
 #define  P_ACTIVITY_AMITLADERECH          4       /* control type: textMsg, callback function: (none) */
-#define  P_ACTIVITY_GUIDE_2_BUTTON        5       /* control type: pictButton, callback function: (none) */
-#define  P_ACTIVITY_GUIDE_3_BUTTON        6       /* control type: pictButton, callback function: (none) */
-#define  P_ACTIVITY_GUIDE_4_BUTTON        7       /* control type: pictButton, callback function: (none) */
-#define  P_ACTIVITY_GUIDE_1_BUTTON        8       /* control type: pictButton, callback function: (none) */
+#define  P_ACTIVITY_GUIDE_BUTTON_2        5       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_3        6       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_4        7       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_1        8       /* control type: pictButton, callback function: openGuidePanel */
 #define  P_ACTIVITY_GOAL                  9       /* control type: textMsg, callback function: (none) */
 #define  P_ACTIVITY_LOGO                  10      /* control type: picture, callback function: (none) */
 #define  P_ACTIVITY_BACKGROUND            11      /* control type: picture, callback function: (none) */
@@ -112,7 +112,7 @@
 #define  P_GUIDE_SAVE_CHANGES_BUTTON      16      /* control type: pictButton, callback function: (none) */
 #define  P_GUIDE_EDITING_BUTTON           17      /* control type: pictButton, callback function: (none) */
 #define  P_GUIDE_SEND_EMAIL               18      /* control type: pictButton, callback function: (none) */
-#define  P_GUIDE_LIST_SOLDIERS_BUTTON     19      /* control type: pictButton, callback function: (none) */
+#define  P_GUIDE_LIST_SOLDIERS_BUTTON     19      /* control type: pictButton, callback function: openTable */
 #define  P_GUIDE_GROUP_2                  20      /* control type: command, callback function: (none) */
 #define  P_GUIDE_GROUP_1                  21      /* control type: command, callback function: (none) */
 #define  P_GUIDE_SUMMARY                  22      /* control type: textBox, callback function: (none) */
@@ -385,6 +385,7 @@
 #define  CTRLARRAY_4                      4
 #define  CTRLARRAY_5                      5
 #define  CTRLARRAY_6                      6
+#define  CTRLARRAY_7                      7
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -398,7 +399,9 @@ int  CVICALLBACK Open_New_Guide(int panel, int control, int event, void *callbac
 int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_P_NEW_MENTOR(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_P_NEW_SOLD(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK openGuidePanel(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OpenPanelNewGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK openTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 

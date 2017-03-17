@@ -12,7 +12,7 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL;
+static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL,pTable;
 static char id[SIZE];
 //static char dbFile[SIZE];
 static char **tagName,**tagValue,**ids;
@@ -31,6 +31,8 @@ void addMember(char dir[],char database[],int panel,int ctrlArray);
 int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[]);
 void showMember(int panel,char dir[],char database[],char record[],int ctrlArray);
 void connectIDtoName(char dir[],char database[],char record[],char fullName[]);
+int connectNametoID(char dir[],char database[],char record[],char fullName[]); 
+void createTable(char dir[],char database[], char **ids, int rows,int panel,int control);
 
 
 //==============================================================================
@@ -58,6 +60,8 @@ int main (int argc, char *argv[])
         return -1;
 	if ((pEditTL = LoadPanel (0, "1.uir", P_EDIT_TL)) < 0)
         return -1;
+	if ((pTable = LoadPanel (0, "1.uir", P_TABLE)) < 0)
+        return -1;
     DisplayPanel (pMain);
     RunUserInterface ();
     finalize();
@@ -70,6 +74,7 @@ int main (int argc, char *argv[])
     DiscardPanel (pSoldier);
     DiscardPanel (pNewSold);
 	DiscardPanel (pEditTL);
+	DiscardPanel (pTable);
     return 0;
 }
 
@@ -149,12 +154,22 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 								 void *callbackData, int eventData1, int eventData2)
 {
+	char fullName[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (pActivity);
-			char fullName[SIZE];
-			connectIDtoName(SOLDIER,"SOLDIER","203059936",fullName);
+			initialize(GUIDE);
+			Database_SetDatabaseFile(GUIDE);
+			Database_CountAllRecords(&recordAmount);
+			ctrlArray = GetCtrlArrayFromResourceID (pActivity, CTRLARRAY_7);
+			for(int i=0;i<recordAmount;i++)
+			{
+				Database_GetRecordInfo(id,i+1);
+				connectIDtoName(GUIDE,"GUIDE",id,fullName);
+				SetCtrlAttribute (pActivity, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, fullName);
+			}
+			
 			break;
 	}
 	return 0;
@@ -202,6 +217,60 @@ int CVICALLBACK Open_P_NEW_MENTOR (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel(pNewMent);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK openGuidePanel (int panel, int control, int event,
+								void *callbackData, int eventData1, int eventData2)
+{
+	char fullName[SIZE];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			HidePanel(panel);
+			DisplayPanel(pGuide);
+			GetCtrlAttribute (panel, control, ATTR_LABEL_TEXT, fullName);
+			connectNametoID(GUIDE,"GUIDE",id,fullName);
+			ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
+			showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK openTable (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	char fullName[SIZE],val[SIZE];
+	int j=0;
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			DisplayPanel(pTable);
+			GetCtrlVal (panel, P_GUIDE_ID_NUMBER, id);
+			connectIDtoName(GUIDE,"GUIDE",id,fullName);
+			initialize("SOLDIER");
+			Database_SetDatabaseFile(SOLDIER);
+			Database_CountAllRecords(&recordAmount);
+			ids = malloc(sizeof(char*)*(recordAmount));
+			for(int i=1;i<=recordAmount;i++) 
+			{
+				Database_GetRecordInfo(id,i);
+				Database_GetFieldVal(id,"מנחה",val);
+				if(strcmp(fullName,val)==0)
+				{
+					ids[j] = malloc((char)strlen(val)+1);
+					sprintf(ids[j],id);
+					j++;
+				}
+			}
+			if(j!=0)
+			{
+				createTable(SOLDIER,"SOLDIER",ids,j,pTable,P_TABLE_LIST_S_OR_M);
+			}
+			
 			break;
 	}
 	return 0;
@@ -336,40 +405,55 @@ void connectIDtoName(char dir[],char database[],char record[],char fullName[])
 	sprintf(fullName,"%s %s",fName,lName);
 }
 
-
-//==============================================================================
-//							OLD Function\VAR realization section
-//============================================================================== 
-
-/*
-int soldierContorls[] = {P_NEW_SOLD_ID_NUMBER,P_NEW_SOLD_FIRST_NAME,
-						 P_NEW_SOLD_LAST_NAME,P_NEW_SOLD_PHONE_NUMBER,
-						P_NEW_SOLD_MAIL,P_NEW_SOLD_ADDRESS,P_NEW_SOLD_AGE,P_NEW_SOLD_GUIDE,
-						P_NEW_SOLD_MENTOR, P_NEW_SOLD_IMAGE};
-void addMember(char dir[],char database[],int memberControl[],int limit,int panel)
-{
-	//dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
-	//database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
-	//memberContor - array of the controls in  the panel.
-	//limit - the size of the memberControl array. use limit = sizeof(memberCcontrol)\sizeof(int);
-	//panel - panel handle the active panel - send panel. 
-	char tmpVal[SIZE],tmpName[SIZE];
-	initialize(database); //CAPITAL LETTER IN CONFIG.INI
-	GetCtrlVal (panel, memberControl[0], id);
+int connectNametoID(char dir[],char database[],char record[],char fullName[]) 
+{ //gets the FULL NAME and return the ID
+	char fName[SIZE],lName[SIZE],fullNameCheck[SIZE];
+	initialize(database);
 	Database_SetDatabaseFile(dir);
-	if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
-		MessagePopup("Error", "ID already exist");
-	else
+	Database_CountAllRecords(&recordAmount);
+	for(int i=1;i<=recordAmount;i++)
 	{
-		for(int i=1;i<limit;i++)
+		Database_GetRecordInfo(id,i);
+		Database_GetFieldVal(id,"שם פרטי",fName);
+		Database_GetFieldVal(id,"שם משפחה",lName);
+		sprintf(fullNameCheck,"%s %s",fName,lName);
+		if(strcmp(fullName,fullNameCheck)==0)
 		{
-			GetCtrlVal (panel, memberControl[i], tmpVal); 
-			GetCtrlAttribute (panel, memberControl[i], ATTR_LABEL_TEXT, tmpName);
-			Database_SetFieldVal(id,tmpName,tmpVal);
+			sprintf(record,id);
+			return 1;
 		}
 	}
+	return 0;
 }
-*/
+
+void createTable(char dir[],char database[], char **ids,int rows,int panel,int control)
+{//NOT WORKING WITH HEBREW 
+	initialize(database);
+	Database_SetDatabaseFile(dir);
+	InsertTableRows (panel, control, -1, rows, VAL_CELL_STRING);
+	InsertTableColumns (panel, control, -1, fieldAmount, VAL_CELL_STRING);
+	for(int i=0;i<rows;i++)
+	{
+		SetTableRowAttribute (panel, control, i+1, ATTR_USE_LABEL_TEXT, 1);
+		SetTableRowAttribute (panel, control, i+1, ATTR_LABEL_TEXT, ids[i]);
+		Database_GetRecordValues(ids[i],fieldAmount,tagName,tagValue); 
+		for(int j=1;j<=fieldAmount;j++)
+		{
+			SetTableColumnAttribute (panel, control, j, ATTR_TEXT_CHARACTER_SET, VAL_HEBREW_CHARSET);
+			SetTableCellVal (panel, control, MakePoint(j,i+1), tagValue[j-1]);
+			SetTableColumnAttribute (panel, control, j, ATTR_USE_LABEL_TEXT, 1);
+			HebrewConverter_convertHebrewUTF8toISO(tagName[j-1]); 
+			SetTableColumnAttribute (panel, control, j, ATTR_LABEL_TEXT, tagName[j-1]);
+			
+		}
+		
+	}
+}
+
+
+
+
+
 
 
 

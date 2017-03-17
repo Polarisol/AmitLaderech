@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 2
+Number of Opened Files = 5
 Window Confinement Region Enabled = True
 MainColumnWidth = 196
 FileDateColumnWidth = 70
@@ -48,32 +48,33 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3572537527
+Disk Date = 3572610715
 In Projects = "1,"
 Window Top = 56
 Window Left = 11
 Window Height = 531
 Window Width = 780
-Window Z-Order = 1
+Window Z-Order = 3
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3572537524
+Disk Date = 3572612257
 In Projects = "1,"
 Window Top = 56
 Window Left = 13
-Window Z-Order = 2
-Source Window State = "1,127,127,127,28,34,34,0,0,77,0,0,0,0,0,21,112,0,127,33,561,1227,1,0,"
+Window Z-Order = 1
+Source Window State = "1,444,444,444,12,50,50,0,0,109,0,258,0,0,0,18,424,0,429,27,561,1227,1,15,"
 
 [File 0003]
 Path = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
 File Type = "CSource"
-Disk Date = 3572434523
+Disk Date = 3572543717
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Source Window State = "1,218,218,218,4,24,24,0,0,80,0,130,0,0,0,15,104,0,136,23,411,1272,1,66,"
+Window Z-Order = 5
+Source Window State = "1,178,178,178,4,26,26,0,0,80,0,130,0,0,0,15,211,0,128,8,411,1272,1,66,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
@@ -91,11 +92,25 @@ Disk Date = 3567963141
 In Projects = "1,"
 Window Top = 272
 Window Left = 128
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,40,16,411,1272,1,0,"
+Window Z-Order = 2
+Source Window State = "1,32,32,32,5,43,43,0,3,80,0,0,0,0,0,15,27,0,32,5,411,1272,1,0,"
+
+[File 0006]
+Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
+File Type = "CSource"
+Disk Date = 3567966381
+In Projects = ""
+Window Top = 272
+Window Left = 128
+Window Z-Order = 4
+Source Window State = "1,173,173,173,12,65,65,0,3,80,0,0,0,0,0,15,165,3,173,12,411,1272,1,0,"
 
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.c"
 Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
+Tab 0003 = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
+Tab 0004 = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/DataBaseAccess_test.c"
+Tab 0005 = "/c/Users/omrig/Desktop/HebrewConversions/HebrewConversions.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
