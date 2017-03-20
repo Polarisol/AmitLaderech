@@ -7,12 +7,13 @@
 #define MENTOR  "Database\\mentor.ini"
 #define GUIDE   "Database\\guide.ini"
 #define CONFIG  "Database\\config.ini"
+#define GROUP   "Database\\group.ini"
 
 //==============================================================================
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL,pTable;
+static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL,pTable,pGroup,pNewGroup;
 static char id[SIZE];
 //static char dbFile[SIZE];
 static char **tagName,**tagValue,**ids;
@@ -62,6 +63,10 @@ int main (int argc, char *argv[])
         return -1;
 	if ((pTable = LoadPanel (0, "1.uir", P_TABLE)) < 0)
         return -1;
+	if ((pGroup = LoadPanel (0, "1.uir", P_GROUP)) < 0)
+        return -1;
+	if ((pNewGroup = LoadPanel (0, "1.uir", P_NEW_GROU)) < 0)
+        return -1;
     DisplayPanel (pMain);
     RunUserInterface ();
     finalize();
@@ -75,6 +80,8 @@ int main (int argc, char *argv[])
     DiscardPanel (pNewSold);
 	DiscardPanel (pEditTL);
 	DiscardPanel (pTable);
+	DiscardPanel (pGroup);
+	DiscardPanel (pNewGroup);
     return 0;
 }
 
@@ -110,6 +117,9 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 
 {
+	char guideName[SIZE],groupName[SIZE];
+	char group1[SIZE],group2[SIZE];
+	char *result;
 	
 	switch (event)
 	{
@@ -140,6 +150,38 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
+			}
+			else if(panel == pNewGroup)
+			{
+				///////////////////////////////////////////////////
+				GetCtrlVal (panel, P_NEW_GROU_CITY, group1);
+				GetCtrlVal (panel, P_NEW_GROU_YEAR, group2);		//CREATE THE GROUP NAME
+				result = malloc(strlen(group1)+strlen(group2)+1);
+				strcpy(result,group1);
+				strcat(result,group2);
+				SetCtrlVal (panel, P_NEW_GROU_GROUP_NAME, result);
+				//////////////////////////////////////////////////
+				GetCtrlVal (panel, P_NEW_GROU_GUIDE, guideName);
+				connectNametoID(GUIDE,"GUIDE",id,guideName);	 
+				Database_GetFieldVal(id,"קבוצה 1", group1);
+				Database_GetFieldVal(id,"קבוצה 2", group2);//
+				GetCtrlVal (panel, P_NEW_GROU_GROUP_NAME, groupName);
+				if(strcmp(group1,"קבוצה 1")==0)
+					Database_SetFieldVal(id,"קבוצה 1", groupName);
+				else if(strcmp(group2,"קבוצה 2")==0)
+					Database_SetFieldVal(id,"קבוצה 2", groupName);
+				else
+				{
+					MessagePopup("Alert", "GUIDE already have 2 groups"); 
+					return 0;
+				}
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_8);
+				addMember(GROUP,"GROUP",panel,ctrlArray);
+				HidePanel(panel);
+				DisplayPanel(pGroup);
+				ctrlArray = GetCtrlArrayFromResourceID (pGroup, CTRLARRAY_9);
+				showMember(pGroup,GROUP,"GROUP",id,ctrlArray);
+				SetCtrlVal (pGroup, P_GROUP_GROUP_NAME, result);
 			}
 			break;
 	}
@@ -201,10 +243,16 @@ int CVICALLBACK Open_New_Guide (int panel, int control, int event,
 int CVICALLBACK OpenPanelNewGroup (int panel, int control, int event,
 								   void *callbackData, int eventData1, int eventData2)
 {
+	char s[3];
 	switch (event)
 	{
 		case EVENT_COMMIT:
-
+			initialize("GROUP");
+			Database_SetDatabaseFile(GROUP);
+			Database_CountAllRecords(&recordAmount);
+			sprintf(s,"%d",(recordAmount+1));
+			DisplayPanel(pNewGroup);
+			SetCtrlVal (pNewGroup, P_NEW_GROU_ID_NUMBER, s);
 			break;
 	}
 	return 0;
@@ -226,6 +274,7 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 								void *callbackData, int eventData1, int eventData2)
 {
 	char fullName[SIZE];
+	char group1[SIZE],group2[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -235,6 +284,10 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 			connectNametoID(GUIDE,"GUIDE",id,fullName);
 			ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
 			showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
+			GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
+			GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
+			SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
+			SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
 			break;
 	}
 	return 0;
@@ -271,6 +324,28 @@ int CVICALLBACK openTable (int panel, int control, int event,
 				createTable(SOLDIER,"SOLDIER",ids,j,pTable,P_TABLE_LIST_S_OR_M);
 			}
 			
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK checkIfExcist (int panel, int control, int event,
+							   void *callbackData, int eventData1, int eventData2)
+{
+	char database[SIZE],fullName[SIZE],dir[SIZE];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			GetCtrlAttribute (panel, control, ATTR_CONSTANT_NAME, database);
+			GetCtrlVal(panel,control,fullName);
+			initialize(database);
+			if(strcmp(database,"GUIDE")==0)
+				sprintf(dir,GUIDE);
+			else
+				sprintf(dir,MENTOR);
+			if(connectNametoID(dir,database,id,fullName)==0)//if the fullName does not excist return 0
+				MessagePopup("Alert", "Record does not excist!");
+				
 			break;
 	}
 	return 0;
@@ -325,6 +400,7 @@ void addMember(char dir[],char database[],int panel, int ctrlArray)
 	int count,idIndex = -1;
 	initialize(database); //CAPITAL LETTER IN CONFIG.INI
 	GetNumCtrlArrayItems (ctrlArray, &count);
+	
 	idIndex = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
 	if(idIndex!=-1)
 	{
@@ -342,6 +418,7 @@ void addMember(char dir[],char database[],int panel, int ctrlArray)
 					GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, i), tmpVal); 
 					GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmpName);
 					Database_SetFieldVal(id,tmpName,tmpVal);
+					
 				}
 			}
 		}
@@ -449,11 +526,4 @@ void createTable(char dir[],char database[], char **ids,int rows,int panel,int c
 		
 	}
 }
-
-
-
-
-
-
-
 

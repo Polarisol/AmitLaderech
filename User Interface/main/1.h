@@ -65,12 +65,12 @@
 #define  P_GROUP_YEAR                     3       /* control type: string, callback function: (none) */
 #define  P_GROUP_MONTH                    4       /* control type: string, callback function: (none) */
 #define  P_GROUP_CITY                     5       /* control type: string, callback function: (none) */
-#define  P_GROUP_GROUP_NAME               6       /* control type: string, callback function: (none) */
-#define  P_GROUP_GUIDE                    7       /* control type: string, callback function: (none) */
-#define  P_GROUP_LOGO                     8       /* control type: picture, callback function: (none) */
-#define  P_GROUP_SAVE_CHANGES_BUTTON      9       /* control type: pictButton, callback function: (none) */
-#define  P_GROUP_LINE                     10      /* control type: deco, callback function: (none) */
-#define  P_GROUP_BACKGROUND               11      /* control type: picture, callback function: (none) */
+#define  P_GROUP_ID_NUMBER                6       /* control type: string, callback function: (none) */
+#define  P_GROUP_GROUP_NAME               7       /* control type: string, callback function: (none) */
+#define  P_GROUP_GUIDE                    8       /* control type: string, callback function: (none) */
+#define  P_GROUP_LOGO                     9       /* control type: picture, callback function: (none) */
+#define  P_GROUP_SAVE_CHANGES_BUTTON      10      /* control type: pictButton, callback function: (none) */
+#define  P_GROUP_LINE                     11      /* control type: deco, callback function: (none) */
 #define  P_GROUP_STATUS_RING              12      /* control type: ring, callback function: (none) */
 #define  P_GROUP_DELETE_GROUP_BUTTON      13      /* control type: pictButton, callback function: (none) */
 #define  P_GROUP_EDIT_GROUP_BUTTON        14      /* control type: pictButton, callback function: (none) */
@@ -91,8 +91,9 @@
 #define  P_GROUP_MENTOR_1                 29      /* control type: command, callback function: (none) */
 #define  P_GROUP_MENTORS_TXT              30      /* control type: textMsg, callback function: (none) */
 #define  P_GROUP_AMITLADERECH             31      /* control type: textMsg, callback function: (none) */
-#define  P_GROUP_MENTOR_3                 32      /* control type: command, callback function: (none) */
-#define  P_GROUP_GOAL                     33      /* control type: textMsg, callback function: (none) */
+#define  P_GROUP_GOAL                     32      /* control type: textMsg, callback function: (none) */
+#define  P_GROUP_MENTOR_3                 33      /* control type: command, callback function: (none) */
+#define  P_GROUP_BACKGROUND               34      /* control type: picture, callback function: (none) */
 
 #define  P_GUIDE                          4       /* callback function: exitFunc */
 #define  P_GUIDE_MAIN_OCCUPATION          2       /* control type: string, callback function: (none) */
@@ -185,13 +186,16 @@
 #define  P_NEW_GROU_MONTH                 3       /* control type: string, callback function: (none) */
 #define  P_NEW_GROU_AMITLADERECH          4       /* control type: textMsg, callback function: (none) */
 #define  P_NEW_GROU_CITY                  5       /* control type: string, callback function: (none) */
-#define  P_NEW_GROU_GUIDE                 6       /* control type: string, callback function: (none) */
-#define  P_NEW_GROU_GOAL                  7       /* control type: textMsg, callback function: (none) */
-#define  P_NEW_GROU_LOGO                  8       /* control type: picture, callback function: (none) */
-#define  P_NEW_GROU_HEADLINE              9       /* control type: textMsg, callback function: (none) */
-#define  P_NEW_GROU_LINE                  10      /* control type: deco, callback function: (none) */
-#define  P_NEW_GROU_BACKGROUND            11      /* control type: picture, callback function: (none) */
-#define  P_NEW_GROU_SAVE_GROUP_BUTTON     12      /* control type: pictButton, callback function: (none) */
+#define  P_NEW_GROU_GROUP_NAME            6       /* control type: string, callback function: (none) */
+#define  P_NEW_GROU_ID_NUMBER             7       /* control type: string, callback function: (none) */
+#define  P_NEW_GROU_GUIDE                 8       /* control type: string, callback function: checkIfExcist */
+#define  P_NEW_GROU_GOAL                  9       /* control type: textMsg, callback function: (none) */
+#define  P_NEW_GROU_LOGO                  10      /* control type: picture, callback function: (none) */
+#define  P_NEW_GROU_HEADLINE              11      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_GROU_LINE                  12      /* control type: deco, callback function: (none) */
+#define  P_NEW_GROU_STATUS_RING           13      /* control type: ring, callback function: (none) */
+#define  P_NEW_GROU_BACKGROUND            14      /* control type: picture, callback function: (none) */
+#define  P_NEW_GROU_SAVE_GROUP_BUTTON     15      /* control type: pictButton, callback function: Save_Sol_Func */
 
 #define  P_NEW_GUID                       8       /* callback function: exitFunc */
 #define  P_NEW_GUID_IMAGE                 2       /* control type: string, callback function: (none) */
@@ -216,7 +220,7 @@
 #define  P_NEW_GUID_SELECT_IMAGE_BUTTON   21      /* control type: command, callback function: (none) */
 
 #define  P_NEW_MENT                       9       /* callback function: exitFunc */
-#define  P_NEW_MENT_GUIDE                 2       /* control type: string, callback function: (none) */
+#define  P_NEW_MENT_GUIDE                 2       /* control type: string, callback function: checkIfExcist */
 #define  P_NEW_MENT_CELL_PHONE_NUMBER     3       /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_MAIN_OCCUPATION       4       /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_CITY                  5       /* control type: string, callback function: (none) */
@@ -256,9 +260,9 @@
 #define  P_NEW_SOLD_STATUS_OTHER_2        16      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_HEADLINE              17      /* control type: textMsg, callback function: (none) */
 #define  P_NEW_SOLD_GENDER_OTHER          18      /* control type: string, callback function: (none) */
-#define  P_NEW_SOLD_MENTOR                19      /* control type: string, callback function: (none) */
+#define  P_NEW_SOLD_MENTOR                19      /* control type: string, callback function: checkIfExcist */
 #define  P_NEW_SOLD_GROUP                 20      /* control type: string, callback function: (none) */
-#define  P_NEW_SOLD_GUIDE                 21      /* control type: string, callback function: (none) */
+#define  P_NEW_SOLD_GUIDE                 21      /* control type: string, callback function: checkIfExcist */
 #define  P_NEW_SOLD_NEXT_MEETING_DATE     22      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_SELECT_IMAGE_BUTTON   23      /* control type: command, callback function: (none) */
 #define  P_NEW_SOLD_LAST_MEETING_DATE     24      /* control type: string, callback function: (none) */
@@ -359,13 +363,13 @@
 #define  P_SOLDIER_BACKGROUND             57      /* control type: picture, callback function: (none) */
 #define  P_SOLDIER_DETAIL_HL_1            58      /* control type: textMsg, callback function: (none) */
 #define  P_SOLDIER_DETAIL_HL_2            59      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_3            60      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_4            61      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_5            62      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_6            63      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_7            64      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_4            60      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_5            61      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_6            62      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_7            63      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_CYCLE_HL               64      /* control type: textMsg, callback function: (none) */
 #define  P_SOLDIER_DETAIL_HL_8            65      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_CYCLE_HL               66      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_3            66      /* control type: textMsg, callback function: (none) */
 
 #define  P_TABLE                          12      /* callback function: exitFunc */
 #define  P_TABLE_LINE                     2       /* control type: deco, callback function: (none) */
@@ -386,6 +390,8 @@
 #define  CTRLARRAY_5                      5
 #define  CTRLARRAY_6                      6
 #define  CTRLARRAY_7                      7
+#define  CTRLARRAY_8                      8
+#define  CTRLARRAY_9                      9
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -394,6 +400,7 @@
 
      /* Callback Prototypes: */
 
+int  CVICALLBACK checkIfExcist(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_New_Guide(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
