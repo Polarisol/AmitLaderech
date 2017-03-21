@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 1
+Number of Opened Files = 2
 Window Confinement Region Enabled = True
 MainColumnWidth = 186
 FileDateColumnWidth = 70
@@ -63,7 +63,8 @@ Disk Date = 3571763078
 In Projects = "1,"
 Window Top = 56
 Window Left = 13
-Source Window State = "1,154,154,154,16,31,31,0,3,0,0,0,0,0,0,0,200,0,154,16,561,1227,1,0,"
+Window Z-Order = 2
+Source Window State = "1,112,112,112,63,72,72,0,3,98,0,0,0,0,0,26,98,0,112,63,561,1227,1,0,"
 
 [File 0003]
 Path = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
@@ -94,6 +95,7 @@ Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,40,16,411,1272,1,0,"
 
 [Tab Order]
 Tab 0001 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.uir"
+Tab 0002 = "/c/Users/shay/Desktop/CVIPros/AmitLaderech/User Interface/main/1.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
