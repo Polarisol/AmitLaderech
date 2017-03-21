@@ -9,7 +9,7 @@ IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
-Number of Files = 5
+Number of Files = 6
 Target Type = "Executable"
 Flags = 2064
 Copied From Locked InstrDrv Directory = False
@@ -55,8 +55,10 @@ Folder Id = 1
 [File 0003]
 File Type = "CSource"
 Res Id = 3
-Path Is Rel = False
-Path = "/c/Users/omrig/Desktop/DatabaseAccess/database.c"
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Lib/database.c"
+Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.c"
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -64,24 +66,38 @@ Folder = "Source Files"
 Folder Id = 1
 
 [File 0004]
-File Type = "Include"
+File Type = "CSource"
 Res Id = 4
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "../../Libraries/DatabaseAccess/database.h"
-Path = "/d/Project/AmitLaderech/Libraries/DatabaseAccess/database.h"
+Path Rel Path = "Lib/HebrewConversions.c"
+Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 1
+
+[File 0005]
+File Type = "Include"
+Res Id = 5
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Lib/database.h"
+Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.h"
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
 Folder Id = 2
 
-[File 0005]
-File Type = "CSource"
-Res Id = 5
-Path Is Rel = False
-Path = "/c/Users/omrig/Desktop/HebrewConversions/HebrewConversions.c"
+[File 0006]
+File Type = "Include"
+Res Id = 6
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Lib/HebrewConversions.h"
+Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.h"
 Exclude = False
-Compile Into Object File = False
 Project Flags = 0
 Folder = "Include Files"
 Folder Id = 2

@@ -24,6 +24,7 @@ void initialize(char name[]);
 void SetInTable(int panel,int control);
 void delTable(int panel,int control);
 void finalize();
+
 int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
