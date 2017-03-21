@@ -125,7 +125,7 @@ int Database_GetRecordValues(char id[], int numOfTags, char * tagName[], char * 
 {
 	int val = Database_RecordCheck (id);
 	if(val==0)
-		return -1;
+		return 0;
 	for(int i=0;i<numOfTags;i++)
 	{
 		
