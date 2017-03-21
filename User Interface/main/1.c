@@ -36,7 +36,6 @@ int connectNametoID(char dir[],char database[],char record[],char fullName[]);
 void createTable(char dir[],char database[], char **ids, int rows,int panel,int control);
 
 
-
 //==============================================================================
 //									MAIN
 //============================================================================== 
@@ -118,36 +117,14 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 
 {
-
 	char guideName[SIZE],groupName[SIZE];
 	char group1[SIZE],group2[SIZE];
 	char *result;
-
 	
 	switch (event)
 	{
 		case EVENT_COMMIT:
 			if(panel == pNewSold)
-
-			{
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
-				addMember(SOLDIER,"SOLDIER",panel,ctrlArray);
-				HidePanel(panel);
-				DisplayPanel(pSoldier);
-				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_4);
-				showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
-				
-			}
-			else if(panel == pNewGuide)
-			{
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
-				addMember(GUIDE,"GUIDE",panel,ctrlArray);
-			}
-			else if(panel == pNewMent)
-			{
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
-				addMember(MENTOR,"MENTOR",panel,ctrlArray);
-
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
 				addMember(SOLDIER,"SOLDIER",panel,ctrlArray);
@@ -155,7 +132,6 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				DisplayPanel(pSoldier);
 				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
 				showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
-			}
 			}
 			else if(panel == pNewGuide)
 			{
@@ -206,7 +182,6 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				ctrlArray = GetCtrlArrayFromResourceID (pGroup, CTRLARRAY_9);
 				showMember(pGroup,GROUP,"GROUP",id,ctrlArray);
 				SetCtrlVal (pGroup, P_GROUP_GROUP_NAME, result);
-
 			}
 			break;
 	}
@@ -226,10 +201,6 @@ int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (pActivity);
-
-			char fullName[SIZE];
-			connectIDtoName(SOLDIER,"SOLDIER","203059936",fullName);
-
 			initialize(GUIDE);
 			Database_SetDatabaseFile(GUIDE);
 			Database_CountAllRecords(&recordAmount);
@@ -241,7 +212,6 @@ int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 				SetCtrlAttribute (pActivity, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, fullName);
 			}
 			
-
 			break;
 	}
 	return 0;
@@ -270,8 +240,6 @@ int CVICALLBACK Open_New_Guide (int panel, int control, int event,
 	}
 	return 0;
 }
-
-
 int CVICALLBACK OpenPanelNewGroup (int panel, int control, int event,
 								   void *callbackData, int eventData1, int eventData2)
 {
@@ -384,7 +352,6 @@ int CVICALLBACK checkIfExcist (int panel, int control, int event,
 }
 
 
-
 //==============================================================================
 //							Function realization section
 //============================================================================== 
@@ -425,111 +392,6 @@ int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[])
 
 //add new member to the specific database
 void addMember(char dir[],char database[],int panel, int ctrlArray)
-
-{
-//dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
-//database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
-//panel - panel handle of the active panel.
-	char tmpVal[SIZE],tmpName[SIZE];
-	int count,idIndex = -1;
-	initialize(database); //CAPITAL LETTER IN CONFIG.INI
-	GetNumCtrlArrayItems (ctrlArray, &count);
-	idIndex = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
-	if(idIndex!=-1)
-	{
-		GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, idIndex), id);
-		Database_SetDatabaseFile(dir);
-		if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
-			MessagePopup("Error", "ID already exist");
-		else
-		{
-			
-			for(int i=0;i<count;i++)
-			{
-				if(i!=idIndex)
-				{
-					GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, i), tmpVal); 
-					GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmpName);
-					Database_SetFieldVal(id,tmpName,tmpVal);
-				}
-			}
-		}
-				
-	}
-	else
-		MessagePopup("Eror","ID index was not found");
-}
-//Show the member from the database in the panel
-void showMember(int panel,char dir[],char database[],char record[],int ctrlArray)
-{
-//dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
-//database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
-//panel - panel handle of the active panel.
-//record - the id number of the member.
-	char tmpVal[SIZE],tmpName[SIZE];
-	int count,idIndex = -1;
-	initialize(database); //CAPITAL LETTER IN CONFIG.INI
-	Database_SetDatabaseFile(SOLDIER);
-	GetNumCtrlArrayItems (ctrlArray, &count);
-	Database_GetRecordValues(record,fieldAmount,tagName,tagValue);
-	idIndex = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
-	if(idIndex == -1)
-	{
-		MessagePopup("Error", "Control was not found");
-	}
-	SetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, idIndex),record);//set the id number in the textbox
-	for(int i=0;i<count;i++)
-	{//Run on all of the items in the ctrlArray -> controls in the panel
-		GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmpName);//get the label text of the item
-		GetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_CONSTANT_NAME, tmpVal);//get the name of the item. no PANEL_..
-		int index = getIndexOfControl(panel,ctrlArray,count,tmpVal);
-		if(index == -1)
-		{
-			MessagePopup("Error", "Control was not found");
-		}
-		if(index != idIndex)
-		{//Only if the control is not the ID NUMBER
-			for(int j=0;j<fieldAmount;j++)
-			{
-				if(strcmp(tmpName,tagName[j])==0)
-				{//if the control's label text is equal to the field name from the database
-				 //then, put the corresponding value in right control.
-					SetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, index),tagValue[j]);
-				}
-			}
-		}
-	}
-}
-
-void connectIDtoName(char dir[],char database[],char record[],char fullName[])
-{
-	char fName[SIZE],lName[SIZE];
-	initialize(database);
-	Database_SetDatabaseFile(dir);
-	Database_GetFieldVal(record,"שם פרטי",fName);
-	Database_GetFieldVal(record,"שם משפחה",lName);
-	sprintf(fullName,"%s %s",fName,lName);
-};
-
-
-
-
-
-
-
-
-//==============================================================================
-//							OLD Function\VAR realization section
-//============================================================================== 
-
-/*
-int soldierContorls[] = {P_NEW_SOLD_ID_NUMBER,P_NEW_SOLD_FIRST_NAME,
-						 P_NEW_SOLD_LAST_NAME,P_NEW_SOLD_PHONE_NUMBER,
-						P_NEW_SOLD_MAIL,P_NEW_SOLD_ADDRESS,P_NEW_SOLD_AGE,P_NEW_SOLD_GUIDE,
-						P_NEW_SOLD_MENTOR, P_NEW_SOLD_IMAGE};
-void addMember(char dir[],char database[],int memberControl[],int limit,int panel)
-=======
->>>>>>> bece4ef3d6ec31674e3e59652be6143a221155b7
 {
 //dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
 //database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
@@ -664,6 +526,4 @@ void createTable(char dir[],char database[], char **ids,int rows,int panel,int c
 		
 	}
 }
-*/
-
 
