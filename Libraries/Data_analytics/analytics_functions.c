@@ -115,3 +115,29 @@ char **extractnames(char filename[],char fieldName[], int *name_array_size)
 	}
 	return namearray;
 }
+
+char **removeduplicates (char **org,int org_size,int *sorted_size)
+{
+	char **sortedarray=NULL;
+	*sorted_size=0;
+	for (int i=0; i<org_size;i++)
+	{
+		for (int j=0;j<=*sorted_size;j++)
+		{
+			if(j==*sorted_size)
+			{
+				sortedarray = (char**)realloc(sortedarray,(*sorted_size+1) * sizeof(char *));
+				sortedarray[*sorted_size] = (char *)malloc(strlen(org[i])+1);
+				strcpy(sortedarray[*sorted_size],org[i]);
+				(*sorted_size)++;
+				break;
+			}
+			else
+			{
+				if(strcmp(sortedarray[j],org[i])==0)
+					break;
+			}
+		}
+	}
+	return sortedarray;
+}

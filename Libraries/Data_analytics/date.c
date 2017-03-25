@@ -87,9 +87,9 @@ int CVICALLBACK find_recent (int panel, int control, int event,
 int CVICALLBACK extract_arrayname (int panel, int control, int event,
 								   void *callbackData, int eventData1, int eventData2)
 {
-	char **name_array=NULL;
+	char **name_array=NULL,**sorted=NULL;
 	char path[300],name_colm[300];
-	int name_array_size=0;
+	int name_array_size=0,sorted_size=0;
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -98,7 +98,18 @@ int CVICALLBACK extract_arrayname (int panel, int control, int event,
 			name_array=extractnames(path,name_colm,&name_array_size);
 			for (int i=0 ;i<name_array_size ;i++)
 				printf("%s\n",name_array[i]);
+			sorted=removeduplicates (name_array,name_array_size,&sorted_size);
+			printf("sorting\n\n");
+			DeleteTextBoxLines (panelHandle, PANEL_TEXTBOX, 0, -1);
+			for (int i=0 ;i<sorted_size ;i++)
+				{
+					printf("%s\n",sorted[i]);
+					HebrewConverter_convertHebrewUTF8toISO(sorted[i]);
+					InsertTextBoxLine (panelHandle, PANEL_TEXTBOX,-1 ,sorted[i] );
+				}
 			break;
+		free(name_array);
+		free(sorted);
 	}
 	return 0;
 }

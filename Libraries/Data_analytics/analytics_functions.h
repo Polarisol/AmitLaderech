@@ -1,5 +1,6 @@
 #ifndef ANALYTICS_FUNCTIONS.H
 #define ANALYTICS_FUNCTIONS.H
+#include "HebrewConversions.h"  
 typedef struct
 {
 	int dd;
@@ -11,4 +12,5 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 Date findmostrecent(Date *datearray,int array_size);// bouble sorts Date type array
 int daysbetween(Date givendate); //calculates days between given date and local system time
 char **extractnames(char filename[],char fieldName[], int *name_array_size); 
+char **removeduplicates (char **org,int org_size,int *sorted_size);
 #endif
