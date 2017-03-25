@@ -3,13 +3,7 @@
 #include <userint.h>
 #include "Func_Header.h"
 #include "HebrewConversions.h"
- 
-typedef struct
-{
-	int dd;
-	int mm;
-	int yy;
-} Date;
+#include "analytics_functions.h"
 
 void dateswap(int index,Date *pdate)
 {
@@ -39,10 +33,13 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 			CSVParser_GetFieldFromRecord(filename, i, fieldName, buffer);
 			if(strcmp(value,buffer)==0)
 			{
-				(*date_array_size)++;
 				CSVParser_GetFieldFromRecord(filename,i,DatefieldName,date);
-				datearray = (Date *)realloc(datearray, *date_array_size* sizeof(Date));
-				sscanf(date,"%d/%d/%d",&(datearray[*date_array_size-1]).dd,&(datearray[*date_array_size-1]).mm,&(datearray[*date_array_size-1]).yy);
+				if (strlen(date)>2)
+				{
+					(*date_array_size)++; 
+					datearray = (Date *)realloc(datearray, *date_array_size* sizeof(Date));
+					sscanf(date,"%d/%d/%d",&(datearray[*date_array_size-1]).dd,&(datearray[*date_array_size-1]).mm,&(datearray[*date_array_size-1]).yy);
+				}
 			}
 		}
 	}

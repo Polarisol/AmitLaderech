@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <userint.h>
 #include "date.h"
-#include "datefunctions.h"
+#include "analytics_functions.h"
 
 int panelHandle;
 int num_dates;
