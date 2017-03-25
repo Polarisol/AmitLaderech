@@ -4,7 +4,7 @@
 #include "Func_Header.h"
 #include "HebrewConversions.h"
 #include "analytics_functions.h"
-
+#define SIZE 300
 void dateswap(int index,Date *pdate)
 {
 	Date temp;
@@ -15,11 +15,10 @@ void dateswap(int index,Date *pdate)
 }
 Date *extract_dates(char filename[], char fieldName[], char value[],char DatefieldName[],int *date_array_size)
 {
-	int SIZE = 300;
 	int total_num_of_records;
 	Date *datearray=NULL;
 	int status;
-	char buffer[SIZE],date[300];
+	char buffer[SIZE],date[SIZE];
 	*date_array_size=0;
 	HebrewConverter_convertHebrewISOtoUTF8(value);
 	HebrewConverter_convertHebrewISOtoUTF8(DatefieldName);
@@ -36,7 +35,7 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 				CSVParser_GetFieldFromRecord(filename,i,DatefieldName,date);
 				if (strlen(date)>2)
 				{
-					(*date_array_size)++; 
+					(*date_array_size)++;
 					datearray = (Date *)realloc(datearray, *date_array_size* sizeof(Date));
 					sscanf(date,"%d/%d/%d",&(datearray[*date_array_size-1]).dd,&(datearray[*date_array_size-1]).mm,&(datearray[*date_array_size-1]).yy);
 				}
@@ -88,3 +87,31 @@ int daysbetween(Date givendate)
 	return day_diff=(int)diff_time/86400;
 }
 
+
+
+char **extractnames(char filename[],char fieldName[], int *name_array_size)
+{
+	int total_num_of_records;
+	char **namearray=NULL;
+	int status;
+	char name[SIZE];
+	*name_array_size=0;
+	HebrewConverter_convertHebrewISOtoUTF8(fieldName);
+	total_num_of_records = CSVParser_GetNumberOfRecords(filename);
+	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, name);
+	if(status>0)
+	{
+		namearray = (char**)malloc(total_num_of_records * sizeof(char *));
+		for(int i=1; i<=total_num_of_records ; i++)
+		{
+			CSVParser_GetFieldFromRecord(filename, i, fieldName, name);
+			{
+				(*name_array_size)++;
+				CSVParser_GetFieldFromRecord(filename,i,fieldName,name);
+				namearray[i-1] = (char *)malloc(strlen(name)+1);
+				strcpy(namearray[i-1], name);;
+			}
+		}
+	}
+	return namearray;
+}

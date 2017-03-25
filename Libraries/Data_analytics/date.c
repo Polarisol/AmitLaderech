@@ -83,3 +83,22 @@ int CVICALLBACK find_recent (int panel, int control, int event,
 	}
 	return 0;
 }
+
+int CVICALLBACK extract_arrayname (int panel, int control, int event,
+								   void *callbackData, int eventData1, int eventData2)
+{
+	char **name_array=NULL;
+	char path[300],name_colm[300];
+	int name_array_size=0;
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			GetCtrlVal (panelHandle, PANEL_PATH, path);
+		 	GetCtrlVal (panelHandle, PANEL_RING, name_colm);
+			name_array=extractnames(path,name_colm,&name_array_size);
+			for (int i=0 ;i<name_array_size ;i++)
+				printf("%s\n",name_array[i]);
+			break;
+	}
+	return 0;
+}
