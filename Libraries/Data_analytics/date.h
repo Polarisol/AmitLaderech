@@ -20,9 +20,10 @@
 #define  PANEL_NAME                       5       /* control type: string, callback function: (none) */
 #define  PANEL_EXTRACT                    6       /* control type: command, callback function: extract */
 #define  PANEL_FINDRECENT                 7       /* control type: command, callback function: find_recent */
-#define  PANEL_TEXTBOX                    8       /* control type: textBox, callback function: (none) */
-#define  PANEL_RING                       9       /* control type: ring, callback function: (none) */
-#define  PANEL_CREATE_NAME_ARRAY          10      /* control type: command, callback function: extract_arrayname */
+#define  PANEL_TEXTBOX_2                  8       /* control type: textBox, callback function: (none) */
+#define  PANEL_TEXTBOX                    9       /* control type: textBox, callback function: (none) */
+#define  PANEL_RING                       10      /* control type: ring, callback function: (none) */
+#define  PANEL_CREATE_NAME_ARRAY          11      /* control type: command, callback function: extract_arrayname */
 
 
      /* Control Arrays: */

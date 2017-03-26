@@ -4,7 +4,7 @@
 #include <userint.h>
 #include "date.h"
 #include "analytics_functions.h"
-
+#define SIZE 300
 int panelHandle;
 int num_dates;
 Date *datearray=NULL;
@@ -96,8 +96,8 @@ int CVICALLBACK extract_arrayname (int panel, int control, int event,
 								   void *callbackData, int eventData1, int eventData2)
 {
 	char **name_array=NULL,**sorted=NULL;
-	char path[300],name_colm[300];
-	int name_array_size=0,sorted_size=0;
+	char path[300],name_colm[300],mentor[SIZE];
+	int name_array_size=0,sorted_size=0,*records=NULL,array_size;
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -114,6 +114,21 @@ int CVICALLBACK extract_arrayname (int panel, int control, int event,
 				printf("%s\n",sorted[i]);
 				HebrewConverter_convertHebrewUTF8toISO(sorted[i]);
 				InsertTextBoxLine (panelHandle, PANEL_TEXTBOX,-1 ,sorted[i] );
+			}
+			strcpy(mentor,sorted[5]);
+			records=extractrecorednum(path, name_colm, mentor,&array_size);
+			for (int i=0 ; i<array_size ; i++)
+				printf("%d\n",records[i]);
+			GetValueFromIndex (panelHandle, PANEL_RING, 0, name_colm);
+			name_array=ExtractSpecificNames(path,records,array_size,name_colm,&name_array_size); 
+			printf("mentor's\n\n");
+			for (int i=0 ; i<name_array_size ; i++)
+				printf("%s\n",name_array[i]);
+			for (int i=0 ; i<name_array_size ; i++)
+			{
+				printf("%s\n",name_array[i]);
+				HebrewConverter_convertHebrewUTF8toISO(name_array[i]);
+				InsertTextBoxLine (panelHandle, PANEL_TEXTBOX_2,-1 ,name_array[i]);
 			}
 			free(name_array);
 			free(sorted);

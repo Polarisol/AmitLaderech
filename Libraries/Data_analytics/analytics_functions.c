@@ -202,3 +202,30 @@ Date *SpecificDateExtract(char filename[], int *recordarray,int arraysize, char 
 
 	return datearray;
 }
+
+
+
+char **ExtractSpecificNames(char filename[],int *recordarray,int arraysize, char fieldName[], int *name_array_size)
+{
+	char **namearray=NULL;
+	int status;
+	char name[SIZE];
+	*name_array_size=0;
+	HebrewConverter_convertHebrewISOtoUTF8(fieldName);
+	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, name);
+	if(status>0)
+	{
+		namearray = (char**)malloc(arraysize * sizeof(char *));
+		for(int i=0; i<arraysize ; i++)
+		{
+			CSVParser_GetFieldFromRecord(filename,recordarray[i], fieldName, name);
+			{
+				(*name_array_size)++;
+				CSVParser_GetFieldFromRecord(filename,recordarray[i],fieldName,name);
+				namearray[i] = (char *)malloc(strlen(name)+1);
+				strcpy(namearray[i], name);
+			}
+		}
+	}
+	return namearray;
+}
