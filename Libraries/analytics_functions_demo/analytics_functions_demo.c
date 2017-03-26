@@ -6,7 +6,7 @@
 #include "analytics_functions.h"
 #define SIZE 300
 static int panelHandle;
-
+int selection;
 
 char path[SIZE],mentor_colm[SIZE],soldier_colm[SIZE],date_colm[SIZE];
 int main (int argc, char *argv[])
@@ -43,7 +43,7 @@ int CVICALLBACK extract (int panel, int control, int event,
 						 void *callbackData, int eventData1, int eventData2)
 {
 	char **names=NULL,**sorted=NULL;
-	int array_size,selection;
+	int array_size;
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -73,35 +73,56 @@ int CVICALLBACK analysis (int panel, int control, int event,
 {
 	int *records=NULL,*recordswithin=NULL,array_size,sorted_array_size;
 	int name_array_size,RRarray_size;
-	char mentor[SIZE],string[SIZE],*datestring=NULL;
+	char subject[SIZE],string[SIZE],*datestring=NULL;
 	char **names=NULL,**sorted=NULL;
 	Date *dates=NULL,date,*dates_sp=NULL;
 	int date_array_size,day_passed;
 	char *date_string=NULL;
+	char men[]="mentor",sol[]="soldier";
 	switch (event)
 	{
 		case EVENT_VAL_CHANGED:
-			GetCtrlVal (panelHandle, PANEL_MENTORS, mentor);
-			records=extractrecorednum(path,mentor_colm,mentor,&array_size);
+			GetCtrlVal (panelHandle, PANEL_MENTORS, subject);
+			if (selection)
+				records=extractrecorednum(path,mentor_colm,subject,&array_size);
+			else
+				records=extractrecorednum(path,soldier_colm,subject,&array_size);
 			dates=SpecificDateExtract(path,records,array_size,date_colm,&date_array_size);
+			if (!date_array_size)
+				break;
 			date=findmostrecent(dates,date_array_size);
 			day_passed=daysbetween(date);
 			datestring=DateStucToString(date);
-			sprintf(string,"Total meeting for mentor = %d",date_array_size);
+			if (selection)
+				sprintf(string,"Total meetings for %s = %d",men,date_array_size);
+			else
+				sprintf(string,"Total meetings for %s = %d",sol,date_array_size);
 			SetCtrlVal (panelHandle,PANEL_TOTAL_MEETINGS,string);
-			names=ExtractSpecificNames(path,records,array_size,soldier_colm,&name_array_size);
+			if (selection)
+				names=ExtractSpecificNames(path,records,array_size,soldier_colm,&name_array_size);
+			else
+				names=ExtractSpecificNames(path,records,array_size,mentor_colm,&name_array_size);
 			sorted=removeduplicates (names,array_size,&sorted_array_size);
-			sprintf(string,"Total soldiers for mentor = %d",sorted_array_size);
+			if (selection)
+				sprintf(string,"Total %s for %s = %d",sol,men,sorted_array_size);
+			else
+				sprintf(string,"Total %s for %s = %d",men,sol,sorted_array_size);
 			SetCtrlVal (panelHandle, PANEL_TOTAL_SUBJECTS,string);
 			sprintf(string,"Last meeting was on %s ,days passed since = %d",datestring,day_passed);
 			SetCtrlVal (panelHandle, PANEL_LAST_MEETING,string);
 			names=NULL;
-			names=ExtractSpecificNames(path,records,array_size, soldier_colm, &name_array_size);
+			if (selection)
+				names=ExtractSpecificNames(path,records,array_size, soldier_colm, &name_array_size);
+			else
+				names=ExtractSpecificNames(path,records,array_size, mentor_colm, &name_array_size);
 			sorted=NULL;
 			sorted=removeduplicates (names,name_array_size,&sorted_array_size);
 			for (int i=0; i<sorted_array_size; i++)
 			{
-				recordswithin=ExtractRecordsWithinRecords(path,records,array_size,soldier_colm,sorted[i],&RRarray_size);
+				if (selection)
+					recordswithin=ExtractRecordsWithinRecords(path,records,array_size,soldier_colm,sorted[i],&RRarray_size);
+				else
+					recordswithin=ExtractRecordsWithinRecords(path,records,array_size,mentor_colm,sorted[i],&RRarray_size);
 				HebrewConverter_convertHebrewUTF8toISO(sorted[i]);
 				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(1,i+1),sorted[i] );
 				dates_sp=SpecificDateExtract(path, recordswithin,RRarray_size,date_colm,&date_array_size);
