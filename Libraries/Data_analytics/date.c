@@ -46,6 +46,7 @@ int CVICALLBACK extract (int panel, int control, int event,
 	char name[300];
 	char namefield[300];
 	char datefield[300];
+	int *records=NULL,array_size;
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -56,6 +57,9 @@ int CVICALLBACK extract (int panel, int control, int event,
 			datearray=extract_dates(path, namefield, name,datefield, &num_dates);
 			for (int i=0; i< num_dates; i++)
 				printf("%d|%d|%d\n",(datearray[i]).dd,(datearray[i]).mm,(datearray[i]).yy);
+			records=extractrecorednum(path,namefield, name,&array_size);
+			for (int i=0;i<array_size;i++)
+				printf("record num - %d\n",records[i]);
 			break;
 	}
 	return 0;
@@ -94,22 +98,22 @@ int CVICALLBACK extract_arrayname (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			GetCtrlVal (panelHandle, PANEL_PATH, path);
-		 	GetCtrlVal (panelHandle, PANEL_RING, name_colm);
+			GetCtrlVal (panelHandle, PANEL_RING, name_colm);
 			name_array=extractnames(path,name_colm,&name_array_size);
-			for (int i=0 ;i<name_array_size ;i++)
+			for (int i=0 ; i<name_array_size ; i++)
 				printf("%s\n",name_array[i]);
 			sorted=removeduplicates (name_array,name_array_size,&sorted_size);
 			printf("sorting\n\n");
 			DeleteTextBoxLines (panelHandle, PANEL_TEXTBOX, 0, -1);
-			for (int i=0 ;i<sorted_size ;i++)
-				{
-					printf("%s\n",sorted[i]);
-					HebrewConverter_convertHebrewUTF8toISO(sorted[i]);
-					InsertTextBoxLine (panelHandle, PANEL_TEXTBOX,-1 ,sorted[i] );
-				}
+			for (int i=0 ; i<sorted_size ; i++)
+			{
+				printf("%s\n",sorted[i]);
+				HebrewConverter_convertHebrewUTF8toISO(sorted[i]);
+				InsertTextBoxLine (panelHandle, PANEL_TEXTBOX,-1 ,sorted[i] );
+			}
+			free(name_array);
+			free(sorted);
 			break;
-		free(name_array);
-		free(sorted);
 	}
 	return 0;
 }

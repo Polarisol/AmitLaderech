@@ -141,3 +141,36 @@ char **removeduplicates (char **org,int org_size,int *sorted_size)
 	}
 	return sortedarray;
 }
+
+
+
+
+int *extractrecorednum(char filename[], char fieldName[], char value[],int *array_size) 
+{
+	int total_num_of_records;
+	int *recordarray=NULL;
+	int status;
+	int j=0;
+	char buffer[SIZE];
+	*array_size=0;
+	HebrewConverter_convertHebrewISOtoUTF8(value);
+	HebrewConverter_convertHebrewISOtoUTF8(fieldName);
+	total_num_of_records = CSVParser_GetNumberOfRecords(filename);
+	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, buffer);
+	if(status>0)
+	{
+		*array_size=CSVParser_CountAllRecordsWithFieldValue(filename,fieldName,value);
+		recordarray = (int *)malloc(*array_size* sizeof(int));
+		for(int i=1; i<=total_num_of_records ; i++)
+		{
+			CSVParser_GetFieldFromRecord(filename, i, fieldName, buffer);
+			if(strcmp(value,buffer)==0)
+			{
+				recordarray[j]=i;
+				j++;
+			}
+		}
+	}
+
+	return recordarray;
+}
