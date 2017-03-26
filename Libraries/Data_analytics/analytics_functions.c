@@ -174,7 +174,6 @@ int *extractrecorednum(char filename[], char fieldName[], char value[],int *arra
 			}
 		}
 	}
-
 	return recordarray;
 }
 
@@ -203,7 +202,7 @@ Date *SpecificDateExtract(char filename[], int *recordarray,int arraysize, char 
 			}
 		}
 	}
-
+	//printf("size=%d\n",*date_array_size);
 	return datearray;
 }
 
@@ -251,9 +250,9 @@ int *ExtractRecordsWithinRecords(char filename[],int *records,int records_size, 
 {
 	int *recordarray=NULL;
 	int status;
-	int j=0;
 	char buffer[SIZE];
-	*array_size=0;
+	int j=0;
+	(*array_size)=0;
 	HebrewConverter_convertHebrewISOtoUTF8(value);
 	HebrewConverter_convertHebrewISOtoUTF8(fieldName);
 	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, buffer);
@@ -266,11 +265,14 @@ int *ExtractRecordsWithinRecords(char filename[],int *records,int records_size, 
 			CSVParser_GetFieldFromRecord(filename, records[i], fieldName, buffer);
 			if(strcmp(value,buffer)==0)
 			{
-				recordarray[j]=records[i];
-				j++;
+					recordarray[j]=records[i];
+					//printf("recordarray[%d]=%d\n",j,recordarray[j]);
+					j++;
+					
 			}
 		}
 	}
-
+	//printf("\nj=%d,RRsize=%d\n",j,*array_size);
+	(*array_size)=j;
 	return recordarray;
 }
