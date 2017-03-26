@@ -31,7 +31,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 2
+Number of Opened Files = 3
 Window Confinement Region Enabled = True
 MainColumnWidth = 214
 FileDateColumnWidth = 70
@@ -50,7 +50,7 @@ Batch Build Debug = False
 Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/analyt"
 Path Line0002 = "ics_functions_demo.uir"
 File Type = "User Interface Resource"
-Disk Date = 3573355728
+Disk Date = 3573357295
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
@@ -62,10 +62,11 @@ Window Z-Order = 2
 Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/analyt"
 Path Line0002 = "ics_functions_demo.c"
 File Type = "CSource"
-Disk Date = 3573355734
+Disk Date = 3573357392
 In Projects = "1,"
+Window Top = 28
 Window Z-Order = 1
-Source Window State = "1,0,0,0,0,0,0,0,0,90,0,0,0,0,0,24,0,0,17,0,400,600,0,0,"
+Source Window State = "1,51,51,51,0,8160,18,1,0,90,0,0,0,0,0,24,42,0,51,8,400,600,1,0,"
 
 [File 0003]
 Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/analyt"
@@ -76,10 +77,10 @@ In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0004]
-Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/analyt"
-Path Line0002 = "ics_functions.h"
-File Type = "Include"
-Disk Date = 3573353197
+Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/CSV_Pa"
+Path Line0002 = "rser_Functions.c"
+File Type = "CSource"
+Disk Date = 3572349481
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
@@ -92,26 +93,29 @@ In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0006]
-Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/Hebrew"
-Path Line0002 = "Conversions.h"
+Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/analyt"
+Path Line0002 = "ics_functions.h"
 File Type = "Include"
-Disk Date = 3572349533
+Disk Date = 3573353197
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 142
+Window Left = 70
+Window Z-Order = 3
+Source Window State = "1,12,12,12,4,15,15,1,0,74,0,0,0,0,0,15,0,0,17,10,331,948,1,0,"
 
 [File 0007]
-Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/CSV_Pa"
-Path Line0002 = "rser_Functions.c"
-File Type = "CSource"
+Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/Func_H"
+Path Line0002 = "eader.h"
+File Type = "Include"
 Disk Date = 3572349481
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0008]
-Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/Func_H"
-Path Line0002 = "eader.h"
+Path Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/Hebrew"
+Path Line0002 = "Conversions.h"
 File Type = "Include"
-Disk Date = 3572349481
+Disk Date = 3572349533
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
@@ -120,6 +124,8 @@ Tab 0001 Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_
 Tab 0001 Line0002 = "ics_functions_demo.uir"
 Tab 0002 Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/analyt"
 Tab 0002 Line0002 = "ics_functions_demo.c"
+Tab 0003 Line0001 = "/c/Users/Lenovo/Documents/AmitLaderech/Libraries/analytics_functions_demo/analyt"
+Tab 0003 Line0002 = "ics_functions.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
