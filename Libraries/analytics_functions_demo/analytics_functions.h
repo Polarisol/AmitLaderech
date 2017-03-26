@@ -17,4 +17,5 @@ int *extractrecorednum(char filename[], char fieldName[], char value[],int *arra
 Date *SpecificDateExtract(char filename[], int *recordarray,int arraysize, char DatefieldName[],int *date_array_size);
 char **ExtractSpecificNames(char filename[],int *recordarray,int arraysize, char fieldName[], int *name_array_size); 
 char *DateStucToString(Date date);
+int *ExtractRecordsWithinRecords(char filename[],int *records,int records_size, char fieldName[], char value[],int *array_size);
 #endif

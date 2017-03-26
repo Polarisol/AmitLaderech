@@ -20,7 +20,8 @@
 #define  PANEL_TOTAL_MEETINGS             5       /* control type: textMsg, callback function: (none) */
 #define  PANEL_DATE_COLM                  6       /* control type: string, callback function: (none) */
 #define  PANEL_TOTAL_SUBJECTS             7       /* control type: textMsg, callback function: (none) */
-#define  PANEL_LAST_MEETING               8       /* control type: textMsg, callback function: (none) */
+#define  PANEL_TABLE                      8       /* control type: table, callback function: (none) */
+#define  PANEL_LAST_MEETING               9       /* control type: textMsg, callback function: (none) */
 
 
      /* Control Arrays: */
