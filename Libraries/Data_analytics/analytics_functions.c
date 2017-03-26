@@ -49,6 +49,7 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 
 Date findmostrecent(Date *datearray,int array_size)
 {
+
 	for (int i=0 ; i<array_size; i++)
 	{
 		for (int j=0; j<array_size-i-1; j++)
@@ -65,6 +66,7 @@ Date findmostrecent(Date *datearray,int array_size)
 	}
 	return datearray[0];
 }
+
 
 
 
@@ -186,16 +188,18 @@ Date *SpecificDateExtract(char filename[], int *recordarray,int arraysize, char 
 	*date_array_size=0;
 	HebrewConverter_convertHebrewISOtoUTF8(DatefieldName);
 	status = CSVParser_GetFieldFromRecord(filename, 1, DatefieldName, buffer);
+	*date_array_size=0;
 	if(status>0)
 	{
 		for(int i=0; i<arraysize ; i++)
 		{
 			CSVParser_GetFieldFromRecord(filename,recordarray[i],DatefieldName,date);
-			if (strlen(date)>2)
+			if (strlen(date)>1)
 			{
 				(*date_array_size)++;
 				datearray = (Date *)realloc(datearray, *date_array_size* sizeof(Date));
 				sscanf(date,"%d/%d/%d",&(datearray[*date_array_size-1]).dd,&(datearray[*date_array_size-1]).mm,&(datearray[*date_array_size-1]).yy);
+				//printf("%d|%d|%d\n",datearray[*date_array_size-1].dd,datearray[*date_array_size-1].mm,datearray[*date_array_size-1].yy);
 			}
 		}
 	}
@@ -233,7 +237,7 @@ char **ExtractSpecificNames(char filename[],int *recordarray,int arraysize, char
 
 char *DateStucToString(Date date)
 {
-	char fullstring[20];
+	char fullstring[200]= {0};
 	char *string=NULL;
 	sprintf(fullstring,"%d/%d/%d",date.dd,date.mm,date.yy);
 	string=(char *)malloc(strlen(fullstring)+1);
@@ -241,3 +245,32 @@ char *DateStucToString(Date date)
 	return string;
 }
 
+
+
+int *ExtractRecordsWithinRecords(char filename[],int *records,int records_size, char fieldName[], char value[],int *array_size)
+{
+	int *recordarray=NULL;
+	int status;
+	int j=0;
+	char buffer[SIZE];
+	*array_size=0;
+	HebrewConverter_convertHebrewISOtoUTF8(value);
+	HebrewConverter_convertHebrewISOtoUTF8(fieldName);
+	status = CSVParser_GetFieldFromRecord(filename, 1, fieldName, buffer);
+	if(status>0)
+	{
+		*array_size=CSVParser_CountAllRecordsWithFieldValue(filename,fieldName,value);
+		recordarray = (int *)malloc(*array_size* sizeof(int));
+		for(int i=0; i<records_size ; i++)
+		{
+			CSVParser_GetFieldFromRecord(filename, records[i], fieldName, buffer);
+			if(strcmp(value,buffer)==0)
+			{
+				recordarray[j]=records[i];
+				j++;
+			}
+		}
+	}
+
+	return recordarray;
+}
