@@ -229,3 +229,15 @@ char **ExtractSpecificNames(char filename[],int *recordarray,int arraysize, char
 	}
 	return namearray;
 }
+
+
+char *DateStucToString(Date date)
+{
+	char fullstring[20];
+	char *string=NULL;
+	sprintf(fullstring,"%d/%d/%d",date.dd,date.mm,date.yy);
+	string=(char *)malloc(strlen(fullstring)+1);
+	strcpy(string,fullstring);
+	return string;
+}
+
