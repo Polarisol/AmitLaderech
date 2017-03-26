@@ -60,6 +60,10 @@ int CVICALLBACK extract (int panel, int control, int event,
 			records=extractrecorednum(path,namefield, name,&array_size);
 			for (int i=0;i<array_size;i++)
 				printf("record num - %d\n",records[i]);
+			datearray=NULL;
+			datearray=SpecificDateExtract(path, records,array_size,datefield,&array_size);
+			for (int i=0;i<array_size;i++)
+				printf("%d|%d|%d\n",(datearray[i]).dd,(datearray[i]).mm,(datearray[i]).yy);
 			break;
 	}
 	return 0;

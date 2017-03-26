@@ -13,6 +13,7 @@ void dateswap(int index,Date *pdate)
 	pdate[index+1]=temp;
 
 }
+
 Date *extract_dates(char filename[], char fieldName[], char value[],char DatefieldName[],int *date_array_size)
 {
 	int total_num_of_records;
@@ -120,9 +121,9 @@ char **removeduplicates (char **org,int org_size,int *sorted_size)
 {
 	char **sortedarray=NULL;
 	*sorted_size=0;
-	for (int i=0; i<org_size;i++)
+	for (int i=0; i<org_size; i++)
 	{
-		for (int j=0;j<=*sorted_size;j++)
+		for (int j=0; j<=*sorted_size; j++)
 		{
 			if(j==*sorted_size)
 			{
@@ -145,7 +146,7 @@ char **removeduplicates (char **org,int org_size,int *sorted_size)
 
 
 
-int *extractrecorednum(char filename[], char fieldName[], char value[],int *array_size) 
+int *extractrecorednum(char filename[], char fieldName[], char value[],int *array_size)
 {
 	int total_num_of_records;
 	int *recordarray=NULL;
@@ -173,4 +174,31 @@ int *extractrecorednum(char filename[], char fieldName[], char value[],int *arra
 	}
 
 	return recordarray;
+}
+
+
+
+Date *SpecificDateExtract(char filename[], int *recordarray,int arraysize, char DatefieldName[],int *date_array_size)
+{
+	Date *datearray=NULL;
+	int status;
+	char buffer[SIZE],date[SIZE];
+	*date_array_size=0;
+	HebrewConverter_convertHebrewISOtoUTF8(DatefieldName);
+	status = CSVParser_GetFieldFromRecord(filename, 1, DatefieldName, buffer);
+	if(status>0)
+	{
+		for(int i=0; i<arraysize ; i++)
+		{
+			CSVParser_GetFieldFromRecord(filename,recordarray[i],DatefieldName,date);
+			if (strlen(date)>2)
+			{
+				(*date_array_size)++;
+				datearray = (Date *)realloc(datearray, *date_array_size* sizeof(Date));
+				sscanf(date,"%d/%d/%d",&(datearray[*date_array_size-1]).dd,&(datearray[*date_array_size-1]).mm,&(datearray[*date_array_size-1]).yy);
+			}
+		}
+	}
+
+	return datearray;
 }
