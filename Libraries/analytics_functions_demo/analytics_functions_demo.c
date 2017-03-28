@@ -63,6 +63,14 @@ int CVICALLBACK extract (int panel, int control, int event,
 				HebrewConverter_convertHebrewUTF8toISO(sorted[i]);
 				InsertListItem (panelHandle, PANEL_MENTORS, -1, sorted[i],sorted[i]);
 			}
+			for (int i=1;i<10;i++)
+			{
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(1,i),"" );
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(2,i),"");
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(3,i),0);
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(4,i),0 );
+			}
+			
 			break;
 	}
 	return 0;
@@ -104,13 +112,20 @@ int CVICALLBACK analysis (int panel, int control, int event,
 				names=ExtractSpecificNames(path,records,array_size,mentor_colm,&name_array_size);
 			sorted=removeduplicates (names,array_size,&sorted_array_size);
 			if (selection)
-				sprintf(string,"Total %s for %s = %d",sol,men,sorted_array_size);
+				sprintf(string,"Total %ss for %s = %d",sol,men,sorted_array_size);
 			else
-				sprintf(string,"Total %s for %s = %d",men,sol,sorted_array_size);
+				sprintf(string,"Total %ss for %s = %d",men,sol,sorted_array_size);
 			SetCtrlVal (panelHandle, PANEL_TOTAL_SUBJECTS,string);
 			sprintf(string,"Last meeting was on %s ,days passed since = %d",datestring,day_passed);
 			SetCtrlVal (panelHandle, PANEL_LAST_MEETING,string);
 			names=NULL;
+			for (int i=1;i<10;i++)
+			{
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(1,i),"" );
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(2,i),"");
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(3,i),0);
+				SetTableCellVal (panelHandle, PANEL_TABLE, MakePoint(4,i),0 );
+			}
 			if (selection)
 				names=ExtractSpecificNames(path,records,array_size, soldier_colm, &name_array_size);
 			else
