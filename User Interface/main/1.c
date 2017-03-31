@@ -16,7 +16,7 @@
 static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL,pTable,pGroup,pNewGroup;
 static char id[SIZE], currentDate[50], currentTime[50];
 //static char dbFile[SIZE];
-static char **tagName,**tagValue,**ids;
+static char **tagName,**tagValue,**ids,**output; 
 int recordAmount;
 int fieldAmount;
 int ctrlArray;
@@ -35,6 +35,8 @@ void showMember(int panel,char dir[],char database[],char record[],int ctrlArray
 void connectIDtoName(char dir[],char database[],char record[],char fullName[]);
 int connectNametoID(char dir[],char database[],char record[],char fullName[]); 
 void createTable(char dir[],char database[], char **ids, int rows,int panel,int control);
+int connectNametoIDS(char **records,char fullName[]);
+int search(char searchBy[],char val[],char **output);
 
 
 //==============================================================================
@@ -68,7 +70,7 @@ int main (int argc, char *argv[])
         return -1;
 	if ((pNewGroup = LoadPanel (0, "1.uir", P_NEW_GROU)) < 0)
         return -1;
-	RecallPanelState (pMain, "panelState.txt", 0);
+	//RecallPanelState (pMain, "panelState.txt", 0);
 	GetSystemDate (&month, &day, &year);
 	sprintf (currentDate, "%d/%d/%d", day, month, year);
 	GetSystemTime (&hr, &min, &sec);
@@ -373,6 +375,63 @@ int CVICALLBACK checkIfExcist (int panel, int control, int event,
 	return 0;
 }
 
+int CVICALLBACK changeVal (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+char database[SIZE], searchBy[SIZE],val[SIZE],dir[SIZE];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			if(control == P_MAIN_SEARCH_RING)
+			{
+				SetCtrlAttribute (panel, P_MAIN_SEARCH_BY_RING ,ATTR_VISIBLE, 1);
+			}
+			else if(control ==  P_MAIN_SEARCH_BY_RING) 
+			{
+				 SetCtrlAttribute (panel,P_MAIN_SEARCH_STRING, ATTR_VISIBLE, 1);
+			}
+			else if(control == P_MAIN_SEARCH_STRING)
+			{
+				
+				GetCtrlVal (panel, P_MAIN_SEARCH_RING, database);
+				GetCtrlVal (panel, P_MAIN_SEARCH_BY_RING, searchBy);
+				GetCtrlVal (panel, control, val);
+				if(strcmp(database,"GROUP")==0)
+				{
+					sprintf(dir,"%s",GROUP);	
+				}
+				else if(strcmp(database,"GUIDE")==0)
+				{
+					sprintf(dir,"%s",GUIDE);
+				}
+				else if(strcmp(database,"MENTOR")==0)
+				{
+					sprintf(dir,"%s",MENTOR);
+				}
+				else
+					sprintf(dir,"%s",SOLDIER);
+				initialize(database);
+				Database_SetDatabaseFile(dir);
+				Database_CountAllRecords(&recordAmount);
+				output = malloc(sizeof(char*)*recordAmount);
+				if(database != "GROUP")
+				{
+					int cc = search(searchBy,val,output);
+					if(cc>=1)
+					{
+						DisplayPanel(pTable);
+						createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M);
+					}
+				}
+				else
+				{
+					//GROUP search
+				}
+			}								   
+			break;
+	}
+	return 0;
+}
 
 //==============================================================================
 //							Function realization section
@@ -526,6 +585,53 @@ int connectNametoID(char dir[],char database[],char record[],char fullName[])
 	return 0;
 }
 
+int connectNametoIDS(char **records,char fullName[]) 
+{ //gets the FULL NAME and return the ID
+	char fName[SIZE],lName[SIZE],fullNameCheck[SIZE];
+	int countID =0;
+	for(int i=1;i<=recordAmount;i++)
+	{
+		Database_GetRecordInfo(id,i);
+		Database_GetFieldVal(id,"שם פרטי",fName);
+		Database_GetFieldVal(id,"שם משפחה",lName);
+		sprintf(fullNameCheck,"%s %s",fName,lName);
+		if((strcmp(fullName,fullNameCheck)==0)|| strcmp(fullName,fName)==0 ||  strcmp(fullName,lName)==0)
+		{
+			records[countID] = malloc(sizeof(char)*12);
+			sprintf(records[countID],"%s\0",id);
+			countID++;
+		}
+		
+	}
+	if(countID==0)
+		return 0;
+	else
+		return countID;
+}
+
+int search(char searchBy[],char val[],char **output)
+{
+	
+	if(strcmp(searchBy,"name")==0)
+	{//Search by name 
+			return connectNametoIDS(output,val);
+	}
+	else
+	{//search by ID
+		for(int i=0;i<recordAmount;i++)
+		{
+			Database_GetRecordInfo(id,i+1);
+			if(strcmp(val,id)==0)
+			{
+				output[0] = malloc(sizeof(char)*strlen(val)+1);
+				sprintf(output[0],val);
+				return 1;
+			}
+		}	
+	}
+	return 0;
+}
+
 void createTable(char dir[],char database[], char **ids,int rows,int panel,int control)
 {//NOT WORKING WITH HEBREW 
 	initialize(database);
@@ -552,26 +658,27 @@ void createTable(char dir[],char database[], char **ids,int rows,int panel,int c
 
 int CVICALLBACK edit (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
-{
+{/*
+	
 	int ctrlarr1[3], ctrlarr2[7], ctrlarr3[3]; // 1-hide/show , 2-hot/indicator, 3-another hide/show
 	switch (event)
 	{
 		case EVENT_COMMIT:
 			if (panel==pGuide)
-			//switch (panel)    // I didn't finish that function. Please Don't touch!
+			switch (panel)    // I didn't finish that function. Please Don't touch!
 			{
-				/*case pGroup:
+				case pGroup:
 					ctrlarr1=[P_GROUP_DELETE_GROUP_BUTTON, P_GROUP_EDIT_MENTORS_BUTTON, P_GROUP_SAVE_CHANGES_BUTTON];
 					ctrlarr2=[P_GROUP_GUIDE, P_GROUP_STATUS_RING];
 					ctrlarr3=[P_GROUP_EDIT_GROUP_BUTTON, P_GROUP_LIST_SOLDIERS_BUTTON];
-					break;*/
-				//case pGuide:
+					break;
+				case pGuide:
 					ctrlarr1={P_GUIDE_DELETING_GUIDE_BUTTON, P_GUIDE_SAVE_CHANGES_BUTTON};
 					ctrlarr2={P_GUIDE_CELL_PHONE_NUMBER, P_GUIDE_PHONE_NUMBER, P_GUIDE_ADDRESS, P_GUIDE_CITY,
 							  P_GUIDE_MAIN_OCCUPATION, P_GUIDE_SUMMARY, P_GUIDE_EXCEPTIONS};
 					ctrlarr3={P_GUIDE_LIST_SOLDIERS_BUTTON, P_GUIDE_SEND_EMAIL, P_GUIDE_EDITING_BUTTON};
-					//break;
-				/*case pMentor:
+					break;
+				case pMentor:
 					ctrlarr1=[P_MENTOR_DELETING_MENTO_BUTTON, P_MENTOR_SAVE_CHANGES_BUTTON];
 					ctrlarr2=[P_MENTOR_CELL_PHONE_NUMBER, P_MENTOR_PHONE_NUMBER, P_MENTOR_ADDRESS, P_MENTOR_CITY,
 							  P_MENTOR_MAIN_OCCUPATION];
@@ -580,12 +687,14 @@ int CVICALLBACK edit (int panel, int control, int event,
 				case pSoldier:
 					ctrlarr1=[P_SOLDIER_MOVING_ARCHIVE_BUTTON, P_SOLDIER_SAVE_CHANGES_BUTTON, P_SOLDIER_EDIT_TL_BUTTON];
 					ctrlarr2=[];
-					break;*/
+					break;
 			}
 			SetCtrlArrayAttribute (ctrlarr1, ATTR_VISIBLE, 1);
 			SetCtrlArrayAttribute (ctrlarr2, ATTR_CTRL_MODE, VAL_HOT);
 			SetCtrlArrayAttribute (ctrlarr3, ATTR_VISIBLE, 0);
 			break;
 	}
-	return 0;
+	
+*/
+return 0;
 }

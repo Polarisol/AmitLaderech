@@ -48,7 +48,7 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3573805448
+Disk Date = 3573816819
 In Projects = "1,"
 Window Top = 450
 Window Left = 202
@@ -59,19 +59,21 @@ Window Z-Order = 2
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3573805446
+Disk Date = 3573817079
 In Projects = "1,"
 Window Top = 394
 Window Left = 173
 Window Z-Order = 1
-Source Window State = "1,571,571,571,29,30,30,0,0,109,0,0,0,0,0,33,337,0,564,37,687,1356,1,0,"
+Source Window State = "1,625,625,625,16,49,49,0,0,109,0,0,0,0,0,18,610,0,624,13,687,1356,1,0,"
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.c"
 File Type = "CSource"
-Disk Date = 3573805446
+Disk Date = 3573806638
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 47
+Window Left = 13
+Source Window State = "1,1,2,2,0,24,24,0,0,0,0,0,0,0,0,0,0,0,0,22,436,1272,1,0,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.c"

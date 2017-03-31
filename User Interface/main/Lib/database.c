@@ -1,6 +1,4 @@
 //#include <userint.h>
-//#include "DataBaseAccess_test.h"
-
 //==============================================================================
 //									database.c							
 //							database function file.
