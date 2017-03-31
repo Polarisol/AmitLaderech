@@ -13,10 +13,10 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "1.prj"
 Drag Bar Left = 213
-Window Top = 48
-Window Left = 1293
-Window Bottom = 1039
-Window Right = 3205
+Window Top = 102
+Window Left = 8
+Window Bottom = 1093
+Window Right = 1920
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 3
+Number of Opened Files = 2
 Window Confinement Region Enabled = True
 MainColumnWidth = 196
 FileDateColumnWidth = 70
@@ -48,66 +48,55 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3572887794
+Disk Date = 3573805448
 In Projects = "1,"
-Window Top = 56
-Window Left = 11
-Window Height = 531
-Window Width = 780
-Window Z-Order = 3
+Window Top = 450
+Window Left = 202
+Window Height = 687
+Window Width = 1356
+Window Z-Order = 2
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3572962143
+Disk Date = 3573805446
 In Projects = "1,"
-Window Top = 47
-Window Left = 13
+Window Top = 394
+Window Left = 173
 Window Z-Order = 1
-Source Window State = "1,33,34,33,0,0,0,0,0,109,0,0,0,0,0,25,18,0,33,17,586,1272,1,0,"
+Source Window State = "1,571,571,571,29,30,30,0,0,109,0,0,0,0,0,33,337,0,564,37,687,1356,1,0,"
 
 [File 0003]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.h"
-File Type = "Include"
-Disk Date = 3572887794
-In Projects = ""
-Window Top = 47
-Window Left = 13
-Window Z-Order = 2
-Source Window State = "1,0,0,0,0,0,0,0,0,80,0,386,0,0,0,21,386,0,0,0,561,1272,1,23,"
-
-[File 0004]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.c"
 File Type = "CSource"
-Disk Date = 3572543717
+Disk Date = 3573805446
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0004]
+Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.c"
+File Type = "CSource"
+Disk Date = 3573805446
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0005]
-Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.c"
-File Type = "CSource"
-Disk Date = 3567963141
+Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.h"
+File Type = "Include"
+Disk Date = 3573805446
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0006]
-Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.h"
-File Type = "Include"
-Disk Date = 3567963334
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0007]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.h"
 File Type = "Include"
-Disk Date = 3567963141
+Disk Date = 3573805446
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [Tab Order]
-Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.c"
-Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
-Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/1.h"
+Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
+Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

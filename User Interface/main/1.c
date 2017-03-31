@@ -14,13 +14,14 @@
 //								SIZE = 300
 //============================================================================== 
 static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL,pTable,pGroup,pNewGroup;
-static char id[SIZE];
+static char id[SIZE], currentDate[50], currentTime[50];
 //static char dbFile[SIZE];
 static char **tagName,**tagValue,**ids;
 int recordAmount;
 int fieldAmount;
 int ctrlArray;
-
+int hr, min, sec;
+int day, month, year;
 
 
 //==============================================================================
@@ -67,9 +68,28 @@ int main (int argc, char *argv[])
         return -1;
 	if ((pNewGroup = LoadPanel (0, "1.uir", P_NEW_GROU)) < 0)
         return -1;
-    DisplayPanel (pMain);
+	RecallPanelState (pMain, "panelState.txt", 0);
+	GetSystemDate (&month, &day, &year);
+	sprintf (currentDate, "%d/%d/%d", day, month, year);
+	GetSystemTime (&hr, &min, &sec);
+	if  (min<10)
+		sprintf (currentTime, "%d:0%d", hr, min);
+	else
+		sprintf (currentTime, "%d:%d",  hr, min);
+	SetCtrlVal (pMain, P_MAIN_DATE_STRING, currentDate);
+	SetCtrlVal (pMain, P_MAIN_CLOCK_STRING, currentTime);
+	if (hr>=7 && hr<12)
+		  SetCtrlVal (pMain, P_MAIN_BLESSING, "!נטלי, בוקר טוב");
+	else if (hr>=12 && hr<17)
+		  SetCtrlVal (pMain, P_MAIN_BLESSING, "!נטלי, צהריים טובים");
+	else if (hr>=17 && hr<22)
+		  SetCtrlVal (pMain, P_MAIN_BLESSING, "!נטלי, ערב טוב");
+	else
+		  SetCtrlVal (pMain, P_MAIN_BLESSING, "!נטלי, לילה טוב! לכי לישון");
+	DisplayPanel (pMain);
     RunUserInterface ();
     finalize();
+	SavePanelState (pMain, "panelState.txt", 0);
     DiscardPanel (pMain);
     DiscardPanel (pActivity);
     DiscardPanel (pGuide);
@@ -85,11 +105,9 @@ int main (int argc, char *argv[])
     return 0;
 }
 
-
-////////////////////////
-// Exits Functions    //
-////////////////////////
-
+//==============================================================================
+//							Exits Functions
+//==============================================================================
 int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
                           int eventData1, int eventData2)
 {
@@ -111,6 +129,10 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
     return 0;
 }
 
+
+//==============================================================================
+//							CVI CALLBACK Functions
+//==============================================================================
 
 //Add new record to any database
 int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
@@ -189,9 +211,9 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 }
 
 
-/////////////////////////////////
-// Display Panels functions    //
-/////////////////////////////////
+//==============================================================================
+//							Display Panels Functions
+//==============================================================================
 
 int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 								 void *callbackData, int eventData1, int eventData2)
@@ -354,7 +376,8 @@ int CVICALLBACK checkIfExcist (int panel, int control, int event,
 
 //==============================================================================
 //							Function realization section
-//============================================================================== 
+//==============================================================================
+
 //Prepare the arrays for input. using the config.ini
 void initialize(char database[])
 {
@@ -527,3 +550,42 @@ void createTable(char dir[],char database[], char **ids,int rows,int panel,int c
 	}
 }
 
+int CVICALLBACK edit (int panel, int control, int event,
+					  void *callbackData, int eventData1, int eventData2)
+{
+	int ctrlarr1[3], ctrlarr2[7], ctrlarr3[3]; // 1-hide/show , 2-hot/indicator, 3-another hide/show
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			if (panel==pGuide)
+			//switch (panel)    // I didn't finish that function. Please Don't touch!
+			{
+				/*case pGroup:
+					ctrlarr1=[P_GROUP_DELETE_GROUP_BUTTON, P_GROUP_EDIT_MENTORS_BUTTON, P_GROUP_SAVE_CHANGES_BUTTON];
+					ctrlarr2=[P_GROUP_GUIDE, P_GROUP_STATUS_RING];
+					ctrlarr3=[P_GROUP_EDIT_GROUP_BUTTON, P_GROUP_LIST_SOLDIERS_BUTTON];
+					break;*/
+				//case pGuide:
+					ctrlarr1={P_GUIDE_DELETING_GUIDE_BUTTON, P_GUIDE_SAVE_CHANGES_BUTTON};
+					ctrlarr2={P_GUIDE_CELL_PHONE_NUMBER, P_GUIDE_PHONE_NUMBER, P_GUIDE_ADDRESS, P_GUIDE_CITY,
+							  P_GUIDE_MAIN_OCCUPATION, P_GUIDE_SUMMARY, P_GUIDE_EXCEPTIONS};
+					ctrlarr3={P_GUIDE_LIST_SOLDIERS_BUTTON, P_GUIDE_SEND_EMAIL, P_GUIDE_EDITING_BUTTON};
+					//break;
+				/*case pMentor:
+					ctrlarr1=[P_MENTOR_DELETING_MENTO_BUTTON, P_MENTOR_SAVE_CHANGES_BUTTON];
+					ctrlarr2=[P_MENTOR_CELL_PHONE_NUMBER, P_MENTOR_PHONE_NUMBER, P_MENTOR_ADDRESS, P_MENTOR_CITY,
+							  P_MENTOR_MAIN_OCCUPATION];
+					ctrlarr3=[];
+					break;
+				case pSoldier:
+					ctrlarr1=[P_SOLDIER_MOVING_ARCHIVE_BUTTON, P_SOLDIER_SAVE_CHANGES_BUTTON, P_SOLDIER_EDIT_TL_BUTTON];
+					ctrlarr2=[];
+					break;*/
+			}
+			SetCtrlArrayAttribute (ctrlarr1, ATTR_VISIBLE, 1);
+			SetCtrlArrayAttribute (ctrlarr2, ATTR_CTRL_MODE, VAL_HOT);
+			SetCtrlArrayAttribute (ctrlarr3, ATTR_VISIBLE, 0);
+			break;
+	}
+	return 0;
+}
