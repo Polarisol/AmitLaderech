@@ -312,7 +312,7 @@ char *last_request_check(char filename[],char soldierfield[],char mentorfield[],
 			CSVParser_GetFieldFromRecord(filename,rec_num, soldierfield, value[1]);
 			CSVParser_GetFieldFromRecord(filename,rec_num, mentorfield, value[2]);
 			sprintf(buffer,"mentor:%s ,soldier:%s, request:%s",value[2],value[1],value[0]);
-			CSVParser_MarkAsProcessed(filename,1);
+			//CSVParser_MarkAsProcessed(filename,1);//this function crashes the program,also the bug regarding extracting data from last record persists, thats why -1 is returned. to return value for illustration subtract 2 from rec_num.
 			return buffer;
 		}
 		else

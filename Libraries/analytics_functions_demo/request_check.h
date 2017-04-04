@@ -22,6 +22,7 @@
 #define  PANEL_TEXTMSG_3                  7       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TEXTMSG_4                  8       /* control type: textMsg, callback function: (none) */
 #define  PANEL_COMMANDBUTTON              9       /* control type: command, callback function: initialize */
+#define  PANEL_NUMERIC                    10      /* control type: numeric, callback function: (none) */
 
 
      /* Control Arrays: */

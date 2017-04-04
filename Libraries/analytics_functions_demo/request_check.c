@@ -40,10 +40,11 @@ int CVICALLBACK check_req (int panel, int control, int event,
 					   void *callbackData, int eventData1, int eventData2)
 {
 	char *string,path[SIZE],soldierfield[SIZE],mentorfield[SIZE],requestfield[SIZE];
-	int rec_num=16;
+	int rec_num;
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			GetCtrlVal (panelHandle, PANEL_NUMERIC, &rec_num);
 			GetCtrlVal (panelHandle, PANEL_TEXTMSG, soldierfield);
 			HebrewConverter_convertHebrewISOtoUTF8(soldierfield);
 			GetCtrlVal (panelHandle, PANEL_TEXTMSG_2, mentorfield);
