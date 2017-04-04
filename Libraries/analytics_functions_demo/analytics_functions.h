@@ -19,4 +19,5 @@ char **ExtractSpecificNames(char filename[],int *recordarray,int arraysize, char
 char *DateStucToString(Date date);
 int *ExtractRecordsWithinRecords(char filename[],int *records,int records_size, char fieldName[], char value[],int *array_size);
 char *request_check(char filename[],char soldierfield[],char mentorfield[],char requestfield[],int rec_num);
+char *last_request_check(char filename[],char soldierfield[],char mentorfield[],char requestfield[]);
 #endif

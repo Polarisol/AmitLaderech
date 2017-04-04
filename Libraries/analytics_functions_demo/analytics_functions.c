@@ -297,3 +297,36 @@ char *request_check(char filename[],char soldierfield[],char mentorfield[],char 
 		return buffer;
 	}
 }
+
+char *last_request_check(char filename[],char soldierfield[],char mentorfield[],char requestfield[])
+{
+	char value[3][5*SIZE],buffer[3*SIZE];
+	int rec_num;
+	if (CSVParser_NewRecords(filename))
+	{
+		rec_num=CSVParser_GetNumberOfRecords(filename);
+		CSVParser_GetFieldFromRecord(filename,rec_num, requestfield, buffer);
+		if (strlen(buffer)>3)
+		{
+			strcpy(value[0],buffer);
+			CSVParser_GetFieldFromRecord(filename,rec_num, soldierfield, value[1]);
+			CSVParser_GetFieldFromRecord(filename,rec_num, mentorfield, value[2]);
+			sprintf(buffer,"mentor:%s ,soldier:%s, request:%s",value[2],value[1],value[0]);
+			CSVParser_MarkAsProcessed(filename,1);
+			return buffer;
+		}
+		else
+		{
+			strcpy(buffer,"-1");
+			return buffer;
+		}
+
+	}
+	else
+	{
+		strcpy(buffer,"-1");
+		return buffer;
+	}
+
+}
+
