@@ -265,14 +265,35 @@ int *ExtractRecordsWithinRecords(char filename[],int *records,int records_size, 
 			CSVParser_GetFieldFromRecord(filename, records[i], fieldName, buffer);
 			if(strcmp(value,buffer)==0)
 			{
-					recordarray[j]=records[i];
-					//printf("recordarray[%d]=%d\n",j,recordarray[j]);
-					j++;
-					
+				recordarray[j]=records[i];
+				//printf("recordarray[%d]=%d\n",j,recordarray[j]);
+				j++;
+
 			}
 		}
 	}
 	//printf("\nj=%d,RRsize=%d\n",j,*array_size);
 	(*array_size)=j;
 	return recordarray;
+}
+
+
+
+char *request_check(char filename[],char soldierfield[],char mentorfield[],char requestfield[],int rec_num)
+{
+	char value[3][5*SIZE],buffer[3*SIZE];
+	CSVParser_GetFieldFromRecord(filename,rec_num, requestfield, buffer);
+	if (strlen(buffer)>3)
+	{
+		strcpy(value[0],buffer);
+		CSVParser_GetFieldFromRecord(filename,rec_num, soldierfield, value[1]);
+		CSVParser_GetFieldFromRecord(filename,rec_num, mentorfield, value[2]);
+		sprintf(buffer,"mentor:%s ,soldier:%s, request:%s",value[2],value[1],value[0]);
+		return buffer;
+	}
+	else
+	{
+		strcpy(buffer,"-1");
+		return buffer;
+	}
 }
