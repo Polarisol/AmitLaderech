@@ -17,9 +17,9 @@
 #define  PANEL_CHECK                      2       /* control type: command, callback function: check_req */
 #define  PANEL_TEXTMSG                    3       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TEXTMSG_2                  4       /* control type: textMsg, callback function: (none) */
-#define  PANEL_TEXTMSG_3                  5       /* control type: textMsg, callback function: (none) */
-#define  PANEL_TEXTMSG_4                  6       /* control type: textMsg, callback function: (none) */
-#define  PANEL_OUTPUT                     7       /* control type: textMsg, callback function: (none) */
+#define  PANEL_OUTPUT                     5       /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG_3                  6       /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG_4                  7       /* control type: textMsg, callback function: (none) */
 
 
      /* Control Arrays: */
