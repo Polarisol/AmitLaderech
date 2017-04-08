@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname = "/c/Users/omrig/Desktop/New folder/wordfunc.cws"
+Pathname = "/d/Project/wordfunc/wordfunc.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -13,9 +13,9 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "wordfunc.prj"
 Drag Bar Left = 213
-Window Top = 102
+Window Top = 45
 Window Left = 8
-Window Bottom = 1093
+Window Bottom = 1036
 Window Right = 1920
 Maximized = True
 Maximized Children = True
@@ -46,29 +46,41 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/c/Users/omrig/Desktop/New folder/wordfunc.uir"
-File Type = "User Interface Resource"
-Disk Date = 3568661732
-In Projects = "1,"
+Path Line0001 = "/c/Program Files (x86)/National Instruments/CVI2015/toolslib/activex/word/wordre"
+Path Line0002 = "port.fp"
+File Type = "Function Panel"
+Disk Date = 3562617600
+In Projects = ""
 Window Top = 45
+Window Left = 10
+Window Height = 400
+Window Width = 400
+Window Z-Order = 2
+
+[File 0002]
+Path = "/d/Project/wordfunc/wordfunc.uir"
+File Type = "User Interface Resource"
+Disk Date = 3574521352
+In Projects = "1,"
+Window Top = 32
 Window Left = 10
 Window Height = 349
 Window Width = 683
-Window Z-Order = 1
 
-[File 0002]
-Path = "/c/Users/omrig/Desktop/New folder/wordfunc.c"
+[File 0003]
+Path = "/d/Project/wordfunc/wordfunc.c"
 File Type = "CSource"
-Disk Date = 3568662474
+Disk Date = 3574521460
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
-Window Z-Order = 2
-Source Window State = "1,387,388,388,12,32,32,0,0,41,0,3,0,0,0,12,0,0,19,67,349,683,1,21,"
+Window Z-Order = 1
+Source Window State = "1,120,125,125,0,17,17,0,0,109,0,3,0,0,0,25,108,0,127,36,349,683,1,21,"
 
 [Tab Order]
-Tab 0001 = "/c/Users/omrig/Desktop/New folder/wordfunc.uir"
-Tab 0002 = "/c/Users/omrig/Desktop/New folder/wordfunc.c"
+Tab 0001 Line0001 = "/c/Program Files (x86)/National Instruments/CVI2015/toolslib/activex/word/wordre"
+Tab 0001 Line0002 = "port.fp"
+Tab 0002 = "/d/Project/wordfunc/wordfunc.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

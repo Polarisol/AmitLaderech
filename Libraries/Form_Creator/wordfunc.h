@@ -16,7 +16,6 @@
 #define  PANEL                            1       /* callback function: exitFunc */
 #define  PANEL_START                      2       /* control type: command, callback function: wordDoc */
 #define  PANEL_DOCUMENT                   3       /* control type: ring, callback function: (none) */
-#define  PANEL_GRAPH                      4       /* control type: graph, callback function: (none) */
 
 
      /* Control Arrays: */

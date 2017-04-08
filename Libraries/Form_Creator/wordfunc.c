@@ -26,17 +26,48 @@ static CAObjHandle TableHandle;
 
 static int	panelHandle;
 
+char AMIT_NAME[300]="Full Name - Amit";
+char AMIT_ID[300];
+char AMIT_DATE[300];		   
+char AMIT_AGE[300];
+char AMIT_GENDER[300];
+char AMIT_ADDRESS[300];
+char AMIT_CITY[300];
+char AMIT_LIVING_STATUS[300];
+char AMIT_MOBILE[300];
+char AMIT_PHONE[300];
+char AMIT_MAIL[300];
+char AMIT_EDUCATION[300];
+char AMIT_JOB[300];
+char AMIT_PERIOD[300];
+char AMIT_ECONOMY[300];
+char AMIT_LEGAL_STATUS[300];
+char AMIT_MENTOR[300]; 
 
-char name[300];
-char address[300]; 
-char age[300]; 
-char price[300];
+char MENTOR_NAME[300]="Full Name - Mentor";
+char MENTOR_ID[300];
+char MENTOR_AGE[300];
+char MENTOR_ADDRESS[300];
+char MENTOR_CITY[300];
+char MENTOR_MOBILE[300];
+char MENTOR_PHONE[300];
+char MENTOR_MAIL[300];
+char MENTOR_MANHE[300];
+char MENTOR_AMIT1[300];
+char MENTOR_AMIT2[300];         
+char MENTOR_AMIT3[300];         
 
-char string[]="Hello";
-
-char data[40][40];
-char grades[40][40];
-
+char MANHE_NAME[300]="Full Name - MANHE";
+char MANHE_ID[300];
+char MANHE_AGE[300];
+char MANHE_ADDRESS[300];
+char MANHE_CITY[300];
+char MANHE_MOBILE[300];
+char MANHE_PHONE[300];
+char MANHE_MAIL[300];
+char MANHE_KVUTZA1[300];
+char MANHE_KVUTZA2[300];         
+char MANHE_KVUTZA3[300];         
 
 int counter=0;
 
@@ -87,13 +118,6 @@ int CVICALLBACK wordDoc (int panel, int control, int event,
 	
 	int val;
 	
-	FILE* fp;
-	
-	char fname[300];
-	char fline[300];
-	
-	int typ;
-	
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -104,17 +128,6 @@ int CVICALLBACK wordDoc (int panel, int control, int event,
 			{
 				case 1:
 					
-					fp=fopen ("amit.csv", "r");
-					if (fp)
-					{
-						while(fgets (fline, 300, fp)!=NULL)
-						{
-							sscanf (fline, "%[^,],%[^,],%[^,]" , name, address, age);
-						}
-					}
-					fclose (fp); 
-				 
-						
 					WordRpt_ApplicationNew (VTRUE, &appHandle);  // new application
 					GetProjectDir (pathName);
 					strcat (pathName, "\\amit.doc");
@@ -125,148 +138,159 @@ int CVICALLBACK wordDoc (int panel, int control, int event,
 					WordRpt_SetHeader (docHandle, "", "", "", WRConst_FieldDate, WRConst_FieldEmpty, WRConst_FieldTime); // date config time
 
 
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 26.0); 
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 14.0); 
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
 	
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);
-	
-					//WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_ALLCAPS, WRConst_TRUE);
-
-	
-					GetProjectDir (imageFileName);
-					strcat (imageFileName, "\\assaf.png");
 	
 					WordRpt_NewLine (docHandle);  //new line
-					WordRpt_AppendText (docHandle, "Amit Details");
+					
+					WordRpt_AppendText (docHandle, AMIT_NAME);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);  
 					WordRpt_NewLine (docHandle); 
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 16.0);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignLeft);
-					WordRpt_AppendText (docHandle, "Name:"); 
+					WordRpt_NewLine (docHandle);
+					
+					WordRpt_AppendText (docHandle, "ID:"); 
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
 					WordRpt_InsertTab (docHandle);
-					WordRpt_AppendText (docHandle, name); 
-	
+					WordRpt_AppendText (docHandle, AMIT_ID); 
 					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 16.0);   
+					WordRpt_NewLine (docHandle);        
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
-					WordRpt_AppendText (docHandle, "Address:");
+					
+					WordRpt_AppendText (docHandle, "Date Of Birth:");
+					WordRpt_InsertTab (docHandle);    
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
-					WordRpt_InsertTab (docHandle);   
-					WordRpt_AppendText (docHandle, address); 
-	
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 16.0);   
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
-					WordRpt_AppendText (docHandle, "Age:");
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
+					WordRpt_AppendText (docHandle, AMIT_DATE);    
 					WordRpt_InsertTab (docHandle);
 					WordRpt_InsertTab (docHandle);      
-					WordRpt_AppendText (docHandle, age);    
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Age:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_AGE);    
+					WordRpt_InsertTab (docHandle);
+					WordRpt_InsertTab (docHandle);      
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Gender:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_GENDER);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);   
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Address:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_ADDRESS);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);        
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);   
+					
+					WordRpt_AppendText (docHandle, "City:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_CITY);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);   
+					
+					WordRpt_AppendText (docHandle, "Living Status:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_LIVING_STATUS);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Economy:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_ECONOMY);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Legal Status:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_LEGAL_STATUS);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Job:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_JOB);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Education:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_EDUCATION);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Period:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_PERIOD);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Mentor:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_MENTOR);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);   
+					WordRpt_AppendText (docHandle, "Contact info:");
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
+					
+					WordRpt_AppendText (docHandle, "Mobile:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_MOBILE);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Phone:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_PHONE);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Mail:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, AMIT_MAIL);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
 	
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);   
-					WordRpt_InsertImage (docHandle, imageFileName, &imageHandle); 
-				
 					break;
 					
 				case 2:
-					
-					fp=fopen ("thanks.csv", "r");
-					if (fp)
-					{
-						while(fgets (fline, 300, fp)!=NULL)
-						{
-							sscanf (fline, "%[^,],%[^,]" , name, price);
-						}
-					}
-					fclose (fp);  
-						
-					WordRpt_ApplicationNew (VTRUE, &appHandle);  // new application
-					GetProjectDir (pathName);
-					strcat (pathName, "\\thanks.doc");
-			
-					WordRpt_DocumentOpen (appHandle, pathName, &docHandle); //open word file
-	
-					WordRpt_AddPageNumbers (docHandle, WRConst_Footer, WRConst_AlignPageNumberCenter, WRConst_TRUE);
-					WordRpt_SetHeader (docHandle, "", "", "", WRConst_FieldDate, WRConst_FieldEmpty, WRConst_FieldTime); // date config time
-
-
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 26.0); 
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);
-	
-					//WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_ALLCAPS, WRConst_TRUE);
-
-	
-					GetProjectDir (imageFileName);
-					strcat (imageFileName, "\\thankyoujpg.png");
-	
-					WordRpt_NewLine (docHandle);  //new line
-					WordRpt_AppendText (docHandle, "Thank You For Donate Us");
-					
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);  
-					
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 16.0);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignLeft);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone); 
-					WordRpt_AppendText (docHandle, "Dear Mr. "); 
-					WordRpt_AppendText (docHandle, name);
-					WordRpt_AppendText (docHandle, " ,\n Thank you so much for donate us "); 
-					WordRpt_AppendText (docHandle, price);
-					WordRpt_AppendText (docHandle, "dollars!");
-			
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);   
-					WordRpt_InsertImage (docHandle, imageFileName, &imageHandle); 
-					
-					break;
-					
-				case 3:
-					
-					fp=fopen ("mentor.csv", "r");
-					if (fp)
-					{
-						while(fgets (fline, 300, fp)!=NULL)
-						{
-							sscanf (fline, "%[^,],%[^,],%[^,]" , name, address, age);
-						}
-					}
-					fclose (fp);  
 					
 					WordRpt_ApplicationNew (VTRUE, &appHandle);  // new application
 					GetProjectDir (pathName);
@@ -278,121 +302,193 @@ int CVICALLBACK wordDoc (int panel, int control, int event,
 					WordRpt_SetHeader (docHandle, "", "", "", WRConst_FieldDate, WRConst_FieldEmpty, WRConst_FieldTime); // date config time
 
 
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 26.0); 
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 14.0); 
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
 	
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);
-	
-				//	WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_ALLCAPS, WRConst_TRUE);
-
-	
-					GetProjectDir (imageFileName);
-					strcat (imageFileName, "\\mentor.png");
 	
 					WordRpt_NewLine (docHandle);  //new line
-					WordRpt_AppendText (docHandle, "Mentor Details");
 					
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);    
-					
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 16.0);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignLeft);
-					WordRpt_AppendText (docHandle, "Name:"); 
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
+					WordRpt_AppendText (docHandle, MENTOR_NAME);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);  
+					WordRpt_NewLine (docHandle); 
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignLeft);
+					WordRpt_NewLine (docHandle);
+					
+					WordRpt_AppendText (docHandle, "ID:"); 
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
 					WordRpt_InsertTab (docHandle);
-					WordRpt_InsertTab (docHandle);      
-					WordRpt_AppendText (docHandle, name); 
-	
+					WordRpt_AppendText (docHandle, MENTOR_ID); 
 					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 16.0);   
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
+					
+					WordRpt_AppendText (docHandle, "Age:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_AGE);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
 					WordRpt_AppendText (docHandle, "Address:");
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
-					
 					WordRpt_InsertTab (docHandle);
-					WordRpt_InsertTab (docHandle);   
-					WordRpt_InsertTab (docHandle);   
+					WordRpt_AppendText (docHandle, MENTOR_ADDRESS);    
+					WordRpt_NewLine (docHandle);        
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);   
 					
-					WordRpt_AppendText (docHandle, address); 
-	
-					WordRpt_NewLine (docHandle);
-					WordRpt_NewLine (docHandle);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 16.0);   
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
-					WordRpt_AppendText (docHandle, "Numbers Of Colleagues:");
+					WordRpt_AppendText (docHandle, "City:");
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
 					WordRpt_InsertTab (docHandle);
-					WordRpt_InsertTab (docHandle);      
-					WordRpt_AppendText (docHandle, age);    
-	
-			     	WordRpt_NewLine (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_CITY);    
 					WordRpt_NewLine (docHandle);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);
-	
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);   
-					WordRpt_InsertImage (docHandle, imageFileName, &imageHandle); 
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE); 
+					
+					WordRpt_AppendText (docHandle, "Manhe incharge:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_MANHE);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);   
+					WordRpt_AppendText (docHandle, "Contact info:");
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
+					
+					WordRpt_AppendText (docHandle, "Mobile:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_MOBILE);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Phone:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_PHONE);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Mail:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_MAIL);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);   
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);  
+					WordRpt_AppendText (docHandle, "Amitim under his response:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);  
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_AMIT1);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_AppendText (docHandle, MENTOR_AMIT2);
+					WordRpt_NewLine (docHandle);            
+					WordRpt_AppendText (docHandle, MENTOR_AMIT3);              
 					
 					break;
 					
-				case 4:
-					
-					fp=fopen ("NamesGrades.csv", "r");
-					if (fp)
-					{
-						while(fgets (fline, 300, fp)!=NULL)
-						{
-							sscanf(fline, "%[^,],%[^,]", data[count],grades[count]);
-							count++;
-						}
-					}
-					fclose (fp);
-					
+				case 3:
 					WordRpt_ApplicationNew (VTRUE, &appHandle);  // new application
 					GetProjectDir (pathName);
-					strcat (pathName, "\\students.doc");
+					strcat (pathName, "\\manhe.doc");
 			
 					WordRpt_DocumentOpen (appHandle, pathName, &docHandle); //open word file
-					
+	
 					WordRpt_AddPageNumbers (docHandle, WRConst_Footer, WRConst_AlignPageNumberCenter, WRConst_TRUE);
 					WordRpt_SetHeader (docHandle, "", "", "", WRConst_FieldDate, WRConst_FieldEmpty, WRConst_FieldTime); // date config time
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 26.0); 
+
+
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 14.0); 
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+	
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignCenter);
-					WordRpt_AppendText (docHandle, "Student's Grades");
+	
+					WordRpt_NewLine (docHandle);  //new line
 					
-					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0); 
+					WordRpt_AppendText (docHandle, MANHE_NAME);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);  
+					WordRpt_NewLine (docHandle); 
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_SIZE, 12.0);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_TEXT_ALIGN, WRConst_AlignLeft);
+					WordRpt_NewLine (docHandle);
+					
+					WordRpt_AppendText (docHandle, "ID:"); 
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_ID); 
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Age:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_AGE);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Address:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_ADDRESS);    
+					WordRpt_NewLine (docHandle);        
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);   
+					
+					WordRpt_AppendText (docHandle, "City:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_CITY);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);    
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE); 
+					
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);   
+					WordRpt_AppendText (docHandle, "Contact info:");
+					WordRpt_NewLine (docHandle);
 					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);
 					
+					WordRpt_AppendText (docHandle, "Mobile:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_MOBILE);    
 					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
+					
+					WordRpt_AppendText (docHandle, "Phone:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_PHONE);    
 					WordRpt_NewLine (docHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
 					
-					TableHandle = 0;
+					WordRpt_AppendText (docHandle, "Mail:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_MAIL);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_NewLine (docHandle);   
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_TRUE);
 					
-					WordRpt_AddTable (docHandle, count, 2, &TableHandle);
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineSingle);  
+					WordRpt_AppendText (docHandle, "Groups under his response:");
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_UNDERLINE, WRConst_UnderlineNone);  
+					WordRpt_SetTextAttribute (docHandle, WR_ATTR_FONT_BOLD, WRConst_FALSE);
+					WordRpt_InsertTab (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_KVUTZA1);    
+					WordRpt_NewLine (docHandle);
+					WordRpt_AppendText (docHandle, MANHE_KVUTZA2);
+					WordRpt_NewLine (docHandle);            
+					WordRpt_AppendText (docHandle, MANHE_KVUTZA3);              
 					
-					for(int i=0;i<count;i++)
-						{
-							WordRpt_WriteToCell (TableHandle, i+1, 1, data[i]);
-							WordRpt_WriteToCell (TableHandle, i+1, 2, grades[i]);   
-						}
+					break;
 			}
-			
-			break;
+					
 	}
 	return 0;
 }

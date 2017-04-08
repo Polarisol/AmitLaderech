@@ -23,6 +23,7 @@
 #define  PANEL_SAVEASHTML                 8       /* control type: command, callback function: SaveAsHTML */
 #define  PANEL_QUIT                       9       /* control type: command, callback function: Quit */
 #define  PANEL_GRAPH                      10      /* control type: graph, callback function: (none) */
+#define  PANEL_STRING                     11      /* control type: string, callback function: (none) */
 
 
      /* Control Arrays: */
