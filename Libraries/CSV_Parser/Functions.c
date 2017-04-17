@@ -126,7 +126,7 @@ int CVICALLBACK GetFieldFromRecord (int panel, int control, int event,
 				HebrewConverter_convertHebrewUTF8toISO(value);
 				SetCtrlVal (panelHandle, PANEL_TEXTBOX, value);
 			}
-			else
+			else if(status!=1)
 			{
 				ResetTextBox (panelHandle, PANEL_TEXTBOX, ""); 
 				SetCtrlVal (panelHandle, PANEL_TEXTBOX, "שגיאה");	
