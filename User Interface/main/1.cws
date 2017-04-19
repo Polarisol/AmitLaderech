@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname = "/d/Project/AmitLaderech/User Interface/main/1.cws"
+Pathname = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/1.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -13,10 +13,10 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "1.prj"
 Drag Bar Left = 213
-Window Top = 102
-Window Left = 8
-Window Bottom = 1093
-Window Right = 1920
+Window Top = 45
+Window Left = 0
+Window Bottom = 1036
+Window Right = 1912
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 2
+Number of Opened Files = 3
 Window Confinement Region Enabled = True
 MainColumnWidth = 196
 FileDateColumnWidth = 70
@@ -46,9 +46,9 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
+Path = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3573816819
+Disk Date = 3575481953
 In Projects = "1,"
 Window Top = 450
 Window Left = 202
@@ -57,48 +57,57 @@ Window Width = 1356
 Window Z-Order = 2
 
 [File 0002]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
+Path = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3573817079
+Disk Date = 3575482253
 In Projects = "1,"
 Window Top = 394
 Window Left = 173
 Window Z-Order = 1
-Source Window State = "1,625,625,625,16,49,49,0,0,109,0,0,0,0,0,18,610,0,624,13,687,1356,1,0,"
+Source Window State = "1,448,448,448,36,66,66,0,0,109,0,0,0,0,0,25,426,0,444,45,687,1356,1,0,"
 
 [File 0003]
-Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.c"
+Path Line0001 = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/Lib/datab"
+Path Line0002 = "ase.c"
 File Type = "CSource"
-Disk Date = 3573806638
+Disk Date = 3575477678
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Source Window State = "1,1,2,2,0,24,24,0,0,0,0,0,0,0,0,0,0,0,0,22,436,1272,1,0,"
+Window Z-Order = 3
+Source Window State = "1,218,218,218,28,30,30,0,3,80,0,0,0,0,0,16,206,0,218,28,436,1272,1,0,"
 
 [File 0004]
-Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.c"
+Path Line0001 = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/Lib/Hebre"
+Path Line0002 = "wConversions.c"
 File Type = "CSource"
-Disk Date = 3573805446
+Disk Date = 3575477678
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 47
+Window Left = 13
+Source Window State = "1,0,0,0,0,0,0,0,0,72,0,0,0,0,0,16,32,0,40,16,436,1152,1,0,"
 
 [File 0005]
-Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.h"
+Path Line0001 = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/Lib/datab"
+Path Line0002 = "ase.h"
 File Type = "Include"
-Disk Date = 3573805446
+Disk Date = 3575477678
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0006]
-Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.h"
+Path Line0001 = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/Lib/Hebre"
+Path Line0002 = "wConversions.h"
 File Type = "Include"
-Disk Date = 3573805446
+Disk Date = 3575477678
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [Tab Order]
-Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
-Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
+Tab 0001 = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/1.uir"
+Tab 0002 = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/1.c"
+Tab 0003 Line0001 = "/c/Users/omrig/Desktop/AmitLaderech-User_Interface/User Interface/main/Lib/datab"
+Tab 0003 Line0002 = "ase.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
@@ -187,4 +196,7 @@ External Process Path = ""
 Command Line Args = ""
 Working Directory = ""
 Environment Options = ""
+
+[Watch 1]
+Watch Expression = "id"
 

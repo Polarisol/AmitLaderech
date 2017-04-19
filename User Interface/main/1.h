@@ -69,30 +69,30 @@
 #define  P_GROUP_GROUP_NAME               7       /* control type: string, callback function: (none) */
 #define  P_GROUP_GUIDE                    8       /* control type: string, callback function: (none) */
 #define  P_GROUP_LOGO                     9       /* control type: picture, callback function: (none) */
-#define  P_GROUP_SAVE_CHANGES_BUTTON      10      /* control type: pictButton, callback function: (none) */
+#define  P_GROUP_SAVE_CHANGES_BUTTON      10      /* control type: pictButton, callback function: SaveChanges */
 #define  P_GROUP_LINE                     11      /* control type: deco, callback function: (none) */
 #define  P_GROUP_STATUS_RING              12      /* control type: ring, callback function: (none) */
 #define  P_GROUP_DELETE_GROUP_BUTTON      13      /* control type: pictButton, callback function: (none) */
-#define  P_GROUP_EDIT_GROUP_BUTTON        14      /* control type: pictButton, callback function: edit */
-#define  P_GROUP_MENTOR_15                15      /* control type: command, callback function: (none) */
+#define  P_GROUP_EDIT_GROUP_BUTTON        14      /* control type: pictButton, callback function: Edit */
+#define  P_GROUP_MENTOR_15                15      /* control type: command, callback function: OpenMentor */
 #define  P_GROUP_LIST_SOLDIERS_BUTTON     16      /* control type: pictButton, callback function: (none) */
-#define  P_GROUP_MENTOR_14                17      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_13                18      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_12                19      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_11                20      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_10                21      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_9                 22      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_8                 23      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_7                 24      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_6                 25      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_5                 26      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_2                 27      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_4                 28      /* control type: command, callback function: (none) */
-#define  P_GROUP_MENTOR_1                 29      /* control type: command, callback function: (none) */
+#define  P_GROUP_MENTOR_14                17      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_13                18      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_12                19      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_11                20      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_10                21      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_9                 22      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_8                 23      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_7                 24      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_6                 25      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_5                 26      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_2                 27      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_4                 28      /* control type: command, callback function: OpenMentor */
+#define  P_GROUP_MENTOR_1                 29      /* control type: command, callback function: OpenMentor */
 #define  P_GROUP_MENTORS_TXT              30      /* control type: textMsg, callback function: (none) */
 #define  P_GROUP_AMITLADERECH             31      /* control type: textMsg, callback function: (none) */
 #define  P_GROUP_GOAL                     32      /* control type: textMsg, callback function: (none) */
-#define  P_GROUP_MENTOR_3                 33      /* control type: command, callback function: (none) */
+#define  P_GROUP_MENTOR_3                 33      /* control type: command, callback function: OpenMentor */
 #define  P_GROUP_BACKGROUND               34      /* control type: picture, callback function: (none) */
 
 #define  P_GUIDE                          4       /* callback function: exitFunc */
@@ -150,6 +150,7 @@
 #define  P_MAIN_LIST_SOLDIERS_BUTTON      24      /* control type: pictButton, callback function: (none) */
 #define  P_MAIN_BACKGROUND                25      /* control type: picture, callback function: (none) */
 #define  P_MAIN_SEARCH_STRING             26      /* control type: string, callback function: changeVal */
+#define  P_MAIN_CLOCK_DATE_TIMER          27      /* control type: timer, callback function: TimeUpdate */
 
 #define  P_MENTOR                         6       /* callback function: exitFunc */
 #define  P_MENTOR_MAIN_OCCUPATION         2       /* control type: string, callback function: (none) */
@@ -386,14 +387,17 @@
      /* Control Arrays: */
 
 #define  CTRLARRAY                        1
-#define  CTRLARRAY_2                      2
-#define  CTRLARRAY_3                      3
-#define  CTRLARRAY_4                      4
-#define  CTRLARRAY_5                      5
-#define  CTRLARRAY_6                      6
-#define  CTRLARRAY_7                      7
-#define  CTRLARRAY_8                      8
-#define  CTRLARRAY_9                      9
+#define  CTRLARRAY_10                     2
+#define  CTRLARRAY_11                     3
+#define  CTRLARRAY_12                     4
+#define  CTRLARRAY_2                      5
+#define  CTRLARRAY_3                      6
+#define  CTRLARRAY_4                      7
+#define  CTRLARRAY_5                      8
+#define  CTRLARRAY_6                      9
+#define  CTRLARRAY_7                      10
+#define  CTRLARRAY_8                      11
+#define  CTRLARRAY_9                      12
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -404,16 +408,19 @@
 
 int  CVICALLBACK changeVal(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK checkIfExcist(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_New_Guide(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_P_NEW_MENTOR(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_P_NEW_SOLD(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK openGuidePanel(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK OpenMentor(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OpenPanelNewGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK openTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK SaveChanges(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK TimeUpdate(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
