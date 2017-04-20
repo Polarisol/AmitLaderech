@@ -2,6 +2,7 @@
 #include <userint.h>
 #include "1.h"
 #include "database.h"
+#include "interface.h"
 //Constants for the database directory
 #define SOLDIER "Database\\soldier.ini"
 #define MENTOR  "Database\\mentor.ini"
@@ -15,7 +16,6 @@
 //============================================================================== 
 static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
 static char id[SIZE], currentDate[50], currentTime[50];
-//static char dbFile[SIZE];
 static char **tagName,**tagValue,**ids,**output; 
 int recordAmount;
 int fieldAmount;
@@ -27,7 +27,7 @@ int day, month, year;
 //==============================================================================
 //							Function declaration section
 //============================================================================== 
-void initialize(char database[]);
+void initialize(char database[],char dir[]);
 void finalize();
 void addMember(char dir[],char database[],int panel,int ctrlArray);
 int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[]);
@@ -41,8 +41,7 @@ void clockDate();
 void restoreSearch();
 void displayGroupPanel(char groupName[]);
 void searchSoldier(char mentorName[],char soldierName[]);
-
-
+void searchFor(char dir[],char database[], char fieldName[], char valToCmp[]); 
 //==============================================================================
 //									MAIN
 //============================================================================== 
@@ -284,8 +283,8 @@ int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (pActivity);
-			initialize(GUIDE);
-			Database_SetDatabaseFile(GUIDE);
+			initialize("GUIDE",GUIDE);
+			
 			Database_CountAllRecords(&recordAmount);
 			ctrlArray = GetCtrlArrayFromResourceID (pActivity, CTRLARRAY_7);
 			for(int i=0;i<recordAmount;i++)
@@ -331,9 +330,7 @@ int CVICALLBACK OpenPanelNewGroup (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			initialize("GROUP");
-			Database_SetDatabaseFile(GROUP);
-			Database_CountAllRecords(&recordAmount);
+			initialize("GROUP",GROUP);
 			sprintf(s,"%d",(recordAmount+1));
 			DisplayPanel(pNewGroup);
 			SetCtrlVal (pNewGroup, P_NEW_GROU_ID_NUMBER, s);
@@ -396,9 +393,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 			DisplayPanel(pTable);
 			GetCtrlVal (panel, P_GUIDE_ID_NUMBER, id);
 			connectIDtoName(GUIDE,"GUIDE",id,fullName);
-			initialize("SOLDIER");
-			Database_SetDatabaseFile(SOLDIER);
-			Database_CountAllRecords(&recordAmount);
+			initialize("SOLDIER",SOLDIER);
 			ids = malloc(sizeof(char*)*(recordAmount));
 			for(int i=1;i<=recordAmount;i++) 
 			{
@@ -430,11 +425,11 @@ int CVICALLBACK checkIfExcist (int panel, int control, int event,
 		case EVENT_COMMIT:
 			GetCtrlAttribute (panel, control, ATTR_CONSTANT_NAME, database);
 			GetCtrlVal(panel,control,fullName);
-			initialize(database);
 			if(strcmp(database,"GUIDE")==0)
 				sprintf(dir,GUIDE);
 			else
 				sprintf(dir,MENTOR);
+			initialize(database,dir); 
 			if(connectNametoID(dir,database,id,fullName)==0)//if the fullName does not excist return 0
 				MessagePopup("Alert", "Record does not excist!");
 				
@@ -491,9 +486,7 @@ char database[SIZE], searchBy[SIZE], val[SIZE], dir[SIZE];
 				else
 					sprintf(dir,"%s",SOLDIER);
 				
-				initialize(database);
-				Database_SetDatabaseFile(dir);
-				Database_CountAllRecords(&recordAmount);
+				initialize(database,dir);
 				output = malloc(sizeof(char*)*recordAmount);
 				if(strcmp(database,"GROUP")==1) //not equal
 				{
@@ -555,7 +548,84 @@ int CVICALLBACK showGroup (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			GetCtrlAttribute (panel, control, ATTR_LABEL_TEXT, groupName);
-			displayGroupPanel(groupName);
+			if(strcmp(groupName,"")!=0)
+				displayGroupPanel(groupName);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK delRecord (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	char idef[SIZE];
+	int i,count;
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			if(panel == pGroup)
+			{
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				i = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),idef);
+				initialize("GROUP",GROUP);
+				Database_RemoveRecord(idef);
+				searchFor(SOLDIER,"SOLDIER","קבוצה",idef);
+				searchFor(MENTOR,"MENTOR","קבוצה",idef);
+				searchFor(GUIDE,"GUIDE","קבוצה 1",idef);
+				searchFor(GUIDE,"GUIDE","קבוצה 2",idef);
+			}
+			else if(panel == pGuide)
+			{
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_6);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				i = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),idef);
+				initialize("GUIDE",GUIDE);
+				Database_RemoveRecord(idef);
+				searchFor(SOLDIER,"SOLDIER","מנחה",idef);
+				searchFor(MENTOR,"MENTOR","מנחה",idef);
+			}
+			else if(panel == pMentor)
+			{
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_4);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				i = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),idef);
+				initialize("MENTOR",MENTOR);
+				Database_RemoveRecord(idef);
+				searchFor(SOLDIER,"SOLDIER","מנטור",idef);
+				
+			}
+			else if(panel == pSoldier)
+			{
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_4);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				i = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),idef);
+				initialize("MENTOR",MENTOR);
+				Database_RemoveRecord(idef);
+			}
+			
+			
+			
+			HidePanel(panel);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK openSoldier (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			HidePanel(panel);
+			DisplayPanel(pSoldier);
+			ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
+			showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
 			break;
 	}
 	return 0;
@@ -566,7 +636,7 @@ int CVICALLBACK showGroup (int panel, int control, int event,
 //==============================================================================
 
 //Prepare the arrays for input. using the config.ini
-void initialize(char database[])
+void initialize(char database[], char dir[])
 {
 //database - name of the recorde database in config.ini
 	Database_SetDatabaseFile(CONFIG);
@@ -574,6 +644,8 @@ void initialize(char database[])
 	tagName = malloc(sizeof(char*)*(fieldAmount));
 	tagValue = malloc(sizeof(char*)*(fieldAmount));
 	Database_GetRecordValues(database,fieldAmount,tagName,tagValue);
+	Database_SetDatabaseFile(dir);
+	Database_CountAllRecords(&recordAmount);
 }
 
 //free all dynamic arrays
@@ -608,14 +680,13 @@ void addMember(char dir[],char database[],int panel, int ctrlArray)
 //panel - panel handle of the active panel.
 	char tmpVal[SIZE],tmpName[SIZE];
 	int count,idIndex = -1;
-	initialize(database); //CAPITAL LETTER IN CONFIG.INI
+	initialize(database,dir); //CAPITAL LETTER IN CONFIG.INI
 	GetNumCtrlArrayItems (ctrlArray, &count);
-	
 	idIndex = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+	
 	if(idIndex!=-1)
 	{
 		GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, idIndex), id);
-		Database_SetDatabaseFile(dir);
 		if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
 			MessagePopup("Error", "ID already exist");
 		else
@@ -646,8 +717,7 @@ void showMember(int panel,char dir[],char database[],char record[],int ctrlArray
 //record - the id number of the member.
 	char tmpVal[SIZE],tmpName[SIZE];
 	int count,idIndex = -1;
-	initialize(database); //CAPITAL LETTER IN CONFIG.INI
-	Database_SetDatabaseFile(dir);
+	initialize(database,dir); //CAPITAL LETTER IN CONFIG.INI
 	GetNumCtrlArrayItems (ctrlArray, &count);
 	Database_GetRecordValues(record,fieldAmount,tagName,tagValue);
 	//(count-1) because: ID_NUMBER count as a ControlArray item but not as a field in ini file
@@ -685,8 +755,7 @@ void showMember(int panel,char dir[],char database[],char record[],int ctrlArray
 void connectIDtoName(char dir[],char database[],char record[],char fullName[])
 {//gets the ID and returns the FULL NAME of the record.
 	char fName[SIZE],lName[SIZE];
-	initialize(database);
-	Database_SetDatabaseFile(dir);
+	initialize(database,dir);
 	Database_GetFieldVal(record,"שם פרטי",fName);
 	Database_GetFieldVal(record,"שם משפחה",lName);
 	sprintf(fullName,"%s %s",fName,lName);
@@ -695,9 +764,7 @@ void connectIDtoName(char dir[],char database[],char record[],char fullName[])
 int connectNametoID(char dir[],char database[],char record[],char fullName[]) 
 { //gets the FULL NAME and return the ID
 	char fName[SIZE],lName[SIZE],fullNameCheck[SIZE];
-	initialize(database);
-	Database_SetDatabaseFile(dir);
-	Database_CountAllRecords(&recordAmount);
+	initialize(database,dir);
 	for(int i=1;i<=recordAmount;i++)
 	{
 		Database_GetRecordInfo(id,i);
@@ -762,8 +829,7 @@ int search(char searchBy[],char val[],char **output)
 
 void createTable(char dir[],char database[], char **ids,int rows,int panel,int control)
 {//NOT WORKING WITH HEBREW 
-	initialize(database);
-	Database_SetDatabaseFile(dir);
+	initialize(database,dir);
 	InsertTableRows (panel, control, -1, rows, VAL_CELL_STRING);
 	InsertTableColumns (panel, control, -1, fieldAmount, VAL_CELL_STRING);
 	for(int i=0;i<rows;i++)
@@ -808,9 +874,7 @@ void clockDate()
 void searchSoldier(char mentorName[],char soldierName[])
 {
 	char tmp[SIZE];
-	initialize("SOLDIER");
-	Database_SetDatabaseFile(SOLDIER);
-	Database_CountAllRecords(&recordAmount);
+	initialize("SOLDIER",SOLDIER);
 	for(int i=0;i<recordAmount;i++)
 	{
 		Database_GetRecordInfo(id,i+1);
@@ -842,9 +906,7 @@ void displayGroupPanel(char groupName[])
 	showMember(pGroup,GROUP,"GROUP",groupName,ctrlArray);
 	SetCtrlVal (pGroup, P_GROUP_GROUP_NAME, groupName);
 	//END. START LOCATING MENTORS
-	initialize("MENTOR");
-	Database_SetDatabaseFile(MENTOR);
-	Database_CountAllRecords(&recordAmount);
+	initialize("MENTOR",MENTOR);
 	for(int i=0;i<recordAmount;i++)
 	{
 		Database_GetRecordInfo(id,i+1);
@@ -869,40 +931,21 @@ void displayGroupPanel(char groupName[])
 	}
 }
 
-
-int CVICALLBACK openSoldier (int panel, int control, int event,
-							 void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
+void searchFor(char dir[],char database[], char fieldName[], char valToCmp[])
+{  //function is used when group\mentor\guide was deleted. 
+	//function remove group\mentor\guide connections from other database 
+	char tmp[SIZE];
+	initialize(database,dir);
+	for(int i=0;i<recordAmount;i++)
 	{
-		case EVENT_COMMIT:
-			HidePanel(panel);
-			DisplayPanel(pSoldier);
-			ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
-			showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
-			break;
+		Database_GetRecordInfo(id,i+1);
+		Database_GetFieldVal(id,fieldName,tmp);
+		if(strcmp(tmp,valToCmp)==0)
+		{
+			Database_SetFieldVal(id, fieldName,fieldName);
+		}
 	}
-	return 0;
+	
 }
 
-int CVICALLBACK delRecord (int panel, int control, int event,
-						   void *callbackData, int eventData1, int eventData2)
-{
-	int count;
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			if(panel == pGroup)
-			{
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
-				GetNumCtrlArrayItems (ctrlArray, &count);
-				int i = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
-				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),id);
-				initialize(GROUP);
-				Database_SetDatabaseFile("GROUP");
-				Database_RemoveRecord(id);
-			}
-			break;
-	}
-	return 0;
-}
+	  

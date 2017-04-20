@@ -110,7 +110,7 @@
 #define  P_GUIDE_GROUP_2_STRING           13      /* control type: string, callback function: (none) */
 #define  P_GUIDE_ID_NUMBER                14      /* control type: string, callback function: (none) */
 #define  P_GUIDE_IMAGE_BOX                15      /* control type: picture, callback function: (none) */
-#define  P_GUIDE_DELETING_GUIDE_BUTTON    16      /* control type: pictButton, callback function: (none) */
+#define  P_GUIDE_DELETING_GUIDE_BUTTON    16      /* control type: pictButton, callback function: delRecord */
 #define  P_GUIDE_SAVE_CHANGES_BUTTON      17      /* control type: pictButton, callback function: SaveChanges */
 #define  P_GUIDE_EDITING_BUTTON           18      /* control type: pictButton, callback function: Edit */
 #define  P_GUIDE_SEND_EMAIL               19      /* control type: pictButton, callback function: (none) */
@@ -170,7 +170,7 @@
 #define  P_MENTOR_FIRST_NAME              15      /* control type: string, callback function: (none) */
 #define  P_MENTOR_ID_NUMBER               16      /* control type: string, callback function: (none) */
 #define  P_MENTOR_IMAGE_BOX               17      /* control type: picture, callback function: (none) */
-#define  P_MENTOR_DELETING_MENTO_BUTTON   18      /* control type: pictButton, callback function: (none) */
+#define  P_MENTOR_DELETING_MENTO_BUTTON   18      /* control type: pictButton, callback function: delRecord */
 #define  P_MENTOR_MEETING_LED             19      /* control type: LED, callback function: (none) */
 #define  P_MENTOR_SAVE_CHANGES_BUTTON     20      /* control type: pictButton, callback function: (none) */
 #define  P_MENTOR_EDITING_BUTTON          21      /* control type: pictButton, callback function: (none) */
