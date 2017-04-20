@@ -40,6 +40,7 @@ int search(char searchBy[],char val[],char **output);
 void clockDate();
 void restoreSearch();
 void displayGroupPanel(char groupName[]);
+void searchSoldier(char mentorName[],char soldierName[]);
 
 
 //==============================================================================
@@ -209,13 +210,14 @@ int CVICALLBACK Edit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			switch (panel)
+			if(panel == pGroup)
 			{
-				case P_GROUP:
+			
 					SetCtrlArrayAttribute (CTRLARRAY_11, ATTR_VISIBLE, 1);
 					SetCtrlArrayAttribute (CTRLARRAY_10, ATTR_CTRL_MODE, VAL_HOT);
 					SetCtrlArrayAttribute (CTRLARRAY_12, ATTR_VISIBLE, 0);
-					break;
+			}
+
 				/*case pGuide:
 					ctrlarr1={P_GUIDE_DELETING_GUIDE_BUTTON, P_GUIDE_SAVE_CHANGES_BUTTON};
 					ctrlarr2={P_GUIDE_CELL_PHONE_NUMBER, P_GUIDE_PHONE_NUMBER, P_GUIDE_ADDRESS, P_GUIDE_CITY,
@@ -232,7 +234,7 @@ int CVICALLBACK Edit (int panel, int control, int event,
 					ctrlarr1=[P_SOLDIER_MOVING_ARCHIVE_BUTTON, P_SOLDIER_SAVE_CHANGES_BUTTON, P_SOLDIER_EDIT_TL_BUTTON];
 					ctrlarr2=[];
 					break;*/
-			}
+			
 			break;
 	}
 return 0;
@@ -360,21 +362,24 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			HidePanel(panel);
-			DefaultCtrl (pGuide, P_GUIDE_GROUP_1);	DefaultCtrl (pGuide, P_GUIDE_GROUP_2);
-			DisplayPanel(pGuide); 
 			GetCtrlAttribute (panel, control, ATTR_LABEL_TEXT, fullName);
-			connectNametoID(GUIDE,"GUIDE",id,fullName);
-			ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
-			showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
-			GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
-			GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
-			if(strcmp(group1,"קבוצה 1")==0)
-				sprintf(group1,"");
-			if(strcmp(group2,"קבוצה 2")==0) 
-				sprintf(group2,"");
-			SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
-			SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
+			if(strcmp(fullName,"")!=0)
+			{
+				HidePanel(panel);
+				DefaultCtrl (pGuide, P_GUIDE_GROUP_1);	DefaultCtrl (pGuide, P_GUIDE_GROUP_2);
+				DisplayPanel(pGuide); 
+				connectNametoID(GUIDE,"GUIDE",id,fullName);
+				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
+				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
+				GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
+				GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
+				if(strcmp(group1,"קבוצה 1")==0)
+					sprintf(group1,"");
+				if(strcmp(group2,"קבוצה 2")==0) 
+					sprintf(group2,"");
+				SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
+				SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
+			}
 			break;
 	}
 	return 0;
@@ -511,9 +516,7 @@ char database[SIZE], searchBy[SIZE], val[SIZE], dir[SIZE];
 							displayGroupPanel(id);
 							restoreSearch();
 						}
-								
 					}
-					
 				}
 			}								   
 			break;
@@ -524,7 +527,7 @@ char database[SIZE], searchBy[SIZE], val[SIZE], dir[SIZE];
 int CVICALLBACK OpenMentor (int panel, int control, int event,
 							void *callbackData, int eventData1, int eventData2)
 {
-	char lbl[SIZE];
+	char lbl[SIZE],soldierName[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -536,6 +539,8 @@ int CVICALLBACK OpenMentor (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
+				searchSoldier(lbl,soldierName);
+				SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_LABEL_TEXT, soldierName);
 			}
 			break;
 	}
@@ -800,6 +805,26 @@ void clockDate()
 		SetCtrlVal (pMain, P_MAIN_BLESSING, "!נטלי, לילה טוב! לכי לישון");
 }
 
+void searchSoldier(char mentorName[],char soldierName[])
+{
+	char tmp[SIZE];
+	initialize("SOLDIER");
+	Database_SetDatabaseFile(SOLDIER);
+	Database_CountAllRecords(&recordAmount);
+	for(int i=0;i<recordAmount;i++)
+	{
+		Database_GetRecordInfo(id,i+1);
+		Database_GetFieldVal(id,"מנטור",tmp);
+		if(strcmp(tmp,mentorName)==0)
+		{
+			connectIDtoName(SOLDIER,"SOLDIER",id,tmp);
+			sprintf(soldierName,"%s",tmp);
+			break;
+		}
+	}
+	
+}
+
 void restoreSearch()
 {
 	DefaultCtrl (pMain, P_MAIN_SEARCH_RING);
@@ -840,11 +865,44 @@ void displayGroupPanel(char groupName[])
 					break;
 				}
 			}
-									
-			
 		}
-									
 	}
 }
 
 
+int CVICALLBACK openSoldier (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			HidePanel(panel);
+			DisplayPanel(pSoldier);
+			ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
+			showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK delRecord (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	int count;
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			if(panel == pGroup)
+			{
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				int i = getIndexOfControl(panel,ctrlArray,count,"ID_NUMBER");
+				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),id);
+				initialize(GROUP);
+				Database_SetDatabaseFile("GROUP");
+				Database_RemoveRecord(id);
+			}
+			break;
+	}
+	return 0;
+}

@@ -72,7 +72,7 @@
 #define  P_GROUP_SAVE_CHANGES_BUTTON      10      /* control type: pictButton, callback function: SaveChanges */
 #define  P_GROUP_LINE                     11      /* control type: deco, callback function: (none) */
 #define  P_GROUP_STATUS_RING              12      /* control type: ring, callback function: (none) */
-#define  P_GROUP_DELETE_GROUP_BUTTON      13      /* control type: pictButton, callback function: (none) */
+#define  P_GROUP_DELETE_GROUP_BUTTON      13      /* control type: pictButton, callback function: delRecord */
 #define  P_GROUP_EDIT_GROUP_BUTTON        14      /* control type: pictButton, callback function: Edit */
 #define  P_GROUP_MENTOR_15                15      /* control type: command, callback function: OpenMentor */
 #define  P_GROUP_LIST_SOLDIERS_BUTTON     16      /* control type: pictButton, callback function: (none) */
@@ -183,7 +183,7 @@
 #define  P_MENTOR_GOAL                    28      /* control type: textMsg, callback function: (none) */
 #define  P_MENTOR_LOGO                    29      /* control type: picture, callback function: (none) */
 #define  P_MENTOR_BACKGROUND              30      /* control type: picture, callback function: (none) */
-#define  P_MENTOR_SOLDIER_BUTTON          31      /* control type: command, callback function: (none) */
+#define  P_MENTOR_SOLDIER_BUTTON          31      /* control type: command, callback function: openSoldier */
 
 #define  P_NEW_GROU                       7       /* callback function: exitFunc */
 #define  P_NEW_GROU_YEAR                  2       /* control type: string, callback function: (none) */
@@ -410,6 +410,7 @@
 
 int  CVICALLBACK changeVal(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK checkIfExcist(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK delRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_New_Guide(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
@@ -419,6 +420,7 @@ int  CVICALLBACK Open_P_NEW_SOLD(int panel, int control, int event, void *callba
 int  CVICALLBACK openGuidePanel(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OpenMentor(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OpenPanelNewGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK openSoldier(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK openTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveChanges(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
