@@ -102,27 +102,28 @@
 #define  P_GUIDE_ADDRESS                  5       /* control type: string, callback function: (none) */
 #define  P_GUIDE_PHONE_NUMBER             6       /* control type: string, callback function: (none) */
 #define  P_GUIDE_AGE                      7       /* control type: string, callback function: (none) */
-#define  P_GUIDE_LAST_NAME                8       /* control type: string, callback function: (none) */
-#define  P_GUIDE_FIRST_NAME               9       /* control type: string, callback function: (none) */
-#define  P_GUIDE_IMAGE                    10      /* control type: string, callback function: (none) */
-#define  P_GUIDE_GROUP_1_STRING           11      /* control type: string, callback function: (none) */
-#define  P_GUIDE_GROUP_2_STRING           12      /* control type: string, callback function: (none) */
-#define  P_GUIDE_ID_NUMBER                13      /* control type: string, callback function: (none) */
-#define  P_GUIDE_IMAGE_BOX                14      /* control type: picture, callback function: (none) */
-#define  P_GUIDE_DELETING_GUIDE_BUTTON    15      /* control type: pictButton, callback function: (none) */
-#define  P_GUIDE_SAVE_CHANGES_BUTTON      16      /* control type: pictButton, callback function: (none) */
-#define  P_GUIDE_EDITING_BUTTON           17      /* control type: pictButton, callback function: (none) */
-#define  P_GUIDE_SEND_EMAIL               18      /* control type: pictButton, callback function: (none) */
-#define  P_GUIDE_LIST_SOLDIERS_BUTTON     19      /* control type: pictButton, callback function: openTable */
-#define  P_GUIDE_GROUP_2                  20      /* control type: command, callback function: (none) */
-#define  P_GUIDE_GROUP_1                  21      /* control type: command, callback function: (none) */
-#define  P_GUIDE_SUMMARY                  22      /* control type: textBox, callback function: (none) */
-#define  P_GUIDE_EXCEPTIONS               23      /* control type: textBox, callback function: (none) */
-#define  P_GUIDE_LINE                     24      /* control type: deco, callback function: (none) */
-#define  P_GUIDE_AMITLADERECH             25      /* control type: textMsg, callback function: (none) */
-#define  P_GUIDE_BACKGROUND               26      /* control type: picture, callback function: (none) */
-#define  P_GUIDE_LOGO                     27      /* control type: picture, callback function: (none) */
-#define  P_GUIDE_GOAL                     28      /* control type: textMsg, callback function: (none) */
+#define  P_GUIDE_MAIL                     8       /* control type: string, callback function: (none) */
+#define  P_GUIDE_LAST_NAME                9       /* control type: string, callback function: (none) */
+#define  P_GUIDE_FIRST_NAME               10      /* control type: string, callback function: (none) */
+#define  P_GUIDE_IMAGE                    11      /* control type: string, callback function: (none) */
+#define  P_GUIDE_GROUP_1_STRING           12      /* control type: string, callback function: (none) */
+#define  P_GUIDE_GROUP_2_STRING           13      /* control type: string, callback function: (none) */
+#define  P_GUIDE_ID_NUMBER                14      /* control type: string, callback function: (none) */
+#define  P_GUIDE_IMAGE_BOX                15      /* control type: picture, callback function: (none) */
+#define  P_GUIDE_DELETING_GUIDE_BUTTON    16      /* control type: pictButton, callback function: (none) */
+#define  P_GUIDE_SAVE_CHANGES_BUTTON      17      /* control type: pictButton, callback function: SaveChanges */
+#define  P_GUIDE_EDITING_BUTTON           18      /* control type: pictButton, callback function: Edit */
+#define  P_GUIDE_SEND_EMAIL               19      /* control type: pictButton, callback function: (none) */
+#define  P_GUIDE_LIST_SOLDIERS_BUTTON     20      /* control type: pictButton, callback function: openTable */
+#define  P_GUIDE_GROUP_2                  21      /* control type: command, callback function: showGroup */
+#define  P_GUIDE_GROUP_1                  22      /* control type: command, callback function: showGroup */
+#define  P_GUIDE_SUMMARY                  23      /* control type: textBox, callback function: (none) */
+#define  P_GUIDE_EXCEPTIONS               24      /* control type: textBox, callback function: (none) */
+#define  P_GUIDE_LINE                     25      /* control type: deco, callback function: (none) */
+#define  P_GUIDE_AMITLADERECH             26      /* control type: textMsg, callback function: (none) */
+#define  P_GUIDE_BACKGROUND               27      /* control type: picture, callback function: (none) */
+#define  P_GUIDE_LOGO                     28      /* control type: picture, callback function: (none) */
+#define  P_GUIDE_GOAL                     29      /* control type: textMsg, callback function: (none) */
 
 #define  P_MAIN                           5       /* callback function: exitFunc */
 #define  P_MAIN_ADDING_MENTOR_BUTTON      2       /* control type: pictButton, callback function: Open_P_NEW_MENTOR */
@@ -386,18 +387,19 @@
 
      /* Control Arrays: */
 
-#define  CTRLARRAY                        1
-#define  CTRLARRAY_10                     2
-#define  CTRLARRAY_11                     3
-#define  CTRLARRAY_12                     4
-#define  CTRLARRAY_2                      5
-#define  CTRLARRAY_3                      6
-#define  CTRLARRAY_4                      7
-#define  CTRLARRAY_5                      8
-#define  CTRLARRAY_6                      9
-#define  CTRLARRAY_7                      10
-#define  CTRLARRAY_8                      11
-#define  CTRLARRAY_9                      12
+#define  CA_MENTOR_BTN                    1
+#define  CTRLARRAY                        2
+#define  CTRLARRAY_10                     3
+#define  CTRLARRAY_11                     4
+#define  CTRLARRAY_12                     5
+#define  CTRLARRAY_2                      6
+#define  CTRLARRAY_3                      7
+#define  CTRLARRAY_4                      8
+#define  CTRLARRAY_5                      9
+#define  CTRLARRAY_6                      10
+#define  CTRLARRAY_7                      11
+#define  CTRLARRAY_8                      12
+#define  CTRLARRAY_9                      13
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -420,6 +422,7 @@ int  CVICALLBACK OpenPanelNewGroup(int panel, int control, int event, void *call
 int  CVICALLBACK openTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveChanges(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK showGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK TimeUpdate(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
