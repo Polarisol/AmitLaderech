@@ -18,7 +18,7 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 {
 	int total_num_of_records;
 	Date *datearray=NULL;
-	int status;			    
+	int status;
 	char buffer[SIZE],date[SIZE];
 	*date_array_size=0;
 	HebrewConverter_convertHebrewISOtoUTF8(value);
@@ -301,30 +301,32 @@ char *request_check(char filename[],char soldierfield[],char mentorfield[],char 
 char *last_request_check(char filename[],char soldierfield[],char mentorfield[],char requestfield[])
 {
 	char value[3][5*SIZE],buffer[3*SIZE];
-	int rec_num;
-	if (CSVParser_NewRecords(filename))
+	int rec_num,num;
+	if ((num=CSVParser_NewRecords(filename)))
 	{
 		rec_num=CSVParser_GetNumberOfRecords(filename);
-		CSVParser_GetFieldFromRecord(filename,rec_num, requestfield, buffer);
+		CSVParser_GetFieldFromRecord(filename,rec_num-num+1, requestfield, buffer);
 		if (strlen(buffer)>3)
 		{
 			strcpy(value[0],buffer);
-			CSVParser_GetFieldFromRecord(filename,rec_num, soldierfield, value[1]);
-			CSVParser_GetFieldFromRecord(filename,rec_num, mentorfield, value[2]);
+			CSVParser_GetFieldFromRecord(filename,rec_num-num+1, soldierfield, value[1]);
+			CSVParser_GetFieldFromRecord(filename,rec_num-num+1, mentorfield, value[2]);
 			sprintf(buffer,"mentor:%s ,soldier:%s, request:%s",value[2],value[1],value[0]);
-			//CSVParser_MarkAsProcessed(filename,1);//this function crashes the program,also the bug regarding extracting data from last record persists, thats why -1 is returned. to return value for illustration subtract 2 from rec_num.
+			//printf("%s\n\n",buffer);
+			CSVParser_MarkAsProcessed(filename,1);
 			return buffer;
 		}
 		else
 		{
-			strcpy(buffer,"-1");
+			strcpy(buffer,"-2"); //empty request
+			CSVParser_MarkAsProcessed(filename,1);
 			return buffer;
 		}
 
 	}
 	else
 	{
-		strcpy(buffer,"-1");
+		strcpy(buffer,"-1");//no new record
 		return buffer;
 	}
 

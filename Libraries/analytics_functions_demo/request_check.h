@@ -21,8 +21,7 @@
 #define  PANEL_OUTPUT                     6       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TEXTMSG_3                  7       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TEXTMSG_4                  8       /* control type: textMsg, callback function: (none) */
-#define  PANEL_COMMANDBUTTON              9       /* control type: command, callback function: initialize */
-#define  PANEL_NUMERIC                    10      /* control type: numeric, callback function: (none) */
+#define  PANEL_NUMERIC                    9       /* control type: numeric, callback function: (none) */
 
 
      /* Control Arrays: */
@@ -39,7 +38,6 @@
 
 int  CVICALLBACK check_last(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK check_req(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK initialize(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK main_func(int panel, int event, void *callbackData, int eventData1, int eventData2);
 
 

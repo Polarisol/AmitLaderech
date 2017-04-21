@@ -81,17 +81,3 @@ int CVICALLBACK check_last (int panel, int control, int event,
 	}
 	return 0;
 }
-
-int CVICALLBACK initialize (int panel, int control, int event,
-							void *callbackData, int eventData1, int eventData2)
-{
-	char path[SIZE];
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			GetCtrlVal (panelHandle, PANEL_TEXTMSG_4, path);
-			CSVParser_MarkAsProcessed(path,1);
-			break;
-	}
-	return 0;
-}
