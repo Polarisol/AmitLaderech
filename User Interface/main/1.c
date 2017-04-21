@@ -2,7 +2,7 @@
 #include <userint.h>
 #include "1.h"
 #include "database.h"
-#include "interface.h"
+
 //Constants for the database directory
 #define SOLDIER "Database\\soldier.ini"
 #define MENTOR  "Database\\mentor.ini"
@@ -16,7 +16,8 @@
 //============================================================================== 
 static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
 static char id[SIZE], currentDate[50], currentTime[50];
-static char **tagName,**tagValue,**ids,**output; 
+static char **tagName,**tagValue,**ids,**output;; 
+int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
 int recordAmount;
 int fieldAmount;
 int ctrlArray;
@@ -24,24 +25,25 @@ int hr, min, sec;
 int day, month, year;
 
 
+
 //==============================================================================
 //							Function declaration section
 //============================================================================== 
 void initialize(char database[],char dir[]);
 void finalize();
-void addMember(char dir[],char database[],int panel,int ctrlArray);
+void addMember(char dir[],char database[],int panel,int ctrlArray,int status);
 int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[]);
 void showMember(int panel,char dir[],char database[],char record[],int ctrlArray);
 void connectIDtoName(char dir[],char database[],char record[],char fullName[]);
 int connectNametoID(char dir[],char database[],char record[],char fullName[]); 
-void createTable(char dir[],char database[], char **ids, int rows,int panel,int control);
+void createTable(char dir[],char database[], char **ids, int rows,int panel,int control,char *fields[],int fieldLen,char groupName[]);
 int connectNametoIDS(char **records,char fullName[]);
 int search(char searchBy[],char val[],char **output);
 void clockDate();
 void restoreSearch();
 void displayGroupPanel(char groupName[]);
 void searchSoldier(char mentorName[],char soldierName[]);
-void searchFor(char dir[],char database[], char fieldName[], char valToCmp[]); 
+void searchFor(char dir[],char database[], char fieldName[], char valToCmp[],char valToCng[]); 
 //==============================================================================
 //									MAIN
 //============================================================================== 
@@ -139,7 +141,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 			if(panel == pNewSold)
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
-				addMember(SOLDIER,"SOLDIER",panel,ctrlArray);
+				addMember(SOLDIER,"SOLDIER",panel,ctrlArray,1);
 				HidePanel(panel);
 				DisplayPanel(pSoldier);
 				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
@@ -148,7 +150,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 			else if(panel == pNewGuide)
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_5);
-				addMember(GUIDE,"GUIDE",panel,ctrlArray);
+				addMember(GUIDE,"GUIDE",panel,ctrlArray,1);
 				HidePanel(panel);
 				DisplayPanel(pGuide);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
@@ -157,7 +159,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 			else if(panel == pNewMent)
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
-				addMember(MENTOR,"MENTOR",panel,ctrlArray);
+				addMember(MENTOR,"MENTOR",panel,ctrlArray,1);
 				HidePanel(panel);
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
@@ -191,7 +193,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 					return 0;
 				}
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_8);
-				addMember(GROUP,"GROUP",panel,ctrlArray);
+				addMember(GROUP,"GROUP",panel,ctrlArray,1);
 				HidePanel(panel);
 				DisplayPanel(pGroup);
 				ctrlArray = GetCtrlArrayFromResourceID (pGroup, CTRLARRAY_9);
@@ -206,33 +208,22 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 int CVICALLBACK Edit (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 {
+	int count;
 	switch (event)
 	{
 		case EVENT_COMMIT:
 			if(panel == pGroup)
 			{
-			
-					SetCtrlArrayAttribute (CTRLARRAY_11, ATTR_VISIBLE, 1);
-					SetCtrlArrayAttribute (CTRLARRAY_10, ATTR_CTRL_MODE, VAL_HOT);
-					SetCtrlArrayAttribute (CTRLARRAY_12, ATTR_VISIBLE, 0);
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CA_GROUP_EDIT);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				SetCtrlAttribute (panel, control, ATTR_DIMMED, 1);
+				for(int i=0;i<count;i++)
+				{
+					SetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_VISIBLE, 1);
+				}
+				SetCtrlAttribute (panel, P_GROUP_STATUS_RING, ATTR_CTRL_MODE, VAL_HOT);
+				SetCtrlAttribute (panel, P_GROUP_GUIDE, ATTR_CTRL_MODE, VAL_HOT);
 			}
-
-				/*case pGuide:
-					ctrlarr1={P_GUIDE_DELETING_GUIDE_BUTTON, P_GUIDE_SAVE_CHANGES_BUTTON};
-					ctrlarr2={P_GUIDE_CELL_PHONE_NUMBER, P_GUIDE_PHONE_NUMBER, P_GUIDE_ADDRESS, P_GUIDE_CITY,
-							  P_GUIDE_MAIN_OCCUPATION, P_GUIDE_SUMMARY, P_GUIDE_EXCEPTIONS};
-					ctrlarr3={P_GUIDE_LIST_SOLDIERS_BUTTON, P_GUIDE_SEND_EMAIL, P_GUIDE_EDITING_BUTTON};
-					break;
-				case pMentor:
-					ctrlarr1=[P_MENTOR_DELETING_MENTO_BUTTON, P_MENTOR_SAVE_CHANGES_BUTTON];
-					ctrlarr2=[P_MENTOR_CELL_PHONE_NUMBER, P_MENTOR_PHONE_NUMBER, P_MENTOR_ADDRESS, P_MENTOR_CITY,
-							  P_MENTOR_MAIN_OCCUPATION];
-					ctrlarr3=[];
-					break;
-				case pSoldier:
-					ctrlarr1=[P_SOLDIER_MOVING_ARCHIVE_BUTTON, P_SOLDIER_SAVE_CHANGES_BUTTON, P_SOLDIER_EDIT_TL_BUTTON];
-					ctrlarr2=[];
-					break;*/
 			
 			break;
 	}
@@ -254,17 +245,26 @@ int CVICALLBACK TimeUpdate (int panel, int control, int event,
 int CVICALLBACK SaveChanges (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
 {
+	int count;
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			switch (panel)
+			if (panel == pGroup)
 			{
-				case P_GROUP:
-					SetCtrlArrayAttribute (CTRLARRAY_11, ATTR_VISIBLE, 0);
-					SetCtrlArrayAttribute (CTRLARRAY_10, ATTR_CTRL_MODE, VAL_INDICATOR);
-					SetCtrlArrayAttribute (CTRLARRAY_12, ATTR_VISIBLE, 1);
-					// add ini
-					break;
+				char groupName[SIZE];
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				addMember(GROUP,"GROUP",panel,ctrlArray,0);	
+				
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CA_GROUP_EDIT);
+				GetNumCtrlArrayItems (ctrlArray, &count);
+				SetCtrlAttribute (panel, P_GROUP_EDIT_GROUP_BUTTON, ATTR_DIMMED, 0);
+				for(int i=0;i<count;i++)
+				{
+					SetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_VISIBLE, 0);
+				}
+				SetCtrlAttribute (panel, P_GROUP_STATUS_RING, ATTR_CTRL_MODE, VAL_INDICATOR);
+				SetCtrlAttribute (panel, P_GROUP_GUIDE, ATTR_CTRL_MODE, VAL_INDICATOR);
 			}
 			break;
 	}
@@ -385,11 +385,13 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 int CVICALLBACK openTable (int panel, int control, int event,
 						   void *callbackData, int eventData1, int eventData2)
 {
+	char **fields;
 	char fullName[SIZE],val[SIZE];
 	int j=0;
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			tableFlag = 1;
 			DisplayPanel(pTable);
 			GetCtrlVal (panel, P_GUIDE_ID_NUMBER, id);
 			connectIDtoName(GUIDE,"GUIDE",id,fullName);
@@ -401,14 +403,20 @@ int CVICALLBACK openTable (int panel, int control, int event,
 				Database_GetFieldVal(id,"מנחה",val);
 				if(strcmp(fullName,val)==0)
 				{
-					ids[j] = malloc((char)strlen(val)+1);
+					ids[j] = malloc((char)strlen(id)+1);
 					sprintf(ids[j],id);
 					j++;
 				}
 			}
 			if(j!=0)
 			{
-				createTable(SOLDIER,"SOLDIER",ids,j,pTable,P_TABLE_LIST_S_OR_M);
+				fields = malloc(sizeof(char*)*2);
+				fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
+				sprintf(fields[0],"שם פרטי");
+				fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+				sprintf(fields[1],"שם משפחה");
+				createTable(SOLDIER,"SOLDIER",ids,j,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+				free(fields);
 			}
 			
 			break;
@@ -441,7 +449,9 @@ int CVICALLBACK checkIfExcist (int panel, int control, int event,
 int CVICALLBACK changeVal (int panel, int control, int event,
 						   void *callbackData, int eventData1, int eventData2)
 {
-char database[SIZE], searchBy[SIZE], val[SIZE], dir[SIZE];
+	char database[SIZE], searchBy[SIZE], val[SIZE], dir[SIZE];
+	char **fields;
+
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -478,13 +488,18 @@ char database[SIZE], searchBy[SIZE], val[SIZE], dir[SIZE];
 				else if(strcmp(database,"GUIDE")==0)
 				{
 					sprintf(dir,"%s",GUIDE);
+					tableFlag = 3;
 				}
 				else if(strcmp(database,"MENTOR")==0)
 				{
 					sprintf(dir,"%s",MENTOR);
+					tableFlag = 2; 
 				}
 				else
+				{
 					sprintf(dir,"%s",SOLDIER);
+					tableFlag = 1;
+				}
 				
 				initialize(database,dir);
 				output = malloc(sizeof(char*)*recordAmount);
@@ -493,9 +508,15 @@ char database[SIZE], searchBy[SIZE], val[SIZE], dir[SIZE];
 					int cc = search(searchBy,val,output);
 					if(cc>=1)
 					{
+						fields = malloc(sizeof(char*)*2);
+						fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
+						sprintf(fields[0],"שם פרטי");
+						fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+						sprintf(fields[1],"שם משפחה");
 						restoreSearch();
 						DisplayPanel(pTable);
-						createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M);
+						createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+						free(fields);
 					}
 				}
 				else
@@ -571,10 +592,10 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),idef);
 				initialize("GROUP",GROUP);
 				Database_RemoveRecord(idef);
-				searchFor(SOLDIER,"SOLDIER","קבוצה",idef);
-				searchFor(MENTOR,"MENTOR","קבוצה",idef);
-				searchFor(GUIDE,"GUIDE","קבוצה 1",idef);
-				searchFor(GUIDE,"GUIDE","קבוצה 2",idef);
+				searchFor(SOLDIER,"SOLDIER","קבוצה",idef,"קבוצה");
+				searchFor(MENTOR,"MENTOR","קבוצה",idef,"קבוצה");
+				searchFor(GUIDE,"GUIDE","קבוצה 1",idef,"קבוצה 1");
+				searchFor(GUIDE,"GUIDE","קבוצה 2",idef,"קבוצה 2");
 			}
 			else if(panel == pGuide)
 			{
@@ -584,8 +605,8 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),idef);
 				initialize("GUIDE",GUIDE);
 				Database_RemoveRecord(idef);
-				searchFor(SOLDIER,"SOLDIER","מנחה",idef);
-				searchFor(MENTOR,"MENTOR","מנחה",idef);
+				searchFor(SOLDIER,"SOLDIER","מנחה",idef,"מנחה");
+				searchFor(MENTOR,"MENTOR","מנחה",idef,"מנחה");
 			}
 			else if(panel == pMentor)
 			{
@@ -595,7 +616,7 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				GetCtrlVal(panel,GetCtrlArrayItem(ctrlArray, i),idef);
 				initialize("MENTOR",MENTOR);
 				Database_RemoveRecord(idef);
-				searchFor(SOLDIER,"SOLDIER","מנטור",idef);
+				searchFor(SOLDIER,"SOLDIER","מנטור",idef,"מנטור");
 				
 			}
 			else if(panel == pSoldier)
@@ -607,9 +628,6 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				initialize("MENTOR",MENTOR);
 				Database_RemoveRecord(idef);
 			}
-			
-			
-			
 			HidePanel(panel);
 			break;
 	}
@@ -673,8 +691,9 @@ int getIndexOfControl(int panel,int ctrlArray,int count,char controlName[])
 }
 
 //add new member to the specific database
-void addMember(char dir[],char database[],int panel, int ctrlArray)
+void addMember(char dir[],char database[],int panel, int ctrlArray,int status)
 {
+	//status: add new member mode = 1 | edit mode =0
 //dir - directory of the inifile. use defined var SOLDIER,MENTOR,etc
 //database - the name of the database as set in the config.ini. "SOLDIER", "MENTOR",etc
 //panel - panel handle of the active panel.
@@ -687,7 +706,7 @@ void addMember(char dir[],char database[],int panel, int ctrlArray)
 	if(idIndex!=-1)
 	{
 		GetCtrlVal (panel, GetCtrlArrayItem(ctrlArray, idIndex), id);
-		if(Database_AddNewRecord(id,tagName,fieldAmount)==0)
+		if(Database_AddNewRecord(id,tagName,fieldAmount)==0 && status==1)
 			MessagePopup("Error", "ID already exist");
 		else
 		{
@@ -827,26 +846,52 @@ int search(char searchBy[],char val[],char **output)
 	return 0;
 }
 
-void createTable(char dir[],char database[], char **ids,int rows,int panel,int control)
-{//NOT WORKING WITH HEBREW 
+void createTable(char dir[],char database[], char **ids,int rows,int panel,int control,char *fields[],int fieldLen,char groupName[])
+{ //status - if we create table for all soldiers = 1
+  //		 if we create table for editing mentors = 2
+	char str[SIZE],tmp[SIZE];
 	initialize(database,dir);
 	InsertTableRows (panel, control, -1, rows, VAL_CELL_STRING);
-	InsertTableColumns (panel, control, -1, fieldAmount, VAL_CELL_STRING);
+	InsertTableColumns (panel, control, -1, 3, VAL_CELL_STRING);
+	
+	for(int k=1;k<=3;k++)
+	{
+		SetTableColumnAttribute (panel, control, k, ATTR_SIZE_MODE, VAL_USE_EXPLICIT_SIZE);
+		SetTableColumnAttribute (panel, control, k, ATTR_COLUMN_WIDTH, 150);
+	}
+	
 	for(int i=0;i<rows;i++)
 	{
-		SetTableRowAttribute (panel, control, i+1, ATTR_USE_LABEL_TEXT, 1);
-		SetTableRowAttribute (panel, control, i+1, ATTR_LABEL_TEXT, ids[i]);
-		Database_GetRecordValues(ids[i],fieldAmount,tagName,tagValue); 
-		for(int j=1;j<=fieldAmount;j++)
+		sprintf(str,"%s","");
+		for(int j=0;j<fieldLen;j++)
 		{
-			SetTableColumnAttribute (panel, control, j, ATTR_TEXT_CHARACTER_SET, VAL_HEBREW_CHARSET);
-			SetTableCellVal (panel, control, MakePoint(j,i+1), tagValue[j-1]);
-			SetTableColumnAttribute (panel, control, j, ATTR_USE_LABEL_TEXT, 1);
-			HebrewConverter_convertHebrewUTF8toISO(tagName[j-1]); 
-			SetTableColumnAttribute (panel, control, j, ATTR_LABEL_TEXT, tagName[j-1]);
-			
+			Database_GetFieldVal(ids[i],fields[j],tmp);
+			strcat(str,tmp);
+			if(j+1<fieldLen)
+				strcat(str," ");
 		}
-		
+		strcat(str,"\0");
+		SetTableCellVal (panel, control, MakePoint(2,i+1), str);
+		SetTableCellAttribute (panel, control, MakePoint(2,i+1), ATTR_NO_EDIT_TEXT, 1);
+		SetTableCellAttribute (panel, control, MakePoint(3,i+1), ATTR_CELL_TYPE, VAL_CELL_BUTTON);
+		SetTableCellVal (panel, control,MakePoint(3,i+1) , ids[i]);
+		SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_TYPE, VAL_CELL_RING);
+		InsertTableCellRingItem (panel, control, MakePoint(1,i+1), 0, "No");
+		InsertTableCellRingItem (panel, control, MakePoint(1,i+1), 1, "Yes");
+		if(strcmp(groupName,"")==0)
+			SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_DIMMED, 1);
+		else
+		{
+			SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_DIMMED, 0);
+			for(int i=0;i<rows;i++)
+			{
+				Database_GetFieldVal(ids[i],"קבוצה",tmp);
+				if(strcmp(tmp,groupName)==0)
+				{
+					SetTableCellVal(panel,control,MakePoint(1,i+1),"YES");
+				}
+			}
+		}
 	}
 }
 
@@ -931,7 +976,7 @@ void displayGroupPanel(char groupName[])
 	}
 }
 
-void searchFor(char dir[],char database[], char fieldName[], char valToCmp[])
+void searchFor(char dir[],char database[], char fieldName[], char valToCmp[], char valToCng[])
 {  //function is used when group\mentor\guide was deleted. 
 	//function remove group\mentor\guide connections from other database 
 	char tmp[SIZE];
@@ -942,10 +987,98 @@ void searchFor(char dir[],char database[], char fieldName[], char valToCmp[])
 		Database_GetFieldVal(id,fieldName,tmp);
 		if(strcmp(tmp,valToCmp)==0)
 		{
-			Database_SetFieldVal(id, fieldName,fieldName);
+			Database_SetFieldVal(id, fieldName,valToCng);
 		}
 	}
 	
 }
 
 	  
+
+int CVICALLBACK tblFunction (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{
+	Point p;
+	char val[SIZE];
+	switch (event)
+	{
+			case EVENT_COMMIT:
+				if(eventData2==3)
+				{
+					switch(tableFlag)
+					{
+						case 1: //SOLDIER
+							ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
+							GetActiveTableCell (panel, control, &p);
+							GetTableCellVal (panel, control, p, val);
+							DisplayPanel(pSoldier);
+							showMember(pSoldier,SOLDIER,"SOLDIER",val,ctrlArray);
+							break;
+						case 2://MENTOR
+							ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
+							GetActiveTableCell (panel, control, &p);
+							GetTableCellVal (panel, control, p, val);
+							DisplayPanel(pMentor);
+							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
+							break;
+						case 3://GUIDE
+							ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
+							GetActiveTableCell (panel, control, &p);
+							GetTableCellVal (panel, control, p, val);
+							DisplayPanel(pGuide);
+							showMember(pGuide,GUIDE,"GUIDE",val,ctrlArray);
+							break;
+					}
+					
+				}
+				else if(eventData2==1)
+				{
+					GetActiveTableCell (panel, control, &p); 
+					GetTableCellVal(panel,control, p,val);
+					GetTableCellVal (panel, control, MakePoint(3,eventData1), id);
+					initialize("MENTOR",MENTOR); 
+					if(strcmp(val,"Yes")==0)
+					{
+						GetCtrlVal (panel, P_TABLE_GNAME, val);
+						Database_SetFieldVal(id,"קבוצה",val);
+					}
+					else
+					{
+						Database_SetFieldVal(id,"קבוצה","קבוצה");	
+					}
+				}
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK editMentorsInGroup (int panel, int control, int event,
+									void *callbackData, int eventData1, int eventData2)
+{
+	char **fields;
+	char val[SIZE];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			tableFlag = 2;
+			initialize("MENTOR",MENTOR);
+			ids = malloc(sizeof(char*)*(recordAmount));
+			for(int i=0;i<recordAmount;i++)
+			{
+				Database_GetRecordInfo(id,i+1);
+				ids[i] = malloc((char)strlen(id)+1);
+				sprintf(ids[i],id);
+			}
+			fields = malloc(sizeof(char*)*2);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
+			sprintf(fields[0],"שם פרטי");
+			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+			sprintf(fields[1],"שם משפחה");
+			GetCtrlVal (panel, P_GROUP_GROUP_NAME, val);
+			DisplayPanel(pTable);
+			createTable(MENTOR,"MENTOR",ids,recordAmount,pTable,P_TABLE_LIST_S_OR_M,fields,2,val);
+			SetCtrlVal (pTable, P_TABLE_GNAME,val );
+			break;
+	}
+	return 0;
+}

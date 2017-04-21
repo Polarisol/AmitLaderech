@@ -61,13 +61,13 @@
 #define  P_EDIT_TL_BOLD_TXT               34      /* control type: textMsg, callback function: (none) */
 
 #define  P_GROUP                          3       /* callback function: exitFunc */
-#define  P_GROUP_EDIT_MENTORS_BUTTON      2       /* control type: pictButton, callback function: (none) */
+#define  P_GROUP_EDIT_MENTORS_BUTTON      2       /* control type: pictButton, callback function: editMentorsInGroup */
 #define  P_GROUP_YEAR                     3       /* control type: string, callback function: (none) */
 #define  P_GROUP_MONTH                    4       /* control type: string, callback function: (none) */
 #define  P_GROUP_CITY                     5       /* control type: string, callback function: (none) */
 #define  P_GROUP_ID_NUMBER                6       /* control type: string, callback function: (none) */
 #define  P_GROUP_GROUP_NAME               7       /* control type: string, callback function: (none) */
-#define  P_GROUP_GUIDE                    8       /* control type: string, callback function: (none) */
+#define  P_GROUP_GUIDE                    8       /* control type: string, callback function: checkIfExcist */
 #define  P_GROUP_LOGO                     9       /* control type: picture, callback function: (none) */
 #define  P_GROUP_SAVE_CHANGES_BUTTON      10      /* control type: pictButton, callback function: SaveChanges */
 #define  P_GROUP_LINE                     11      /* control type: deco, callback function: (none) */
@@ -381,25 +381,24 @@
 #define  P_TABLE_GOAL                     4       /* control type: textMsg, callback function: (none) */
 #define  P_TABLE_BACKGROUND               5       /* control type: picture, callback function: (none) */
 #define  P_TABLE_LOGO                     6       /* control type: picture, callback function: (none) */
-#define  P_TABLE_LIST_S_OR_M              7       /* control type: table, callback function: (none) */
+#define  P_TABLE_LIST_S_OR_M              7       /* control type: table, callback function: tblFunction */
 #define  P_TABLE_EXCEL_BUTTON             8       /* control type: pictButton, callback function: (none) */
+#define  P_TABLE_GNAME                    9       /* control type: string, callback function: (none) */
 
 
      /* Control Arrays: */
 
-#define  CA_MENTOR_BTN                    1
-#define  CTRLARRAY                        2
-#define  CTRLARRAY_10                     3
-#define  CTRLARRAY_11                     4
-#define  CTRLARRAY_12                     5
-#define  CTRLARRAY_2                      6
-#define  CTRLARRAY_3                      7
-#define  CTRLARRAY_4                      8
-#define  CTRLARRAY_5                      9
-#define  CTRLARRAY_6                      10
-#define  CTRLARRAY_7                      11
-#define  CTRLARRAY_8                      12
-#define  CTRLARRAY_9                      13
+#define  CA_GROUP_EDIT                    1
+#define  CA_MENTOR_BTN                    2
+#define  CTRLARRAY                        3
+#define  CTRLARRAY_2                      4
+#define  CTRLARRAY_3                      5
+#define  CTRLARRAY_4                      6
+#define  CTRLARRAY_5                      7
+#define  CTRLARRAY_6                      8
+#define  CTRLARRAY_7                      9
+#define  CTRLARRAY_8                      10
+#define  CTRLARRAY_9                      11
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -412,6 +411,7 @@ int  CVICALLBACK changeVal(int panel, int control, int event, void *callbackData
 int  CVICALLBACK checkIfExcist(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK delRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK editMentorsInGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_New_Guide(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
@@ -425,6 +425,7 @@ int  CVICALLBACK openTable(int panel, int control, int event, void *callbackData
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveChanges(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK showGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK tblFunction(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK TimeUpdate(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
