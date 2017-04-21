@@ -18,7 +18,7 @@ Date *extract_dates(char filename[], char fieldName[], char value[],char Datefie
 {
 	int total_num_of_records;
 	Date *datearray=NULL;
-	int status;
+	int status;			    
 	char buffer[SIZE],date[SIZE];
 	*date_array_size=0;
 	HebrewConverter_convertHebrewISOtoUTF8(value);

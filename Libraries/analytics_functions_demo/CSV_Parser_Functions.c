@@ -200,7 +200,7 @@ int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[
 	{
 		num_of_records = CSVParser_GetNumberOfRecords(filename);
 		
-		if(recordNum>=0 && recordNum<=num_of_records)
+		if(recordNum>=1 && recordNum<=num_of_records)
 		{
 			fgetcsvl(line,LINE_SIZE,Stream);
 			field_header = CSV_Analyzer(line, &num_of_fields_h);
@@ -234,10 +234,6 @@ int CSVParser_GetFieldFromRecord(char filename[], int recordNum, char fieldName[
 				}
 				*/
 			}
-			
-
-
-		
 			free(field_header);
 			free(field_data);
 		}
@@ -392,7 +388,7 @@ char** CSV_Analyzer(char* runner, int* num_of_values)
 					strcpy(pointer[*num_of_values],buffer);
 					break;					
 				}
-				if(*(runner)==',' || *(runner)==10)
+				if(*(runner)==',' || *(runner)==10 || *(runner)==13)
 				{
 					buffer[buf_counter]='\0';
 					buf_counter = 0;
@@ -526,7 +522,7 @@ char* fgetcsvl(char* line,int MAX_SIZE,FILE *Stream)
 					runner++;
 					break;
 				}
-				else if(*runner=='\n')// end of a line -> its a csv line
+				else if(*runner=='\n' || *runner==10 || *runner==12 || *runner==13)// end of a line -> its a csv line
 				{
 					//*runner=' ';
 					strcpy(line,buffer);
@@ -550,5 +546,6 @@ char* fgetcsvl(char* line,int MAX_SIZE,FILE *Stream)
 			runner++;
 		
 	}//end while(result != NULL)
+	strcpy(line,buffer);
 	return result;	
 }//end function
