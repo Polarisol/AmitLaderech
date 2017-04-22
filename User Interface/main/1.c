@@ -205,6 +205,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 	return 0;
 }
 
+
 int CVICALLBACK Edit (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 {
@@ -224,6 +225,34 @@ int CVICALLBACK Edit (int panel, int control, int event,
 				SetCtrlAttribute (panel, P_GROUP_STATUS_RING, ATTR_CTRL_MODE, VAL_HOT);
 				SetCtrlAttribute (panel, P_GROUP_GUIDE, ATTR_CTRL_MODE, VAL_HOT);
 			}
+			else if (panel==pGuide)
+			{		
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_ACTION);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_6);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_HOT);	  
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_VIS);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+			}
+			else if (panel==pMentor)
+			{		
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_ACTION);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_4);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_HOT);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_VIS);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+			}
+			else if(panel==pSoldier)
+			{
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_ACTION);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_HOT);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_VIS);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);	
+			}
+			 
 			
 			break;
 	}
@@ -265,6 +294,43 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 				}
 				SetCtrlAttribute (panel, P_GROUP_STATUS_RING, ATTR_CTRL_MODE, VAL_INDICATOR);
 				SetCtrlAttribute (panel, P_GROUP_GUIDE, ATTR_CTRL_MODE, VAL_INDICATOR);
+			}
+			else if (panel==pGuide)
+			{		
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_ACTION);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_6);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+				addMember(GUIDE,"GUIDE",panel,ctrlArray,0); 
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_VIS);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+			}
+			else if (panel==pMentor)
+			{		
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_ACTION);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_4);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+				addMember(MENTOR,"MENTOR",panel,ctrlArray,0); 
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_VIS);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+				
+			} 
+			else if(panel == pSoldier)
+			{
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_ACTION);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+				addMember(SOLDIER,"SOLDIER",panel,ctrlArray,0); 
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_VIS);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 			}
 			break;
 	}
@@ -371,9 +437,15 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 				GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
 				GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
 				if(strcmp(group1,"קבוצה 1")==0)
+				{
 					sprintf(group1,"");
-				if(strcmp(group2,"קבוצה 2")==0) 
+					SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_VISIBLE, 0);
+				}
+				if(strcmp(group2,"קבוצה 2")==0)
+				{
 					sprintf(group2,"");
+					SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_VISIBLE, 0);
+				}
 				SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
 				SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
 			}
@@ -424,7 +496,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK checkIfExcist (int panel, int control, int event,
+int CVICALLBACK checkIfExist  (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 {
 	char database[SIZE],fullName[SIZE],dir[SIZE];

@@ -13,9 +13,9 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "1.prj"
 Drag Bar Left = 213
-Window Top = 45
+Window Top = 102
 Window Left = -5
-Window Bottom = 1036
+Window Bottom = 1093
 Window Right = 1907
 Maximized = True
 Maximized Children = True
@@ -48,23 +48,23 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3575621000
+Disk Date = 3575729390
 In Projects = "1,"
 Window Top = 450
 Window Left = 202
 Window Height = 687
 Window Width = 1356
-Window Z-Order = 1
+Window Z-Order = 2
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3575621250
+Disk Date = 3575730763
 In Projects = "1,"
 Window Top = 394
 Window Left = 173
-Window Z-Order = 2
-Source Window State = "1,218,218,218,63,64,63,0,0,86,0,210,0,0,0,26,89,0,226,17,687,1356,1,30,"
+Window Z-Order = 1
+Source Window State = "1,446,446,446,60,61,60,0,0,109,0,210,0,0,0,26,424,0,446,61,687,1356,1,30,"
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.c"
@@ -73,7 +73,7 @@ Disk Date = 3575446676
 In Projects = "1,"
 Window Top = 56
 Window Left = 13
-Source Window State = "1,123,123,123,36,38,38,0,0,80,0,0,0,0,0,16,111,0,125,25,436,1272,1,0,"
+Source Window State = "1,123,123,123,36,38,38,0,0,0,0,0,0,0,0,0,111,0,125,25,436,1272,1,0,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.c"
