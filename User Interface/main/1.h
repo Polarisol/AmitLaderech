@@ -75,7 +75,7 @@
 #define  P_GROUP_DELETE_GROUP_BUTTON      13      /* control type: pictButton, callback function: delRecord */
 #define  P_GROUP_EDIT_GROUP_BUTTON        14      /* control type: pictButton, callback function: Edit */
 #define  P_GROUP_MENTOR_15                15      /* control type: command, callback function: OpenMentor */
-#define  P_GROUP_LIST_SOLDIERS_BUTTON     16      /* control type: pictButton, callback function: (none) */
+#define  P_GROUP_LIST_SOLDIERS_BUTTON     16      /* control type: pictButton, callback function: openSoldierTable */
 #define  P_GROUP_MENTOR_14                17      /* control type: command, callback function: OpenMentor */
 #define  P_GROUP_MENTOR_13                18      /* control type: command, callback function: OpenMentor */
 #define  P_GROUP_MENTOR_12                19      /* control type: command, callback function: OpenMentor */
@@ -148,7 +148,7 @@
 #define  P_MAIN_GOAL                      21      /* control type: textMsg, callback function: (none) */
 #define  P_MAIN_LOGO                      22      /* control type: picture, callback function: (none) */
 #define  P_MAIN_LINE                      23      /* control type: deco, callback function: (none) */
-#define  P_MAIN_LIST_SOLDIERS_BUTTON      24      /* control type: pictButton, callback function: (none) */
+#define  P_MAIN_LIST_SOLDIERS_BUTTON      24      /* control type: pictButton, callback function: openSoldierTable */
 #define  P_MAIN_SEARCH_STRING             25      /* control type: string, callback function: changeVal */
 #define  P_MAIN_BACKGROUND                26      /* control type: picture, callback function: (none) */
 #define  P_MAIN_CLOCK_DATE_TIMER          27      /* control type: timer, callback function: TimeUpdate */
@@ -440,6 +440,7 @@ int  CVICALLBACK openGuidePanel(int panel, int control, int event, void *callbac
 int  CVICALLBACK OpenMentor(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OpenPanelNewGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK openSoldier(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK openSoldierTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK openTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveChanges(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

@@ -37,6 +37,7 @@ void showMember(int panel,char dir[],char database[],char record[],int ctrlArray
 void connectIDtoName(char dir[],char database[],char record[],char fullName[]);
 int connectNametoID(char dir[],char database[],char record[],char fullName[]); 
 void createTable(char dir[],char database[], char **ids, int rows,int panel,int control,char *fields[],int fieldLen,char groupName[]);
+void delTable();
 int connectNametoIDS(char **records,char fullName[]);
 int search(char searchBy[],char val[],char **output);
 void clockDate();
@@ -115,7 +116,23 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
             if (panel==pMain)
                 QuitUserInterface (0);
             else
+			{
+				if(panel == pGroup)
+				{//REMOVE TEXT FROM MENTOR'S BUTTONS
+					int count;
+					char tmp[SIZE];
+					ctrlArray = GetCtrlArrayFromResourceID(pGroup,CA_MENTOR_BTN);
+					GetNumCtrlArrayItems (ctrlArray, &count);
+					for(int i=0;i<count;i++)
+					{
+						GetCtrlAttribute (pGroup, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, tmp);
+						if(strcmp(tmp,"")!=0)//false
+							SetCtrlAttribute (pGroup, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, "");
+					}
+								
+				}
                 HidePanel (panel);
+			}
             break;
     }
     return 0;
@@ -464,6 +481,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			tableFlag = 1;
+			delTable();
 			DisplayPanel(pTable);
 			GetCtrlVal (panel, P_GUIDE_ID_NUMBER, id);
 			connectIDtoName(GUIDE,"GUIDE",id,fullName);
@@ -575,6 +593,7 @@ int CVICALLBACK changeVal (int panel, int control, int event,
 				
 				initialize(database,dir);
 				output = malloc(sizeof(char*)*recordAmount);
+				
 				if(strcmp(database,"GROUP")==1) //not equal
 				{
 					int cc = search(searchBy,val,output);
@@ -587,6 +606,7 @@ int CVICALLBACK changeVal (int panel, int control, int event,
 						sprintf(fields[1],"שם משפחה");
 						restoreSearch();
 						DisplayPanel(pTable);
+						delTable(); 
 						createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
 						free(fields);
 					}
@@ -720,6 +740,149 @@ int CVICALLBACK openSoldier (int panel, int control, int event,
 	}
 	return 0;
 }
+
+	  
+
+int CVICALLBACK tblFunction (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{
+	Point p;
+	char val[SIZE];
+	switch (event)
+	{
+			case EVENT_COMMIT:
+				if(eventData2==3)
+				{
+					switch(tableFlag)
+					{
+						case 1: //SOLDIER
+							ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
+							GetActiveTableCell (panel, control, &p);
+							GetTableCellVal (panel, control, p, val);
+							DisplayPanel(pSoldier);
+							showMember(pSoldier,SOLDIER,"SOLDIER",val,ctrlArray);
+							break;
+						case 2://MENTOR
+							ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
+							GetActiveTableCell (panel, control, &p);
+							GetTableCellVal (panel, control, p, val);
+							DisplayPanel(pMentor);
+							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
+							break;
+						case 3://GUIDE
+							ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
+							GetActiveTableCell (panel, control, &p);
+							GetTableCellVal (panel, control, p, val);
+							DisplayPanel(pGuide);
+							showMember(pGuide,GUIDE,"GUIDE",val,ctrlArray);
+							break;
+					}
+					
+				}
+				else if(eventData2==1)
+				{
+					GetActiveTableCell (panel, control, &p); 
+					GetTableCellVal(panel,control, p,val);
+					GetTableCellVal (panel, control, MakePoint(3,eventData1), id);
+					initialize("MENTOR",MENTOR); 
+					if(strcmp(val,"Yes")==0)
+					{
+						GetCtrlVal (panel, P_TABLE_GNAME, val);
+						Database_SetFieldVal(id,"קבוצה",val);
+					}
+					else
+					{
+						Database_SetFieldVal(id,"קבוצה","קבוצה");	
+					}
+				}
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK editMentorsInGroup (int panel, int control, int event,
+									void *callbackData, int eventData1, int eventData2)
+{
+	char **fields;
+	char val[SIZE];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			tableFlag = 2;
+			initialize("MENTOR",MENTOR);
+			ids = malloc(sizeof(char*)*(recordAmount));
+			for(int i=0;i<recordAmount;i++)
+			{
+				Database_GetRecordInfo(id,i+1);
+				ids[i] = malloc((char)strlen(id)+1);
+				sprintf(ids[i],id);
+			}
+			fields = malloc(sizeof(char*)*2);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
+			sprintf(fields[0],"שם פרטי");
+			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+			sprintf(fields[1],"שם משפחה");
+			GetCtrlVal (panel, P_GROUP_GROUP_NAME, val);
+			DisplayPanel(pTable);
+			createTable(MENTOR,"MENTOR",ids,recordAmount,pTable,P_TABLE_LIST_S_OR_M,fields,2,val);
+			SetCtrlVal (pTable, P_TABLE_GNAME,val );
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK openSoldierTable (int panel, int control, int event,
+								  void *callbackData, int eventData1, int eventData2)
+{
+	char **fields; 
+	int j=0,rows;
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			tableFlag = 1;
+			delTable();
+			initialize("SOLDIER",SOLDIER);
+			ids = malloc(sizeof(char*)*(recordAmount));
+			for(int i=1;i<=recordAmount;i++) 
+			{
+				Database_GetRecordInfo(id,i);
+				if(panel == pGroup)
+				{
+					char groupName[SIZE],sGroup[SIZE];
+					GetCtrlVal (panel, P_GROUP_GROUP_NAME, groupName);
+					Database_GetFieldVal(id,"קבוצה",sGroup);
+					if(strcmp(groupName,sGroup)==0)
+					{
+						ids[j] = malloc((char)strlen(id)+1);
+						sprintf(ids[j],id);
+						j++;	
+					}
+				}
+				else
+				{
+					ids[i-1] = malloc((char)strlen(id)+1);
+					sprintf(ids[i-1],id);
+				}
+				
+			}
+			if(panel == pGroup)
+				rows = j;
+			else
+				rows = recordAmount;
+			fields = malloc(sizeof(char*)*2);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
+			sprintf(fields[0],"שם פרטי");
+			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+			sprintf(fields[1],"שם משפחה");
+			restoreSearch();
+			DisplayPanel(pTable);
+			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+			free(fields);
+			break;
+	}
+	return 0;
+}
+
 
 //==============================================================================
 //							Function realization section
@@ -951,7 +1114,7 @@ void createTable(char dir[],char database[], char **ids,int rows,int panel,int c
 		InsertTableCellRingItem (panel, control, MakePoint(1,i+1), 0, "No");
 		InsertTableCellRingItem (panel, control, MakePoint(1,i+1), 1, "Yes");
 		if(strcmp(groupName,"")==0)
-			SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_DIMMED, 1);
+			SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_DIMMED, 1);  
 		else
 		{
 			SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_DIMMED, 0);
@@ -1010,7 +1173,9 @@ void restoreSearch()
 {
 	DefaultCtrl (pMain, P_MAIN_SEARCH_RING);
 	DefaultCtrl (pMain, P_MAIN_SEARCH_BY_RING);
+	SetCtrlAttribute (pMain, P_MAIN_SEARCH_BY_RING, ATTR_VISIBLE, 0);
 	DefaultCtrl (pMain, P_MAIN_SEARCH_STRING);
+	SetCtrlAttribute (pMain, P_MAIN_SEARCH_STRING, ATTR_VISIBLE, 0); 
 }
 
 void displayGroupPanel(char groupName[])
@@ -1065,92 +1230,9 @@ void searchFor(char dir[],char database[], char fieldName[], char valToCmp[], ch
 	
 }
 
-	  
-
-int CVICALLBACK tblFunction (int panel, int control, int event,
-							 void *callbackData, int eventData1, int eventData2)
+void delTable()
 {
-	Point p;
-	char val[SIZE];
-	switch (event)
-	{
-			case EVENT_COMMIT:
-				if(eventData2==3)
-				{
-					switch(tableFlag)
-					{
-						case 1: //SOLDIER
-							ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
-							GetActiveTableCell (panel, control, &p);
-							GetTableCellVal (panel, control, p, val);
-							DisplayPanel(pSoldier);
-							showMember(pSoldier,SOLDIER,"SOLDIER",val,ctrlArray);
-							break;
-						case 2://MENTOR
-							ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
-							GetActiveTableCell (panel, control, &p);
-							GetTableCellVal (panel, control, p, val);
-							DisplayPanel(pMentor);
-							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
-							break;
-						case 3://GUIDE
-							ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
-							GetActiveTableCell (panel, control, &p);
-							GetTableCellVal (panel, control, p, val);
-							DisplayPanel(pGuide);
-							showMember(pGuide,GUIDE,"GUIDE",val,ctrlArray);
-							break;
-					}
-					
-				}
-				else if(eventData2==1)
-				{
-					GetActiveTableCell (panel, control, &p); 
-					GetTableCellVal(panel,control, p,val);
-					GetTableCellVal (panel, control, MakePoint(3,eventData1), id);
-					initialize("MENTOR",MENTOR); 
-					if(strcmp(val,"Yes")==0)
-					{
-						GetCtrlVal (panel, P_TABLE_GNAME, val);
-						Database_SetFieldVal(id,"קבוצה",val);
-					}
-					else
-					{
-						Database_SetFieldVal(id,"קבוצה","קבוצה");	
-					}
-				}
-			break;
-	}
-	return 0;
+	DeleteTableRows (pTable, P_TABLE_LIST_S_OR_M, 1, -1);
+	DeleteTableColumns (pTable, P_TABLE_LIST_S_OR_M, 1, -1);
 }
 
-int CVICALLBACK editMentorsInGroup (int panel, int control, int event,
-									void *callbackData, int eventData1, int eventData2)
-{
-	char **fields;
-	char val[SIZE];
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			tableFlag = 2;
-			initialize("MENTOR",MENTOR);
-			ids = malloc(sizeof(char*)*(recordAmount));
-			for(int i=0;i<recordAmount;i++)
-			{
-				Database_GetRecordInfo(id,i+1);
-				ids[i] = malloc((char)strlen(id)+1);
-				sprintf(ids[i],id);
-			}
-			fields = malloc(sizeof(char*)*2);
-			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
-			sprintf(fields[0],"שם פרטי");
-			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
-			sprintf(fields[1],"שם משפחה");
-			GetCtrlVal (panel, P_GROUP_GROUP_NAME, val);
-			DisplayPanel(pTable);
-			createTable(MENTOR,"MENTOR",ids,recordAmount,pTable,P_TABLE_LIST_S_OR_M,fields,2,val);
-			SetCtrlVal (pTable, P_TABLE_GNAME,val );
-			break;
-	}
-	return 0;
-}
