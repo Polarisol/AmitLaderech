@@ -410,14 +410,18 @@
 #define  CA_SOLDIER_ACTION                7
 #define  CA_SOLDIER_VIS                   8
 #define  CTRLARRAY                        9
-#define  CTRLARRAY_2                      10
-#define  CTRLARRAY_3                      11
-#define  CTRLARRAY_4                      12
-#define  CTRLARRAY_5                      13
-#define  CTRLARRAY_6                      14
-#define  CTRLARRAY_7                      15
-#define  CTRLARRAY_8                      16
-#define  CTRLARRAY_9                      17
+#define  CTRLARRAY_10                     10
+#define  CTRLARRAY_11                     11
+#define  CTRLARRAY_12                     12
+#define  CTRLARRAY_13                     13
+#define  CTRLARRAY_2                      14
+#define  CTRLARRAY_3                      15
+#define  CTRLARRAY_4                      16
+#define  CTRLARRAY_5                      17
+#define  CTRLARRAY_6                      18
+#define  CTRLARRAY_7                      19
+#define  CTRLARRAY_8                      20
+#define  CTRLARRAY_9                      21
 
      /* Menu Bars, Menus, and Menu Items: */
 
