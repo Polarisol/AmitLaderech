@@ -109,7 +109,7 @@
 #define  P_GUIDE_GROUP_1_STRING           12      /* control type: string, callback function: (none) */
 #define  P_GUIDE_GROUP_2_STRING           13      /* control type: string, callback function: (none) */
 #define  P_GUIDE_ID_NUMBER                14      /* control type: string, callback function: (none) */
-#define  P_GUIDE_IMAGE_BOX                15      /* control type: picture, callback function: (none) */
+#define  P_GUIDE_PICTURE                  15      /* control type: picture, callback function: (none) */
 #define  P_GUIDE_DELETING_GUIDE_BUTTON    16      /* control type: pictButton, callback function: delRecord */
 #define  P_GUIDE_SAVE_CHANGES_BUTTON      17      /* control type: pictButton, callback function: SaveChanges */
 #define  P_GUIDE_EDITING_BUTTON           18      /* control type: pictButton, callback function: Edit */
@@ -223,7 +223,7 @@
 #define  P_NEW_GUID_PHONE_NUMBER          7       /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_MAIL                  8       /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_AGE                   9       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_IMAGE_BOX             10      /* control type: picture, callback function: (none) */
+#define  P_NEW_GUID_PICTURE               10      /* control type: picture, callback function: (none) */
 #define  P_NEW_GUID_LAST_NAME             11      /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_FIRST_NAME            12      /* control type: string, callback function: (none) */
 #define  P_NEW_GUID_ID_NUMBER             13      /* control type: string, callback function: (none) */
@@ -234,7 +234,7 @@
 #define  P_NEW_GUID_GOAL                  18      /* control type: textMsg, callback function: (none) */
 #define  P_NEW_GUID_BACKGROUND            19      /* control type: picture, callback function: (none) */
 #define  P_NEW_GUID_LOGO                  20      /* control type: picture, callback function: (none) */
-#define  P_NEW_GUID_SELECT_IMAGE_BUTTON   21      /* control type: command, callback function: (none) */
+#define  P_NEW_GUID_SELECT_IMAGE_BUTTON   21      /* control type: command, callback function: pic_func */
 
 #define  P_NEW_MENT                       9       /* callback function: exitFunc */
 #define  P_NEW_MENT_GUIDE                 2       /* control type: string, callback function: checkIfExist */
@@ -249,7 +249,7 @@
 #define  P_NEW_MENT_LAST_NAME             11      /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_FIRST_NAME            12      /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_ID_NUMBER             13      /* control type: string, callback function: (none) */
-#define  P_NEW_MENT_IMAGE_BOX             14      /* control type: picture, callback function: (none) */
+#define  P_NEW_MENT_PICTURE               14      /* control type: picture, callback function: pic_func */
 #define  P_NEW_MENT_SAVE_DATA_BUTTON      15      /* control type: pictButton, callback function: Save_Sol_Func */
 #define  P_NEW_MENT_HEADLINE              16      /* control type: textMsg, callback function: (none) */
 #define  P_NEW_MENT_LINE                  17      /* control type: deco, callback function: (none) */
@@ -257,7 +257,7 @@
 #define  P_NEW_MENT_GOAL                  19      /* control type: textMsg, callback function: (none) */
 #define  P_NEW_MENT_BACKGROUND            20      /* control type: picture, callback function: (none) */
 #define  P_NEW_MENT_LOGO                  21      /* control type: picture, callback function: (none) */
-#define  P_NEW_MENT_SELECT_IMAGE_BUTTON   22      /* control type: command, callback function: (none) */
+#define  P_NEW_MENT_SELECT_IMAGE_BUTTON   22      /* control type: command, callback function: pic_func */
 
 #define  P_NEW_SOLD                       10      /* callback function: exitFunc */
 #define  P_NEW_SOLD_CYCLE                 2       /* control type: string, callback function: (none) */
@@ -281,7 +281,7 @@
 #define  P_NEW_SOLD_GROUP                 20      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_GUIDE                 21      /* control type: string, callback function: checkIfExist */
 #define  P_NEW_SOLD_NEXT_MEETING_DATE     22      /* control type: string, callback function: (none) */
-#define  P_NEW_SOLD_SELECT_IMAGE_BUTTON   23      /* control type: command, callback function: (none) */
+#define  P_NEW_SOLD_SELECT_IMAGE_BUTTON   23      /* control type: command, callback function: pic_func */
 #define  P_NEW_SOLD_LAST_MEETING_DATE     24      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_LAST_NAME             25      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_FIRST_NAME            26      /* control type: string, callback function: (none) */
@@ -446,6 +446,7 @@ int  CVICALLBACK OpenPanelNewGroup(int panel, int control, int event, void *call
 int  CVICALLBACK openSoldier(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK openSoldierTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK openTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK pic_func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Save_Sol_Func(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveChanges(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK showGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

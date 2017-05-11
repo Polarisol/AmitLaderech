@@ -45,6 +45,7 @@ void restoreSearch();
 void displayGroupPanel(char groupName[]);
 void searchSoldier(char mentorName[],char soldierName[]);
 void searchFor(char dir[],char database[], char fieldName[], char valToCmp[],char valToCng[]);
+int CVICALLBACK pic_func (int panel, int control, int event,void *callbackData, int eventData1, int eventData2);
 
 //==============================================================================
 //									MAIN
@@ -1252,4 +1253,43 @@ void delTable()
 {
 	DeleteTableRows (pTable, P_TABLE_LIST_S_OR_M, 1, -1);
 	DeleteTableColumns (pTable, P_TABLE_LIST_S_OR_M, 1, -1);
+}
+
+int CVICALLBACK pic_func (int panel, int control, int event,
+						  void *callbackData, int eventData1, int eventData2)
+{
+       char file_name[300];
+       int sel_val;
+	   char ID[300];
+	   int bitmapID=0;
+	   char pic_id[10];
+	   char panel_control_pic[100],panel_control_id[100];
+       
+	   switch (event)
+       {
+              case EVENT_COMMIT:
+				  
+				  
+				  	 if (panel== pNewGuide) 
+					 {
+						 sprintf (panel_control_id,"P_NEW_GUID_ID_NUMBER");
+						 sprintf (panel_control_pic,"P_NEW_GUID_PICTURE");
+					 }
+					 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
+                     if (sel_val)
+					 {
+					
+					 	DisplayImageFile (panel, panel_control_pic, file_name);
+						GetCtrlBitmap (panel, panel_control_pic, 0, &bitmapID);
+						GetCtrlVal (panel, panel_control_id, pic_id);
+ 						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
+						SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
+						
+						DiscardBitmap (bitmapID);
+					 }
+                    break;
+    
+}
+
+	return 0;
 }
