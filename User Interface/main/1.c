@@ -43,9 +43,11 @@ int search(char searchBy[],char val[],char **output);
 void clockDate();
 void restoreSearch();
 void displayGroupPanel(char groupName[]);
-void searchSoldier(char mentorName[],char soldierName[]);
+int searchSoldier(char mentorName[],char soldierName[]);
 void searchFor(char dir[],char database[], char fieldName[], char valToCmp[],char valToCng[]);
 int CVICALLBACK pic_func (int panel, int control, int event,void *callbackData, int eventData1, int eventData2);
+void dealWithSoldierButton();
+void dealWithGroupButtonInGuide();
 
 //==============================================================================
 //									MAIN
@@ -182,8 +184,9 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				addMember(MENTOR,"MENTOR",panel,ctrlArray,1);
 				HidePanel(panel);
 				DisplayPanel(pMentor);
-				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
+				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_13);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
+				dealWithSoldierButton();
 			}
 			else if(panel == pNewGroup)
 			{
@@ -191,9 +194,11 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				GetCtrlVal (panel, P_NEW_GROU_CITY, group1);
 				GetCtrlVal (panel, P_NEW_GROU_MONTH, group2);
 				GetCtrlVal (panel, P_NEW_GROU_YEAR, group3);		//CREATE THE GROUP NAME
-				result = malloc(strlen(group1)+strlen(group2)+strlen(group3)+1);
+				result = malloc(strlen(group1)+strlen(group2)+strlen(group3)+3);
 				strcpy(result,group1);
+				strcat(result," ");
 				strcat(result,group2);
+				strcat(result," ");
 				strcat(result,group3);
 				SetCtrlVal (panel, P_NEW_GROU_ID_NUMBER, result);
 				SetCtrlVal (panel, P_NEW_GROU_GROUP_NAME, result);
@@ -228,7 +233,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 int CVICALLBACK Edit (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 {
-	int count;
+	
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -306,26 +311,21 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_11);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
-				/*char groupName[SIZE];
+				
+				
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
 				GetNumCtrlArrayItems (ctrlArray, &count);
 				addMember(GROUP,"GROUP",panel,ctrlArray,0);	
-				
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CA_GROUP_EDIT);
-				GetNumCtrlArrayItems (ctrlArray, &count);
-				for(int i=0;i<count;i++)
-				{
-					SetCtrlAttribute (panel, GetCtrlArrayItem(ctrlArray, i), ATTR_VISIBLE, 0);
-				}
-				SetCtrlAttribute (panel, P_GROUP_STATUS_RING, ATTR_CTRL_MODE, VAL_INDICATOR);
-				SetCtrlAttribute (panel, P_GROUP_GUIDE, ATTR_CTRL_MODE, VAL_INDICATOR);*/
 			}
 			else if (panel==pGuide)
 			{	
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_ACTION);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_12);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);	  
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_12);		 
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+				addMember(GUIDE,"GUIDE",panel,ctrlArray,0); 
+				
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_VIS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 				/*ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_ACTION);
@@ -342,11 +342,14 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 			{		
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_ACTION);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_13);
+				
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_4);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+				addMember(MENTOR,"MENTOR",panel,ctrlArray,0); 
+				
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_VIS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
-				
+				dealWithSoldierButton();
 				/*ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_ACTION);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
 				
@@ -390,7 +393,10 @@ int CVICALLBACK checkIfExist  (int panel, int control, int event,
 				sprintf(dir,MENTOR);
 			initialize(database,dir); 
 			if(connectNametoID(dir,database,id,fullName)==0)//if the fullName does not excist return 0
+			{
 				MessagePopup("Alert", "Record does not excist!");
+				SetCtrlVal(panel,control,"");
+			}
 				
 			break;
 	}
@@ -628,12 +634,28 @@ int CVICALLBACK Open_P_NEW_MENTOR (int panel, int control, int event,
 	}
 	return 0;
 }
-
+void dealWithGroupButtonInGuide()
+{
+	char group1[SIZE],group2[SIZE];
+	GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
+	GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
+	if(strcmp(group1,"קבוצה 1")==0)
+	{
+		sprintf(group1,"");
+		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_VISIBLE, 0);
+	}
+	if(strcmp(group2,"קבוצה 2")==0)
+	{
+		sprintf(group2,"");
+		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_VISIBLE, 0);
+	}
+	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
+	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
+}
 int CVICALLBACK openGuidePanel (int panel, int control, int event,
 								void *callbackData, int eventData1, int eventData2)
 {
 	char fullName[SIZE];
-	char group1[SIZE],group2[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -646,20 +668,7 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 				connectNametoID(GUIDE,"GUIDE",id,fullName);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
-				GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
-				GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
-				if(strcmp(group1,"קבוצה 1")==0)
-				{
-					sprintf(group1,"");
-					SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_VISIBLE, 0);
-				}
-				if(strcmp(group2,"קבוצה 2")==0)
-				{
-					sprintf(group2,"");
-					SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_VISIBLE, 0);
-				}
-				SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
-				SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
+				dealWithGroupButtonInGuide(); 
 			}
 			break;
 	}
@@ -712,20 +721,23 @@ int CVICALLBACK openTable (int panel, int control, int event,
 int CVICALLBACK OpenMentor (int panel, int control, int event,
 							void *callbackData, int eventData1, int eventData2)
 {
-	char lbl[SIZE],soldierName[SIZE];
+	char mentorName[SIZE],soldierName[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			GetCtrlAttribute (panel, control, ATTR_LABEL_TEXT, lbl);
-			if(strcmp(lbl,"")==1)
+			GetCtrlAttribute (panel, control, ATTR_LABEL_TEXT, mentorName);
+			if(strcmp(mentorName,"")==1)
 			{
 				HidePanel (pGroup);
-				connectNametoID(MENTOR,"MENTOR",id,lbl);
+				connectNametoID(MENTOR,"MENTOR",id,mentorName);
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
-				searchSoldier(lbl,soldierName);
-				SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_LABEL_TEXT, soldierName);
+				
+				if(searchSoldier(mentorName,soldierName)==1)
+					SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_LABEL_TEXT, soldierName);
+				else
+					dealWithSoldierButton();  
 			}
 			break;
 	}
@@ -762,6 +774,17 @@ int CVICALLBACK openSoldier (int panel, int control, int event,
 	return 0;
 }
 
+void dealWithSoldierButton()
+{
+	char val[SIZE];
+	GetCtrlVal (pMentor, P_MENTOR_SOLDIER_NAME_S, val);
+	if(strcmp(val,"HIDDEN")==0)
+	{
+		SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_VISIBLE, 0);
+		SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_TEXT, ATTR_VISIBLE, 0);
+	}
+}
+
 int CVICALLBACK tblFunction (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
 {
@@ -780,13 +803,21 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pSoldier);
 							showMember(pSoldier,SOLDIER,"SOLDIER",val,ctrlArray);
+							HidePanel(panel);
 							break;
 						case 2://MENTOR
-							ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
+							char mentorName[SIZE],soldierName[SIZE];
+							ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_13);
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pMentor);
 							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
+							GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(eventData2-1,eventData1), mentorName);
+							if(searchSoldier(mentorName,soldierName)==1)
+								SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_LABEL_TEXT, soldierName);
+							else
+								dealWithSoldierButton();
+							HidePanel(panel);
 							break;
 						case 3://GUIDE
 							ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
@@ -794,6 +825,8 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pGuide);
 							showMember(pGuide,GUIDE,"GUIDE",val,ctrlArray);
+							dealWithGroupButtonInGuide();
+							HidePanel(panel);
 							break;
 					}
 					
@@ -842,6 +875,7 @@ int CVICALLBACK editMentorsInGroup (int panel, int control, int event,
 			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
 			sprintf(fields[1],"שם משפחה");
 			GetCtrlVal (panel, P_GROUP_GROUP_NAME, val);
+			delTable();
 			DisplayPanel(pTable);
 			createTable(MENTOR,"MENTOR",ids,recordAmount,pTable,P_TABLE_LIST_S_OR_M,fields,2,val);
 			SetCtrlVal (pTable, P_TABLE_GNAME,val );
@@ -1170,7 +1204,7 @@ void clockDate()
 		SetCtrlVal (pMain, P_MAIN_BLESSING, "!נטלי, לילה טוב! לכי לישון");
 }
 
-void searchSoldier(char mentorName[],char soldierName[])
+int searchSoldier(char mentorName[],char soldierName[])
 {
 	char tmp[SIZE];
 	initialize("SOLDIER",SOLDIER);
@@ -1182,9 +1216,10 @@ void searchSoldier(char mentorName[],char soldierName[])
 		{
 			connectIDtoName(SOLDIER,"SOLDIER",id,tmp);
 			sprintf(soldierName,"%s",tmp);
-			break;
+			return 1;
 		}
 	}
+	return 0;
 	
 }
 
