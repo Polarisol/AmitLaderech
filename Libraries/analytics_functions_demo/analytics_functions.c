@@ -306,7 +306,7 @@ char *last_request_check(char filename[],char soldierfield[],char mentorfield[],
 	{
 		rec_num=CSVParser_GetNumberOfRecords(filename);
 		CSVParser_GetFieldFromRecord(filename,rec_num-num+1, requestfield, buffer);
-		if (strlen(buffer)>3)
+		if (strlen(buffer)>1)
 		{
 			strcpy(value[0],buffer);
 			CSVParser_GetFieldFromRecord(filename,rec_num-num+1, soldierfield, value[1]);

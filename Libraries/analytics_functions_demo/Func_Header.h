@@ -8,3 +8,4 @@ char** CSV_Analyzer(char* runner, int* num_of_values);
 char* fgetcsvl(char* line,int MAX_SIZE,FILE *Stream);
 void HebrewConverter_convertHebrewUTF8toISO(char original[]); //file to cvi
 void HebrewConverter_convertHebrewISOtoUTF8(char original[]); //cvi to file
+//
