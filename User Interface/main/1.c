@@ -1231,12 +1231,17 @@ void restoreSearch()
 	DefaultCtrl (pMain, P_MAIN_SEARCH_STRING);
 	SetCtrlAttribute (pMain, P_MAIN_SEARCH_STRING, ATTR_VISIBLE, 0); 
 }
-
+void delMentorButtons()
+{
+	ctrlArray = GetCtrlArrayFromResourceID (pGroup, CA_MENTOR_BTN);
+	SetCtrlArrayAttribute (ctrlArray, ATTR_LABEL_TEXT, "");
+}
 void displayGroupPanel(char groupName[])
 {
 	char tmp[SIZE],fullName[SIZE];
 	int count;
 	//SET THE STAGE
+	delMentorButtons();
 	DisplayPanel(pGroup);
 	ctrlArray = GetCtrlArrayFromResourceID (pGroup, CTRLARRAY_9);
 	showMember(pGroup,GROUP,"GROUP",groupName,ctrlArray);
