@@ -46,7 +46,6 @@ void displayGroupPanel(char groupName[]);
 int searchSoldier(char mentorName[],char soldierName[]);
 void searchFor(char dir[],char database[], char fieldName[], char valToCmp[],char valToCng[]);
 int CVICALLBACK pic_func (int panel, int control, int event,void *callbackData, int eventData1, int eventData2);
-void dealWithSoldierButton();
 void dealWithGroupButtonInGuide();
 
 //==============================================================================
@@ -186,7 +185,6 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_13);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
-				dealWithSoldierButton();
 			}
 			else if(panel == pNewGroup)
 			{
@@ -349,7 +347,6 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 				
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_VIS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
-				dealWithSoldierButton();
 				/*ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_ACTION);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
 				
@@ -733,11 +730,6 @@ int CVICALLBACK OpenMentor (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
-				
-				if(searchSoldier(mentorName,soldierName)==1)
-					SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_LABEL_TEXT, soldierName);
-				else
-					dealWithSoldierButton();  
 			}
 			break;
 	}
@@ -762,28 +754,46 @@ int CVICALLBACK showGroup (int panel, int control, int event,
 int CVICALLBACK openSoldier (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
 {
+	char mentorName[SIZE],solMentor[SIZE];
+	int rows = 0;
 	switch (event)
 	{
 		case EVENT_COMMIT:
 			HidePanel(panel);
-			DisplayPanel(pSoldier);
-			ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
-			showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
+			delTable();
+			DisplayPanel(pTable);
+			GetCtrlVal (panel, P_MENTOR_ID_NUMBER, id);
+			connectIDtoName(MENTOR,"MENTOR",id,mentorName);
+			
+			initialize("SOLDIER",SOLDIER);
+			ids = malloc(sizeof(char*)*(recordAmount));
+			for(int i=0;i<recordAmount;i++)
+			{
+				Database_GetRecordInfo(id,i+1);
+				Database_GetFieldVal(id,"מנטור",solMentor);
+				if(strcmp(mentorName,solMentor)==0)
+				{
+					ids[rows] =  malloc(sizeof(char)*strlen(id)+1);
+					sprintf(ids[rows],id);
+					rows++;
+				}
+			}
+			char **fields;
+			fields = malloc(sizeof(char*)*2);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); 
+			sprintf(fields[0],"שם פרטי");
+			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+			sprintf(fields[1],"שם משפחה");
+			delTable();
+			tableFlag = 1;
+			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+			
 			break;
 	}
 	return 0;
 }
 
-void dealWithSoldierButton()
-{
-	char val[SIZE];
-	GetCtrlVal (pMentor, P_MENTOR_SOLDIER_NAME_S, val);
-	if(strcmp(val,"HIDDEN")==0)
-	{
-		SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_VISIBLE, 0);
-		SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_TEXT, ATTR_VISIBLE, 0);
-	}
-}
+
 
 int CVICALLBACK tblFunction (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
@@ -813,10 +823,6 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							DisplayPanel(pMentor);
 							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
 							GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(eventData2-1,eventData1), mentorName);
-							if(searchSoldier(mentorName,soldierName)==1)
-								SetCtrlAttribute (pMentor, P_MENTOR_SOLDIER_BUTTON, ATTR_LABEL_TEXT, soldierName);
-							else
-								dealWithSoldierButton();
 							HidePanel(panel);
 							break;
 						case 3://GUIDE
@@ -887,7 +893,7 @@ int CVICALLBACK editMentorsInGroup (int panel, int control, int event,
 int CVICALLBACK openSoldierTable (int panel, int control, int event,
 								  void *callbackData, int eventData1, int eventData2)
 {
-	char **fields; 
+	char **fields;
 	int j=0,rows;
 	switch (event)
 	{
@@ -923,7 +929,7 @@ int CVICALLBACK openSoldierTable (int panel, int control, int event,
 			else
 				rows = recordAmount;
 			fields = malloc(sizeof(char*)*2);
-			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); 
 			sprintf(fields[0],"שם פרטי");
 			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
 			sprintf(fields[1],"שם משפחה");
