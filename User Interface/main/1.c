@@ -568,6 +568,7 @@ int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 				Database_GetRecordInfo(id,i+1);
 				connectIDtoName(GUIDE,"GUIDE",id,fullName);
 				SetCtrlAttribute (pActivity, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, fullName);
+				SetCtrlAttribute (pActivity, GetCtrlArrayItem(ctrlArray, i), ATTR_VISIBLE, 1);
 			}
 			
 			break;
