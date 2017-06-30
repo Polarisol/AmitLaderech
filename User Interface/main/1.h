@@ -17,13 +17,21 @@
 #define  P_ACTIVITY_ADDING_GUIDE_BUTTON   2       /* control type: pictButton, callback function: Open_New_Guide */
 #define  P_ACTIVITY_LINE                  3       /* control type: deco, callback function: (none) */
 #define  P_ACTIVITY_AMITLADERECH          4       /* control type: textMsg, callback function: (none) */
-#define  P_ACTIVITY_GUIDE_BUTTON_2        5       /* control type: pictButton, callback function: openGuidePanel */
-#define  P_ACTIVITY_GUIDE_BUTTON_3        6       /* control type: pictButton, callback function: openGuidePanel */
-#define  P_ACTIVITY_GUIDE_BUTTON_4        7       /* control type: pictButton, callback function: openGuidePanel */
-#define  P_ACTIVITY_GUIDE_BUTTON_1        8       /* control type: pictButton, callback function: openGuidePanel */
-#define  P_ACTIVITY_GOAL                  9       /* control type: textMsg, callback function: (none) */
-#define  P_ACTIVITY_LOGO                  10      /* control type: picture, callback function: (none) */
-#define  P_ACTIVITY_BACKGROUND            11      /* control type: picture, callback function: (none) */
+#define  P_ACTIVITY_GUIDE_BUTTON_10       5       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_11       6       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_12       7       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_9        8       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_6        9       /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_7        10      /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_8        11      /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_5        12      /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_2        13      /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_3        14      /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_4        15      /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GUIDE_BUTTON_1        16      /* control type: pictButton, callback function: openGuidePanel */
+#define  P_ACTIVITY_GOAL                  17      /* control type: textMsg, callback function: (none) */
+#define  P_ACTIVITY_LOGO                  18      /* control type: picture, callback function: (none) */
+#define  P_ACTIVITY_BACKGROUND            19      /* control type: picture, callback function: (none) */
 
 #define  P_EDIT_TL                        2       /* callback function: exitFunc */
 #define  P_EDIT_TL_TICK_8                 2       /* control type: string, callback function: (none) */
@@ -136,21 +144,21 @@
 #define  P_MAIN_TUESDAY                   9       /* control type: textBox, callback function: (none) */
 #define  P_MAIN_MONDAY                    10      /* control type: textBox, callback function: (none) */
 #define  P_MAIN_SUNDAY                    11      /* control type: textBox, callback function: (none) */
-#define  P_MAIN_SEARCH_BY_RING            12      /* control type: ring, callback function: changeVal */
-#define  P_MAIN_SEARCH_RING               13      /* control type: ring, callback function: changeVal */
-#define  P_MAIN_MY_TASKS                  14      /* control type: textBox, callback function: (none) */
-#define  P_MAIN_STATISTICS                15      /* control type: textBox, callback function: (none) */
-#define  P_MAIN_NEW_SOLDIER_BUTTON        16      /* control type: pictButton, callback function: Open_P_NEW_SOLD */
-#define  P_MAIN_AMITLADERECH              17      /* control type: textMsg, callback function: (none) */
-#define  P_MAIN_NEW_GROUP_BUTTON          18      /* control type: pictButton, callback function: OpenPanelNewGroup */
-#define  P_MAIN_ACTIVITY_PANEL_BUTTON     19      /* control type: pictButton, callback function: OPEN_P_Activity */
-#define  P_MAIN_ANALYSIS_PANEL_BUTTO2     20      /* control type: pictButton, callback function: (none) */
-#define  P_MAIN_GOAL                      21      /* control type: textMsg, callback function: (none) */
-#define  P_MAIN_LOGO                      22      /* control type: picture, callback function: (none) */
-#define  P_MAIN_LINE                      23      /* control type: deco, callback function: (none) */
-#define  P_MAIN_LIST_SOLDIERS_BUTTON      24      /* control type: pictButton, callback function: openSoldierTable */
-#define  P_MAIN_SEARCH_STRING             25      /* control type: string, callback function: changeVal */
-#define  P_MAIN_BACKGROUND                26      /* control type: picture, callback function: (none) */
+#define  P_MAIN_MY_TASKS                  12      /* control type: textBox, callback function: (none) */
+#define  P_MAIN_STATISTICS                13      /* control type: textBox, callback function: (none) */
+#define  P_MAIN_NEW_SOLDIER_BUTTON        14      /* control type: pictButton, callback function: Open_P_NEW_SOLD */
+#define  P_MAIN_AMITLADERECH              15      /* control type: textMsg, callback function: (none) */
+#define  P_MAIN_NEW_GROUP_BUTTON          16      /* control type: pictButton, callback function: OpenPanelNewGroup */
+#define  P_MAIN_ACTIVITY_PANEL_BUTTON     17      /* control type: pictButton, callback function: OPEN_P_Activity */
+#define  P_MAIN_ANALYSIS_PANEL_BUTTO2     18      /* control type: pictButton, callback function: (none) */
+#define  P_MAIN_GOAL                      19      /* control type: textMsg, callback function: (none) */
+#define  P_MAIN_LOGO                      20      /* control type: picture, callback function: (none) */
+#define  P_MAIN_LINE                      21      /* control type: deco, callback function: (none) */
+#define  P_MAIN_LIST_SOLDIERS_BUTTON      22      /* control type: pictButton, callback function: openSoldierTable */
+#define  P_MAIN_SEARCH_STRING             23      /* control type: string, callback function: changeVal */
+#define  P_MAIN_BACKGROUND                24      /* control type: picture, callback function: (none) */
+#define  P_MAIN_SEARCH_RING               25      /* control type: ring, callback function: changeVal */
+#define  P_MAIN_SEARCH_BY_RING            26      /* control type: ring, callback function: changeVal */
 #define  P_MAIN_CLOCK_DATE_TIMER          27      /* control type: timer, callback function: TimeUpdate */
 
 #define  P_MENTOR                         6       /* callback function: exitFunc */
@@ -396,6 +404,7 @@
 #define  P_TABLE_LIST_S_OR_M              7       /* control type: table, callback function: tblFunction */
 #define  P_TABLE_EXCEL_BUTTON             8       /* control type: pictButton, callback function: (none) */
 #define  P_TABLE_GNAME                    9       /* control type: string, callback function: (none) */
+#define  P_TABLE_TABLE_HEADLINE           10      /* control type: textMsg, callback function: (none) */
 
 
      /* Control Arrays: */
