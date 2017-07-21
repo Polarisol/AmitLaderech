@@ -13,7 +13,7 @@
 
      /* Panels and Controls: */
 
-#define  PANEL                            1       /* callback function: main */
+#define  PANEL                            1       /* callback function: main_func */
 #define  PANEL_CHECK_2                    2       /* control type: command, callback function: check_last */
 #define  PANEL_CHECK                      3       /* control type: command, callback function: check_req */
 #define  PANEL_TEXTMSG                    4       /* control type: textMsg, callback function: (none) */
@@ -38,7 +38,7 @@
 
 int  CVICALLBACK check_last(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK check_req(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK main(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK main_func(int panel, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
