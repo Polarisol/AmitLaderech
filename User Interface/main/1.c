@@ -26,6 +26,7 @@ int fieldAmount;
 int ctrlArray;
 int hr, min, sec;
 int day, month, year;
+char Fname[100],Lname[100], name [100];  
 
 
 
@@ -91,7 +92,6 @@ int main (int argc, char *argv[])
 	restoreSearch();
 	clockDate();
 	DisplayPanel (pMain);
-	DisplayPanel (panelHandledemo);
 	DisplayPanel (panelHandlecheck);
     RunUserInterface ();
     finalize();
@@ -269,6 +269,7 @@ int CVICALLBACK Edit (int panel, int control, int event,
 				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_HOT);
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_VIS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+			
 			}
 			else if(panel==pSoldier)
 			{
@@ -742,6 +743,11 @@ int CVICALLBACK OpenMentor (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
+				GetCtrlVal (pMentor, P_MENTOR_FIRST_NAME,Fname );
+				GetCtrlVal (pMentor, P_MENTOR_LAST_NAME,Lname );
+				sprintf (name,"%s %s",Fname,Lname );
+				SetCtrlVal (panelHandledemo, PANEL_STR_MENTOR_NAME, name);
+				DisplayPanel (panelHandledemo);
 			}
 			break;
 	}

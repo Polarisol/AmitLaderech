@@ -10,6 +10,7 @@ int selection;
 
 char path[SIZE],mentor_colm[SIZE],soldier_colm[SIZE],date_colm[SIZE];
 
+
 int CVICALLBACK demo (int panel, int event, void *callbackData,
 					  int eventData1, int eventData2)
 {
@@ -22,11 +23,14 @@ int CVICALLBACK demo (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-			QuitUserInterface (0);
+			HidePanel (PANEL);
 			break;
 	}
 	return 0;
 }
+
+
+
 
 int CVICALLBACK extract (int panel, int control, int event,
 						 void *callbackData, int eventData1, int eventData2)
