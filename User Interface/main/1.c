@@ -462,16 +462,40 @@ int CVICALLBACK changeVal (int panel, int control, int event,
 					int cc = search(searchBy,val,output);
 					if(cc>=1)
 					{
-						fields = malloc(sizeof(char*)*2);
-						fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
-						sprintf(fields[0],"שם פרטי");
-						fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
-						sprintf(fields[1],"שם משפחה");
-						restoreSearch();
-						DisplayPanel(pTable);
-						delTable(); 
-						createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
-						free(fields);
+						if(tableFlag != 1)
+						{
+							fields = malloc(sizeof(char*)*2);
+							fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
+							sprintf(fields[0],"שם פרטי");
+							fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+							sprintf(fields[1],"שם משפחה");
+							restoreSearch();
+							DisplayPanel(pTable);
+							delTable(); 
+							createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+							free(fields);
+						}
+						else
+						{
+							fields = malloc(sizeof(char*)*5);
+							fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); //F.Name
+							sprintf(fields[0],"שם פרטי");
+							fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1); //L.Name
+							sprintf(fields[1],"שם משפחה");
+							fields[2] = malloc(sizeof(char)*strlen("מנטור")+1); //Mentor
+							sprintf(fields[2],"מנטור");
+							fields[3] = malloc(sizeof(char)*strlen("מנחה")+1); //Guide
+							sprintf(fields[3],"מנחה");
+							fields[4] = malloc(sizeof(char)*strlen("קבוצה")+1);  //Group
+							sprintf(fields[4],"קבוצה");
+							//End fields
+							restoreSearch();
+							SetCtrlAttribute (pTable, P_TABLE_TABLE_HEADLINE, ATTR_CTRL_VAL, tableHeadline);
+							DisplayPanel(pTable);
+							delTable();
+							createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
+							free(fields);	
+						}
 					}
 				}
 				else
@@ -687,12 +711,20 @@ int CVICALLBACK openTable (int panel, int control, int event,
 			}
 			if(j!=0)
 			{
-				fields = malloc(sizeof(char*)*2);
-				fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1);
-				sprintf(fields[0],"שם פרטי");
-				fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
-				sprintf(fields[1],"שם משפחה");
-				createTable(SOLDIER,"SOLDIER",ids,j,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+				//Create the fields needed in the table
+			fields = malloc(sizeof(char*)*5);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); //F.Name
+			sprintf(fields[0],"שם פרטי");
+			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1); //L.Name
+			sprintf(fields[1],"שם משפחה");
+			fields[2] = malloc(sizeof(char)*strlen("מנטור")+1); //Mentor
+			sprintf(fields[2],"מנטור");
+			fields[3] = malloc(sizeof(char)*strlen("מנחה")+1); //Guide
+			sprintf(fields[3],"מנחה");
+			fields[4] = malloc(sizeof(char)*strlen("קבוצה")+1);  //Group
+			sprintf(fields[4],"קבוצה");
+			//End fields
+				createTable(SOLDIER,"SOLDIER",ids,j,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
 				free(fields);
 			}
 			
@@ -768,14 +800,22 @@ int CVICALLBACK openSoldier (int panel, int control, int event,
 				}
 			}
 			char **fields;
-			fields = malloc(sizeof(char*)*2);
-			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); 
+			//Create the fields needed in the table
+			fields = malloc(sizeof(char*)*5);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); //F.Name
 			sprintf(fields[0],"שם פרטי");
-			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1); //L.Name
 			sprintf(fields[1],"שם משפחה");
+			fields[2] = malloc(sizeof(char)*strlen("מנטור")+1); //Mentor
+			sprintf(fields[2],"מנטור");
+			fields[3] = malloc(sizeof(char)*strlen("מנחה")+1); //Guide
+			sprintf(fields[3],"מנחה");
+			fields[4] = malloc(sizeof(char)*strlen("קבוצה")+1);  //Group
+			sprintf(fields[4],"קבוצה");
+			//End fields
 			delTable();
 			tableFlag = 1;
-			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
 			
 			break;
 	}
@@ -790,7 +830,7 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 	switch (event)
 	{
 			case EVENT_COMMIT:
-				if(eventData2==3)
+				if(eventData2==1)
 				{
 					switch(tableFlag)
 					{
@@ -923,15 +963,23 @@ int CVICALLBACK openSoldierTable (int panel, int control, int event,
 			}
 			else
 				rows = recordAmount;
-			fields = malloc(sizeof(char*)*2);
-			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); 
+			//Create the fields needed in the table
+			fields = malloc(sizeof(char*)*5);
+			fields[0] = malloc(sizeof(char)*strlen("שם פרטי")+1); //F.Name
 			sprintf(fields[0],"שם פרטי");
-			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1);
+			fields[1] = malloc(sizeof(char)*strlen("שם משפחה")+1); //L.Name
 			sprintf(fields[1],"שם משפחה");
+			fields[2] = malloc(sizeof(char)*strlen("מנטור")+1); //Mentor
+			sprintf(fields[2],"מנטור");
+			fields[3] = malloc(sizeof(char)*strlen("מנחה")+1); //Guide
+			sprintf(fields[3],"מנחה");
+			fields[4] = malloc(sizeof(char)*strlen("קבוצה")+1);  //Group
+			sprintf(fields[4],"קבוצה");
+			//End fields
 			restoreSearch();
 			SetCtrlAttribute (pTable, P_TABLE_TABLE_HEADLINE, ATTR_CTRL_VAL, tableHeadline);
 			DisplayPanel(pTable);
-			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
 			free(fields);
 			break;
 	}
@@ -1182,42 +1230,69 @@ void createTable(char dir[],char database[], char **ids,int rows,int panel,int c
 	initialize(database,dir);
 	InsertTableRows (panel, control, -1, rows, VAL_CELL_STRING);
 	InsertTableColumns (panel, control, -1, 3, VAL_CELL_STRING);
-	
+	if(fieldLen>2)  //For SOLDIERS
+	{
+		InsertTableColumns (panel, control, 4, 3, VAL_CELL_STRING);
+	}
 	for(int k=1;k<=3;k++)
 	{
 		SetTableColumnAttribute (panel, control, k, ATTR_SIZE_MODE, VAL_USE_EXPLICIT_SIZE);
 		SetTableColumnAttribute (panel, control, k, ATTR_COLUMN_WIDTH, 150);
 	}
-	
+	SetTableColumnAttribute (panel, control, 1, ATTR_USE_LABEL_TEXT, 1);
+	SetTableColumnAttribute (panel, control, 1, ATTR_LABEL_TEXT, "ID");
+	SetTableColumnAttribute (panel, control, 2, ATTR_USE_LABEL_TEXT, 1);
+	SetTableColumnAttribute (panel, control, 2, ATTR_LABEL_TEXT, "Name");
+	SetTableColumnAttribute (panel, control, 3, ATTR_USE_LABEL_TEXT, 1);
+	SetTableColumnAttribute (panel, control, 3, ATTR_LABEL_TEXT, "In Group");
 	for(int i=0;i<rows;i++)
 	{
 		sprintf(str,"%s","");
-		for(int j=0;j<fieldLen;j++)
+		for(int j=0;j<2;j++)				//Create Soldier full name
 		{
 			Database_GetFieldVal(ids[i],fields[j],tmp);
 			strcat(str,tmp);
 			if(j+1<fieldLen)
 				strcat(str," ");
-		}
+		}	  //End full name
 		strcat(str,"\0");
 		SetTableCellVal (panel, control, MakePoint(2,i+1), str);
 		SetTableCellAttribute (panel, control, MakePoint(2,i+1), ATTR_NO_EDIT_TEXT, 1);
-		SetTableCellAttribute (panel, control, MakePoint(3,i+1), ATTR_CELL_TYPE, VAL_CELL_BUTTON);
-		SetTableCellVal (panel, control,MakePoint(3,i+1) , ids[i]);
-		SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_TYPE, VAL_CELL_RING);
-		InsertTableCellRingItem (panel, control, MakePoint(1,i+1), 0, "No");
-		InsertTableCellRingItem (panel, control, MakePoint(1,i+1), 1, "Yes");
+		SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_TYPE, VAL_CELL_BUTTON);
+		SetTableCellVal (panel, control,MakePoint(1,i+1) , ids[i]);
+		SetTableCellAttribute (panel, control, MakePoint(3,i+1), ATTR_CELL_TYPE, VAL_CELL_RING);
+		InsertTableCellRingItem (panel, control, MakePoint(3,i+1), 0, "No");
+		InsertTableCellRingItem (panel, control, MakePoint(3,i+1), 1, "Yes");
 		if(strcmp(groupName,"")==0)
-			SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_DIMMED, 1);  
+		{
+			SetTableCellAttribute (panel, control, MakePoint(3,i+1), ATTR_CELL_DIMMED, 1);
+			if(tableFlag==1)
+			{
+				sprintf(str,"%s","");
+				SetTableColumnAttribute (panel, control, 4, ATTR_USE_LABEL_TEXT, 1);
+				SetTableColumnAttribute (panel, control, 4, ATTR_LABEL_TEXT, "Mentor");
+				SetTableColumnAttribute (panel, control, 5, ATTR_USE_LABEL_TEXT, 1);
+				SetTableColumnAttribute (panel, control, 5, ATTR_LABEL_TEXT, "Guide");
+				SetTableColumnAttribute (panel, control, 6, ATTR_USE_LABEL_TEXT, 1);
+				SetTableColumnAttribute (panel, control, 6, ATTR_LABEL_TEXT, "Group");
+				for(int j=2;j<fieldLen;j++)				
+				{
+					Database_GetFieldVal(ids[i],fields[j],tmp);
+					SetTableColumnAttribute (panel, control, j+2, ATTR_SIZE_MODE, VAL_USE_EXPLICIT_SIZE);
+					SetTableColumnAttribute (panel, control, j+2, ATTR_COLUMN_WIDTH, 150);
+					SetTableCellVal(panel,control,MakePoint(j+2,i+1),tmp);
+				}
+			}
+		}
 		else
 		{
-			SetTableCellAttribute (panel, control, MakePoint(1,i+1), ATTR_CELL_DIMMED, 0);
+			SetTableCellAttribute (panel, control, MakePoint(3,i+1), ATTR_CELL_DIMMED, 0);
 			for(int i=0;i<rows;i++)
 			{
 				Database_GetFieldVal(ids[i],"קבוצה",tmp);
 				if(strcmp(tmp,groupName)==0)
 				{
-					SetTableCellVal(panel,control,MakePoint(1,i+1),"YES");
+					SetTableCellVal(panel,control,MakePoint(3,i+1),"YES");
 				}
 			}
 		}
