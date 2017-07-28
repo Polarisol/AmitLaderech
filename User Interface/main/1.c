@@ -2,6 +2,9 @@
 #include <userint.h>
 #include "1.h"
 #include "database.h"
+#include "analytics_functions_demo.h"
+#include "analytics_functions.h"
+#include "request_check.h"   
 
 //Constants for the database directory
 #define SOLDIER "Database\\soldier.ini"
@@ -14,7 +17,7 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
+static int panelHandlecheck, panelHandledemo,pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
 static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100];
 static char **tagName,**tagValue,**ids,**output;; 
 int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
@@ -56,6 +59,10 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
         return -1;    /* out of memory */
+	if ((panelHandledemo = LoadPanel (0, "analytics_functions_demo.uir", PANEL)) < 0)
+		return -1;
+	if ((panelHandlecheck = LoadPanel (0, "request_check.uir", PANEL)) < 0)
+		return -1;
     if ((pMain = LoadPanel (0, "1.uir", P_MAIN)) < 0)
         return -1;
     if ((pActivity = LoadPanel (0, "1.uir", P_ACTIVITY)) < 0)
@@ -84,9 +91,13 @@ int main (int argc, char *argv[])
 	restoreSearch();
 	clockDate();
 	DisplayPanel (pMain);
+	//DisplayPanel (panelHandledemo);
+	//DisplayPanel (panelHandlecheck);
     RunUserInterface ();
     finalize();
 	SavePanelState (pMain, "panelState.txt", 0);
+	DiscardPanel (panelHandledemo);
+	DiscardPanel (panelHandlecheck);
     DiscardPanel (pMain);
     DiscardPanel (pActivity);
     DiscardPanel (pGuide);
@@ -411,19 +422,12 @@ int CVICALLBACK changeVal (int panel, int control, int event,
 				{
 					SetCtrlAttribute (panel, P_MAIN_SEARCH_BY_RING, ATTR_CTRL_INDEX, 0);
 					SetCtrlAttribute (panel, P_MAIN_SEARCH_BY_RING, ATTR_CTRL_MODE, VAL_INDICATOR);
-					SetCtrlAttribute (panel,P_MAIN_SEARCH_STRING, ATTR_VISIBLE, 1);
 				}                           
 				else					
 				{   					
 					SetCtrlAttribute (panel, P_MAIN_SEARCH_BY_RING, ATTR_CTRL_INDEX, 1);
 					SetCtrlAttribute (panel, P_MAIN_SEARCH_BY_RING, ATTR_CTRL_MODE, VAL_HOT);
-					SetCtrlAttribute (panel,P_MAIN_SEARCH_STRING, ATTR_VISIBLE, 0);
 				}					
-				SetCtrlAttribute (panel, P_MAIN_SEARCH_BY_RING ,ATTR_VISIBLE, 1);
-			}
-			else if(control ==  P_MAIN_SEARCH_BY_RING) 
-			{
-				 SetCtrlAttribute (panel,P_MAIN_SEARCH_STRING, ATTR_VISIBLE, 1);
 			}
 			else if(control == P_MAIN_SEARCH_STRING)
 			{
@@ -626,25 +630,6 @@ int CVICALLBACK Open_P_NEW_MENTOR (int panel, int control, int event,
 			break;
 	}
 	return 0;
-}
-
-void dealWithGroupButtonInGuide()
-{
-	char group1[SIZE],group2[SIZE];
-	GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
-	GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
-	if(strcmp(group1,"קבוצה 1")==0)
-	{
-		sprintf(group1,"");
-		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_VISIBLE, 0);
-	}
-	if(strcmp(group2,"קבוצה 2")==0)
-	{
-		sprintf(group2,"");
-		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_VISIBLE, 0);
-	}
-	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
-	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
 }
 
 int CVICALLBACK openGuidePanel (int panel, int control, int event,
@@ -1283,9 +1268,7 @@ void restoreSearch()
 {
 	DefaultCtrl (pMain, P_MAIN_SEARCH_RING);
 	DefaultCtrl (pMain, P_MAIN_SEARCH_BY_RING);
-	SetCtrlAttribute (pMain, P_MAIN_SEARCH_BY_RING, ATTR_VISIBLE, 0);
 	DefaultCtrl (pMain, P_MAIN_SEARCH_STRING);
-	SetCtrlAttribute (pMain, P_MAIN_SEARCH_STRING, ATTR_VISIBLE, 0); 
 }
 
 void delMentorButtons()
@@ -1351,4 +1334,23 @@ void delTable()
 {
 	DeleteTableRows (pTable, P_TABLE_LIST_S_OR_M, 1, -1);
 	DeleteTableColumns (pTable, P_TABLE_LIST_S_OR_M, 1, -1);
+}
+
+void dealWithGroupButtonInGuide()
+{
+	char group1[SIZE],group2[SIZE];
+	GetCtrlVal (pGuide, P_GUIDE_GROUP_1_STRING, group1);
+	GetCtrlVal (pGuide, P_GUIDE_GROUP_2_STRING, group2);
+	if(strcmp(group1,"קבוצה 1")==0)
+	{
+		sprintf(group1,"");
+		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_VISIBLE, 0);
+	}
+	if(strcmp(group2,"קבוצה 2")==0)
+	{
+		sprintf(group2,"");
+		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_VISIBLE, 0);
+	}
+	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
+	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
 }

@@ -155,10 +155,10 @@
 #define  P_MAIN_LOGO                      20      /* control type: picture, callback function: (none) */
 #define  P_MAIN_LINE                      21      /* control type: deco, callback function: (none) */
 #define  P_MAIN_LIST_SOLDIERS_BUTTON      22      /* control type: pictButton, callback function: openSoldierTable */
-#define  P_MAIN_SEARCH_STRING             23      /* control type: string, callback function: changeVal */
-#define  P_MAIN_BACKGROUND                24      /* control type: picture, callback function: (none) */
-#define  P_MAIN_SEARCH_RING               25      /* control type: ring, callback function: changeVal */
-#define  P_MAIN_SEARCH_BY_RING            26      /* control type: ring, callback function: changeVal */
+#define  P_MAIN_BACKGROUND                23      /* control type: picture, callback function: (none) */
+#define  P_MAIN_SEARCH_RING               24      /* control type: ring, callback function: changeVal */
+#define  P_MAIN_SEARCH_BY_RING            25      /* control type: ring, callback function: changeVal */
+#define  P_MAIN_SEARCH_STRING             26      /* control type: string, callback function: changeVal */
 #define  P_MAIN_CLOCK_DATE_TIMER          27      /* control type: timer, callback function: TimeUpdate */
 
 #define  P_MENTOR                         6       /* callback function: exitFunc */
