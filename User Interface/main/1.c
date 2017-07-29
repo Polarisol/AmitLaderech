@@ -91,7 +91,6 @@ int main (int argc, char *argv[])
 	restoreSearch();
 	clockDate();
 	DisplayPanel (pMain);
-	//DisplayPanel (panelHandledemo);
 	//DisplayPanel (panelHandlecheck);
     RunUserInterface ();
     finalize();
@@ -659,7 +658,7 @@ int CVICALLBACK Open_P_NEW_MENTOR (int panel, int control, int event,
 int CVICALLBACK openGuidePanel (int panel, int control, int event,
 								void *callbackData, int eventData1, int eventData2)
 {
-	char fullName[SIZE];
+	char fullName[SIZE],picid[100];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -736,7 +735,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 int CVICALLBACK OpenMentor (int panel, int control, int event,
 							void *callbackData, int eventData1, int eventData2)
 {
-	char mentorName[SIZE],soldierName[SIZE];
+	char mentorName[SIZE],soldierName[SIZE],picid[100];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -748,6 +747,9 @@ int CVICALLBACK OpenMentor (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
+				
+				
+
 			}
 			break;
 	}
@@ -986,33 +988,60 @@ int CVICALLBACK openSoldierTable (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK pic_func (int panel, int control, int event,
+
+int CVICALLBACK pic_func_Guide (int panel, int control, int event,
 						  void *callbackData, int eventData1, int eventData2)
 {
        char file_name[300];
        int sel_val;
 	   char ID[300];
 	   int bitmapID=0;
-	   char pic_id[10];
-	   char panel_control_pic[100],panel_control_id[100];
+	   char pic_id[100];
+
        
 	   switch (event)
        {
               case EVENT_COMMIT:
-				  
-				  
-				  	 if (panel== pNewGuide) 
-					 {
-						 sprintf (panel_control_id,"P_NEW_GUID_ID_NUMBER");
-						 sprintf (panel_control_pic,"P_NEW_GUID_PICTURE");
-					 }
+
 					 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
                      if (sel_val)
 					 {
 					
-					 	DisplayImageFile (panel, panel_control_pic, file_name);
-						GetCtrlBitmap (panel, panel_control_pic, 0, &bitmapID);
-						GetCtrlVal (panel, panel_control_id, pic_id);
+					 	DisplayImageFile (panel, P_NEW_GUID_PICTURE, file_name);
+						GetCtrlBitmap (panel, P_NEW_GUID_PICTURE, 0, &bitmapID);
+						GetCtrlVal (panel, P_NEW_GUID_ID_NUMBER, pic_id);
+ 						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
+						SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
+						
+						DiscardBitmap (bitmapID);
+					 }
+                    break;
+    
+		}
+
+	return 0;
+}
+int CVICALLBACK pic_func_Sold (int panel, int control, int event,
+						  void *callbackData, int eventData1, int eventData2)
+{
+       char file_name[300];
+       int sel_val;
+	   char ID[300];
+	   int bitmapID=0;
+	   char pic_id[100];
+       
+	   switch (event)
+       {
+              case EVENT_COMMIT:
+
+
+					 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
+                     if (sel_val)
+					 {
+					
+					 	DisplayImageFile (panel, P_NEW_SOLD_PICTURE, file_name);
+						GetCtrlBitmap (panel, P_NEW_SOLD_PICTURE, 0, &bitmapID);
+						GetCtrlVal (panel, P_NEW_SOLD_ID_NUMBER, pic_id);
  						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
 						SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
 						
@@ -1025,6 +1054,38 @@ int CVICALLBACK pic_func (int panel, int control, int event,
 	return 0;
 }
 
+int CVICALLBACK pic_func_Ment (int panel, int control, int event,
+						  void *callbackData, int eventData1, int eventData2)
+{
+       char file_name[300];
+       int sel_val;
+	   char ID[300];
+	   int bitmapID=0;
+	   char pic_id[100];
+       
+	   switch (event)
+       {
+              case EVENT_COMMIT:
+
+
+					 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
+                     if (sel_val)
+					 {
+					
+					 	DisplayImageFile (panel, P_NEW_MENT_PICTURE, file_name);
+						GetCtrlBitmap (panel, P_NEW_MENT_PICTURE, 0, &bitmapID);
+						GetCtrlVal (panel, P_NEW_MENT_ID_NUMBER, pic_id);
+ 						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
+						SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
+						
+						DiscardBitmap (bitmapID);
+					 }
+                    break;
+    
+		}
+
+	return 0;
+}
 //==============================================================================
 //							Function realization section
 //==============================================================================
@@ -1428,4 +1489,21 @@ void dealWithGroupButtonInGuide()
 	}
 	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
 	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
+}
+
+int CVICALLBACK OPEN_DATA (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	char Fname[50],Lname[50],name[100];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			 DisplayPanel (panelHandledemo);
+			 GetCtrlVal (pMentor, P_MENTOR_FIRST_NAME, Fname);
+			 GetCtrlVal (pMentor, P_MENTOR_LAST_NAME, Lname);
+			 sprintf (name, "%s %s" ,Fname,Lname);
+			 SetCtrlVal (panelHandledemo, PANEL_MENT_CHECK, name);
+			break;
+	}
+	return 0;
 }

@@ -22,6 +22,7 @@
 #define  PANEL_TOTAL_SUBJECTS             7       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TABLE                      8       /* control type: table, callback function: (none) */
 #define  PANEL_LAST_MEETING               9       /* control type: textMsg, callback function: (none) */
+#define  PANEL_MENT_CHECK                 10      /* control type: string, callback function: (none) */
 
 
      /* Control Arrays: */
