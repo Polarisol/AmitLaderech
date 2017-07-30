@@ -91,7 +91,7 @@ int main (int argc, char *argv[])
 	restoreSearch();
 	clockDate();
 	DisplayPanel (pMain);
-	//DisplayPanel (panelHandlecheck);
+	DisplayPanel (panelHandlecheck);
     RunUserInterface ();
     finalize();
 	SavePanelState (pMain, "panelState.txt", 0);
@@ -658,7 +658,7 @@ int CVICALLBACK Open_P_NEW_MENTOR (int panel, int control, int event,
 int CVICALLBACK openGuidePanel (int panel, int control, int event,
 								void *callbackData, int eventData1, int eventData2)
 {
-	char fullName[SIZE],picid[100];
+	char fullName[SIZE],pic_id[100];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -670,6 +670,8 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 				DisplayPanel(pGuide); 
 				connectNametoID(GUIDE,"GUIDE",id,fullName);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
+				sprintf (pic_id, "Pictures\\%s.jpeg",id);
+				DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
 				dealWithGroupButtonInGuide(); 
 			}
@@ -735,7 +737,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 int CVICALLBACK OpenMentor (int panel, int control, int event,
 							void *callbackData, int eventData1, int eventData2)
 {
-	char mentorName[SIZE],soldierName[SIZE],picid[100];
+	char mentorName[SIZE],soldierName[SIZE],pic_id[100];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -746,10 +748,9 @@ int CVICALLBACK OpenMentor (int panel, int control, int event,
 				connectNametoID(MENTOR,"MENTOR",id,mentorName);
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
+				sprintf (pic_id, "Pictures\\%s.jpeg",id);
+				DisplayImageFile (pMentor, P_MENTOR_PICTURE, pic_id);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
-				
-				
-
 			}
 			break;
 	}

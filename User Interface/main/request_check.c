@@ -19,7 +19,7 @@ int CVICALLBACK main_func (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-			QuitUserInterface (0);
+			HidePanel(panel);
 			break;
 	}
 	return 0;
