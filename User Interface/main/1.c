@@ -17,7 +17,7 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int panelHandlecheck, panelHandledemo,pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
+static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
 static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100];
 static char **tagName,**tagValue,**ids,**output;; 
 int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
@@ -50,6 +50,7 @@ int searchSoldier(char mentorName[],char soldierName[]);
 void searchFor(char dir[],char database[], char fieldName[], char valToCmp[],char valToCng[]);
 int CVICALLBACK pic_func (int panel, int control, int event,void *callbackData, int eventData1, int eventData2);
 void dealWithGroupButtonInGuide();
+void clearPanel(int panel); 
 
 //==============================================================================
 //									MAIN
@@ -146,6 +147,8 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
 					}
 								
 				}
+				if(panel == pNewGroup  ||  panel == pNewGuide  ||  panel == pNewMent)
+					clearPanel(panel);
                 HidePanel (panel);
 			}
             break;
@@ -182,6 +185,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_5);
 				addMember(GUIDE,"GUIDE",panel,ctrlArray,1);
+				clearPanel(panel);
 				HidePanel(panel);
 				DisplayPanel(pGuide);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
@@ -191,6 +195,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
 				addMember(MENTOR,"MENTOR",panel,ctrlArray,1);
+				clearPanel(panel);
 				HidePanel(panel);
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_13);
@@ -220,8 +225,15 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 					Database_SetFieldVal(id,"קבוצה 1", groupName);
 				else if(strcmp(group2,"קבוצה 2")==0)
 					Database_SetFieldVal(id,"קבוצה 2", groupName);
+				else
+				{
+					MessagePopup("Alert!", "The Guide can't have more two groups at the same time");
+					SetCtrlVal(panel, P_NEW_GROU_GUIDE, "");
+					return 0;
+				}
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_8);
 				addMember(GROUP,"GROUP",panel,ctrlArray,1);
+				clearPanel(panel);
 				HidePanel(panel);
 				DisplayPanel(pGroup);
 				ctrlArray = GetCtrlArrayFromResourceID (pGroup, CTRLARRAY_9);
@@ -240,6 +252,7 @@ int CVICALLBACK Edit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			
 			if(panel == pGroup)
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CA_GROUP_EDIT);
@@ -310,15 +323,17 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_10);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CA_MENTOR_BTN);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+				
+				char t[50];
+				GetCtrlVal (pGroup, P_GROUP_GROUP_NAME, t);
+				displayGroupPanel(t);
+				
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_11);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
-				
-				
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
 				GetNumCtrlArrayItems (ctrlArray, &count);
 				addMember(GROUP,"GROUP",panel,ctrlArray,0);	
+				
 			}
 			else if (panel==pGuide)
 			{	
@@ -536,6 +551,8 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				searchFor(MENTOR,"MENTOR","קבוצה",idef,"קבוצה");
 				searchFor(GUIDE,"GUIDE","קבוצה 1",idef,"קבוצה 1");
 				searchFor(GUIDE,"GUIDE","קבוצה 2",idef,"קבוצה 2");
+				
+				
 			}
 			else if(panel == pGuide)
 			{
@@ -569,6 +586,23 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				Database_RemoveRecord(idef);
 			}
 			HidePanel(panel);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK OPEN_DATA (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	char Fname[50],Lname[50],name[100];
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			 DisplayPanel (panelHandledemo);
+			 GetCtrlVal (pMentor, P_MENTOR_FIRST_NAME, Fname);
+			 GetCtrlVal (pMentor, P_MENTOR_LAST_NAME, Lname);
+			 sprintf (name, "%s %s" ,Fname,Lname);
+			 SetCtrlVal (panelHandledemo, PANEL_MENT_CHECK, name);
 			break;
 	}
 	return 0;
@@ -667,13 +701,13 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 			{
 				HidePanel(panel);
 				DefaultCtrl (pGuide, P_GUIDE_GROUP_1);	DefaultCtrl (pGuide, P_GUIDE_GROUP_2);
-				DisplayPanel(pGuide); 
 				connectNametoID(GUIDE,"GUIDE",id,fullName);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
 				sprintf (pic_id, "Pictures\\%s.jpeg",id);
 				DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
 				dealWithGroupButtonInGuide(); 
+				DisplayPanel(pGuide);
 			}
 			break;
 	}
@@ -767,6 +801,7 @@ int CVICALLBACK showGroup (int panel, int control, int event,
 			GetCtrlAttribute (panel, control, ATTR_LABEL_TEXT, groupName);
 			if(strcmp(groupName,"")!=0)
 				displayGroupPanel(groupName);
+			HidePanel(panel);
 			break;
 	}
 	return 0;
@@ -867,11 +902,11 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 					}
 					
 				}
-				else if(eventData2==1)
+				else if(eventData2==3)
 				{
 					GetActiveTableCell (panel, control, &p); 
 					GetTableCellVal(panel,control, p,val);
-					GetTableCellVal (panel, control, MakePoint(3,eventData1), id);
+					GetTableCellVal (panel, control, MakePoint(1,eventData1), id);
 					initialize("MENTOR",MENTOR); 
 					if(strcmp(val,"Yes")==0)
 					{
@@ -989,7 +1024,6 @@ int CVICALLBACK openSoldierTable (int panel, int control, int event,
 	return 0;
 }
 
-
 int CVICALLBACK pic_func_Guide (int panel, int control, int event,
 						  void *callbackData, int eventData1, int eventData2)
 {
@@ -1022,6 +1056,7 @@ int CVICALLBACK pic_func_Guide (int panel, int control, int event,
 
 	return 0;
 }
+
 int CVICALLBACK pic_func_Sold (int panel, int control, int event,
 						  void *callbackData, int eventData1, int eventData2)
 {
@@ -1087,6 +1122,7 @@ int CVICALLBACK pic_func_Ment (int panel, int control, int event,
 
 	return 0;
 }
+
 //==============================================================================
 //							Function realization section
 //==============================================================================
@@ -1443,6 +1479,7 @@ void displayGroupPanel(char groupName[])
 				if(strcmp(tmp,"")==0)//true
 				{
 					SetCtrlAttribute (pGroup, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, fullName);
+					SetCtrlAttribute (pGroup, GetCtrlArrayItem(ctrlArray, i), ATTR_VISIBLE, 1); 
 					break;
 				}
 			}
@@ -1483,28 +1520,30 @@ void dealWithGroupButtonInGuide()
 		sprintf(group1,"");
 		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_VISIBLE, 0);
 	}
+	else
+	{
+		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_VISIBLE, 1);	
+	}
 	if(strcmp(group2,"קבוצה 2")==0)
 	{
 		sprintf(group2,"");
 		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_VISIBLE, 0);
 	}
+	else
+	{
+		SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_VISIBLE, 1);	
+	}
 	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_1, ATTR_LABEL_TEXT, group1);
 	SetCtrlAttribute (pGuide, P_GUIDE_GROUP_2, ATTR_LABEL_TEXT, group2); 
 }
 
-int CVICALLBACK OPEN_DATA (int panel, int control, int event,
-						   void *callbackData, int eventData1, int eventData2)
+void clearPanel(int panel)
 {
-	char Fname[50],Lname[50],name[100];
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			 DisplayPanel (panelHandledemo);
-			 GetCtrlVal (pMentor, P_MENTOR_FIRST_NAME, Fname);
-			 GetCtrlVal (pMentor, P_MENTOR_LAST_NAME, Lname);
-			 sprintf (name, "%s %s" ,Fname,Lname);
-			 SetCtrlVal (panelHandledemo, PANEL_MENT_CHECK, name);
-			break;
-	}
-	return 0;
+	if(panel == pNewGroup)
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_14);
+	else if(panel == pNewGuide)
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_5);
+	else if(panel == pNewMent)
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
+	SetCtrlArrayVal (ctrlArray, "");
 }

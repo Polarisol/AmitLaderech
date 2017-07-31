@@ -150,16 +150,15 @@
 #define  P_MAIN_AMITLADERECH              15      /* control type: textMsg, callback function: (none) */
 #define  P_MAIN_NEW_GROUP_BUTTON          16      /* control type: pictButton, callback function: OpenPanelNewGroup */
 #define  P_MAIN_ACTIVITY_PANEL_BUTTON     17      /* control type: pictButton, callback function: OPEN_P_Activity */
-#define  P_MAIN_ANALYSIS_PANEL_BUTTO2     18      /* control type: pictButton, callback function: (none) */
-#define  P_MAIN_GOAL                      19      /* control type: textMsg, callback function: (none) */
-#define  P_MAIN_LOGO                      20      /* control type: picture, callback function: (none) */
-#define  P_MAIN_LINE                      21      /* control type: deco, callback function: (none) */
-#define  P_MAIN_LIST_SOLDIERS_BUTTON      22      /* control type: pictButton, callback function: openSoldierTable */
-#define  P_MAIN_BACKGROUND                23      /* control type: picture, callback function: (none) */
-#define  P_MAIN_SEARCH_RING               24      /* control type: ring, callback function: changeVal */
-#define  P_MAIN_SEARCH_BY_RING            25      /* control type: ring, callback function: changeVal */
-#define  P_MAIN_SEARCH_STRING             26      /* control type: string, callback function: changeVal */
-#define  P_MAIN_CLOCK_DATE_TIMER          27      /* control type: timer, callback function: TimeUpdate */
+#define  P_MAIN_GOAL                      18      /* control type: textMsg, callback function: (none) */
+#define  P_MAIN_LOGO                      19      /* control type: picture, callback function: (none) */
+#define  P_MAIN_LINE                      20      /* control type: deco, callback function: (none) */
+#define  P_MAIN_LIST_SOLDIERS_BUTTON      21      /* control type: pictButton, callback function: openSoldierTable */
+#define  P_MAIN_BACKGROUND                22      /* control type: picture, callback function: (none) */
+#define  P_MAIN_SEARCH_RING               23      /* control type: ring, callback function: changeVal */
+#define  P_MAIN_SEARCH_BY_RING            24      /* control type: ring, callback function: changeVal */
+#define  P_MAIN_SEARCH_STRING             25      /* control type: string, callback function: changeVal */
+#define  P_MAIN_CLOCK_DATE_TIMER          26      /* control type: timer, callback function: TimeUpdate */
 
 #define  P_MENTOR                         6       /* callback function: exitFunc */
 #define  P_MENTOR_MAIN_OCCUPATION         2       /* control type: string, callback function: (none) */
@@ -223,26 +222,25 @@
 #define  P_NEW_GROU_SAVE_GROUP_BUTTON     15      /* control type: pictButton, callback function: Save_Sol_Func */
 
 #define  P_NEW_GUID                       8       /* callback function: exitFunc */
-#define  P_NEW_GUID_IMAGE                 2       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_CELL_PHONE_NUMBER     3       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_MAIN_OCCUPATION       4       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_CITY                  5       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_ADDRESS               6       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_PHONE_NUMBER          7       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_MAIL                  8       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_AGE                   9       /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_PICTURE               10      /* control type: picture, callback function: (none) */
-#define  P_NEW_GUID_LAST_NAME             11      /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_FIRST_NAME            12      /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_ID_NUMBER             13      /* control type: string, callback function: (none) */
-#define  P_NEW_GUID_SAVE_DATA_BUTTON      14      /* control type: pictButton, callback function: Save_Sol_Func */
-#define  P_NEW_GUID_HEADLINE              15      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_GUID_LINE                  16      /* control type: deco, callback function: (none) */
-#define  P_NEW_GUID_AMITLADERECH          17      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_GUID_GOAL                  18      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_GUID_BACKGROUND            19      /* control type: picture, callback function: (none) */
-#define  P_NEW_GUID_LOGO                  20      /* control type: picture, callback function: (none) */
-#define  P_NEW_GUID_SELECT_IMAGE_BUTTON   21      /* control type: command, callback function: pic_func_Guide */
+#define  P_NEW_GUID_CELL_PHONE_NUMBER     2       /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_MAIN_OCCUPATION       3       /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_CITY                  4       /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_ADDRESS               5       /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_PHONE_NUMBER          6       /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_MAIL                  7       /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_AGE                   8       /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_PICTURE               9       /* control type: picture, callback function: (none) */
+#define  P_NEW_GUID_LAST_NAME             10      /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_FIRST_NAME            11      /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_ID_NUMBER             12      /* control type: string, callback function: (none) */
+#define  P_NEW_GUID_SAVE_DATA_BUTTON      13      /* control type: pictButton, callback function: Save_Sol_Func */
+#define  P_NEW_GUID_HEADLINE              14      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_GUID_LINE                  15      /* control type: deco, callback function: (none) */
+#define  P_NEW_GUID_AMITLADERECH          16      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_GUID_GOAL                  17      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_GUID_BACKGROUND            18      /* control type: picture, callback function: (none) */
+#define  P_NEW_GUID_LOGO                  19      /* control type: picture, callback function: (none) */
+#define  P_NEW_GUID_SELECT_IMAGE_BUTTON   20      /* control type: command, callback function: pic_func_Guide */
 
 #define  P_NEW_MENT                       9       /* callback function: exitFunc */
 #define  P_NEW_MENT_GUIDE                 2       /* control type: string, callback function: checkIfExist */
@@ -253,19 +251,18 @@
 #define  P_NEW_MENT_PHONE_NUMBER          7       /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_MAIL                  8       /* control type: string, callback function: (none) */
 #define  P_NEW_MENT_AGE                   9       /* control type: string, callback function: (none) */
-#define  P_NEW_MENT_IMAGE                 10      /* control type: string, callback function: (none) */
-#define  P_NEW_MENT_LAST_NAME             11      /* control type: string, callback function: (none) */
-#define  P_NEW_MENT_FIRST_NAME            12      /* control type: string, callback function: (none) */
-#define  P_NEW_MENT_ID_NUMBER             13      /* control type: string, callback function: (none) */
-#define  P_NEW_MENT_PICTURE               14      /* control type: picture, callback function: pic_func_Ment */
-#define  P_NEW_MENT_SAVE_DATA_BUTTON      15      /* control type: pictButton, callback function: Save_Sol_Func */
-#define  P_NEW_MENT_HEADLINE              16      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_MENT_LINE                  17      /* control type: deco, callback function: (none) */
-#define  P_NEW_MENT_AMITLADERECH          18      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_MENT_GOAL                  19      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_MENT_BACKGROUND            20      /* control type: picture, callback function: (none) */
-#define  P_NEW_MENT_LOGO                  21      /* control type: picture, callback function: (none) */
-#define  P_NEW_MENT_SELECT_IMAGE_BUTTON   22      /* control type: command, callback function: pic_func_Ment */
+#define  P_NEW_MENT_LAST_NAME             10      /* control type: string, callback function: (none) */
+#define  P_NEW_MENT_FIRST_NAME            11      /* control type: string, callback function: (none) */
+#define  P_NEW_MENT_ID_NUMBER             12      /* control type: string, callback function: (none) */
+#define  P_NEW_MENT_PICTURE               13      /* control type: picture, callback function: pic_func_Ment */
+#define  P_NEW_MENT_SAVE_DATA_BUTTON      14      /* control type: pictButton, callback function: Save_Sol_Func */
+#define  P_NEW_MENT_HEADLINE              15      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_MENT_LINE                  16      /* control type: deco, callback function: (none) */
+#define  P_NEW_MENT_AMITLADERECH          17      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_MENT_GOAL                  18      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_MENT_BACKGROUND            19      /* control type: picture, callback function: (none) */
+#define  P_NEW_MENT_LOGO                  20      /* control type: picture, callback function: (none) */
+#define  P_NEW_MENT_SELECT_IMAGE_BUTTON   21      /* control type: command, callback function: pic_func_Ment */
 
 #define  P_NEW_SOLD                       10      /* callback function: exitFunc */
 #define  P_NEW_SOLD_CYCLE                 2       /* control type: string, callback function: (none) */
@@ -423,14 +420,15 @@
 #define  CTRLARRAY_11                     11
 #define  CTRLARRAY_12                     12
 #define  CTRLARRAY_13                     13
-#define  CTRLARRAY_2                      14
-#define  CTRLARRAY_3                      15
-#define  CTRLARRAY_4                      16
-#define  CTRLARRAY_5                      17
-#define  CTRLARRAY_6                      18
-#define  CTRLARRAY_7                      19
-#define  CTRLARRAY_8                      20
-#define  CTRLARRAY_9                      21
+#define  CTRLARRAY_14                     14
+#define  CTRLARRAY_2                      15
+#define  CTRLARRAY_3                      16
+#define  CTRLARRAY_4                      17
+#define  CTRLARRAY_5                      18
+#define  CTRLARRAY_6                      19
+#define  CTRLARRAY_7                      20
+#define  CTRLARRAY_8                      21
+#define  CTRLARRAY_9                      22
 
      /* Menu Bars, Menus, and Menu Items: */
 
