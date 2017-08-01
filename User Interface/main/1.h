@@ -261,7 +261,7 @@
 #define  P_NEW_SOLD_LEGAL_STATUS_OTHER    12      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_ECONOMIC_STATUS_OTHER 13      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_RESIDENCE_STATU_OTHER 14      /* control type: string, callback function: (none) */
-#define  P_NEW_SOLD_STATUS_OTHER_2        15      /* control type: string, callback function: (none) */
+#define  P_NEW_SOLD_STATUS_OTHER          15      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_HEADLINE              16      /* control type: textMsg, callback function: (none) */
 #define  P_NEW_SOLD_GENDER_OTHER          17      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_SELECT_IMAGE_BUTTON   18      /* control type: command, callback function: pic_func_Sold */
@@ -271,34 +271,33 @@
 #define  P_NEW_SOLD_ID_NUMBER             22      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_SAVE_DATA_BUTTON      23      /* control type: pictButton, callback function: Save_Sol_Func */
 #define  P_NEW_SOLD_PICTURE               24      /* control type: picture, callback function: (none) */
-#define  P_NEW_SOLD_GENDER_RING           25      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_STATUS_RING           26      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_GENDER_RING           25      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_STATUS_RING           26      /* control type: ring, callback function: changeValSold */
 #define  P_NEW_SOLD_LINE                  27      /* control type: deco, callback function: (none) */
 #define  P_NEW_SOLD_AMITLADERECH          28      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_EDUCATION_STATUS_RING 29      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_EDUCATION_STATUS_RING 29      /* control type: ring, callback function: changeValSold */
 #define  P_NEW_SOLD_GOAL                  30      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_EMPLOYMENT_STATU_RING 31      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_LEGAL_STATUS_RING     32      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_EMPLOYMENT_STATU_RING 31      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_LEGAL_STATUS_RING     32      /* control type: ring, callback function: changeValSold */
 #define  P_NEW_SOLD_LOGO                  33      /* control type: picture, callback function: (none) */
-#define  P_NEW_SOLD_ECONOMIC_STATUS_RING  34      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_DIRECTING_RING        35      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_RESIDENCE_STATUS_RING 36      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_AREA_RING             37      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_BIRTH_DATE_HL         38      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DAY_BD_RING           39      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_MONTH_BD_RING         40      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_BIRTH_SLASH_MY        41      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_BIRTH_SLASH_DM        42      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_YEAR_BD_RING          43      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_BACKGROUND            44      /* control type: picture, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_1           45      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_2           46      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_3           47      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_4           48      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_5           49      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_6           50      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_7           51      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_8           52      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_ECONOMIC_STATUS_RING  34      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_DIRECTING_RING        35      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_RESIDENCE_STATUS_RING 36      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_BIRTH_DATE_HL         37      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DAY_BD_RING           38      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_MONTH_BD_RING         39      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_BIRTH_SLASH_MY        40      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_BIRTH_SLASH_DM        41      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_YEAR_BD_RING          42      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_BACKGROUND            43      /* control type: picture, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_1           44      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_2           45      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_3           46      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_4           47      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_5           48      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_6           49      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_7           50      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_8           51      /* control type: textMsg, callback function: (none) */
 
 #define  P_SOLDIER                        11      /* callback function: exitFunc */
 #define  P_SOLDIER_BIRTH_DATE             2       /* control type: string, callback function: (none) */
@@ -334,34 +333,36 @@
 #define  P_SOLDIER_SEND_EMAIL             32      /* control type: pictButton, callback function: (none) */
 #define  P_SOLDIER_COMMENTS_FROM_MEETING  33      /* control type: textBox, callback function: (none) */
 #define  P_SOLDIER_STATUS_RING            34      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_EDIT_TL_BUTTON         35      /* control type: command, callback function: (none) */
-#define  P_SOLDIER_PROGRESS_RING          36      /* control type: slide, callback function: (none) */
-#define  P_SOLDIER_LINE                   37      /* control type: deco, callback function: (none) */
-#define  P_SOLDIER_AMITLADERECH           38      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_EDUCATION_STATUS_RING  39      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_GOAL                   40      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_EMPLOYMENT_STATU_RING  41      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_LEGAL_STATUS_RING      42      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_LOGO                   43      /* control type: picture, callback function: (none) */
-#define  P_SOLDIER_ECONOMIC_STATUS_RING   44      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_DIRECTING_RING         45      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_RESIDENCE_STATUS_RING  46      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_AREA_RING              47      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_BIRTH_DATE_HL          48      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DAY_BD_RING            49      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_MONTH_BD_RING          50      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_BIRTH_SLASH_MY         51      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_BIRTH_SLASH_DM         52      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_YEAR_BD_RING           53      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_BACKGROUND             54      /* control type: picture, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_1            55      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_2            56      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_4            57      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_5            58      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_6            59      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_7            60      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_8            61      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_3            62      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_MENTOR_BTN_2           35      /* control type: command, callback function: chooseMentForSol */
+#define  P_SOLDIER_GROUP_BTN              36      /* control type: command, callback function: chooseGroupForSol */
+#define  P_SOLDIER_EDIT_TL_BUTTON         37      /* control type: command, callback function: (none) */
+#define  P_SOLDIER_PROGRESS_RING          38      /* control type: slide, callback function: (none) */
+#define  P_SOLDIER_LINE                   39      /* control type: deco, callback function: (none) */
+#define  P_SOLDIER_AMITLADERECH           40      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_EDUCATION_STATUS_RING  41      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_GOAL                   42      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_EMPLOYMENT_STATU_RING  43      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_LEGAL_STATUS_RING      44      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_LOGO                   45      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_ECONOMIC_STATUS_RING   46      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_DIRECTING_RING         47      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_RESIDENCE_STATUS_RING  48      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_AREA_RING              49      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_BIRTH_DATE_HL          50      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DAY_BD_RING            51      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_MONTH_BD_RING          52      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_BIRTH_SLASH_MY         53      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_BIRTH_SLASH_DM         54      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_YEAR_BD_RING           55      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_BACKGROUND             56      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_1            57      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_2            58      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_4            59      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_5            60      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_6            61      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_7            62      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_8            63      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_3            64      /* control type: textMsg, callback function: (none) */
 
 #define  P_TABLE                          12      /* callback function: exitFunc */
 #define  P_TABLE_LINE                     2       /* control type: deco, callback function: (none) */
@@ -391,15 +392,16 @@
 #define  CTRLARRAY_12                     12
 #define  CTRLARRAY_13                     13
 #define  CTRLARRAY_14                     14
-#define  CTRLARRAY_2                      15
-#define  CTRLARRAY_3                      16
-#define  CTRLARRAY_4                      17
-#define  CTRLARRAY_5                      18
-#define  CTRLARRAY_6                      19
-#define  CTRLARRAY_7                      20
-#define  CTRLARRAY_8                      21
-#define  CTRLARRAY_9                      22
-#define  LBLCTRL                          23
+#define  CTRLARRAY_15                     15
+#define  CTRLARRAY_2                      16
+#define  CTRLARRAY_3                      17
+#define  CTRLARRAY_4                      18
+#define  CTRLARRAY_5                      19
+#define  CTRLARRAY_6                      20
+#define  CTRLARRAY_7                      21
+#define  CTRLARRAY_8                      22
+#define  CTRLARRAY_9                      23
+#define  LBLCTRL                          24
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -409,7 +411,10 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK changeVal(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK changeValSold(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK checkIfExist(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK chooseGroupForSol(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK chooseMentForSol(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK delRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK editMentorsInGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
