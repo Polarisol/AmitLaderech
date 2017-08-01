@@ -18,7 +18,7 @@
 //								SIZE = 300
 //============================================================================== 
 static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
-static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100];
+static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100],tempGuide[100];
 static char **tagName,**tagValue,**ids,**output;; 
 int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
 int recordAmount;
@@ -187,9 +187,11 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				addMember(GUIDE,"GUIDE",panel,ctrlArray,1);
 				clearPanel(panel);
 				HidePanel(panel);
-				DisplayPanel(pGuide);
+				
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
+				dealWithGroupButtonInGuide(); 
+				DisplayPanel(pGuide); 
 			}
 			else if(panel == pNewMent)
 			{
@@ -255,6 +257,7 @@ int CVICALLBACK Edit (int panel, int control, int event,
 			
 			if(panel == pGroup)
 			{
+				GetCtrlVal (panel, P_GROUP_GUIDE, tempGuide);
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CA_GROUP_EDIT);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_10);
@@ -309,11 +312,30 @@ int CVICALLBACK TimeUpdate (int panel, int control, int event,
 	}
 	return 0;
 }
+int ChangeGroupField(char dir[],char database[],char fullName[],char groupName[])
+{
+	char group1[100],group2[100];
+	connectNametoID(dir,database,id,fullName);
+	Database_GetFieldVal(id,"קבוצה 1", group1);
+	Database_GetFieldVal(id,"קבוצה 2", group2);
+	if(strcmp(group1,groupName)==0)
+		Database_SetFieldVal(id,"קבוצה 1", "קבוצה 1");
+	else if(strcmp(group2,groupName)==0)
+		Database_SetFieldVal(id,"קבוצה 2","קבוצה 2");
+	else if(strcmp(group1,"קבוצה 1")==0)
+		Database_SetFieldVal(id,"קבוצה 1", groupName);
+	else if(strcmp(group1,"קבוצה 2")==0)
+		Database_SetFieldVal(id,"קבוצה 2", groupName);
+	else
+		return 0;
+	return 1;
+}
 
 int CVICALLBACK SaveChanges (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
 {
 	int count;
+	char curGuide[100],groupName[100],group1[100],group2[100];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -324,15 +346,31 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_10);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 				
-				char t[50];
-				GetCtrlVal (pGroup, P_GROUP_GROUP_NAME, t);
-				displayGroupPanel(t);
-				
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_11);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
 				GetNumCtrlArrayItems (ctrlArray, &count);
-				addMember(GROUP,"GROUP",panel,ctrlArray,0);	
+				
+				GetCtrlVal (panel, P_GROUP_GUIDE, curGuide);
+				GetCtrlVal (panel, P_GROUP_GROUP_NAME, groupName);
+				if(strcmp(tempGuide,curGuide)!=0)
+				{
+					ChangeGroupField(GUIDE,"GUIDE",tempGuide,groupName);
+					ChangeGroupField(GUIDE,"GUIDE",curGuide,groupName);
+					/*connectNametoID(GUIDE,"GUIDE",id,tempGuide);
+					
+					Database_GetFieldVal(id,"קבוצה 1", group1);
+					Database_GetFieldVal(id,"קבוצה 2", group2);
+					if(strcmp(group1,groupName)==0)
+						Database_SetFieldVal(id,"קבוצה 1", "");
+					else if(strcmp(group2,groupName)==0)
+						Database_SetFieldVal(id,"קבוצה 2", ""); */
+				}
+					
+				addMember(GROUP,"GROUP",panel,ctrlArray,0);
+				char t[50];
+				GetCtrlVal (pGroup, P_GROUP_GROUP_NAME, t);
+				displayGroupPanel(t);
 				
 			}
 			else if (panel==pGuide)
@@ -346,6 +384,7 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 				
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_VIS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+				dealWithGroupButtonInGuide();
 				/*ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_ACTION);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 				
@@ -619,11 +658,13 @@ int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			DisplayPanel (pActivity);
+			
+			ctrlArray = GetCtrlArrayFromResourceID (pActivity, CTRLARRAY_7);
+			SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
 			initialize("GUIDE",GUIDE);
 			
 			Database_CountAllRecords(&recordAmount);
-			ctrlArray = GetCtrlArrayFromResourceID (pActivity, CTRLARRAY_7);
+			
 			for(int i=0;i<recordAmount;i++)
 			{
 				Database_GetRecordInfo(id,i+1);
@@ -631,7 +672,7 @@ int CVICALLBACK OPEN_P_Activity (int panel, int control, int event,
 				SetCtrlAttribute (pActivity, GetCtrlArrayItem(ctrlArray, i), ATTR_LABEL_TEXT, fullName);
 				SetCtrlAttribute (pActivity, GetCtrlArrayItem(ctrlArray, i), ATTR_VISIBLE, 1);
 			}
-			
+			DisplayPanel (pActivity);
 			break;
 	}
 	return 0;
@@ -643,7 +684,11 @@ int CVICALLBACK Open_P_NEW_SOLD (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			 DisplayPanel (pNewSold);
+			ctrlArray = GetCtrlArrayFromResourceID (pNewSold, LBLCTRL );
+			SetCtrlArrayAttribute (ctrlArray, ATTR_LABEL_VISIBLE, 0);
+			DisplayPanel (pNewSold);
+			 
+			
 			break;
 	}
 	return 0;
@@ -655,6 +700,7 @@ int CVICALLBACK Open_New_Guide (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			HidePanel(panel);
 			DisplayPanel(pNewGuide);
 			break;
 	}
@@ -704,7 +750,7 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 				connectNametoID(GUIDE,"GUIDE",id,fullName);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
 				sprintf (pic_id, "Pictures\\%s.jpeg",id);
-				DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
+				//DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
 				dealWithGroupButtonInGuide(); 
 				DisplayPanel(pGuide);
@@ -815,9 +861,7 @@ int CVICALLBACK openSoldier (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			HidePanel(panel);
-			delTable();
-			DisplayPanel(pTable);
+			
 			GetCtrlVal (panel, P_MENTOR_ID_NUMBER, id);
 			connectIDtoName(MENTOR,"MENTOR",id,mentorName);
 			sprintf(tableHeadline, "רשימת חיילים עבור מנטור: ");
@@ -837,6 +881,14 @@ int CVICALLBACK openSoldier (int panel, int control, int event,
 					rows++;
 				}
 			}
+			if(rows==0)
+			{
+				MessagePopup("Alert!", "No Soldiers found");
+				return 0;
+			}
+			HidePanel(panel);
+			delTable();
+			DisplayPanel(pTable);
 			char **fields;
 			//Create the fields needed in the table
 			fields = malloc(sizeof(char*)*5);
@@ -854,7 +906,7 @@ int CVICALLBACK openSoldier (int panel, int control, int event,
 			delTable();
 			tableFlag = 1;
 			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
-			
+			free(fields);
 			break;
 	}
 	return 0;
@@ -887,7 +939,7 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pMentor);
 							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
-							GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(eventData2-1,eventData1), mentorName);
+							GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(eventData2,eventData1), mentorName);
 							HidePanel(panel);
 							break;
 						case 3://GUIDE
