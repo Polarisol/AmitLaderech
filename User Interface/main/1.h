@@ -113,25 +113,24 @@
 #define  P_GUIDE_MAIL                     8       /* control type: string, callback function: (none) */
 #define  P_GUIDE_LAST_NAME                9       /* control type: string, callback function: (none) */
 #define  P_GUIDE_FIRST_NAME               10      /* control type: string, callback function: (none) */
-#define  P_GUIDE_IMAGE                    11      /* control type: string, callback function: (none) */
-#define  P_GUIDE_GROUP_1_STRING           12      /* control type: string, callback function: (none) */
-#define  P_GUIDE_GROUP_2_STRING           13      /* control type: string, callback function: (none) */
-#define  P_GUIDE_ID_NUMBER                14      /* control type: string, callback function: (none) */
-#define  P_GUIDE_PICTURE                  15      /* control type: picture, callback function: pic_func_Guide */
-#define  P_GUIDE_DELETING_GUIDE_BUTTON    16      /* control type: pictButton, callback function: delRecord */
-#define  P_GUIDE_SAVE_CHANGES_BUTTON      17      /* control type: pictButton, callback function: SaveChanges */
-#define  P_GUIDE_EDITING_BUTTON           18      /* control type: pictButton, callback function: Edit */
-#define  P_GUIDE_SEND_EMAIL               19      /* control type: pictButton, callback function: (none) */
-#define  P_GUIDE_LIST_SOLDIERS_BUTTON     20      /* control type: pictButton, callback function: openTable */
-#define  P_GUIDE_GROUP_2                  21      /* control type: command, callback function: showGroup */
-#define  P_GUIDE_GROUP_1                  22      /* control type: command, callback function: showGroup */
-#define  P_GUIDE_SUMMARY                  23      /* control type: textBox, callback function: (none) */
-#define  P_GUIDE_EXCEPTIONS               24      /* control type: textBox, callback function: (none) */
-#define  P_GUIDE_LINE                     25      /* control type: deco, callback function: (none) */
-#define  P_GUIDE_AMITLADERECH             26      /* control type: textMsg, callback function: (none) */
-#define  P_GUIDE_BACKGROUND               27      /* control type: picture, callback function: (none) */
-#define  P_GUIDE_LOGO                     28      /* control type: picture, callback function: (none) */
-#define  P_GUIDE_GOAL                     29      /* control type: textMsg, callback function: (none) */
+#define  P_GUIDE_GROUP_1_STRING           11      /* control type: string, callback function: (none) */
+#define  P_GUIDE_GROUP_2_STRING           12      /* control type: string, callback function: (none) */
+#define  P_GUIDE_ID_NUMBER                13      /* control type: string, callback function: (none) */
+#define  P_GUIDE_PICTURE                  14      /* control type: picture, callback function: pic_func_Guide */
+#define  P_GUIDE_DELETING_GUIDE_BUTTON    15      /* control type: pictButton, callback function: delRecord */
+#define  P_GUIDE_SAVE_CHANGES_BUTTON      16      /* control type: pictButton, callback function: SaveChanges */
+#define  P_GUIDE_EDITING_BUTTON           17      /* control type: pictButton, callback function: Edit */
+#define  P_GUIDE_SEND_EMAIL               18      /* control type: pictButton, callback function: (none) */
+#define  P_GUIDE_LIST_SOLDIERS_BUTTON     19      /* control type: pictButton, callback function: openTable */
+#define  P_GUIDE_GROUP_2                  20      /* control type: command, callback function: showGroup */
+#define  P_GUIDE_GROUP_1                  21      /* control type: command, callback function: showGroup */
+#define  P_GUIDE_SUMMARY                  22      /* control type: textBox, callback function: (none) */
+#define  P_GUIDE_EXCEPTIONS               23      /* control type: textBox, callback function: (none) */
+#define  P_GUIDE_LINE                     24      /* control type: deco, callback function: (none) */
+#define  P_GUIDE_AMITLADERECH             25      /* control type: textMsg, callback function: (none) */
+#define  P_GUIDE_BACKGROUND               26      /* control type: picture, callback function: (none) */
+#define  P_GUIDE_LOGO                     27      /* control type: picture, callback function: (none) */
+#define  P_GUIDE_GOAL                     28      /* control type: textMsg, callback function: (none) */
 
 #define  P_MAIN                           5       /* callback function: exitFunc */
 #define  P_MAIN_ADDING_MENTOR_BUTTON      2       /* control type: pictButton, callback function: Open_P_NEW_MENTOR */
@@ -169,24 +168,23 @@
 #define  P_MENTOR_AGE                     7       /* control type: string, callback function: (none) */
 #define  P_MENTOR_MAIL                    8       /* control type: string, callback function: (none) */
 #define  P_MENTOR_GUIDE                   9       /* control type: string, callback function: checkIfExist */
-#define  P_MENTOR_IMAGE                   10      /* control type: string, callback function: (none) */
-#define  P_MENTOR_PICTURE                 11      /* control type: picture, callback function: pic_func_Ment */
-#define  P_MENTOR_LAST_NAME               12      /* control type: string, callback function: (none) */
-#define  P_MENTOR_FIRST_NAME              13      /* control type: string, callback function: (none) */
-#define  P_MENTOR_ID_NUMBER               14      /* control type: string, callback function: (none) */
-#define  P_MENTOR_DELETING_MENTO_BUTTON   15      /* control type: pictButton, callback function: delRecord */
-#define  P_MENTOR_SAVE_CHANGES_BUTTON     16      /* control type: pictButton, callback function: SaveChanges */
-#define  P_MENTOR_EDITING_BUTTON          17      /* control type: pictButton, callback function: Edit */
-#define  P_MENTOR_SEND_EMAIL              18      /* control type: pictButton, callback function: (none) */
-#define  P_MENTOR_COMMENTS_FROM_MEETING   19      /* control type: textBox, callback function: (none) */
-#define  P_MENTOR_LINE                    20      /* control type: deco, callback function: (none) */
-#define  P_MENTOR_AMITLADERECH            21      /* control type: textMsg, callback function: (none) */
-#define  P_MENTOR_SOLDIER_TEXT            22      /* control type: textMsg, callback function: (none) */
-#define  P_MENTOR_GOAL                    23      /* control type: textMsg, callback function: (none) */
-#define  P_MENTOR_LOGO                    24      /* control type: picture, callback function: (none) */
-#define  P_MENTOR_BACKGROUND              25      /* control type: picture, callback function: (none) */
-#define  P_MENTOR_SOLDIER_BUTTON          26      /* control type: command, callback function: openSoldier */
-#define  P_MENTOR_DATA_BUTTON             27      /* control type: command, callback function: OPEN_DATA */
+#define  P_MENTOR_PICTURE                 10      /* control type: picture, callback function: pic_func_Ment */
+#define  P_MENTOR_LAST_NAME               11      /* control type: string, callback function: (none) */
+#define  P_MENTOR_FIRST_NAME              12      /* control type: string, callback function: (none) */
+#define  P_MENTOR_ID_NUMBER               13      /* control type: string, callback function: (none) */
+#define  P_MENTOR_DELETING_MENTO_BUTTON   14      /* control type: pictButton, callback function: delRecord */
+#define  P_MENTOR_SAVE_CHANGES_BUTTON     15      /* control type: pictButton, callback function: SaveChanges */
+#define  P_MENTOR_EDITING_BUTTON          16      /* control type: pictButton, callback function: Edit */
+#define  P_MENTOR_SEND_EMAIL              17      /* control type: pictButton, callback function: (none) */
+#define  P_MENTOR_COMMENTS_FROM_MEETING   18      /* control type: textBox, callback function: (none) */
+#define  P_MENTOR_LINE                    19      /* control type: deco, callback function: (none) */
+#define  P_MENTOR_AMITLADERECH            20      /* control type: textMsg, callback function: (none) */
+#define  P_MENTOR_SOLDIER_TEXT            21      /* control type: textMsg, callback function: (none) */
+#define  P_MENTOR_GOAL                    22      /* control type: textMsg, callback function: (none) */
+#define  P_MENTOR_LOGO                    23      /* control type: picture, callback function: (none) */
+#define  P_MENTOR_BACKGROUND              24      /* control type: picture, callback function: (none) */
+#define  P_MENTOR_SOLDIER_BUTTON          25      /* control type: command, callback function: openSoldier */
+#define  P_MENTOR_DATA_BUTTON             26      /* control type: command, callback function: OPEN_DATA */
 
 #define  P_NEW_GROU                       7       /* callback function: exitFunc */
 #define  P_NEW_GROU_YEAR                  2       /* control type: string, callback function: (none) */
@@ -267,37 +265,36 @@
 #define  P_NEW_SOLD_SELECT_IMAGE_BUTTON   18      /* control type: command, callback function: pic_func_Sold */
 #define  P_NEW_SOLD_LAST_NAME             19      /* control type: string, callback function: (none) */
 #define  P_NEW_SOLD_FIRST_NAME            20      /* control type: string, callback function: (none) */
-#define  P_NEW_SOLD_IMAGE                 21      /* control type: string, callback function: (none) */
-#define  P_NEW_SOLD_ID_NUMBER             22      /* control type: string, callback function: (none) */
-#define  P_NEW_SOLD_SAVE_DATA_BUTTON      23      /* control type: pictButton, callback function: Save_Sol_Func */
-#define  P_NEW_SOLD_PICTURE               24      /* control type: picture, callback function: (none) */
-#define  P_NEW_SOLD_GENDER_RING           25      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_STATUS_RING           26      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_LINE                  27      /* control type: deco, callback function: (none) */
-#define  P_NEW_SOLD_AMITLADERECH          28      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_EDUCATION_STATUS_RING 29      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_GOAL                  30      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_EMPLOYMENT_STATU_RING 31      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_LEGAL_STATUS_RING     32      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_LOGO                  33      /* control type: picture, callback function: (none) */
-#define  P_NEW_SOLD_ECONOMIC_STATUS_RING  34      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_DIRECTING_RING        35      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_RESIDENCE_STATUS_RING 36      /* control type: ring, callback function: changeValSold */
-#define  P_NEW_SOLD_BIRTH_DATE_HL         37      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DAY_BD_RING           38      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_MONTH_BD_RING         39      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_BIRTH_SLASH_MY        40      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_BIRTH_SLASH_DM        41      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_YEAR_BD_RING          42      /* control type: ring, callback function: (none) */
-#define  P_NEW_SOLD_BACKGROUND            43      /* control type: picture, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_1           44      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_2           45      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_3           46      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_4           47      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_5           48      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_6           49      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_7           50      /* control type: textMsg, callback function: (none) */
-#define  P_NEW_SOLD_DETAIL_HL_8           51      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_ID_NUMBER             21      /* control type: string, callback function: (none) */
+#define  P_NEW_SOLD_SAVE_DATA_BUTTON      22      /* control type: pictButton, callback function: Save_Sol_Func */
+#define  P_NEW_SOLD_PICTURE               23      /* control type: picture, callback function: (none) */
+#define  P_NEW_SOLD_GENDER_RING           24      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_STATUS_RING           25      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_LINE                  26      /* control type: deco, callback function: (none) */
+#define  P_NEW_SOLD_AMITLADERECH          27      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_EDUCATION_STATUS_RING 28      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_GOAL                  29      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_EMPLOYMENT_STATU_RING 30      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_LEGAL_STATUS_RING     31      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_LOGO                  32      /* control type: picture, callback function: (none) */
+#define  P_NEW_SOLD_ECONOMIC_STATUS_RING  33      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_DIRECTING_RING        34      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_RESIDENCE_STATUS_RING 35      /* control type: ring, callback function: changeValSold */
+#define  P_NEW_SOLD_BIRTH_DATE_HL         36      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DAY_BD_RING           37      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_MONTH_BD_RING         38      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_BIRTH_SLASH_MY        39      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_BIRTH_SLASH_DM        40      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_YEAR_BD_RING          41      /* control type: ring, callback function: (none) */
+#define  P_NEW_SOLD_BACKGROUND            42      /* control type: picture, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_1           43      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_2           44      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_3           45      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_4           46      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_5           47      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_6           48      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_7           49      /* control type: textMsg, callback function: (none) */
+#define  P_NEW_SOLD_DETAIL_HL_8           50      /* control type: textMsg, callback function: (none) */
 
 #define  P_SOLDIER                        11      /* callback function: exitFunc */
 #define  P_SOLDIER_BIRTH_DATE             2       /* control type: string, callback function: (none) */
@@ -306,63 +303,61 @@
 #define  P_SOLDIER_CELL_PHONE_NUMBER      5       /* control type: string, callback function: (none) */
 #define  P_SOLDIER_PHONE_NUMBER           6       /* control type: string, callback function: (none) */
 #define  P_SOLDIER_AGE                    7       /* control type: string, callback function: (none) */
-#define  P_SOLDIER_DIRECTING_OTHER        8       /* control type: string, callback function: (none) */
-#define  P_SOLDIER_EDUCATION_STATU_OTHER  9       /* control type: string, callback function: (none) */
-#define  P_SOLDIER_EMPLOYMENT_STAT_OTHER  10      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_LEGAL_STATUS_OTHER     11      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_ECONOMIC_STATUS_OTHER  12      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_RESIDENCE_STATU_OTHER  13      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_STATUS_OTHER_2         14      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_GENDER_OTHER           15      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_MENTOR                 16      /* control type: string, callback function: checkIfExist */
-#define  P_SOLDIER_GROUP                  17      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_GUIDE                  18      /* control type: string, callback function: checkIfExist */
-#define  P_SOLDIER_NEXT_MEETING_DATE      19      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_LAST_MEETING_DATE      20      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_LAST_NAME              21      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_FIRST_NAME             22      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_PROGRESS_STRING        23      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_IMAGE                  24      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_ID_NUMBER              25      /* control type: string, callback function: (none) */
-#define  P_SOLDIER_IMAGE_BOX              26      /* control type: picture, callback function: (none) */
-#define  P_SOLDIER_MOVING_ARCHIVE_BUTTON  27      /* control type: pictButton, callback function: (none) */
-#define  P_SOLDIER_MEETING_LED            28      /* control type: LED, callback function: (none) */
-#define  P_SOLDIER_SAVE_CHANGES_BUTTON    29      /* control type: pictButton, callback function: SaveChanges */
-#define  P_SOLDIER_EDITING_BUTTON         30      /* control type: pictButton, callback function: Edit */
-#define  P_SOLDIER_GENDER_RING            31      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_SEND_EMAIL             32      /* control type: pictButton, callback function: (none) */
-#define  P_SOLDIER_COMMENTS_FROM_MEETING  33      /* control type: textBox, callback function: (none) */
-#define  P_SOLDIER_STATUS_RING            34      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_MENTOR_BTN_2           35      /* control type: command, callback function: chooseMentForSol */
-#define  P_SOLDIER_GROUP_BTN              36      /* control type: command, callback function: chooseGroupForSol */
-#define  P_SOLDIER_EDIT_TL_BUTTON         37      /* control type: command, callback function: (none) */
-#define  P_SOLDIER_PROGRESS_RING          38      /* control type: slide, callback function: (none) */
-#define  P_SOLDIER_LINE                   39      /* control type: deco, callback function: (none) */
-#define  P_SOLDIER_AMITLADERECH           40      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_EDUCATION_STATUS_RING  41      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_GOAL                   42      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_EMPLOYMENT_STATU_RING  43      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_LEGAL_STATUS_RING      44      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_LOGO                   45      /* control type: picture, callback function: (none) */
-#define  P_SOLDIER_ECONOMIC_STATUS_RING   46      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_DIRECTING_RING         47      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_RESIDENCE_STATUS_RING  48      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_AREA_RING              49      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_BIRTH_DATE_HL          50      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DAY_BD_RING            51      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_MONTH_BD_RING          52      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_BIRTH_SLASH_MY         53      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_BIRTH_SLASH_DM         54      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_YEAR_BD_RING           55      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_BACKGROUND             56      /* control type: picture, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_1            57      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_2            58      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_4            59      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_5            60      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_6            61      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_7            62      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_8            63      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_DETAIL_HL_3            64      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_MAIL                   8       /* control type: string, callback function: (none) */
+#define  P_SOLDIER_DIRECTING_OTHER        9       /* control type: string, callback function: (none) */
+#define  P_SOLDIER_EDUCATION_STATU_OTHER  10      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_EMPLOYMENT_STAT_OTHER  11      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_LEGAL_STATUS_OTHER     12      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_ECONOMIC_STATUS_OTHER  13      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_RESIDENCE_STATU_OTHER  14      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_STATUS_OTHER_2         15      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_GENDER_OTHER           16      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_MENTOR                 17      /* control type: string, callback function: checkIfExist */
+#define  P_SOLDIER_GROUP                  18      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_GUIDE                  19      /* control type: string, callback function: checkIfExist */
+#define  P_SOLDIER_NEXT_MEETING_DATE      20      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_LAST_MEETING_DATE      21      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_LAST_NAME              22      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_FIRST_NAME             23      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_ID_NUMBER              24      /* control type: string, callback function: (none) */
+#define  P_SOLDIER_IMAGE_BOX              25      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_MOVING_ARCHIVE_BUTTON  26      /* control type: pictButton, callback function: (none) */
+#define  P_SOLDIER_MEETING_LED            27      /* control type: LED, callback function: (none) */
+#define  P_SOLDIER_SAVE_CHANGES_BUTTON    28      /* control type: pictButton, callback function: SaveChanges */
+#define  P_SOLDIER_EDITING_BUTTON         29      /* control type: pictButton, callback function: Edit */
+#define  P_SOLDIER_GENDER_RING            30      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_SEND_EMAIL             31      /* control type: pictButton, callback function: (none) */
+#define  P_SOLDIER_COMMENTS_FROM_MEETING  32      /* control type: textBox, callback function: (none) */
+#define  P_SOLDIER_STATUS_RING            33      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_MENTOR_BTN_2           34      /* control type: command, callback function: chooseMentForSol */
+#define  P_SOLDIER_GROUP_BTN              35      /* control type: command, callback function: chooseGroupForSol */
+#define  P_SOLDIER_EDIT_TL_BUTTON         36      /* control type: command, callback function: (none) */
+#define  P_SOLDIER_LINE                   37      /* control type: deco, callback function: (none) */
+#define  P_SOLDIER_AMITLADERECH           38      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_EDUCATION_STATUS_RING  39      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_GOAL                   40      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_EMPLOYMENT_STATU_RING  41      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_LEGAL_STATUS_RING      42      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_LOGO                   43      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_ECONOMIC_STATUS_RING   44      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_DIRECTING_RING         45      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_RESIDENCE_STATUS_RING  46      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_DAY_BD_RING            47      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_MONTH_BD_RING          48      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_BIRTH_SLASH_MY         49      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_YEAR_BD_RING           50      /* control type: ring, callback function: (none) */
+#define  P_SOLDIER_BACKGROUND             51      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_1            52      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_2            53      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_4            54      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_5            55      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_6            56      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_7            57      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_8            58      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_TIME_LINE_PIC          59      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_BIRTH_DATE_HL          60      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_DETAIL_HL_3            61      /* control type: textMsg, callback function: (none) */
+#define  P_SOLDIER_BIRTH_SLASH_DM         62      /* control type: textMsg, callback function: (none) */
 
 #define  P_TABLE                          12      /* callback function: exitFunc */
 #define  P_TABLE_LINE                     2       /* control type: deco, callback function: (none) */
@@ -371,7 +366,7 @@
 #define  P_TABLE_BACKGROUND               5       /* control type: picture, callback function: (none) */
 #define  P_TABLE_LOGO                     6       /* control type: picture, callback function: (none) */
 #define  P_TABLE_LIST_S_OR_M              7       /* control type: table, callback function: tblFunction */
-#define  P_TABLE_EXCEL_BUTTON             8       /* control type: pictButton, callback function: (none) */
+#define  P_TABLE_EXCEL_BUTTON             8       /* control type: pictButton, callback function: creatExcelTable */
 #define  P_TABLE_GNAME                    9       /* control type: string, callback function: (none) */
 #define  P_TABLE_TABLE_HEADLINE           10      /* control type: textMsg, callback function: (none) */
 
@@ -393,15 +388,17 @@
 #define  CTRLARRAY_13                     13
 #define  CTRLARRAY_14                     14
 #define  CTRLARRAY_15                     15
-#define  CTRLARRAY_2                      16
-#define  CTRLARRAY_3                      17
-#define  CTRLARRAY_4                      18
-#define  CTRLARRAY_5                      19
-#define  CTRLARRAY_6                      20
-#define  CTRLARRAY_7                      21
-#define  CTRLARRAY_8                      22
-#define  CTRLARRAY_9                      23
-#define  LBLCTRL                          24
+#define  CTRLARRAY_16                     16
+#define  CTRLARRAY_17                     17
+#define  CTRLARRAY_2                      18
+#define  CTRLARRAY_3                      19
+#define  CTRLARRAY_4                      20
+#define  CTRLARRAY_5                      21
+#define  CTRLARRAY_6                      22
+#define  CTRLARRAY_7                      23
+#define  CTRLARRAY_8                      24
+#define  CTRLARRAY_9                      25
+#define  LBLCTRL                          26
 
      /* Menu Bars, Menus, and Menu Items: */
 
@@ -415,6 +412,7 @@ int  CVICALLBACK changeValSold(int panel, int control, int event, void *callback
 int  CVICALLBACK checkIfExist(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK chooseGroupForSol(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK chooseMentForSol(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK creatExcelTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK delRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK editMentorsInGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

@@ -17,7 +17,7 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup;
+static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup, pReportsGuide, pReportsSol, pReportsMentor;
 static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100],tempGuide[100],soldierID[20];
 static char **tagName,**tagValue,**ids,**output; 
 int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
@@ -91,6 +91,13 @@ int main (int argc, char *argv[])
         return -1;
 	if ((pNewGroup = LoadPanel (0, "1.uir", P_NEW_GROU)) < 0)
         return -1;
+	if ((pReportsGuide = LoadPanel (0, "ReportsManhe.uir", PANEL)) < 0)
+		return -1;
+	if ((pReportsSol = LoadPanel (0, "Reports.uir", PANEL)) < 0)
+		return -1;
+	if ((pReportsMentor = LoadPanel (0, "ReportsMentor.uir", PANEL)) < 0)
+		return -1;
+	
 	RecallPanelState (pMain, "panelState.txt", 0);
 	restoreSearch();
 	clockDate();
@@ -113,6 +120,9 @@ int main (int argc, char *argv[])
 	DiscardPanel (pTable);
 	DiscardPanel (pGroup);
 	DiscardPanel (pNewGroup);
+	DiscardPanel (pReportsGuide);
+	DiscardPanel (pReportsSol);
+	DiscardPanel (pReportsMentor);
     return 0;
 }
 
@@ -150,7 +160,7 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
 					}
 								
 				}
-				if(panel == pNewGroup  ||  panel == pNewGuide  ||  panel == pNewMent)
+				if(panel == pNewGroup  ||  panel == pNewGuide  ||  panel == pNewMent  ||  panel == pNewSold)
 					clearPanel(panel);
                 HidePanel (panel);
 			}
@@ -188,6 +198,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				*/
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY);
 				addMember(SOLDIER,"SOLDIER",panel,ctrlArray,1);
+				clearPanel(panel);
 				HidePanel(panel);
 				DisplayPanel(pSoldier);
 				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
@@ -254,6 +265,18 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				showMember(pGroup,GROUP,"GROUP",id,ctrlArray);
 				SetCtrlVal (pGroup, P_GROUP_GROUP_NAME, result);
 			}
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK creatExcelTable (int panel, int control, int event,
+								 void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
 			break;
 	}
 	return 0;
@@ -785,7 +808,7 @@ int CVICALLBACK chooseGroupForSol (int panel, int control, int event,
 			}
 			if(rows==0)
 			{
-				MessagePopup("Alert!", "No Soldiers found");
+				MessagePopup("Alert!", "No Groups found"); 
 				return 0;
 			}
 			GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, id);
@@ -1725,13 +1748,22 @@ void dealWithGroupButtonInGuide()
 
 void clearPanel(int panel)
 {
+	int i, imax;
 	if(panel == pNewGroup)
 		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_14);
 	else if(panel == pNewGuide)
 		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_5);
 	else if(panel == pNewMent)
 		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_3);
-	SetCtrlArrayVal (ctrlArray, "");
+	else if(panel == pNewSold)
+	{
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_17);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_16);
+	}
+	GetNumCtrlArrayItems (ctrlArray, &imax);
+	for (i=0; i<imax; i++)
+		DefaultCtrl (panel, GetCtrlArrayItem (ctrlArray, i));
 }
 
 void createGroupTable(char dir[],char database[], char **ids,int rows,int panel,int control,char *fields[],int fieldLen)
