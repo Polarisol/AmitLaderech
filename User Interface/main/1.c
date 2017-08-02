@@ -959,7 +959,10 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 				connectNametoID(GUIDE,"GUIDE",id,fullName);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
 				sprintf (pic_id, "Pictures\\%s.jpeg",id);
-				//DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
+				if (FileExists (pic_id, 0) == 1)   
+					DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
+				else
+					DisplayImageFile (pGuide, P_GUIDE_PICTURE, "Pictures\\HumanShadow.jpg");
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
 				dealWithGroupButtonInGuide(); 
 				DisplayPanel(pGuide);
@@ -1038,7 +1041,10 @@ int CVICALLBACK OpenMentor (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
 				sprintf (pic_id, "Pictures\\%s.jpeg",id);
-				DisplayImageFile (pMentor, P_MENTOR_PICTURE, pic_id);
+				if (FileExists (pic_id, 0) == 1)   
+					DisplayImageFile (pMentor, P_MENTOR_PICTURE, pic_id);
+				else
+					DisplayImageFile (pMentor, P_MENTOR_PICTURE, "Pictures\\HumanShadow.jpg");
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
 			}
 			break;
@@ -1125,7 +1131,7 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
 {
 	Point p;
-	char val[SIZE];
+	char val[SIZE],pic_id[100];
 	switch (event)
 	{
 			case EVENT_COMMIT:
@@ -1138,6 +1144,11 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pSoldier);
+							sprintf (pic_id, "Pictures\\%s.jpeg",id);
+							if (FileExists (pic_id, 0) == 1)   
+								DisplayImageFile (pSoldier, P_SOLDIER_PICTURE, pic_id);
+							else
+								DisplayImageFile (pSoldier,  P_SOLDIER_PICTURE, "Pictures\\HumanShadow.jpg");
 							showMember(pSoldier,SOLDIER,"SOLDIER",val,ctrlArray);
 							HidePanel(panel);
 							break;
@@ -1147,6 +1158,11 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pMentor);
+							sprintf (pic_id, "Pictures\\%s.jpeg",id);
+							if (FileExists (pic_id, 0) == 1)   
+								DisplayImageFile (pMentor, P_MENTOR_PICTURE, pic_id);
+							else
+								DisplayImageFile (pMentor, P_MENTOR_PICTURE, "Pictures\\HumanShadow.jpg");
 							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
 							GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(eventData2,eventData1), mentorName);
 							HidePanel(panel);
@@ -1156,6 +1172,11 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pGuide);
+							sprintf (pic_id, "Pictures\\%s.jpeg",id);
+							if (FileExists (pic_id, 0) == 1)   
+								DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
+							else
+								DisplayImageFile (pGuide, P_GUIDE_PICTURE, "Pictures\\HumanShadow.jpg");
 							showMember(pGuide,GUIDE,"GUIDE",val,ctrlArray);
 							dealWithGroupButtonInGuide();
 							HidePanel(panel);
