@@ -28,7 +28,6 @@ char attachmentFile[600] = "reportfile.pdf";  //when pdf is avia change to .pdf
 
 char TestText[300];
 
-int counter=1;
 
 void initialize_mail(int p,int p2)
 {

@@ -10,7 +10,7 @@
 #include "ReportsMentor.h"
 #include "email.h"
 #include "HebrewConversions.h"
-
+#include "new-ui-prog.h"  
 
 
 //Constants for the database directory
@@ -24,7 +24,7 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup, pReportsGuide, pReportsSol, pReportsMentor, pEmail, pEmailData;
+static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup, pReportsGuide, pReportsSol, pReportsMentor, pEmail, pEmailData,pgraph, pgraph_2;
 static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100],tempGuide[100],soldierID[20];
 static char **tagName,**tagValue,**ids,**output; 
 int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
@@ -108,7 +108,10 @@ int main (int argc, char *argv[])
 		return -1;
 	if ((pEmailData = LoadPanel (0, "email.uir", P_EMAILD)) < 0)
 		return -1;
-	
+	if ((pgraph = LoadPanel (0, "new-ui-prog.uir", PANEL_PROG)) < 0)
+		return -1;
+	if ((pgraph_2 = LoadPanel (0, "new-ui-prog.uir", PANEL_GRPH)) < 0)
+		return -1;
 	RecallPanelState (pMain, "panelState.txt", 0);
 	restoreSearch();
 	clockDate();
@@ -134,6 +137,10 @@ int main (int argc, char *argv[])
 	DiscardPanel (pReportsGuide);
 	DiscardPanel (pReportsSol);
 	DiscardPanel (pReportsMentor);
+	DiscardPanel (pEmail);DiscardPanel (pEmailData);
+	DiscardPanel (pgraph);DiscardPanel (pgraph_2);
+	
+	//pEmail, pEmailData,pgraph, pgraph_2;
     return 0;
 }
 
@@ -1510,12 +1517,6 @@ int CVICALLBACK creatReport (int panel, int control, int event,
 			DeleteFile("reportfile.pdf");
 			LaunchExecutable("nconvert -out pdf -truecolors reportfile.jpg");
 			
-			//========================================================
-			// here niv need to add 2 functions
-			//the first one to convert jpg file to pdf file
-			//the second one to open automaticly th pdf file
-			//========================================================
-
 			break;
 	}
 	return 0;
@@ -2009,6 +2010,18 @@ int CVICALLBACK mailCheck (int panel, int control, int event,
 		case EVENT_COMMIT:
 			initialize_mail(pEmail,pEmailData);
 			DisplayPanel(pEmail);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK editTL (int panel, int control, int event,
+						void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			 initialize_prog(pgraph, pgraph_2);
 			break;
 	}
 	return 0;

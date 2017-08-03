@@ -157,8 +157,7 @@
 #define  P_MAIN_SEARCH_RING               23      /* control type: ring, callback function: changeVal */
 #define  P_MAIN_SEARCH_BY_RING            24      /* control type: ring, callback function: changeVal */
 #define  P_MAIN_SEARCH_STRING             25      /* control type: string, callback function: changeVal */
-#define  P_MAIN_COMMANDBUTTON             26      /* control type: command, callback function: mailCheck */
-#define  P_MAIN_CLOCK_DATE_TIMER          27      /* control type: timer, callback function: TimeUpdate */
+#define  P_MAIN_CLOCK_DATE_TIMER          26      /* control type: timer, callback function: TimeUpdate */
 
 #define  P_MENTOR                         6       /* callback function: exitFunc */
 #define  P_MENTOR_MAIN_OCCUPATION         2       /* control type: string, callback function: (none) */
@@ -330,7 +329,7 @@
 #define  P_SOLDIER_STATUS_RING            32      /* control type: ring, callback function: (none) */
 #define  P_SOLDIER_MENTOR_BTN_2           33      /* control type: command, callback function: chooseMentForSol */
 #define  P_SOLDIER_GROUP_BTN              34      /* control type: command, callback function: chooseGroupForSol */
-#define  P_SOLDIER_EDIT_TL_BUTTON         35      /* control type: command, callback function: (none) */
+#define  P_SOLDIER_EDIT_TL_BUTTON         35      /* control type: command, callback function: editTL */
 #define  P_SOLDIER_LINE                   36      /* control type: deco, callback function: (none) */
 #define  P_SOLDIER_AMITLADERECH           37      /* control type: textMsg, callback function: (none) */
 #define  P_SOLDIER_EDUCATION_STATUS_RING  38      /* control type: ring, callback function: (none) */
@@ -417,8 +416,8 @@ int  CVICALLBACK creatReport(int panel, int control, int event, void *callbackDa
 int  CVICALLBACK delRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK editMentorsInGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK editTL(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK exitFunc(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK mailCheck(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OPEN_DATA(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Open_New_Guide(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OPEN_P_Activity(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
