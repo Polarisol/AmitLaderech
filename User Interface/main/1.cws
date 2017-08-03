@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 2
 Window Confinement Region Enabled = True
 MainColumnWidth = 232
 FileDateColumnWidth = 70
@@ -52,7 +52,7 @@ Disk Date = 3584611615
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
-Window Z-Order = 3
+Window Z-Order = 2
 Source Window State = "1,2023,2023,2023,13,28,28,0,0,38,0,1245,0,0,0,10,2007,0,2023,28,349,683,1,15,"
 
 [File 0002]
@@ -64,7 +64,7 @@ Window Top = 72
 Window Left = 13
 Window Height = 561
 Window Width = 1272
-Window Z-Order = 4
+Window Z-Order = 1
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/User Interface/main/email.c"
@@ -315,7 +315,6 @@ Window Top = 47
 Window Left = 13
 Window Height = 475
 Window Width = 1359
-Window Z-Order = 2
 
 [File 0032]
 Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.c"
@@ -324,8 +323,7 @@ Disk Date = 3584611509
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Window Z-Order = 1
-Source Window State = "1,58,58,58,5,19,19,0,3,100,0,18,0,0,0,23,495,0,58,5,427,726,1,14,"
+Source Window State = "1,58,58,58,5,19,19,0,0,41,0,18,0,0,0,13,474,0,499,35,427,726,1,14,"
 
 [File 0033]
 Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.h"
@@ -355,8 +353,6 @@ Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
-Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.c"
-Tab 0004 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.uir"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
