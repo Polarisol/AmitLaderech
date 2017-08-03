@@ -13,10 +13,10 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "1.prj"
 Drag Bar Left = 249
-Window Top = 72
-Window Left = 0
-Window Bottom = 486
-Window Right = 1896
+Window Top = 117
+Window Left = 11
+Window Bottom = 475
+Window Right = 1885
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -48,12 +48,12 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3584601992
+Disk Date = 3584607430
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
 Window Z-Order = 2
-Source Window State = "1,1736,1736,1736,18,19,18,0,3,41,0,1245,0,0,0,12,1985,0,1736,19,349,683,1,15,"
+Source Window State = "1,1506,1506,1506,47,57,57,0,0,41,0,1245,0,0,0,12,1495,0,1516,48,349,683,1,15,"
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
@@ -64,7 +64,7 @@ Window Top = 72
 Window Left = 13
 Window Height = 561
 Window Width = 1272
-Window Z-Order = 3
+Window Z-Order = 1
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions_demo.uir"
@@ -284,12 +284,12 @@ Window Width = 1242
 [File 0028]
 Path = "/d/Project/AmitLaderech/User Interface/main/email.c"
 File Type = "CSource"
-Disk Date = 3584603794
+Disk Date = 3584605811
 In Projects = "1,"
 Window Top = 92
 Window Left = 36
-Window Z-Order = 1
-Source Window State = "1,200,201,200,8,0,8,0,0,107,0,200,0,200,0,25,178,0,199,0,436,1242,1,0,"
+Window Z-Order = 3
+Source Window State = "1,26,26,26,39,42,42,0,0,78,0,199,0,199,0,16,6,0,23,41,436,1242,1,0,"
 
 [File 0029]
 Path = "/d/Project/AmitLaderech/User Interface/main/email.h"

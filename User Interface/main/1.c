@@ -1464,6 +1464,7 @@ int CVICALLBACK creatReport (int panel, int control, int event,
 				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_MAIL, temp);
 				
 				GetPanelDisplayBitmap (pReportsMentor, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
+				 
 				
 			}
 			
@@ -1504,7 +1505,10 @@ int CVICALLBACK creatReport (int panel, int control, int event,
 
 			}
 			SaveBitmapToJPEGFile (data_image, "reportfile.jpg", 0, 80);
-			//LaunchExecutable ("convert reportfile.jpg reportfile.pdf");   // the pdf func is not working
+			initialize_mail(pEmail,pEmailData);
+			DisplayPanel(pEmail);
+			DeleteFile("reportfile.pdf");
+			LaunchExecutable("nconvert -out pdf -truecolors reportfile.jpg");
 			
 			//========================================================
 			// here niv need to add 2 functions

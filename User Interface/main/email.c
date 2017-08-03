@@ -24,7 +24,7 @@ char port[MAX] = "587";
 char to[MAX];  
 char subject[MAX];
 char text[MAX] = "Enter Your Text";
-char attachmentFile[600];
+char attachmentFile[600] = "reportfile.pdf";  //when pdf is avia change to .pdf
 
 char TestText[300];
 
@@ -192,7 +192,6 @@ int CVICALLBACK fileselectFunc (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			FileSelectPopup ("", "*.*", "", "Load File", VAL_LOAD_BUTTON, 0, 0, 1, 0, attachmentFile);
-
 			break;
 	}
 	return 0;

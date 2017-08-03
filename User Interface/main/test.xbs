@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><XnView_script version="1.0" name="test">
+    <Output folder="" filename="{Filename}_result" case="0" format="PDF">
+        <Options overwrite="1" orgDate="false" keepMeta="true" keepICC="false" keepFolder="false" keepParentFolder="false" delOrg="false" multipage="false" allPages="false" openExplorer="false" openBrowser="false" clearItems="false"/>
+        <PDF compress="0" compressGrey="0" compressBW="0" quality="99"/>
+    </Output>
+</XnView_script>
