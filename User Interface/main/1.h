@@ -356,8 +356,7 @@
 #define  P_SOLDIER_BIRTH_DATE_HL          59      /* control type: textMsg, callback function: (none) */
 #define  P_SOLDIER_BIRTH_SLASH_DM         60      /* control type: textMsg, callback function: (none) */
 #define  P_SOLDIER_DETAIL_HL_3            61      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_SOLDIER_PICTURE        62      /* control type: picture, callback function: (none) */
-#define  P_SOLDIER_PICTURE                63      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_PICTURE                62      /* control type: picture, callback function: (none) */
 
 #define  P_TABLE                          12      /* callback function: exitFunc */
 #define  P_TABLE_LINE                     2       /* control type: deco, callback function: (none) */

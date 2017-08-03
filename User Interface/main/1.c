@@ -208,6 +208,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				DisplayPanel(pSoldier);
 				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
 				showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
+				checkIfPicEx(pSoldier,P_SOLDIER_PICTURE,id);
 			}
 			else if(panel == pNewGuide)
 			{
@@ -218,8 +219,9 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
+				checkIfPicEx(pGuide,P_GUIDE_PICTURE,id);
 				dealWithGroupButtonInGuide(); 
-				DisplayPanel(pGuide); 
+				DisplayPanel(pGuide);
 			}
 			else if(panel == pNewMent)
 			{
@@ -230,6 +232,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_13);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
+				checkIfPicEx(pMentor,P_MENTOR_PICTURE,id);
 			}
 			else if(panel == pNewGroup)
 			{
@@ -824,18 +827,24 @@ int CVICALLBACK pic_func_Guide (int panel, int control, int event,
 	switch (event)
     {
 		case EVENT_COMMIT:
-			 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
-		     if (sel_val)
-			 {
+			GetCtrlVal (panel, P_NEW_GUID_ID_NUMBER, pic_id);  
+			if(strcmp(pic_id,"")==1) 
+			{
+				 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
+			     if (sel_val)
+				 {
 	
-			 	DisplayImageFile (panel, P_NEW_GUID_PICTURE, file_name);
-				GetCtrlBitmap (panel, P_NEW_GUID_PICTURE, 0, &bitmapID);
-				GetCtrlVal (panel, P_NEW_GUID_ID_NUMBER, pic_id);
-				sprintf (ID,"Pictures/%s.jpeg",pic_id); 
-				SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
+				 	DisplayImageFile (panel, P_NEW_GUID_PICTURE, file_name);
+					GetCtrlBitmap (panel, P_NEW_GUID_PICTURE, 0, &bitmapID);
+					
+					sprintf (ID,"Pictures/%s.jpeg",pic_id); 
+					SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
 		
-				DiscardBitmap (bitmapID);
-			 }
+					DiscardBitmap (bitmapID);
+				 }
+			}
+			else
+						 MessagePopup("Alert!","Plase enter ID number first");
 		    break;
     
 		}
@@ -856,19 +865,23 @@ int CVICALLBACK pic_func_Sold (int panel, int control, int event,
        {
               case EVENT_COMMIT:
 
-
-					 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
-                     if (sel_val)
+					 GetCtrlVal (panel, P_NEW_SOLD_ID_NUMBER, pic_id);
+					 if(strcmp(pic_id,"")==1)
 					 {
+						 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
+	                     if (sel_val)
+						 {
 					
-					 	DisplayImageFile (panel, P_NEW_SOLD_PICTURE, file_name);
-						GetCtrlBitmap (panel, P_NEW_SOLD_PICTURE, 0, &bitmapID);
-						GetCtrlVal (panel, P_NEW_SOLD_ID_NUMBER, pic_id);
- 						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
-						SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
+						 	DisplayImageFile (panel, P_NEW_SOLD_PICTURE, file_name);
+							GetCtrlBitmap (panel, P_NEW_SOLD_PICTURE, 0, &bitmapID);
+	 						sprintf (ID,"Pictures\\%s.jpeg",pic_id); 
+							SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
 						
-						DiscardBitmap (bitmapID);
+							DiscardBitmap (bitmapID);
+						 }
 					 }
+					 else
+						 MessagePopup("Alert!","Plase enter ID number first");
                     break;
     
 		}
@@ -889,19 +902,24 @@ int CVICALLBACK pic_func_Ment (int panel, int control, int event,
        {
               case EVENT_COMMIT:
 
-
-					 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
-                     if (sel_val)
+				     GetCtrlVal (panel, P_NEW_MENT_ID_NUMBER, pic_id);
+					 if(strcmp(pic_id,"")==1)
 					 {
+						 sel_val = FileSelectPopup ("", "*.*", "", "Select a File", VAL_SELECT_BUTTON, 0, 0, 1, 0, file_name);
+	                     if (sel_val)
+						 {
 					
-					 	DisplayImageFile (panel, P_NEW_MENT_PICTURE, file_name);
-						GetCtrlBitmap (panel, P_NEW_MENT_PICTURE, 0, &bitmapID);
-						GetCtrlVal (panel, P_NEW_MENT_ID_NUMBER, pic_id);
- 						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
-						SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
+						 	DisplayImageFile (panel, P_NEW_MENT_PICTURE, file_name);
+							GetCtrlBitmap (panel, P_NEW_MENT_PICTURE, 0, &bitmapID);
+							
+	 						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
+							SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
 						
-						DiscardBitmap (bitmapID);
+							DiscardBitmap (bitmapID);
+						 }
 					 }
+					 else
+						 MessagePopup("Alert!","Plase enter ID number first");
                     break;
     
 		}
