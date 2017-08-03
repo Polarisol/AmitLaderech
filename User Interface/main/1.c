@@ -8,7 +8,9 @@
 #include "ReportsManhe.h"
 #include "Reports.h"
 #include "ReportsMentor.h"
+#include "email.h"
 #include "HebrewConversions.h"
+
 
 
 //Constants for the database directory
@@ -22,7 +24,7 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup, pReportsGuide, pReportsSol, pReportsMentor;
+static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup, pReportsGuide, pReportsSol, pReportsMentor, pEmail, pEmailData;
 static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100],tempGuide[100],soldierID[20];
 static char **tagName,**tagValue,**ids,**output; 
 int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
@@ -101,6 +103,10 @@ int main (int argc, char *argv[])
 	if ((pReportsSol = LoadPanel (0, "Reports.uir", PANEL_AMIT)) < 0)
 		return -1;
 	if ((pReportsMentor = LoadPanel (0, "ReportsMentor.uir", PANEL_MENT)) < 0)
+		return -1;
+	if ((pEmail = LoadPanel (0, "email.uir", P_EMAIL)) < 0)
+		return -1;
+	if ((pEmailData = LoadPanel (0, "email.uir", P_EMAILD)) < 0)
 		return -1;
 	
 	RecallPanelState (pMain, "panelState.txt", 0);
@@ -1991,3 +1997,15 @@ void checkIfPicEx(int panel, int control, char id[])
 			DisplayImageFile (panel, control, "Pictures\\HumanShadow.jpg");
 }
 
+int CVICALLBACK mailCheck (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			initialize_mail(pEmail,pEmailData);
+			DisplayPanel(pEmail);
+			break;
+	}
+	return 0;
+}

@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 3
 Window Confinement Region Enabled = True
 MainColumnWidth = 232
 FileDateColumnWidth = 70
@@ -48,23 +48,23 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3584599515
+Disk Date = 3584601992
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
-Window Z-Order = 3
-Source Window State = "1,280,401,280,0,1,0,0,0,41,0,1245,0,0,0,12,1375,0,1396,47,349,683,1,15,"
+Window Z-Order = 2
+Source Window State = "1,1736,1736,1736,18,19,18,0,3,41,0,1245,0,0,0,12,1985,0,1736,19,349,683,1,15,"
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584593094
+Disk Date = 3584601996
 In Projects = "1,"
 Window Top = 72
 Window Left = 13
 Window Height = 561
 Window Width = 1272
-Window Z-Order = 4
+Window Z-Order = 3
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions_demo.uir"
@@ -85,7 +85,6 @@ Window Top = 122
 Window Left = 58
 Window Height = 349
 Window Width = 683
-Window Z-Order = 2
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsManhe.uir"
@@ -106,7 +105,6 @@ Window Top = 56
 Window Left = 10
 Window Height = 323
 Window Width = 683
-Window Z-Order = 1
 
 [File 0007]
 Path = "/d/Project/AmitLaderech/User Interface/main/request_check.uir"
@@ -177,7 +175,7 @@ Disk Date = 3584589558
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
-Source Window State = "1,3,4,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,323,683,1,0,"
+Source Window State = "1,3,4,3,0,0,0,0,0,41,0,0,0,0,0,11,0,0,3,0,323,683,1,0,"
 
 [File 0015]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.c"
@@ -186,7 +184,7 @@ Disk Date = 3584589558
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
-Source Window State = "1,4,15,15,0,0,4,0,0,0,0,0,0,0,0,0,0,0,3,0,323,683,1,0,"
+Source Window State = "1,4,15,15,0,0,4,0,0,41,0,0,0,0,0,11,0,0,3,0,323,683,1,0,"
 
 [File 0016]
 Path = "/d/Project/AmitLaderech/User Interface/main/request_check.c"
@@ -195,7 +193,7 @@ Disk Date = 3584589558
 In Projects = "1,"
 Window Top = 72
 Window Left = 25
-Source Window State = "1,21,21,21,12,34,34,0,0,0,0,0,0,0,0,0,0,0,9,0,311,948,1,21,"
+Source Window State = "1,21,21,21,12,34,34,0,0,59,0,0,0,0,0,11,0,0,9,0,311,948,1,21,"
 
 [File 0017]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions.h"
@@ -273,11 +271,46 @@ Disk Date = 3584589558
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
+[File 0027]
+Path = "/d/Project/AmitLaderech/User Interface/main/email.uir"
+File Type = "User Interface Resource"
+Disk Date = 3584602245
+In Projects = "1,"
+Window Top = 47
+Window Left = 13
+Window Height = 436
+Window Width = 1242
+
+[File 0028]
+Path = "/d/Project/AmitLaderech/User Interface/main/email.c"
+File Type = "CSource"
+Disk Date = 3584603794
+In Projects = "1,"
+Window Top = 92
+Window Left = 36
+Window Z-Order = 1
+Source Window State = "1,200,201,200,8,0,8,0,0,107,0,200,0,200,0,25,178,0,199,0,436,1242,1,0,"
+
+[File 0029]
+Path = "/d/Project/AmitLaderech/User Interface/main/email.h"
+File Type = "Include"
+Disk Date = 3584602446
+In Projects = "1,"
+Window Top = 47
+Window Left = 13
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,16,36,0,55,35,436,1272,1,0,"
+
+[File 0030]
+Path = "/d/Project/AmitLaderech/User Interface/main/MailFunctions.h"
+File Type = "Include"
+Disk Date = 3578459126
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
-Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/Reports.uir"
-Tab 0004 = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.uir"
+Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/email.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
