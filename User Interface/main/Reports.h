@@ -38,7 +38,7 @@
 #define  PANEL_AMIT_AMIT_PHONE            23      /* control type: textMsg, callback function: (none) */
 #define  PANEL_AMIT_AMIT_CELLPHONE        24      /* control type: textMsg, callback function: (none) */
 #define  PANEL_AMIT_AMIT_MENTOR           25      /* control type: textMsg, callback function: (none) */
-#define  PANEL_AMIT_AMIT_PERIOD           26      /* control type: textMsg, callback function: (none) */
+#define  PANEL_AMIT_AMIT_GROUP            26      /* control type: textMsg, callback function: (none) */
 #define  PANEL_AMIT_AMIT_EDUCATION        27      /* control type: textMsg, callback function: (none) */
 #define  PANEL_AMIT_AMIT_ECONOMY          28      /* control type: textMsg, callback function: (none) */
 #define  PANEL_AMIT_AMIT_JOB              29      /* control type: textMsg, callback function: (none) */
@@ -51,7 +51,6 @@
 #define  PANEL_AMIT_AMIT_LAST_NAME        36      /* control type: textMsg, callback function: (none) */
 #define  PANEL_AMIT_AMIT_AGE              37      /* control type: textMsg, callback function: (none) */
 #define  PANEL_AMIT_AMIT_ID               38      /* control type: textMsg, callback function: (none) */
-#define  PANEL_AMIT_COMMANDBUTTON         39      /* control type: command, callback function: (none) */
 
 
      /* Control Arrays: */

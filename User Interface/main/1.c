@@ -278,128 +278,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK creatReport (int panel, int control, int event,
-							 void *callbackData, int eventData1, int eventData2)
-{   char temp[300];
-	int data_image;
-	
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			if(panel == pSoldier)
-			{
-				GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_ID, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_FIRST_NAME, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_FIRST_NAME, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_LAST_NAME, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_LAST_NAME, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_AGE, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_AGE, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_CITY, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_CITY, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_ADDRESS, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_ADDRESS, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_PHONE_NUMBER, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_PHONE, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_CELL_PHONE_NUMBER, temp);  
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_CELLPHONE, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_MENTOR, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_MENTOR, temp);
-				
-				GetCtrlVal (panel, P_SOLDIER_MAIL, temp);
-				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_MAIL, temp);
-				
-				GetPanelDisplayBitmap (pReportsSol, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
-				
-			}
-			
-			else if(panel == pMentor)
-			{
-				GetCtrlVal (panel, P_MENTOR_ID_NUMBER, temp);
-		    	SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_ID, temp);  
-				
-				GetCtrlVal (panel, P_MENTOR_FIRST_NAME, temp);
-				SetCtrlVal (pReportsMentor, PANEL_MENT_FIRST_NAME, temp);        
-			
-				GetCtrlVal (panel, P_MENTOR_LAST_NAME, temp);
-				SetCtrlVal (pReportsMentor, PANEL_MENT_LAST_NAME, temp); 
-				
-				GetCtrlVal (panel, P_MENTOR_AGE, temp);
-				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_AGE, temp);
-				
-				GetCtrlVal (panel, P_MENTOR_CITY, temp);
-				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_CITY, temp); 
-				
-				GetCtrlVal (panel, P_MENTOR_ADDRESS, temp);
-				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_ADDRESS, temp);
-				
-				GetCtrlVal (panel, P_MENTOR_PHONE_NUMBER, temp);
-				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_PHONE, temp); 
-				
-				GetCtrlVal (panel, P_MENTOR_CELL_PHONE_NUMBER, temp); 
-				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_CELLPHONE, temp);  
-				
-				GetCtrlVal (panel, P_MENTOR_MAIL, temp);
-				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_MAIL, temp);
-				
-				GetPanelDisplayBitmap (pReportsMentor, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
-				
-			}
-			
-			else if(panel == pGuide)
-			{
-				GetCtrlVal (panel, P_GUIDE_ID_NUMBER, temp);
-		        SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_ID, temp);
-				
-				GetCtrlVal (panel, P_GUIDE_FIRST_NAME, temp);
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_FIRST_NAME, temp);                  
-			
-				GetCtrlVal (panel, P_GUIDE_LAST_NAME, temp);
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_LAST_MAME, temp);     
-				
-				GetCtrlVal (panel, P_GUIDE_AGE, temp);
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_AGE, temp);     
-				
-				GetCtrlVal (panel, P_GUIDE_CITY, temp);
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_CITY, temp);     
-				
-				GetCtrlVal (panel, P_GUIDE_ADDRESS, temp);
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_ADDRESS, temp);     
-				
-				GetCtrlVal (panel, P_GUIDE_PHONE_NUMBER, temp);
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_PHONE, temp);     
-				
-				GetCtrlVal (panel, P_GUIDE_CELL_PHONE_NUMBER, temp); 
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_CELLPHONE, temp);     
-				
-				GetCtrlVal (panel, P_GUIDE_MAIL, temp);
-				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_MAIL, temp);     
-				
-				GetPanelDisplayBitmap (pReportsGuide, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
 
-			}
-			SaveBitmapToJPEGFile (data_image, "reportfile.jpg", 0, 80);
-			//LaunchExecutable ("convert reportfile.jpg reportfile.pdf");   // the pdf func is not working
-			
-			//========================================================
-			// here niv need to add 2 functions
-			//the first one to convert jpg file to pdf file
-			//the second one to open automaticly th pdf file
-			//========================================================
-
-			break;
-	}
-	return 0;
-}
 
 int CVICALLBACK creatExcelTable (int panel, int control, int event,
 								 void *callbackData, int eventData1, int eventData2)
@@ -1471,6 +1350,162 @@ int CVICALLBACK openSoldierTable (int panel, int control, int event,
 			DisplayPanel(pTable);
 			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
 			free(fields);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK creatReport (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{   char temp[300];
+	int data_image;
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			if(panel == pSoldier)
+			{
+				GetCtrlVal (pMain, P_MAIN_DATE_STRING, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_LOCAL_DATE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_ID, temp);
+				checkIfPicEx(pReportsSol, PANEL_AMIT_AMIT_PICTURE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_FIRST_NAME, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_FIRST_NAME, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_LAST_NAME, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_LAST_NAME, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_AGE, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_AGE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_BIRTH_DATE, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_BIRTH_DATE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_CITY, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_CITY, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_RESIDENCE_STATUS_RING, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_LIVING_STATUS, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_LEGAL_STATUS_RING, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_LEGAL_STATUS, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_GROUP, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_GROUP, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_EDUCATION_STATUS_RING, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_EDUCATION, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_EMPLOYMENT_STATU_RING, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_JOB, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_ECONOMIC_STATUS_RING, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_ECONOMY, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_ADDRESS, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_ADDRESS, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_PHONE_NUMBER, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_PHONE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_CELL_PHONE_NUMBER, temp);  
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_CELLPHONE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_MENTOR, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_MENTOR, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_MAIL, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_MAIL, temp);
+				
+				GetPanelDisplayBitmap (pReportsSol, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
+				
+			}
+			
+			else if(panel == pMentor)
+			{
+				GetCtrlVal (pMain, P_MAIN_DATE_STRING, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_LOCAL_DATE, temp);
+				
+				GetCtrlVal (panel, P_MENTOR_ID_NUMBER, temp);
+		    	SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_ID, temp);  
+				checkIfPicEx(pReportsMentor, PANEL_MENT_MENTOR_PICTURE, temp);     
+				
+				GetCtrlVal (panel, P_MENTOR_FIRST_NAME, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_FIRST_NAME, temp);        
+			
+				GetCtrlVal (panel, P_MENTOR_LAST_NAME, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_LAST_NAME, temp); 
+				
+				GetCtrlVal (panel, P_MENTOR_AGE, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_AGE, temp);
+				
+				GetCtrlVal (panel, P_MENTOR_CITY, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_CITY, temp); 
+				
+				GetCtrlVal (panel, P_MENTOR_ADDRESS, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_ADDRESS, temp);
+				
+				GetCtrlVal (panel, P_MENTOR_PHONE_NUMBER, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_PHONE, temp); 
+				
+				GetCtrlVal (panel, P_MENTOR_CELL_PHONE_NUMBER, temp); 
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_CELLPHONE, temp);  
+				
+				GetCtrlVal (panel, P_MENTOR_MAIL, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_MAIL, temp);
+				
+				GetPanelDisplayBitmap (pReportsMentor, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
+				
+			}
+			
+			else if(panel == pGuide)
+			{
+				GetCtrlVal (pMain, P_MAIN_DATE_STRING, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_LOCAL_DATE, temp);
+				
+				GetCtrlVal (panel, P_GUIDE_ID_NUMBER, temp);
+		        SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_ID, temp);
+				checkIfPicEx(pReportsGuide, PANEL_MANH_MANHE_PICTURE, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_FIRST_NAME, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_FIRST_NAME, temp);                  
+			
+				GetCtrlVal (panel, P_GUIDE_LAST_NAME, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_LAST_MAME, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_AGE, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_AGE, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_CITY, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_CITY, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_ADDRESS, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_ADDRESS, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_PHONE_NUMBER, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_PHONE, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_CELL_PHONE_NUMBER, temp); 
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_CELLPHONE, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_MAIL, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_MAIL, temp);     
+				
+				GetPanelDisplayBitmap (pReportsGuide, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
+
+			}
+			SaveBitmapToJPEGFile (data_image, "reportfile.jpg", 0, 80);
+			//LaunchExecutable ("convert reportfile.jpg reportfile.pdf");   // the pdf func is not working
+			
+			//========================================================
+			// here niv need to add 2 functions
+			//the first one to convert jpg file to pdf file
+			//the second one to open automaticly th pdf file
+			//========================================================
+
 			break;
 	}
 	return 0;

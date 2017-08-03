@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 2
+Number of Opened Files = 4
 Window Confinement Region Enabled = True
 MainColumnWidth = 232
 FileDateColumnWidth = 70
@@ -46,6 +46,16 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
+Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
+File Type = "CSource"
+Disk Date = 3584599515
+In Projects = "1,"
+Window Top = 56
+Window Left = 10
+Window Z-Order = 3
+Source Window State = "1,280,401,280,0,1,0,0,0,41,0,1245,0,0,0,12,1375,0,1396,47,349,683,1,15,"
+
+[File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
 Disk Date = 3584593094
@@ -54,17 +64,7 @@ Window Top = 72
 Window Left = 13
 Window Height = 561
 Window Width = 1272
-Window Z-Order = 2
-
-[File 0002]
-Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
-File Type = "CSource"
-Disk Date = 3584594790
-In Projects = "1,"
-Window Top = 56
-Window Left = 10
-Window Z-Order = 1
-Source Window State = "1,880,881,881,21,78,78,0,0,107,0,1245,0,0,0,25,786,0,846,78,349,683,1,15,"
+Window Z-Order = 4
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions_demo.uir"
@@ -79,17 +79,18 @@ Window Width = 948
 [File 0004]
 Path = "/d/Project/AmitLaderech/User Interface/main/Reports.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584589556
+Disk Date = 3584599641
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Window Height = 349
 Window Width = 683
+Window Z-Order = 2
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsManhe.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584589556
+Disk Date = 3584599662
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
@@ -99,12 +100,13 @@ Window Width = 683
 [File 0006]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584589556
+Disk Date = 3584599688
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
 Window Height = 323
 Window Width = 683
+Window Z-Order = 1
 
 [File 0007]
 Path = "/d/Project/AmitLaderech/User Interface/main/request_check.uir"
@@ -244,7 +246,7 @@ Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 [File 0023]
 Path = "/d/Project/AmitLaderech/User Interface/main/Reports.h"
 File Type = "Include"
-Disk Date = 3584589556
+Disk Date = 3584599641
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
@@ -260,7 +262,7 @@ Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,687,1356,1,0,"
 [File 0025]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.h"
 File Type = "Include"
-Disk Date = 3584589556
+Disk Date = 3584599688
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
@@ -274,6 +276,8 @@ Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 [Tab Order]
 Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
+Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/Reports.uir"
+Tab 0004 = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.uir"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

@@ -35,7 +35,6 @@
 #define  PANEL_MENT_MENTOR_ADDRESS        20      /* control type: textMsg, callback function: (none) */
 #define  PANEL_MENT_MENTOR_AGE            21      /* control type: textMsg, callback function: (none) */
 #define  PANEL_MENT_MENTOR_ID             22      /* control type: textMsg, callback function: (none) */
-#define  PANEL_MENT_OK_BUTTON             23      /* control type: command, callback function: (none) */
 
 
      /* Control Arrays: */
