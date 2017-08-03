@@ -4,7 +4,12 @@
 #include "database.h"
 #include "analytics_functions_demo.h"
 #include "analytics_functions.h"
-#include "request_check.h"   
+#include "request_check.h"
+#include "ReportsManhe.h"
+#include "Reports.h"
+#include "ReportsMentor.h"
+#include "HebrewConversions.h"
+
 
 //Constants for the database directory
 #define SOLDIER "Database\\soldier.ini"
@@ -52,7 +57,7 @@ void searchFor(char dir[],char database[], char fieldName[], char valToCmp[],cha
 void dealWithGroupButtonInGuide();
 void clearPanel(int panel);
 void createGroupTable(char dir[],char database[], char **ids,int rows,int panel,int control,char *fields[],int fieldLen);
-
+void checkIfPicEx(int panel, int control, char id[]);
 
 
 //==============================================================================
@@ -91,11 +96,11 @@ int main (int argc, char *argv[])
         return -1;
 	if ((pNewGroup = LoadPanel (0, "1.uir", P_NEW_GROU)) < 0)
         return -1;
-	if ((pReportsGuide = LoadPanel (0, "ReportsManhe.uir", PANEL)) < 0)
+	if ((pReportsGuide = LoadPanel (0, "ReportsManhe.uir", PANEL_MANH)) < 0)
 		return -1;
-	if ((pReportsSol = LoadPanel (0, "Reports.uir", PANEL)) < 0)
+	if ((pReportsSol = LoadPanel (0, "Reports.uir", PANEL_AMIT)) < 0)
 		return -1;
-	if ((pReportsMentor = LoadPanel (0, "ReportsMentor.uir", PANEL)) < 0)
+	if ((pReportsMentor = LoadPanel (0, "ReportsMentor.uir", PANEL_MENT)) < 0)
 		return -1;
 	
 	RecallPanelState (pMain, "panelState.txt", 0);
@@ -265,6 +270,129 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				showMember(pGroup,GROUP,"GROUP",id,ctrlArray);
 				SetCtrlVal (pGroup, P_GROUP_GROUP_NAME, result);
 			}
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK creatReport (int panel, int control, int event,
+							 void *callbackData, int eventData1, int eventData2)
+{   char temp[300];
+	int data_image;
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			if(panel == pSoldier)
+			{
+				GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_ID, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_FIRST_NAME, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_FIRST_NAME, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_LAST_NAME, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_LAST_NAME, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_AGE, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_AGE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_CITY, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_CITY, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_ADDRESS, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_ADDRESS, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_PHONE_NUMBER, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_PHONE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_CELL_PHONE_NUMBER, temp);  
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_CELLPHONE, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_MENTOR, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_MENTOR, temp);
+				
+				GetCtrlVal (panel, P_SOLDIER_MAIL, temp);
+				SetCtrlVal (pReportsSol, PANEL_AMIT_AMIT_MAIL, temp);
+				
+				GetPanelDisplayBitmap (pReportsSol, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
+				
+			}
+			
+			else if(panel == pMentor)
+			{
+				GetCtrlVal (panel, P_MENTOR_ID_NUMBER, temp);
+		    	SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_ID, temp);  
+				
+				GetCtrlVal (panel, P_MENTOR_FIRST_NAME, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_FIRST_NAME, temp);        
+			
+				GetCtrlVal (panel, P_MENTOR_LAST_NAME, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_LAST_NAME, temp); 
+				
+				GetCtrlVal (panel, P_MENTOR_AGE, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_AGE, temp);
+				
+				GetCtrlVal (panel, P_MENTOR_CITY, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_CITY, temp); 
+				
+				GetCtrlVal (panel, P_MENTOR_ADDRESS, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_ADDRESS, temp);
+				
+				GetCtrlVal (panel, P_MENTOR_PHONE_NUMBER, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_PHONE, temp); 
+				
+				GetCtrlVal (panel, P_MENTOR_CELL_PHONE_NUMBER, temp); 
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_CELLPHONE, temp);  
+				
+				GetCtrlVal (panel, P_MENTOR_MAIL, temp);
+				SetCtrlVal (pReportsMentor, PANEL_MENT_MENTOR_MAIL, temp);
+				
+				GetPanelDisplayBitmap (pReportsMentor, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
+				
+			}
+			
+			else if(panel == pGuide)
+			{
+				GetCtrlVal (panel, P_GUIDE_ID_NUMBER, temp);
+		        SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_ID, temp);
+				
+				GetCtrlVal (panel, P_GUIDE_FIRST_NAME, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_FIRST_NAME, temp);                  
+			
+				GetCtrlVal (panel, P_GUIDE_LAST_NAME, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_LAST_MAME, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_AGE, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_AGE, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_CITY, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_CITY, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_ADDRESS, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_ADDRESS, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_PHONE_NUMBER, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_PHONE, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_CELL_PHONE_NUMBER, temp); 
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_CELLPHONE, temp);     
+				
+				GetCtrlVal (panel, P_GUIDE_MAIL, temp);
+				SetCtrlVal (pReportsGuide, PANEL_MANH_MANHE_MAIL, temp);     
+				
+				GetPanelDisplayBitmap (pReportsGuide, VAL_FULL_PANEL, VAL_ENTIRE_OBJECT, &data_image);
+
+			}
+			SaveBitmapToJPEGFile (data_image, "reportfile.jpg", 0, 80);
+			//LaunchExecutable ("convert reportfile.jpg reportfile.pdf");   // the pdf func is not working
+			
+			//========================================================
+			// here niv need to add 2 functions
+			//the first one to convert jpg file to pdf file
+			//the second one to open automaticly th pdf file
+			//========================================================
+
 			break;
 	}
 	return 0;
@@ -958,11 +1086,7 @@ int CVICALLBACK openGuidePanel (int panel, int control, int event,
 				DefaultCtrl (pGuide, P_GUIDE_GROUP_1);	DefaultCtrl (pGuide, P_GUIDE_GROUP_2);
 				connectNametoID(GUIDE,"GUIDE",id,fullName);
 				ctrlArray = GetCtrlArrayFromResourceID (pGuide, CTRLARRAY_6);
-				sprintf (pic_id, "Pictures\\%s.jpeg",id);
-				if (FileExists (pic_id, 0) == 1)   
-					DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
-				else
-					DisplayImageFile (pGuide, P_GUIDE_PICTURE, "Pictures\\HumanShadow.jpg");
+				checkIfPicEx(pGuide,P_GUIDE_PICTURE,id);
 				showMember(pGuide,GUIDE,"GUIDE",id,ctrlArray);
 				dealWithGroupButtonInGuide(); 
 				DisplayPanel(pGuide);
@@ -1040,11 +1164,7 @@ int CVICALLBACK OpenMentor (int panel, int control, int event,
 				connectNametoID(MENTOR,"MENTOR",id,mentorName);
 				DisplayPanel(pMentor);
 				ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_4);
-				sprintf (pic_id, "Pictures\\%s.jpeg",id);
-				if (FileExists (pic_id, 0) == 1)   
-					DisplayImageFile (pMentor, P_MENTOR_PICTURE, pic_id);
-				else
-					DisplayImageFile (pMentor, P_MENTOR_PICTURE, "Pictures\\HumanShadow.jpg");
+				checkIfPicEx(pMentor,P_MENTOR_PICTURE,id);
 				showMember(pMentor,MENTOR,"MENTOR",id,ctrlArray);
 			}
 			break;
@@ -1131,7 +1251,7 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
 {
 	Point p;
-	char val[SIZE],pic_id[100];
+	char val[SIZE];
 	switch (event)
 	{
 			case EVENT_COMMIT:
@@ -1144,25 +1264,17 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pSoldier);
-							sprintf (pic_id, "Pictures\\%s.jpeg",id);
-							if (FileExists (pic_id, 0) == 1)   
-								DisplayImageFile (pSoldier, P_SOLDIER_PICTURE, pic_id);
-							else
-								DisplayImageFile (pSoldier,  P_SOLDIER_PICTURE, "Pictures\\HumanShadow.jpg");
+							checkIfPicEx(pSoldier,P_SOLDIER_PICTURE,val);
 							showMember(pSoldier,SOLDIER,"SOLDIER",val,ctrlArray);
 							HidePanel(panel);
 							break;
 						case 2://MENTOR
-							char mentorName[SIZE],soldierName[SIZE];
+							char mentorName[SIZE], soldierName[SIZE];
 							ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_13);
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pMentor);
-							sprintf (pic_id, "Pictures\\%s.jpeg",id);
-							if (FileExists (pic_id, 0) == 1)   
-								DisplayImageFile (pMentor, P_MENTOR_PICTURE, pic_id);
-							else
-								DisplayImageFile (pMentor, P_MENTOR_PICTURE, "Pictures\\HumanShadow.jpg");
+							checkIfPicEx(pMentor,P_MENTOR_PICTURE,val);
 							showMember(pMentor,MENTOR,"MENTOR",val,ctrlArray);
 							GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(eventData2,eventData1), mentorName);
 							HidePanel(panel);
@@ -1172,11 +1284,7 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pGuide);
-							sprintf (pic_id, "Pictures\\%s.jpeg",id);
-							if (FileExists (pic_id, 0) == 1)   
-								DisplayImageFile (pGuide, P_GUIDE_PICTURE, pic_id);
-							else
-								DisplayImageFile (pGuide, P_GUIDE_PICTURE, "Pictures\\HumanShadow.jpg");
+							checkIfPicEx(pGuide,P_GUIDE_PICTURE,val);
 							showMember(pGuide,GUIDE,"GUIDE",val,ctrlArray);
 							dealWithGroupButtonInGuide();
 							HidePanel(panel);
@@ -1819,3 +1927,14 @@ void createGroupTable(char dir[],char database[], char **ids,int rows,int panel,
 		InsertTableCellRingItem (panel, control, MakePoint(3,i+1), 1, "Yes");
 	}
 }
+
+void checkIfPicEx(int panel, int control, char id[])
+{
+	char pic_id[100];
+	sprintf (pic_id, "Pictures\\%s.jpeg",id);
+		if (FileExists (pic_id, 0) == 1)   
+			DisplayImageFile (panel, control, pic_id);
+		else
+			DisplayImageFile (panel, control, "Pictures\\HumanShadow.jpg");
+}
+

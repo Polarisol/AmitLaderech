@@ -120,7 +120,7 @@
 #define  P_GUIDE_DELETING_GUIDE_BUTTON    15      /* control type: pictButton, callback function: delRecord */
 #define  P_GUIDE_SAVE_CHANGES_BUTTON      16      /* control type: pictButton, callback function: SaveChanges */
 #define  P_GUIDE_EDITING_BUTTON           17      /* control type: pictButton, callback function: Edit */
-#define  P_GUIDE_SEND_EMAIL               18      /* control type: pictButton, callback function: (none) */
+#define  P_GUIDE_SEND_EMAIL               18      /* control type: pictButton, callback function: creatReport */
 #define  P_GUIDE_LIST_SOLDIERS_BUTTON     19      /* control type: pictButton, callback function: openTable */
 #define  P_GUIDE_GROUP_2                  20      /* control type: command, callback function: showGroup */
 #define  P_GUIDE_GROUP_1                  21      /* control type: command, callback function: showGroup */
@@ -175,16 +175,15 @@
 #define  P_MENTOR_DELETING_MENTO_BUTTON   14      /* control type: pictButton, callback function: delRecord */
 #define  P_MENTOR_SAVE_CHANGES_BUTTON     15      /* control type: pictButton, callback function: SaveChanges */
 #define  P_MENTOR_EDITING_BUTTON          16      /* control type: pictButton, callback function: Edit */
-#define  P_MENTOR_SEND_EMAIL              17      /* control type: pictButton, callback function: (none) */
+#define  P_MENTOR_SEND_EMAIL              17      /* control type: pictButton, callback function: creatReport */
 #define  P_MENTOR_COMMENTS_FROM_MEETING   18      /* control type: textBox, callback function: (none) */
 #define  P_MENTOR_LINE                    19      /* control type: deco, callback function: (none) */
 #define  P_MENTOR_AMITLADERECH            20      /* control type: textMsg, callback function: (none) */
-#define  P_MENTOR_SOLDIER_TEXT            21      /* control type: textMsg, callback function: (none) */
-#define  P_MENTOR_GOAL                    22      /* control type: textMsg, callback function: (none) */
-#define  P_MENTOR_LOGO                    23      /* control type: picture, callback function: (none) */
-#define  P_MENTOR_BACKGROUND              24      /* control type: picture, callback function: (none) */
-#define  P_MENTOR_SOLDIER_BUTTON          25      /* control type: command, callback function: openSoldier */
-#define  P_MENTOR_DATA_BUTTON             26      /* control type: command, callback function: OPEN_DATA */
+#define  P_MENTOR_GOAL                    21      /* control type: textMsg, callback function: (none) */
+#define  P_MENTOR_LOGO                    22      /* control type: picture, callback function: (none) */
+#define  P_MENTOR_BACKGROUND              23      /* control type: picture, callback function: (none) */
+#define  P_MENTOR_SOLDIER_BUTTON          24      /* control type: command, callback function: openSoldier */
+#define  P_MENTOR_DATA_BUTTON             25      /* control type: command, callback function: OPEN_DATA */
 
 #define  P_NEW_GROU                       7       /* callback function: exitFunc */
 #define  P_NEW_GROU_YEAR                  2       /* control type: string, callback function: (none) */
@@ -325,7 +324,7 @@
 #define  P_SOLDIER_SAVE_CHANGES_BUTTON    27      /* control type: pictButton, callback function: SaveChanges */
 #define  P_SOLDIER_EDITING_BUTTON         28      /* control type: pictButton, callback function: Edit */
 #define  P_SOLDIER_GENDER_RING            29      /* control type: ring, callback function: (none) */
-#define  P_SOLDIER_SEND_EMAIL             30      /* control type: pictButton, callback function: (none) */
+#define  P_SOLDIER_SEND_EMAIL             30      /* control type: pictButton, callback function: creatReport */
 #define  P_SOLDIER_COMMENTS_FROM_MEETING  31      /* control type: textBox, callback function: (none) */
 #define  P_SOLDIER_STATUS_RING            32      /* control type: ring, callback function: (none) */
 #define  P_SOLDIER_MENTOR_BTN_2           33      /* control type: command, callback function: chooseMentForSol */
@@ -357,7 +356,8 @@
 #define  P_SOLDIER_BIRTH_DATE_HL          59      /* control type: textMsg, callback function: (none) */
 #define  P_SOLDIER_BIRTH_SLASH_DM         60      /* control type: textMsg, callback function: (none) */
 #define  P_SOLDIER_DETAIL_HL_3            61      /* control type: textMsg, callback function: (none) */
-#define  P_SOLDIER_PICTURE                62      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_SOLDIER_PICTURE        62      /* control type: picture, callback function: (none) */
+#define  P_SOLDIER_PICTURE                63      /* control type: picture, callback function: (none) */
 
 #define  P_TABLE                          12      /* callback function: exitFunc */
 #define  P_TABLE_LINE                     2       /* control type: deco, callback function: (none) */
@@ -413,6 +413,7 @@ int  CVICALLBACK checkIfExist(int panel, int control, int event, void *callbackD
 int  CVICALLBACK chooseGroupForSol(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK chooseMentForSol(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK creatExcelTable(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK creatReport(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK delRecord(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Edit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK editMentorsInGroup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
