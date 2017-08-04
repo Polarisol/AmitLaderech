@@ -34,7 +34,7 @@ int ctrlArray;
 int hr, min, sec;
 int day, month, year;
 int notExFlag = 0,chooseMen4SolFlag = 0;  
-
+FILE *fp;
 
 //==============================================================================
 //							Function declaration section
@@ -298,12 +298,37 @@ int CVICALLBACK creatExcelTable (int panel, int control, int event,
 {
 	switch (event)
 	{
+		char iD[50]={"????? ????"}, fullName[70]={"?? ???"}, Mentor[70]={"?????"}, Guide[70]={"????"}, Group[70]={"÷????"}, fullString[330];
+		int i, n;
 		case EVENT_COMMIT:
-
+			SetCtrlAttribute (panel, control, ATTR_VISIBLE, 0);
+			GetNumTableRows (panel, P_TABLE_LIST_S_OR_M, &n);
+			fp = fopen ("excelTable.csv","w");
+			strcat (tableHeadline, "\n");
+			HebrewConverter_convertHebrewISOtoUTF8 (tableHeadline);
+			fprintf (fp, "%s", tableHeadline);
+			sprintf (fullString, "%s,%s,%s,%s,%s\n", iD, fullName, Mentor, Guide, Group);
+			HebrewConverter_convertHebrewISOtoUTF8 (fullString);
+			fprintf (fp, "%s", fullString);
+			for (i=1; i<n; i++)
+			{
+				GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(1,i), iD);
+				GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(2,i), fullName);
+				GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(4,i), Mentor);
+				GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(5,i), Guide);
+				GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(6,i), Group);
+				sprintf (fullString, "%s,%s,%s,%s,%s\n", iD, fullName, Mentor, Guide, Group);
+				HebrewConverter_convertHebrewISOtoUTF8 (fullString);
+				fprintf (fp, "%s", fullString);
+			}
+			fclose (fp);
+			HidePanel (panel);
+			OpenDocumentInDefaultViewer ("excelTable.csv", VAL_NO_ZOOM);
 			break;
 	}
 	return 0;
 }
+
 
 int CVICALLBACK Edit (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
@@ -558,6 +583,7 @@ int CVICALLBACK changeVal (int panel, int control, int event,
 							DisplayPanel(pTable);
 							delTable(); 
 							createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M,fields,2,"");
+							SetCtrlAttribute (pTable, P_TABLE_EXCEL_BUTTON, ATTR_VISIBLE, 0);
 							free(fields);
 						}
 						else
@@ -579,6 +605,7 @@ int CVICALLBACK changeVal (int panel, int control, int event,
 							DisplayPanel(pTable);
 							delTable();
 							createTable(dir,database,output,cc,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
+							SetCtrlAttribute (pTable, P_TABLE_EXCEL_BUTTON, ATTR_VISIBLE, 1);
 							free(fields);	
 						}
 					}
@@ -886,6 +913,7 @@ int CVICALLBACK chooseMentForSol (int panel, int control, int event,
 			chooseMen4SolFlag = 1;
 			SetCtrlVal (pTable, P_TABLE_GNAME,val ); 
 			createTable(MENTOR,"MENTOR",ids,recordAmount,pTable,P_TABLE_LIST_S_OR_M,fields,2,val);
+			SetCtrlAttribute (pTable, P_TABLE_EXCEL_BUTTON, ATTR_VISIBLE, 0);
 			DisplayPanel(pTable);
 			 
 			break;
@@ -1052,6 +1080,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 			sprintf(fields[4],"קבוצה");
 			//End fields
 				createTable(SOLDIER,"SOLDIER",ids,j,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
+				SetCtrlAttribute (pTable, P_TABLE_EXCEL_BUTTON, ATTR_VISIBLE, 1);
 				free(fields);
 			}
 			
@@ -1151,6 +1180,7 @@ int CVICALLBACK openSoldier (int panel, int control, int event,
 			delTable();
 			tableFlag = 1;
 			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
+			SetCtrlAttribute (pTable, P_TABLE_EXCEL_BUTTON, ATTR_VISIBLE, 1);
 			free(fields);
 			break;
 	}
@@ -1293,6 +1323,7 @@ int CVICALLBACK editMentorsInGroup (int panel, int control, int event,
 			delTable();
 			DisplayPanel(pTable);
 			createTable(MENTOR,"MENTOR",ids,recordAmount,pTable,P_TABLE_LIST_S_OR_M,fields,2,val);
+			SetCtrlAttribute (pTable, P_TABLE_EXCEL_BUTTON, ATTR_VISIBLE, 0);
 			SetCtrlVal (pTable, P_TABLE_GNAME,val );
 			break;
 	}
@@ -1362,6 +1393,7 @@ int CVICALLBACK openSoldierTable (int panel, int control, int event,
 			SetCtrlAttribute (pTable, P_TABLE_TABLE_HEADLINE, ATTR_CTRL_VAL, tableHeadline);
 			DisplayPanel(pTable);
 			createTable(SOLDIER,"SOLDIER",ids,rows,pTable,P_TABLE_LIST_S_OR_M,fields,5,"");
+			SetCtrlAttribute (pTable, P_TABLE_EXCEL_BUTTON, ATTR_VISIBLE, 1);
 			free(fields);
 			break;
 	}
