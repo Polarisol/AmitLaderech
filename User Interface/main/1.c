@@ -394,7 +394,7 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 							 void *callbackData, int eventData1, int eventData2)
 {
 	int count;
-	char curGuide[100],groupName[100],group1[100],group2[100];
+	char curGuide[100],groupName[100];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -683,7 +683,7 @@ int CVICALLBACK changeValSold (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 {
 	int arrayIndex, ringIndex;
-	char ctrlVal[80], ctrlID[80];
+	char ctrlVal[80];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -985,7 +985,7 @@ int CVICALLBACK Open_P_NEW_MENTOR (int panel, int control, int event,
 int CVICALLBACK openGuidePanel (int panel, int control, int event,
 								void *callbackData, int eventData1, int eventData2)
 {
-	char fullName[SIZE],pic_id[100];
+	char fullName[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -1063,7 +1063,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 int CVICALLBACK OpenMentor (int panel, int control, int event,
 							void *callbackData, int eventData1, int eventData2)
 {
-	char mentorName[SIZE],soldierName[SIZE],pic_id[100];
+	char mentorName[SIZE],pic_id[100];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -2021,7 +2021,8 @@ int CVICALLBACK editTL (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			 initialize_prog(pgraph, pgraph_2);
+			GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, id);
+			 initialize_prog(pgraph, pgraph_2,id);
 			break;
 	}
 	return 0;
