@@ -159,8 +159,8 @@ void initialize_prog(int p, int p2,char id[])
 		ctrlarray4 = GetCtrlArrayFromResourceID (pgraph, INITEXT);
 		canvasFirst = MakePoint (0 ,canvasHeight/2);
 		canvasLast = MakePoint (canvasWidth, canvasHeight/2);
-		//SetCtrlAttribute (pgraph_2, PANEL_GRPH_CANVAS, ATTR_PEN_WIDTH, 4);
-		//GetCtrlVal (psoldier,P_SOLDIER_ID_NUMBER, &id_num);
+		SetCtrlAttribute (pgraph_2, PANEL_GRPH_CANVAS, ATTR_PEN_WIDTH, 4);
+		GetCtrlVal (psoldier,P_SOLDIER_ID_NUMBER, &id_num);
 		sprintf (savepanelstatefile, "%s-panel",id);
 		sprintf (progressbarpng, "%s-progressbar.png",id);
 
@@ -170,7 +170,7 @@ void initialize_prog(int p, int p2,char id[])
 
 	void ini_initialize()
 	{
-		//Database_setDatabaseFile("Database\\soldier.ini");
+		Database_setDatabaseFile("Database\\soldier.ini");
 	}
 
 	void DatetoRemind(int day, int month, int year, int daysbefore)
@@ -222,10 +222,10 @@ void initialize_prog(int p, int p2,char id[])
 		 return highest;
 	}
 
-	/*int main (int argc, char *argv[])
+	int main (int argc, char *argv[])
 	{
 		if (InitCVIRTE (0, argv, 0) == 0)
-			return -1;	/* out of memory */ /*
+			return -1;	/* out of memory */ 
 		if ((pgraph = LoadPanel (0, "new-ui-prog.uir", PANEL_PROG)) < 0)
 			return -1;
 		if ((pgraph_2 = LoadPanel (0, "new-ui-prog.uir", PANEL_GRPH)) < 0)
@@ -235,7 +235,7 @@ void initialize_prog(int p, int p2,char id[])
 		ini_initialize();
 		RunUserInterface ();
 		return 0;
-	} */
+	} 
 
 	int CVICALLBACK exitFUNC (int panel, int event, void *callbackData,
 							  int eventData1, int eventData2)
@@ -349,7 +349,7 @@ void initialize_prog(int p, int p2,char id[])
 		int todayseconds=0, maxDaysBetween=0;
 		int taskdateseconds[8]={0};
 		//double pixelsPerday=0;
-		char progressbarpath[32], panelstatepath[32];
+		char progressbarpath[64], panelstatepath[32];
 	
 
 		char initask[8][128]={""};
