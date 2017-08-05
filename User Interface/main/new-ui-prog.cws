@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1501
-Pathname = "/d/Project/NEWER/new-ui-prog.cws"
+Pathname = "/c/Users/itaym_000/Desktop/User_Interface/User Interface/main/new-ui-prog.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2015"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
@@ -12,11 +12,11 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "new-ui-prog.prj"
-Drag Bar Left = 249
+Drag Bar Left = 287
 Window Top = 117
 Window Left = 11
 Window Bottom = 475
-Window Right = 1885
+Window Right = 969
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -30,9 +30,9 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 2
+Number of Opened Files = 1
 Window Confinement Region Enabled = True
-MainColumnWidth = 232
+MainColumnWidth = 270
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -46,7 +46,7 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/d/Project/NEWER/Mscomct2.fp"
+Path = "/c/Users/itaym_000/Desktop/User_Interface/User Interface/main/Mscomct2.fp"
 File Type = "Function Panel"
 Disk Date = 3584607810
 In Projects = "1,"
@@ -56,18 +56,18 @@ Window Height = 400
 Window Width = 400
 
 [File 0002]
-Path = "/d/Project/NEWER/new-ui-prog.c"
+Path = "/c/Users/itaym_000/Desktop/User_Interface/User Interface/main/new-ui-prog.c"
 File Type = "CSource"
-Disk Date = 3584608565
+Disk Date = 3584768947
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Window Z-Order = 1
-Source Window State = "1,372,373,372,0,0,0,0,0,107,0,382,0,3,0,25,490,0,506,23,291,828,1,14,"
-Line Tags = "112,"
+Source Window State = "1,196,196,196,4,58,4,0,0,128,0,383,0,4,0,42,126,0,89,127,291,828,1,14,"
+Line Tags = "123,"
 
 [File 0003]
-Path = "/d/Project/NEWER/new-ui-prog.uir"
+Path = "/c/Users/itaym_000/Desktop/User_Interface/User Interface/main/new-ui-prog.uir"
 File Type = "User Interface Resource"
 Disk Date = 3584607812
 In Projects = "1,"
@@ -75,25 +75,24 @@ Window Top = 92
 Window Left = 36
 Window Height = 531
 Window Width = 1068
-Window Z-Order = 2
 
 [File 0004]
-Path = "/d/Project/NEWER/database.h"
+Path = "/c/Users/itaym_000/Desktop/User_Interface/User Interface/main/database.h"
 File Type = "Include"
-Disk Date = 3584607812
+Disk Date = 3584692115
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0005]
-Path = "/d/Project/NEWER/HebrewConversions.h"
+Path Line0001 = "/c/Users/itaym_000/Desktop/User_Interface/User Interface/main/HebrewConversions."
+Path Line0002 = "h"
 File Type = "Include"
-Disk Date = 3584607810
+Disk Date = 3584692115
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [Tab Order]
-Tab 0001 = "/d/Project/NEWER/new-ui-prog.uir"
-Tab 0002 = "/d/Project/NEWER/new-ui-prog.c"
+Tab 0001 = "/c/Users/itaym_000/Desktop/User_Interface/User Interface/main/new-ui-prog.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

@@ -1,5 +1,6 @@
 	// DONT FORGET TO ADD database.c
 
+#include <formatio.h>
 	#include "toolbox.h"
 	#include <utility.h>
 	#include <ansi_c.h>
@@ -46,32 +47,42 @@
 	char task[8][256]={""};
 
 	// task counter
-	int counter=0;
+
+	int counter=1;
 
 	// getting control index
+	
 	int bold_index = 0, open_index = 0;
 
 	//getting state
+	
 	int bold_state = 0, task_state = 0;
 
 	// progress bar name
+	
 	int id_num;
 	char progressbarpng[64];
 
 	// placing task in Canvas
+	
 	Point canvasFirst, canvasLast;
-
 	struct todaydate taskdate[8];
 	int days_before_reminder = 0;
 	int openPanelConfirm, selection, answersave;
 	char firstday[16];
+	
+	// saving file data
+	
 	char savepanelstatefile[32], loadpanelstatefile[260];
+	char progressbarpath[64], panelstatepath[64];
+	int AmitCheck = 0;
 
 	//ini
+	
 	char taskforINI[8][256];
 	char dateforINI[16];
 	char labeltext[32];
-	char id[16]={"203059936"};
+	char sol_id[16]={""};
 
 	void loadAmitPanel()
 	{
@@ -120,8 +131,12 @@
 void initialize_prog(int p, int p2,char id[])
 {
 	pgraph = p;  pgraph_2 = p2;
+	
 	DisplayPanel(pgraph);
-	openPanelConfirm = ConfirmPopup ("עמית לדרך- גרף התקדמות",
+	
+	// Option for uploading Amit Panel
+	
+	/*	openPanelConfirm = ConfirmPopup ("עמית לדרך- גרף התקדמות",
 										 "?האם תרצה לטעון פאנל של עמית");
 		if (openPanelConfirm == 1)
 		{
@@ -139,8 +154,17 @@ void initialize_prog(int p, int p2,char id[])
 					MessagePopup ("!אזהרה", ".לא נבחר קובץ");
 					selection = FileSelectPopup ("", "*.*", "", "Select a file", VAL_LOAD_BUTTON, 0, 0, 1, 0, loadpanelstatefile);
 				}  
-		}
+		}  */
 	
+		// Smarter panel check and upload
+		
+		AmitCheck = FileExists (panelstatepath, 0);
+		
+		if (AmitCheck==1)
+		{
+			OpenFile (panelstatepath, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
+		}
+		
 		//checking if panel was uploaded
 
 		GetCtrlVal (pgraph, PANEL_PROG_FIRSTDAY, firstday);
@@ -161,10 +185,8 @@ void initialize_prog(int p, int p2,char id[])
 		canvasLast = MakePoint (canvasWidth, canvasHeight/2);
 		//SetCtrlAttribute (pgraph_2, PANEL_GRPH_CANVAS, ATTR_PEN_WIDTH, 4);
 		//GetCtrlVal (psoldier,P_SOLDIER_ID_NUMBER, &id_num);
-		sprintf (savepanelstatefile, "%s-panel",id);
-		sprintf (progressbarpng, "%s-progressbar.png",id);
-
-	return;
+		sprintf (savepanelstatefile, "%s-panel",sol_id);
+		sprintf (progressbarpng, "%s-progressbar.png",sol_id);
 }
 
 
@@ -273,6 +295,7 @@ void initialize_prog(int p, int p2,char id[])
 		}
 		return 0;
 	}
+
 	//making text bold if needed
 
 	int CVICALLBACK boldit (int panel, int control, int event,
@@ -294,6 +317,7 @@ void initialize_prog(int p, int p2,char id[])
 		}
 		return 0;
 	}
+
 	//open next line for another task if needed
 
 	int CVICALLBACK opennext (int panel, int control, int event,
@@ -348,14 +372,12 @@ void initialize_prog(int p, int p2,char id[])
 		int daysBetweenDates[8]={0};
 		int todayseconds=0, maxDaysBetween=0;
 		int taskdateseconds[8]={0};
+		
 		//double pixelsPerday=0;
-		char progressbarpath[32], panelstatepath[32];
 	
-
 		char initask[8][128]={""};
 		int dayforini=0, monthforini=0, yearforini=0, daysbeforeini=0;
-
-
+		
 
 		switch (event)
 		{
@@ -365,7 +387,7 @@ void initialize_prog(int p, int p2,char id[])
 	
 					todayseconds = (todaydate.DD * secondsPerDay) + (todaydate.MM * secondsPerMonth) + ((todaydate.YYYY-2017) * secondsPerYear);
 			
-						//Getting the dates and ** DAYS ** between the day the mentor insert for the time data
+						// Getting the dates and ** DAYS ** between the day the mentor insert for the time data
 			
 						for (int i=0; i<counter; i++)
 						{
@@ -402,6 +424,7 @@ void initialize_prog(int p, int p2,char id[])
 							SetCtrlAttribute (pgraph_2, TextforProgresBar[i], ATTR_VISIBLE, 1);
 						
 							// Adding Task
+							
 							GetCtrlVal (panel, taskarr[i], task[i]);
 							SetCtrlVal (pgraph_2, TextforProgresBar[i], task[i]);
 						
@@ -435,7 +458,7 @@ void initialize_prog(int p, int p2,char id[])
 		
 			
 							/*  My try of "SMART" progress bar with gap that matches dates gap
-								MIGHT NOT WORK DUE TO TOO MANY CHANGES!!!*/
+								MIGHT NOT WORK DUE TO TOO MANY CHANGES!!! 						*/
 
 				/*	for (int i=0; i<=counter; i++)
 					{
@@ -513,7 +536,7 @@ void initialize_prog(int p, int p2,char id[])
 					{
 						GetCtrlAttribute (pgraph, inistringarr[i], ATTR_LABEL_TEXT,
 										  labeltext);
-						Database_SetFieldVal(id, labeltext, taskforINI[i]); 
+						Database_SetFieldVal(sol_id, labeltext, taskforINI[i]); 
 					}
 		
 			
