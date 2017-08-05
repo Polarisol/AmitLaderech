@@ -138,7 +138,7 @@ int  CVICALLBACK exitFunc2(int panel, int event, void *callbackData, int eventDa
 int  CVICALLBACK ok(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK opennext(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK showprogressbar(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-void initialize_prog(int p, int p2, char id[]);
+void initialize_prog(int p, int p2,char id[]);
 
 #ifdef __cplusplus
     }

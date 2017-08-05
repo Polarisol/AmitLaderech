@@ -90,8 +90,6 @@ int main (int argc, char *argv[])
         return -1;
     if ((pNewSold = LoadPanel (0, "1.uir", P_NEW_SOLD)) < 0)
         return -1;
-	if ((pEditTL = LoadPanel (0, "1.uir", P_EDIT_TL)) < 0)
-        return -1;
 	if ((pTable = LoadPanel (0, "1.uir", P_TABLE)) < 0)
         return -1;
 	if ((pGroup = LoadPanel (0, "1.uir", P_GROUP)) < 0)
@@ -139,8 +137,6 @@ int main (int argc, char *argv[])
 	DiscardPanel (pReportsMentor);
 	DiscardPanel (pEmail);DiscardPanel (pEmailData);
 	DiscardPanel (pgraph);DiscardPanel (pgraph_2);
-	
-	//pEmail, pEmailData,pgraph, pgraph_2;
     return 0;
 }
 
@@ -190,7 +186,14 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
 //==============================================================================
 //							CVI CALLBACK Functions
 //==============================================================================
+void checkIfProgEx(int panel,int control, char sol_id[])
+{
+	char path[50];
+	sprintf(path,"progressbar\\%s-progressbar.png",sol_id);
 
+	if (FileExists (path, 0) == 1)   
+			DisplayImageFile (panel, control, path);
+}
 //Add new record to any database
 int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
@@ -222,6 +225,7 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
 				showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
 				checkIfPicEx(pSoldier,P_SOLDIER_PICTURE,id);
+				checkIfProgEx(pSoldier,P_SOLDIER_TIME_LINE_PIC,id);
 			}
 			else if(panel == pNewGuide)
 			{
@@ -1092,7 +1096,7 @@ int CVICALLBACK openTable (int panel, int control, int event,
 int CVICALLBACK OpenMentor (int panel, int control, int event,
 							void *callbackData, int eventData1, int eventData2)
 {
-	char mentorName[SIZE],pic_id[100];
+	char mentorName[SIZE];
 	switch (event)
 	{
 		case EVENT_COMMIT:
@@ -1205,11 +1209,12 @@ int CVICALLBACK tblFunction (int panel, int control, int event,
 							GetTableCellVal (panel, control, p, val);
 							DisplayPanel(pSoldier);
 							checkIfPicEx(pSoldier,P_SOLDIER_PICTURE,val);
+							checkIfProgEx(pSoldier,P_SOLDIER_TIME_LINE_PIC,val); 
 							showMember(pSoldier,SOLDIER,"SOLDIER",val,ctrlArray);
 							HidePanel(panel);
 							break;
 						case 2://MENTOR
-							char mentorName[SIZE], soldierName[SIZE];
+							char mentorName[SIZE];
 							ctrlArray = GetCtrlArrayFromResourceID (pMentor, CTRLARRAY_13);
 							GetActiveTableCell (panel, control, &p);
 							GetTableCellVal (panel, control, p, val);

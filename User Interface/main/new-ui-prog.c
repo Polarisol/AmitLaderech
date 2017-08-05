@@ -131,12 +131,13 @@
 void initialize_prog(int p, int p2,char id[])
 {
 	pgraph = p;  pgraph_2 = p2;
-	
+	sprintf(panelstatepath,"panel-progress\\%s-panel",id);
+	sprintf(sol_id,id);
 	DisplayPanel(pgraph);
 	
 	// Option for uploading Amit Panel
-	
-	/*	openPanelConfirm = ConfirmPopup ("עמית לדרך- גרף התקדמות",
+		/*
+		openPanelConfirm = ConfirmPopup ("עמית לדרך- גרף התקדמות",
 										 "?האם תרצה לטעון פאנל של עמית");
 		if (openPanelConfirm == 1)
 		{
@@ -154,15 +155,17 @@ void initialize_prog(int p, int p2,char id[])
 					MessagePopup ("!אזהרה", ".לא נבחר קובץ");
 					selection = FileSelectPopup ("", "*.*", "", "Select a file", VAL_LOAD_BUTTON, 0, 0, 1, 0, loadpanelstatefile);
 				}  
-		}  */
-	
+		}  
+		  */
 		// Smarter panel check and upload
-		
+		 
 		AmitCheck = FileExists (panelstatepath, 0);
 		
 		if (AmitCheck==1)
 		{
-			OpenFile (panelstatepath, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
+			//OpenFile (panelstatepath, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
+			RecallPanelState (pgraph, panelstatepath, 0); 
+			loadAmitPanel();
 		}
 		
 		//checking if panel was uploaded
@@ -243,21 +246,6 @@ void initialize_prog(int p, int p2,char id[])
 
 		 return highest;
 	}
-
-	/*int main (int argc, char *argv[])
-	{
-		if (InitCVIRTE (0, argv, 0) == 0)
-			return -1;	/* out of memory */ /*
-		if ((pgraph = LoadPanel (0, "new-ui-prog.uir", PANEL_PROG)) < 0)
-			return -1;
-		if ((pgraph_2 = LoadPanel (0, "new-ui-prog.uir", PANEL_GRPH)) < 0)
-			return -1;
-		DisplayPanel (pgraph);
-		initialize();
-		ini_initialize();
-		RunUserInterface ();
-		return 0;
-	} */
 
 	int CVICALLBACK exitFUNC (int panel, int event, void *callbackData,
 							  int eventData1, int eventData2)
