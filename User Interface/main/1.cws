@@ -12,7 +12,7 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "1.prj"
-Drag Bar Left = 249
+Drag Bar Left = 302
 Window Top = 117
 Window Left = 11
 Window Bottom = 1091
@@ -30,9 +30,9 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 5
 Window Confinement Region Enabled = True
-MainColumnWidth = 232
+MainColumnWidth = 285
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -48,12 +48,12 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3584809110
+Disk Date = 3584810158
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
-Window Z-Order = 1
-Source Window State = "1,2043,2067,2067,0,3,3,0,0,115,0,1245,0,0,0,26,1565,0,1578,1,349,683,1,15,"
+Window Z-Order = 2
+Source Window State = "1,130,130,130,0,27,27,0,0,44,0,1245,0,0,0,11,125,0,134,14,349,683,1,15,"
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
@@ -64,37 +64,39 @@ Window Top = 72
 Window Left = 13
 Window Height = 561
 Window Width = 1272
-Window Z-Order = 2
+Window Z-Order = 5
 
 [File 0003]
 Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.c"
 File Type = "CSource"
-Disk Date = 3584807145
+Disk Date = 3584809964
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Window Z-Order = 3
-Source Window State = "1,8,9,8,0,0,0,0,3,47,0,256,0,0,0,14,147,0,8,20,427,726,1,0,"
+Window Z-Order = 1
+Source Window State = "1,527,527,527,64,74,74,0,3,111,0,240,0,0,0,19,511,0,527,64,427,726,1,13,"
+Breakpoint 0001 = "505,0,enabled,"
 
 [File 0004]
 Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584808195
+Disk Date = 3584809374
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Window Height = 475
 Window Width = 1359
-Window Z-Order = 4
+Window Z-Order = 3
 
 [File 0005]
 Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.h"
 File Type = "Include"
-Disk Date = 3584808364
+Disk Date = 3584809568
 In Projects = "1,"
 Window Top = 182
 Window Left = 82
-Source Window State = "1,140,140,140,0,5,5,0,0,92,0,0,0,0,0,15,119,0,140,0,446,1359,1,0,"
+Window Z-Order = 4
+Source Window State = "1,140,140,140,0,5,5,0,0,92,0,0,0,0,0,15,120,0,140,46,446,1359,1,0,"
 
 [File 0006]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions_demo.uir"
@@ -357,6 +359,7 @@ Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
 Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.c"
 Tab 0004 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.uir"
+Tab 0005 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

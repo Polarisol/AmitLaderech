@@ -128,7 +128,6 @@ int main (int argc, char *argv[])
     DiscardPanel (pNewMent);
     DiscardPanel (pSoldier);
     DiscardPanel (pNewSold);
-	DiscardPanel (pEditTL);
 	DiscardPanel (pTable);
 	DiscardPanel (pGroup);
 	DiscardPanel (pNewGroup);
