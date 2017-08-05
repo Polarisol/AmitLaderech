@@ -48,12 +48,12 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3584808880
+Disk Date = 3584809110
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
 Window Z-Order = 1
-Source Window State = "1,522,522,522,16,25,25,0,3,115,0,1245,0,0,0,26,613,0,522,16,349,683,1,15,"
+Source Window State = "1,2043,2067,2067,0,3,3,0,0,115,0,1245,0,0,0,26,1565,0,1578,1,349,683,1,15,"
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"

@@ -60,7 +60,7 @@ void dealWithGroupButtonInGuide();
 void clearPanel(int panel);
 void createGroupTable(char dir[],char database[], char **ids,int rows,int panel,int control,char *fields[],int fieldLen);
 void checkIfPicEx(int panel, int control, char id[]);
-
+void checkIfProgEx(int panel,int control, char sol_id[]);
 
 //==============================================================================
 //									MAIN
@@ -186,14 +186,7 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
 //==============================================================================
 //							CVI CALLBACK Functions
 //==============================================================================
-void checkIfProgEx(int panel,int control, char sol_id[])
-{
-	char path[50];
-	sprintf(path,"progressbar\\%s-progressbar.png",sol_id);
 
-	if (FileExists (path, 0) == 1)   
-			DisplayImageFile (panel, control, path);
-}
 //Add new record to any database
 int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
@@ -1559,6 +1552,32 @@ int CVICALLBACK creatReport (int panel, int control, int event,
 	return 0;
 }
 
+int CVICALLBACK mailCheck (int panel, int control, int event,
+						   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			initialize_mail(pEmail,pEmailData);
+			DisplayPanel(pEmail);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK editTL (int panel, int control, int event,
+						void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, id);
+			 initialize_prog(pgraph, pgraph_2,id);
+			break;
+	}
+	return 0;
+}
+
 //==============================================================================
 //							Function realization section
 //==============================================================================
@@ -2039,28 +2058,13 @@ void checkIfPicEx(int panel, int control, char id[])
 			DisplayImageFile (panel, control, "Pictures\\HumanShadow.jpg");
 }
 
-int CVICALLBACK mailCheck (int panel, int control, int event,
-						   void *callbackData, int eventData1, int eventData2)
+void checkIfProgEx(int panel,int control, char sol_id[])
 {
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			initialize_mail(pEmail,pEmailData);
-			DisplayPanel(pEmail);
-			break;
-	}
-	return 0;
+	char path[50];
+	sprintf(path,"progressbar\\%s-progressbar.png",sol_id);
+
+	if (FileExists (path, 0) == 1)   
+			DisplayImageFile (panel, control, path);
 }
 
-int CVICALLBACK editTL (int panel, int control, int event,
-						void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, id);
-			 initialize_prog(pgraph, pgraph_2,id);
-			break;
-	}
-	return 0;
-}
+
