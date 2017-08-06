@@ -386,13 +386,12 @@ void initialize_prog(int p, int p2,char id[])
 							daysBetweenDates[i] = (taskdateseconds[i]-todayseconds)/secondsPerDay;
 							maxDaysBetween = MaxNumber(daysBetweenDates, counter); 
 						
-							/*if (daysBetweenDates[i]<0 || maxDaysBetween==0)
+							if (daysBetweenDates[i]<0 || maxDaysBetween==0)
 								{
 									MessagePopup ("Error!", "One or more of the dates you insert is invalid");
-									return 0;
 									DisplayPanel (pgraph);
 								}
-								 */
+							
 						//	pixelsPerday = canvasWidth/maxDaysBetween;
 							GetCtrlVal (panel, taskarr[i], task[i]);
 				

@@ -15,7 +15,7 @@ Project 0001 = "1.prj"
 Drag Bar Left = 302
 Window Top = 117
 Window Left = 11
-Window Bottom = 1091
+Window Bottom = 1108
 Window Right = 1885
 Maximized = True
 Maximized Children = True
@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 5
+Number of Opened Files = 2
 Window Confinement Region Enabled = True
 MainColumnWidth = 285
 FileDateColumnWidth = 70
@@ -48,293 +48,289 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.c"
 File Type = "CSource"
-Disk Date = 3584810158
+Disk Date = 3584840006
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
 Window Z-Order = 2
-Source Window State = "1,130,130,130,0,27,27,0,0,44,0,1245,0,0,0,11,125,0,134,14,349,683,1,15,"
+Source Window State = "1,2087,2087,2087,58,65,65,0,0,44,0,1245,0,0,0,11,2052,1,2086,67,349,683,1,15,"
 
 [File 0002]
 Path = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584808195
+Disk Date = 3584840008
 In Projects = "1,"
 Window Top = 72
 Window Left = 13
 Window Height = 561
 Window Width = 1272
-Window Z-Order = 5
+Window Z-Order = 1
 
 [File 0003]
-Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.c"
-File Type = "CSource"
-Disk Date = 3584809964
-In Projects = "1,"
-Window Top = 182
-Window Left = 82
-Window Z-Order = 1
-Source Window State = "1,527,527,527,64,74,74,0,3,111,0,240,0,0,0,19,511,0,527,64,427,726,1,13,"
-Breakpoint 0001 = "505,0,enabled,"
-
-[File 0004]
-Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.uir"
-File Type = "User Interface Resource"
-Disk Date = 3584809374
-In Projects = "1,"
-Window Top = 47
-Window Left = 13
-Window Height = 475
-Window Width = 1359
-Window Z-Order = 3
-
-[File 0005]
-Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.h"
-File Type = "Include"
-Disk Date = 3584809568
-In Projects = "1,"
-Window Top = 182
-Window Left = 82
-Window Z-Order = 4
-Source Window State = "1,140,140,140,0,5,5,0,0,92,0,0,0,0,0,15,120,0,140,46,446,1359,1,0,"
-
-[File 0006]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions_demo.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584770148
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 72
 Window Left = 25
 Window Height = 311
 Window Width = 948
 
-[File 0007]
+[File 0004]
 Path = "/d/Project/AmitLaderech/User Interface/main/email.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584770148
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Window Height = 436
 Window Width = 1242
 
-[File 0008]
+[File 0005]
+Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.uir"
+File Type = "User Interface Resource"
+Disk Date = 3584840002
+In Projects = "1,"
+Window Top = 56
+Window Left = 13
+Window Height = 475
+Window Width = 1359
+
+[File 0006]
 Path = "/d/Project/AmitLaderech/User Interface/main/Reports.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584770150
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Window Height = 349
 Window Width = 683
 
-[File 0009]
+[File 0007]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsManhe.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584770150
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
 Window Height = 323
 Window Width = 683
 
-[File 0010]
+[File 0008]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584770150
+Disk Date = 3584840006
 In Projects = "1,"
 Window Top = 56
 Window Left = 10
 Window Height = 323
 Window Width = 683
 
-[File 0011]
+[File 0009]
 Path = "/d/Project/AmitLaderech/User Interface/main/request_check.uir"
 File Type = "User Interface Resource"
-Disk Date = 3584770150
+Disk Date = 3584840006
 In Projects = "1,"
 Window Top = 72
 Window Left = 13
 Window Height = 461
 Window Width = 1152
 
-[File 0012]
+[File 0010]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions.c"
 File Type = "CSource"
-Disk Date = 3584770148
+Disk Date = 3584840002
 In Projects = "1,"
 Window Top = 74
 Window Left = 18
 Source Window State = "1,281,281,281,6,19,19,0,3,0,0,0,0,0,0,0,0,0,281,6,750,1370,1,0,"
 
-[File 0013]
+[File 0011]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions_demo.c"
 File Type = "CSource"
-Disk Date = 3584770148
+Disk Date = 3584840006
 In Projects = "1,"
 Window Top = 72
 Window Left = 10
 Source Window State = "1,67,67,67,16,24,24,0,0,0,0,0,0,0,0,0,6,0,64,48,311,780,1,0,"
 
-[File 0014]
+[File 0012]
 Path = "/d/Project/AmitLaderech/User Interface/main/CSV_Parser_Functions.c"
 File Type = "CSource"
-Disk Date = 3584770148
+Disk Date = 3584840006
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0015]
+[File 0013]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/database.c"
 File Type = "CSource"
-Disk Date = 3584770150
+Disk Date = 3584840010
 In Projects = "1,"
 Window Top = 56
 Window Left = 13
 Source Window State = "1,123,123,123,36,38,38,0,0,0,0,0,0,0,0,0,111,0,125,25,436,1272,1,0,"
 
-[File 0016]
+[File 0014]
 Path = "/d/Project/AmitLaderech/User Interface/main/email.c"
 File Type = "CSource"
-Disk Date = 3584770150
+Disk Date = 3584840006
 In Projects = "1,"
 Window Top = 92
 Window Left = 36
 Source Window State = "1,30,30,30,0,15,15,0,0,0,0,198,0,198,0,0,156,0,29,0,436,1242,1,0,"
 
-[File 0017]
+[File 0015]
 Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.c"
 File Type = "CSource"
-Disk Date = 3584770154
+Disk Date = 3584840012
 In Projects = "1,"
 Window Top = 72
 Window Left = 13
-Source Window State = "1,28,32,32,0,61,61,0,0,0,0,0,0,0,0,0,0,0,32,45,436,1152,1,0,"
+Source Window State = "1,32,32,32,5,43,43,0,3,0,0,0,0,0,0,0,0,0,32,5,436,1152,1,0,"
 
-[File 0018]
+[File 0016]
 Path = "/d/Project/AmitLaderech/User Interface/main/Mscomct2.c"
 File Type = "CSource"
-Disk Date = 3584770148
+Disk Date = 3584840002
 In Projects = "1,"
 Window Top = 137
 Window Left = 59
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,63,0,10,56,427,686,1,0,"
 
-[File 0019]
+[File 0017]
+Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.c"
+File Type = "CSource"
+Disk Date = 3584840004
+In Projects = "1,"
+Window Top = 182
+Window Left = 82
+Source Window State = "1,8,9,8,0,0,0,0,3,0,0,256,0,0,0,0,126,0,8,20,427,726,1,0,"
+
+[File 0018]
 Path = "/d/Project/AmitLaderech/User Interface/main/Reports.c"
 File Type = "CSource"
-Disk Date = 3584770148
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
 Source Window State = "1,5,48,48,0,0,11,0,0,0,0,0,0,0,0,0,0,0,3,20,323,683,1,0,"
 
-[File 0020]
+[File 0019]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsManhe.c"
 File Type = "CSource"
-Disk Date = 3584770150
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
 Source Window State = "1,3,4,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,323,683,1,0,"
 
-[File 0021]
+[File 0020]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.c"
 File Type = "CSource"
-Disk Date = 3584770150
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Source Window State = "1,4,15,15,0,0,4,0,0,0,0,0,0,0,0,0,0,0,3,0,323,683,1,0,"
 
-[File 0022]
+[File 0021]
 Path = "/d/Project/AmitLaderech/User Interface/main/request_check.c"
 File Type = "CSource"
-Disk Date = 3584770150
+Disk Date = 3584840006
 In Projects = "1,"
 Window Top = 72
 Window Left = 25
 Source Window State = "1,21,21,21,12,34,34,0,0,0,0,0,0,0,0,0,0,0,9,0,311,948,1,21,"
 
-[File 0023]
+[File 0022]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840002
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0024]
+[File 0023]
 Path = "/d/Project/AmitLaderech/User Interface/main/analytics_functions_demo.h"
 File Type = "Include"
-Disk Date = 3584770150
+Disk Date = 3584840002
 In Projects = "1,"
 Window Top = 86
 Window Left = 40
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,311,948,1,0,"
 
-[File 0025]
+[File 0024]
 Path = "/d/Project/AmitLaderech/User Interface/main/database.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
 Source Window State = "1,49,49,49,4,24,24,0,0,0,0,0,0,0,0,0,37,0,44,52,561,1152,1,0,"
 
-[File 0026]
+[File 0025]
 Path = "/d/Project/AmitLaderech/User Interface/main/email.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840002
 In Projects = "1,"
 Window Top = 47
 Window Left = 13
-Source Window State = "1,0,0,0,0,0,0,0,0,86,0,0,0,0,0,14,47,0,55,0,436,1272,1,0,"
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,55,0,436,1272,1,0,"
 
-[File 0027]
+[File 0026]
 Path = "/d/Project/AmitLaderech/User Interface/main/Func_Header.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840004
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0027]
+Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.h"
+File Type = "Include"
+Disk Date = 3584840010
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0028]
-Path = "/d/Project/AmitLaderech/User Interface/main/Lib/HebrewConversions.h"
+Path = "/d/Project/AmitLaderech/User Interface/main/inifile.h"
 File Type = "Include"
-Disk Date = 3584770154
+Disk Date = 3584840004
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0029]
-Path = "/d/Project/AmitLaderech/User Interface/main/inifile.h"
+Path = "/d/Project/AmitLaderech/User Interface/main/MailFunctions.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840004
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0030]
-Path = "/d/Project/AmitLaderech/User Interface/main/MailFunctions.h"
+Path = "/d/Project/AmitLaderech/User Interface/main/Mscomct2.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840002
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0031]
-Path = "/d/Project/AmitLaderech/User Interface/main/Mscomct2.h"
+Path = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840006
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 182
+Window Left = 82
+Source Window State = "1,140,140,140,0,5,5,0,0,0,0,0,0,0,0,0,119,0,140,0,446,1359,1,0,"
 
 [File 0032]
 Path = "/d/Project/AmitLaderech/User Interface/main/Reports.h"
 File Type = "Include"
-Disk Date = 3584770150
+Disk Date = 3584840004
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0033]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsManhe.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840004
 In Projects = "1,"
 Window Top = 58
 Window Left = 15
@@ -343,23 +339,20 @@ Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,687,1356,1,0,"
 [File 0034]
 Path = "/d/Project/AmitLaderech/User Interface/main/ReportsMentor.h"
 File Type = "Include"
-Disk Date = 3584770148
+Disk Date = 3584840006
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0035]
 Path = "/d/Project/AmitLaderech/User Interface/main/request_check.h"
 File Type = "Include"
-Disk Date = 3584770150
+Disk Date = 3584840006
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [Tab Order]
-Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
-Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.c"
-Tab 0003 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.c"
-Tab 0004 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.uir"
-Tab 0005 = "/d/Project/AmitLaderech/User Interface/main/new-ui-prog.h"
+Tab 0001 = "/d/Project/AmitLaderech/User Interface/main/1.c"
+Tab 0002 = "/d/Project/AmitLaderech/User Interface/main/1.uir"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

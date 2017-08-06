@@ -24,13 +24,14 @@
 //							Variables section
 //								SIZE = 300
 //============================================================================== 
-static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pEditTL, pTable, pGroup, pNewGroup, pReportsGuide, pReportsSol, pReportsMentor, pEmail, pEmailData,pgraph, pgraph_2;
+static int panelHandlecheck, panelHandledemo, pMain, pActivity, pGuide, pNewGuide, pMentor, pNewMent, pSoldier, pNewSold, pTable, pGroup, pNewGroup, pReportsGuide, pReportsSol, pReportsMentor, pEmail, pEmailData,pgraph, pgraph_2;
 static char id[SIZE], currentDate[50], currentTime[50], tableHeadline[100],tempGuide[100],soldierID[20];
 static char **tagName,**tagValue,**ids,**output; 
 int tableFlag = 0;// 1 - soldier  2 - mentor  3 - guide
 int recordAmount;
 int fieldAmount;
 int ctrlArray;
+int editMode = 0;
 int hr, min, sec;
 int day, month, year;
 int notExFlag = 0,chooseMen4SolFlag = 0;  
@@ -61,6 +62,8 @@ void clearPanel(int panel);
 void createGroupTable(char dir[],char database[], char **ids,int rows,int panel,int control,char *fields[],int fieldLen);
 void checkIfPicEx(int panel, int control, char id[]);
 void checkIfProgEx(int panel,int control, char sol_id[]);
+void resetEditMode (int panel);
+
 
 //==============================================================================
 //									MAIN
@@ -175,6 +178,8 @@ int CVICALLBACK exitFunc (int panel, int event, void *callbackData,
 				}
 				if(panel == pNewGroup  ||  panel == pNewGuide  ||  panel == pNewMent  ||  panel == pNewSold)
 					clearPanel(panel);
+				if (editMode)
+					resetEditMode (panel);
                 HidePanel (panel);
 			}
             break;
@@ -213,6 +218,8 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 				addMember(SOLDIER,"SOLDIER",panel,ctrlArray,1);
 				clearPanel(panel);
 				HidePanel(panel);
+				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CA_SOLDIER_OTHERS);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_LABEL_VISIBLE, 0);
 				DisplayPanel(pSoldier);
 				ctrlArray = GetCtrlArrayFromResourceID (pSoldier, CTRLARRAY_2);
 				showMember(pSoldier,SOLDIER,"SOLDIER",id,ctrlArray);
@@ -287,24 +294,22 @@ int CVICALLBACK Save_Sol_Func (int panel, int control, int event,
 	return 0;
 }
 
-
-
 int CVICALLBACK creatExcelTable (int panel, int control, int event,
 								 void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
-		char iD[50]={"????? ????"}, fullName[70]={"?? ???"}, Mentor[70]={"?????"}, Guide[70]={"????"}, Group[70]={"÷????"}, fullString[330];
+		char iD[50]={"תעודת זהות"}, fullName[70]={"שם מלא"}, Mentor[70]={"מנטור"}, Guide[70]={"מנחה"}, Group[70]={"קבוצה"}, fullString[330];
 		int i, n;
 		case EVENT_COMMIT:
 			SetCtrlAttribute (panel, control, ATTR_VISIBLE, 0);
 			GetNumTableRows (panel, P_TABLE_LIST_S_OR_M, &n);
 			fp = fopen ("excelTable.csv","w");
 			strcat (tableHeadline, "\n");
-			HebrewConverter_convertHebrewISOtoUTF8 (tableHeadline);
+			HebrewConverter_convertHebrewUTF8toISO (tableHeadline);
 			fprintf (fp, "%s", tableHeadline);
 			sprintf (fullString, "%s,%s,%s,%s,%s\n", iD, fullName, Mentor, Guide, Group);
-			HebrewConverter_convertHebrewISOtoUTF8 (fullString);
+			HebrewConverter_convertHebrewUTF8toISO (fullString);
 			fprintf (fp, "%s", fullString);
 			for (i=1; i<n; i++)
 			{
@@ -314,7 +319,7 @@ int CVICALLBACK creatExcelTable (int panel, int control, int event,
 				GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(5,i), Guide);
 				GetTableCellVal (panel, P_TABLE_LIST_S_OR_M, MakePoint(6,i), Group);
 				sprintf (fullString, "%s,%s,%s,%s,%s\n", iD, fullName, Mentor, Guide, Group);
-				HebrewConverter_convertHebrewISOtoUTF8 (fullString);
+				HebrewConverter_convertHebrewUTF8toISO (fullString);
 				fprintf (fp, "%s", fullString);
 			}
 			fclose (fp);
@@ -325,7 +330,6 @@ int CVICALLBACK creatExcelTable (int panel, int control, int event,
 	return 0;
 }
 
-
 int CVICALLBACK Edit (int panel, int control, int event,
 					  void *callbackData, int eventData1, int eventData2)
 {
@@ -333,7 +337,7 @@ int CVICALLBACK Edit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			
+			editMode = 1;
 			if(panel == pGroup)
 			{
 				GetCtrlVal (panel, P_GROUP_GUIDE, tempGuide);
@@ -368,7 +372,9 @@ int CVICALLBACK Edit (int panel, int control, int event,
 			{
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_ACTION);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_HORI);
+				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_HOT);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_OTHERS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_HOT);
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_VIS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);	
@@ -419,15 +425,9 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			resetEditMode (panel);
 			if (panel == pGroup)
 			{
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CA_GROUP_EDIT);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_10);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
-				
-				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_11);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
 				GetNumCtrlArrayItems (ctrlArray, &count);
 				
@@ -445,42 +445,23 @@ int CVICALLBACK SaveChanges (int panel, int control, int event,
 				displayGroupPanel(t);
 				
 			}
-			else if (panel==pGuide)
+			else if (panel == pGuide)
 			{	
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_ACTION);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
-				
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_12);		 
-				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
 				addMember(GUIDE,"GUIDE",panel,ctrlArray,0); 
-				
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_VIS);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 				dealWithGroupButtonInGuide();
 			}
-			else if (panel==pMentor)
-			{		
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_ACTION);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
-				
+			else if (panel == pMentor)
+			{	
 				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_4);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
 				addMember(MENTOR,"MENTOR",panel,ctrlArray,0); 
-				
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_VIS);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
-			} 
+			}
 			else if(panel == pSoldier)
 			{
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_ACTION);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
-				
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_2);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_OTHERS);
 				SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_HORI);
 				addMember(SOLDIER,"SOLDIER",panel,ctrlArray,0); 
-				
-				ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_VIS);
-				SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
 			}
 			break;
 	}
@@ -633,6 +614,7 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			resetEditMode (panel);
 			if(panel == pGroup)
 			{
 				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_9);
@@ -645,8 +627,6 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				searchFor(MENTOR,"MENTOR","קבוצה",idef,"קבוצה");
 				searchFor(GUIDE,"GUIDE","קבוצה 1",idef,"קבוצה 1");
 				searchFor(GUIDE,"GUIDE","קבוצה 2",idef,"קבוצה 2");
-				
-				
 			}
 			else if(panel == pGuide)
 			{
@@ -668,7 +648,6 @@ int CVICALLBACK delRecord (int panel, int control, int event,
 				initialize("MENTOR",MENTOR);
 				Database_RemoveRecord(idef);
 				searchFor(SOLDIER,"SOLDIER","מנטור",idef,"מנטור");
-				
 			}
 			else if(panel == pSoldier)
 			{
@@ -710,7 +689,10 @@ int CVICALLBACK changeValSold (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_15);
+			if (panel == pNewSold)
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_15);
+			if (panel == pSoldier)
+				ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_18);
 			GetCtrlArrayIndex (ctrlArray, panel, control, &arrayIndex);
 			GetCtrlIndex (panel, control, &ringIndex);
 			GetLabelFromIndex (panel, control, ringIndex, ctrlVal);
@@ -752,7 +734,7 @@ int CVICALLBACK pic_func_Guide (int panel, int control, int event,
 				 	DisplayImageFile (panel, P_NEW_GUID_PICTURE, file_name);
 					GetCtrlBitmap (panel, P_NEW_GUID_PICTURE, 0, &bitmapID);
 					
-					sprintf (ID,"Pictures/%s.jpeg",pic_id); 
+					sprintf (ID,"Pictures\\%s.jpeg",pic_id); 
 					SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
 		
 					DiscardBitmap (bitmapID);
@@ -827,7 +809,7 @@ int CVICALLBACK pic_func_Ment (int panel, int control, int event,
 						 	DisplayImageFile (panel, P_NEW_MENT_PICTURE, file_name);
 							GetCtrlBitmap (panel, P_NEW_MENT_PICTURE, 0, &bitmapID);
 							
-	 						sprintf (ID,"Pictures/%s.jpeg",pic_id); 
+	 						sprintf (ID,"Pictures\\%s.jpeg",pic_id); 
 							SaveBitmapToJPEGFile (bitmapID, ID, 0, 100);
 						
 							DiscardBitmap (bitmapID);
@@ -955,7 +937,7 @@ int CVICALLBACK Open_P_NEW_SOLD (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			ctrlArray = GetCtrlArrayFromResourceID (pNewSold, LBLCTRL );
+			ctrlArray = GetCtrlArrayFromResourceID (pNewSold, LBLCTRL);
 			SetCtrlArrayAttribute (ctrlArray, ATTR_LABEL_VISIBLE, 0);
 			DisplayPanel (pNewSold);
 			 
@@ -1571,7 +1553,7 @@ int CVICALLBACK editTL (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			GetCtrlVal (panel, P_SOLDIER_ID_NUMBER, id);
-			 initialize_prog(pgraph, pgraph_2,id);
+			initialize_prog(pgraph, pgraph_2,id);
 			break;
 	}
 	return 0;
@@ -2066,4 +2048,46 @@ void checkIfProgEx(int panel,int control, char sol_id[])
 			DisplayImageFile (panel, control, path);
 }
 
-
+void resetEditMode (int panel)
+{
+	if (panel == pGroup)
+	{
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CA_GROUP_EDIT);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_10);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+		ctrlArray = GetCtrlArrayFromResourceID (panel, CTRLARRAY_11);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+	}
+	else if (panel == pGuide)
+	{
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_ACTION);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_12);		 
+		SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_GUIDE_VIS);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+	}
+	else if (panel == pMentor)
+	{	
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_ACTION);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CTRLARRAY_4);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+		addMember(MENTOR,"MENTOR",panel,ctrlArray,0); 
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_MENTOR_VIS);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+	}
+	else if(panel == pSoldier)
+	{
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_ACTION);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 0);
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_HORI);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_OTHERS);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_CTRL_MODE, VAL_INDICATOR);
+		ctrlArray=GetCtrlArrayFromResourceID (panel, CA_SOLDIER_VIS);
+		SetCtrlArrayAttribute (ctrlArray, ATTR_VISIBLE, 1);
+	}
+	editMode = 0;
+}
