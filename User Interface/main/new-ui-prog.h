@@ -115,7 +115,9 @@
 #define  PANEL_PROG_inistring             87      /* control type: string, callback function: (none) */
 #define  PANEL_PROG_TEXTMSG               88      /* control type: textMsg, callback function: (none) */
 #define  PANEL_PROG_FIRSTDATE             89      /* control type: textMsg, callback function: (none) */
-#define  PANEL_PROG_FIRSTDAY              90      /* control type: textMsg, callback function: (none) */
+#define  PANEL_PROG_COUNTER               90      /* control type: numeric, callback function: (none) */
+#define  PANEL_PROG_FIRSTDAY              91      /* control type: textMsg, callback function: (none) */
+#define  PANEL_PROG_CURRENT_DAY           92      /* control type: textMsg, callback function: (none) */
 
 
      /* Control Arrays: */
@@ -138,7 +140,7 @@ int  CVICALLBACK exitFunc2(int panel, int event, void *callbackData, int eventDa
 int  CVICALLBACK ok(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK opennext(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK showprogressbar(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-void initialize_prog(int p, int p2,char id[]);
+
 
 #ifdef __cplusplus
     }

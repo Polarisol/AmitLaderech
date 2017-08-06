@@ -1,6 +1,6 @@
 	// DONT FORGET TO ADD database.c
 
-#include <formatio.h>
+	#include <formatio.h>
 	#include "toolbox.h"
 	#include <utility.h>
 	#include <ansi_c.h>
@@ -31,6 +31,7 @@
 	} todaydate;
 
 	// **** arraying all controls *** //
+
 	int boldarr[8]={PANEL_PROG_BOLD, PANEL_PROG_BOLD_2, PANEL_PROG_BOLD_3,PANEL_PROG_BOLD_4, PANEL_PROG_BOLD_5, PANEL_PROG_BOLD_6, PANEL_PROG_BOLD_7, PANEL_PROG_BOLD_8};
 	int opentextarr[9]={PANEL_PROG_OPENEXT, PANEL_PROG_OPENEXT_2, PANEL_PROG_OPENEXT_3,PANEL_PROG_OPENEXT_4, PANEL_PROG_OPENEXT_5, PANEL_PROG_OPENEXT_6, PANEL_PROG_OPENEXT_7, PANEL_PROG_OPENEXT_8, PANEL_PROG_OPENEXT_9};
 	int reminderarr[8]={PANEL_PROG_DAYS, PANEL_PROG_DAYS_2, PANEL_PROG_DAYS_3,PANEL_PROG_DAYS_4, PANEL_PROG_DAYS_5, PANEL_PROG_DAYS_6, PANEL_PROG_DAYS_7, PANEL_PROG_DAYS_8};
@@ -66,10 +67,10 @@
 	// placing task in Canvas
 	
 	Point canvasFirst, canvasLast;
-	struct todaydate taskdate[8];
+	struct todaydate taskdate[8], firstday_added, current_day;
 	int days_before_reminder = 0;
 	int openPanelConfirm, selection, answersave;
-	char firstday[16];
+	char firstday[16], currentday[16];
 	
 	// saving file data
 	
@@ -88,16 +89,14 @@
 	{
 
 		int boldinitialze, missioncompleteinitialze;
-		char textinitialize[256];
-
-
-
-		for (int i=0; i<8; i++)
-		{
-			GetCtrlVal (pgraph, taskarr[i], textinitialize);
-	
-			if (strcmp(textinitialize,"")!=0)
-			{
+		
+		GetCtrlVal (pgraph, PANEL_PROG_COUNTER, &counter);
+		GetCtrlVal (pgraph, PANEL_PROG_FIRSTDAY, firstday); 
+		
+		sscanf (firstday, "%d-%d-%d", &firstday_added.DD, &firstday_added.MM, &firstday_added.YYYY);
+		
+				for (int i=0; i<counter; i++)
+				{
 					// Reading from date controls
 			
 					GetCtrlVal (pgraph, finaldayarr[i], &taskdate[i].DD);
@@ -107,24 +106,29 @@
 			
 					// Adding Row in initialize()
 			
-					SetCtrlAttribute (pgraph, boldarr[counter], ATTR_DIMMED, 0);
-					SetCtrlAttribute (pgraph, opentextarr[counter+1], ATTR_DIMMED, 0);
-					SetCtrlAttribute (pgraph, reminderarr[counter], ATTR_DIMMED, 0);
-					SetCtrlAttribute (pgraph, finaldayarr[counter], ATTR_DIMMED, 0);
-					SetCtrlAttribute (pgraph, finalmontharr[counter], ATTR_DIMMED, 0);
-					SetCtrlAttribute (pgraph, finalyeararr[counter], ATTR_DIMMED, 0);
-					SetCtrlAttribute (pgraph, taskarr[counter], ATTR_DIMMED, 0);
-					SetCtrlAttribute (pgraph, missioncompletearr[counter], ATTR_DIMMED, 0);
-					counter ++; 
-				
+					SetCtrlAttribute (pgraph, boldarr[i], ATTR_DIMMED, 0);
+					SetCtrlAttribute (pgraph, opentextarr[i+1], ATTR_DIMMED, 0);
+					SetCtrlAttribute (pgraph, reminderarr[i], ATTR_DIMMED, 0);
+					SetCtrlAttribute (pgraph, finaldayarr[i], ATTR_DIMMED, 0);
+					SetCtrlAttribute (pgraph, finalmontharr[i], ATTR_DIMMED, 0);
+					SetCtrlAttribute (pgraph, finalyeararr[i], ATTR_DIMMED, 0);
+					SetCtrlAttribute (pgraph, taskarr[i], ATTR_DIMMED, 0);
+					SetCtrlAttribute (pgraph, missioncompletearr[i], ATTR_DIMMED, 0);
+					 
 					// Checking Bold or mission complete
 			
 					GetCtrlVal (pgraph, boldarr[i], &boldinitialze);
+						if(boldinitialze==1)
+						{
+							SetCtrlAttribute (pgraph, taskarr[i], ATTR_TEXT_BOLD, 1);
+						}
 					GetCtrlVal (pgraph, missioncompletearr[i], &missioncompleteinitialze);
+				
+
 					GetCtrlVal (pgraph, PANEL_PROG_FIRSTDAY, firstday);
+				}
 			
-			}
-		}
+		
 		return;
 	}
 
@@ -135,43 +139,23 @@ void initialize_prog(int p, int p2,char id[])
 	sprintf(sol_id,id);
 	DisplayPanel(pgraph);
 	
-	// Option for uploading Amit Panel
-		/*
-		openPanelConfirm = ConfirmPopup ("עמית לדרך- גרף התקדמות",
-										 "?האם תרצה לטעון פאנל של עמית");
-		if (openPanelConfirm == 1)
-		{
-			selection = FileSelectPopup ("", "*.*", "", "Select a file",
-										 VAL_LOAD_BUTTON, 0, 0, 1, 0,
-										 loadpanelstatefile);
-	
-				if (selection!=0)
-				{
-					RecallPanelState (pgraph, loadpanelstatefile, 0);
-					loadAmitPanel();
-				}
-					else
-				{
-					MessagePopup ("!אזהרה", ".לא נבחר קובץ");
-					selection = FileSelectPopup ("", "*.*", "", "Select a file", VAL_LOAD_BUTTON, 0, 0, 1, 0, loadpanelstatefile);
-				}  
-		}  
-		  */
-		// Smarter panel check and upload
-		 
 		AmitCheck = FileExists (panelstatepath, 0);
 		
 		if (AmitCheck==1)
 		{
-			//OpenFile (panelstatepath, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
 			RecallPanelState (pgraph, panelstatepath, 0); 
 			loadAmitPanel();
 		}
+		
+		GetSystemDate (&current_day.MM, &current_day.DD, &current_day.YYYY);
+		sprintf (currentday, "%d-%d-%d", current_day.DD,current_day.MM,current_day.YYYY); \
+		SetCtrlVal (pgraph, PANEL_PROG_CURRENT_DAY, currentday);
 		
 		//checking if panel was uploaded
 
 		GetCtrlVal (pgraph, PANEL_PROG_FIRSTDAY, firstday);
 	
+		
 		if(strcmp(firstday,"")==0)
 			{
 				GetSystemDate (&todaydate.MM, &todaydate.DD, &todaydate.YYYY);
@@ -192,11 +176,6 @@ void initialize_prog(int p, int p2,char id[])
 		sprintf (progressbarpng, "%s-progressbar.png",sol_id);
 }
 
-
-	void ini_initialize()
-	{
-		//Database_setDatabaseFile("Database\\soldier.ini");
-	}
 
 	void DatetoRemind(int day, int month, int year, int daysbefore)
 	{
@@ -358,7 +337,7 @@ void initialize_prog(int p, int p2,char id[])
 						void *callbackData, int eventData1, int eventData2)
 	{
 		int daysBetweenDates[8]={0};
-		int todayseconds=0, maxDaysBetween=0;
+		int todayseconds=0/*, maxDaysBetween=0*/;
 		int taskdateseconds[8]={0};
 		
 		//double pixelsPerday=0;
@@ -373,8 +352,9 @@ void initialize_prog(int p, int p2,char id[])
 	
 		//		CanvasClear (pgraph_2, PANEL_GRPH_CANVAS, VAL_ENTIRE_OBJECT);
 	
-					todayseconds = (todaydate.DD * secondsPerDay) + (todaydate.MM * secondsPerMonth) + ((todaydate.YYYY-2017) * secondsPerYear);
-			
+					todayseconds = (current_day.DD * secondsPerDay) + (current_day.MM * secondsPerMonth) + ((current_day.YYYY-2017) * secondsPerYear);
+					
+				
 						// Getting the dates and ** DAYS ** between the day the mentor insert for the time data
 			
 						for (int i=0; i<counter; i++)
@@ -384,9 +364,9 @@ void initialize_prog(int p, int p2,char id[])
 							GetCtrlVal (panel, finalyeararr[i], &taskdate[i].YYYY);
 							taskdateseconds[i] = (taskdate[i].DD * secondsPerDay) + (taskdate[i].MM * secondsPerMonth) + ((taskdate[i].YYYY-2017) * secondsPerYear); 
 							daysBetweenDates[i] = (taskdateseconds[i]-todayseconds)/secondsPerDay;
-							maxDaysBetween = MaxNumber(daysBetweenDates, counter); 
+						//	maxDaysBetween = MaxNumber(daysBetweenDates, counter); 
 						
-							if (daysBetweenDates[i]<0 || maxDaysBetween==0)
+							if (daysBetweenDates[i]<0 /*|| maxDaysBetween==0*/)
 								{
 									MessagePopup ("Error!", "One or more of the dates you insert is invalid");
 									DisplayPanel (pgraph);
@@ -431,8 +411,7 @@ void initialize_prog(int p, int p2,char id[])
 							GetCtrlVal (panel, missioncompletearr[i], &task_state);
 							if(task_state==1)
 							{
-								SetCtrlAttribute (pgraph_2, TextforProgresBar[i], ATTR_TEXT_COLOR,
-												  VAL_GREEN);
+								SetCtrlAttribute (pgraph_2, TextforProgresBar[i], ATTR_TEXT_COLOR, VAL_DK_GREEN);
 								SetCtrlAttribute (pgraph_2, TextforProgresBar[i], ATTR_TEXT_ITALIC,
 												  task_state);
 							
@@ -512,8 +491,10 @@ void initialize_prog(int p, int p2,char id[])
 				
 						SetCtrlVal (pgraph, inistringarr[i], taskforINI[i]);
 				
-					}  
-			
+					} 
+					
+					SetCtrlVal (pgraph, PANEL_PROG_COUNTER, counter);
+					
 			
 	 				//=====================INI SAVING=====================//
 					
